@@ -143,52 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Gestion du formulaire de connexion Firebase (creer-compte.html)
-  const loginForm = document.querySelector('#login-form');
-  if (loginForm) {
-    console.log('Login form found');
-    const firebaseConfig = {
-      apiKey: "AIzaSyDTLmqjNyOODvp51K3hBjfzENhvm9aC0ew",
-      authDomain: "sb-editions.firebaseapp.com",
-      projectId: "sb-editions",
-      storageBucket: "sb-editions.firebasestorage.app",
-      messagingSenderId: "517978298591",
-      appId: "1:517978298591:web:bba99b0266e43965a3f16a"
-    };
-
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-    const auth = firebase.auth();
-
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = loginForm.querySelector('#login-email').value;
-      const password = loginForm.querySelector('#login-password').value;
-      const recaptchaResponse = grecaptcha.getResponse();
-      console.log('Submitting login form with email:', email, 'reCAPTCHA:', recaptchaResponse);
-
-      if (!recaptchaResponse) {
-        console.error('reCAPTCHA non validé');
-        alert('Veuillez valider le reCAPTCHA.');
-        return;
-      }
-
-      auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          console.log('Connexion réussie, redirection vers index.html');
-          alert('Connexion réussie ! Bienvenue dans votre espace !');
-          window.location.href = 'index.html';
-        })
-        .catch((error) => {
-          console.error('Erreur connexion:', error);
-          alert('Erreur : ' + error.message);
-        });
-    });
-  } else {
-    console.log('Login form not found');
-  }
-
   // Gestion du panier
   const removeButtons = document.querySelectorAll('.remove-button');
   removeButtons.forEach(button => {
