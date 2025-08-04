@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Les Éditions de la Sorcière Blanche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="blog.css">
+  <link rel="stylesheet" href="protection.css">
+</head>
+<body>
+  <div class="cookie-banner" id="cookieBanner">
+    <p>Nous utilisons des cookies pour améliorer votre expérience. <a href="politique-cookies.html">En savoir plus</a>.</p>
+    <button onclick="acceptCookies()">Accepter</button>
+  </div>
+  <div class="announcement-bar">
+    <p>Lancement officiel le 1er Octobre 2025 - Top départ de nos préventes le 31 juillet à 00h00 ! <a href="boutique.html" class="button announcement-button">Voir la Boutique</a></p>
+  </div>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo-link">
+        <img src="images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+        <div class="header-title">
+          <span>Les Éditions de la</span>
+          <span>Sorcière Blanche</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="a-propos.html">À Propos</a></li>
+          <li><a href="je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blog.html" class="active">Blog</a></li>
+          <li><a href="creer-compte.html" class="account-icon"><img src="images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
+          <li class="lang-switcher">
+            <img src="images/icon_globe.png" alt="Globe" class="globe-icon">
+            <a href="blog.html" class="lang-fr active">FR</a>
+            <a href="en/blog.html" class="lang-en">EN</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="blog-content">
+      <div class="blog-banner">
+        <img src="images/sb_banniere_blog.jpg" alt="Bannière Blog" class="banner-image">
+      </div>
+      <h1>Le Blog de la Sorcière Blanche</h1>
+      <img src="images/icon_infinity.png" alt="Infinity Icon" class="title-icon">
+      <div class="blog-subtitle">
+        <p>Explorez nos réflexions sur l’ésotérisme, la littérature fantastique et les mystères du monde.</p>
+        <p>Découvrez les coulisses de nos publications et les inspirations de nos auteurs.</p>
+      </div>
+      <div class="blog-philtres">
+        <h2>Philtres</h2>
+        <div class="philtres-buttons">
+          <button class="philtres-button active" data-filter="all">Tous</button>
+          <button class="philtres-button" data-filter="alchimie">Alchimie</button>
+          <button class="philtres-button" data-filter="ateliers">Ateliers</button>
+          <button class="philtres-button" data-filter="coulisses">Coulisses</button>
+          <button class="philtres-button" data-filter="decouvertes">Découvertes</button>
+          <button class="philtres-button" data-filter="enigmes-loisirs">Énigmes & Loisirs</button>
+          <button class="philtres-button" data-filter="fantastique-fantasy">Fantastique & Fantasy</button>
+          <button class="philtres-button" data-filter="plantes">La Magie des Plantes</button>
+          <button class="philtres-button" data-filter="magie-esoterisme">Magie & Ésotérisme</button>
+          <button class="philtres-button" data-filter="recettes">Nos Recettes</button>
+          <button class="philtres-button" data-filter="spiritualite">Spiritualité</button>
+        </div>
+      </div>
+      <h2>Article à la Une</h2>
+      <div class="featured-article" data-category="coulisses">
+        <div class="article-image-container">
+          <img src="images/sb_blog_vignette_coulisses.jpg" alt="Article Coulisses" class="article-image">
+        </div>
+        <div class="article-text">
+          <h3>Découvrez Les Éditions de La Sorcière Blanche : une maison d’édition bilingue enchantée !</h3>
+          <p class="article-meta">Par La Sorcière Blanche | 1 décembre 2024 | 5 min | 3421 vues</p>
+          <p>Le 1er octobre 2025 marquera un tournant dans le paysage littéraire avec le lancement des Éditions de la Sorcière Blanche, une maison d’édition associative unique...</p>
+          <a href="article-1.html" class="action-button">Je continue ma lecture <img src="images/icon_quill.png" alt="Quill" class="button-icon"></a>
+        </div>
+      </div>
+      <h2>Nos Articles</h2>
+      <div class="blog-grid">
+        <div class="blog-post" data-category="coulisses">
+          <div class="article-image-container">
+            <img src="images/sb_blog_vignette_coulisses.jpg" alt="Article Coulisses" class="article-image">
+          </div>
+          <div class="article-text">
+            <h3>Murmures d’Objets et Secrets de Plantes – Les Racines de Nos Histoires</h3>
+            <p class="article-meta">Par La Sorcière Blanche | 15 novembre 2024 | 8 min | 2156 vues</p>
+            <p>Et si un vieux meuble ou une simple fleur séchée vous murmurait son histoire ? Aux Éditions de la Sorcière Blanche, nous écoutons ces échos de vies passées...</p>
+            <a href="article-2.html" class="action-button">Je continue ma lecture <img src="images/icon_quill.png" alt="Quill" class="button-icon"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="index.html">
+          <img src="images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+          <div class="footer-title">
+            <span>Les Éditions de la</span>
+            <span>Sorcière Blanche</span>
+          </div>
+        </a>
+        <p>Maison d’édition bilingue spécialisée dans les livres ésotériques, fantastiques et mystiques. Découvrez un univers de magie et de mystère à travers nos publications uniques.</p>
+      </div>
+      <div class="footer-info">
+        <h3>Informations</h3>
+        <ul>
+          <li><a href="conditions-generales.html">Conditions Générales</a></li>
+          <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+          <li><a href="livraison-retours.html">Livraison et Retours</a></li>
+          <li><a href="politique-cookies.html">Politique de Cookies</a></li>
+        </ul>
+      </div>
+      <div class="footer-menu">
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="a-propos.html">À Propos</a></li>
+          <li><a href="je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blog.html" class="active">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Suivez-nous</h3>
+        <ul>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="images/icon_x.png" alt="X" class="social-icon"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
+    <p><strong>Attribution des icônes :</strong> Icônes par <a href="https://www.flaticon.com">Flaticon</a> (Freepik, Icon Mela, Dreamstale, Ilham Fitrotul Hayat, Noplubery, sonnycandra, Laisa Islam Ani, Pixel perfect, IYAHICON, Iconjam).</p>
+  </footer>
+  <script src="script.js"></script>
+  <script src="protection.js"></script>
+</body>
+</html>

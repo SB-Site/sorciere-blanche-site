@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Je Soutiens - Les Éditions de la Sorcière Blanche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="je-soutiens.css">
+  <script src="https://www.paypal.com/sdk/js?client-id=BAA51afidFS4AQU3dNu2pUeq91wxbwf_MG9I0lz2mqUuX89LxwhnTAaldysPIXpCBOuYj8g4ex0AaEbS-A&components=buttons,hosted-fields&currency=EUR"></script>
+</head>
+<body>
+  <div class="cookie-banner" id="cookieBanner">
+    <p>Nous utilisons des cookies pour améliorer votre expérience. <a href="politique-cookies.html">En savoir plus</a>.</p>
+    <button onclick="acceptCookies()">Accepter</button>
+  </div>
+  <div class="announcement-bar">
+    <p>Lancement officiel le 1er Octobre 2025 - Top départ de nos préventes le 31 juillet à 00h00 ! <a href="boutique.html" class="button announcement-button">Voir la Boutique</a></p>
+  </div>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo-link">
+        <img src="images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+        <div class="header-title">
+          <span>Les Éditions de la</span>
+          <span>Sorcière Blanche</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="a-propos.html">À Propos</a></li>
+          <li><a href="je-soutiens.html" class="active">Je Soutiens</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="creer-compte.html" class="account-icon"><img src="images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
+          <li class="lang-switcher">
+            <img src="images/icon_globe.png" alt="Globe" class="globe-icon">
+            <a href="je-soutiens.html" class="lang-fr active">FR</a>
+            <a href="en/je-soutiens.html" class="lang-en">EN</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="support-content">
+      <h1>Je Soutiens les Éditions de la Sorcière Blanche</h1>
+      <div class="support-subtitle">
+        <p>Rejoignez notre mission pour promouvoir la créativité, le fantastique et le bien-être spirituel à travers nos publications uniques.</p>
+        <p>Sorcière Blanche Éditions est une maison d’édition associative. Chaque don, chaque soutien, nous permet de donner vie à des mondes, de rémunérer nos auteurs et artistes, et de rester indépendants.</p>
+        <p>Votre soutien permet à nos auteurs de créer des œuvres exceptionnelles ! Devenez un véritable acteur de cette belle aventure.</p>
+        <p>Chaque don, chaque soutien, nous permet de donner vie à des mondes, de rémunérer nos auteurs et artistes, et de rester indépendants.</p>
+      </div>
+    </section>
+    <section class="support-membership">
+      <h2>Soutenez la Magie à Votre Façon</h2>
+      <div class="support-subtitle">
+        <p>Chaque contribution est un sortilège puissant qui soutient nos auteurs, finance nos publications et donne vie à des projets uniques.</p>
+        <p>En devenant membre, profitez d’avantages exclusifs et participez à nos projets magiques.</p>
+      </div>
+      <div class="support-grid">
+        <div class="support-grid-row">
+          <div class="support-item">
+            <h3>Amis</h3>
+            <p class="support-price">5€ / mois</p>
+            <p class="support-description">Soutenez nos auteurs avec un petit don amical</p>
+            <ul class="support-advantages">
+              <li><img src="images/icon_star.png" alt="Star Icon"> Remerciement dans nos publications</li>
+              <li><img src="images/icon_star.png" alt="Star Icon"> Newsletter Plume-Mail exclusive</li>
+              <li><img src="images/icon_star.png" alt="Star Icon"> Badge de soutien numérique</li>
+            </ul>
+            <div id="paypal-container-ZFB68XN3ZKGV2" class="paypal-button"></div>
+            <button class="support-button" id="paypal-onetime-amis">Je soutiens via PayPal</button>
+            <p class="support-note">Optez pour un soutien mensuel ou pour nous offrir une <a href="#kofi-button">pause magique</a> impromptue !</p>
+          </div>
+          <div class="support-item">
+            <h3>Initié</h3>
+            <p class="support-price">15€ / mois</p>
+            <p class="support-description">Participez activement au financement de nos publications</p>
+            <ul class="support-advantages">
+              <li><img src="images/icon_star.png" alt="Star Icon"> Tous les avantages précédents plus...</li>
+              <li><img src="images/icon_star.png" alt="Star Icon"> Accès anticipé aux nouveautés</li>
+              <li><img src="images/icon_star.png" alt="Star Icon"> Mention spéciale dans les crédits</li>
+              <li><img src="images/icon_star.png" alt="Star Icon"> Contenu exclusif Plume-Mail</li>
+            </ul>
+            <div id="paypal-container-B6K6GWKCHHMT8" class="paypal-button"></div>
+            <button class="support-button" id="paypal-onetime-initie">Je soutiens via PayPal</button>
+            <p class="support-note">Optez pour un soutien mensuel ou pour nous offrir une <a href="#kofi-button">pause magique</a> impromptue !</p>
+          </div>
+          <div class="support-item">
+            <h3>Gardien du Savoir</h3>
+            <p class="support-price">30€ / mois</p>
+            <p class="support-description">Devenez gardien de notre patrimoine littéraire mystique</p>
+            <ul class="support-advantages">
+              <li><img src="images/icon_star.png" alt="Star Icon"> Tous les avantages précédents plus...</li>
+              <li><img src="images/icon_star.png" alt="Star Icon"> Exemplaire dédicacé offert</li>
+              <li><img src="images/icon_star.png" alt="Star Icon"> Consultation privée avec nos auteurs</li>
+              <li><img src="images/icon_star.png" alt="Star Icon"> Événements VIP réservés</li>
+            </ul>
+            <div id="paypal-container-RGK6BAGJWWWE8" class="paypal-button"></div>
+            <button class="support-button" id="paypal-onetime-gardien">Je soutiens via PayPal</button>
+            <p class="support-note">Optez pour un soutien mensuel ou pour nous offrir une <a href="#kofi-button">pause magique</a> impromptue !</p>
+          </div>
+        </div>
+        <div class="support-grid-row">
+          <div class="support-item support-sage">
+            <h3>Sage Bienfaiteur</h3>
+            <p class="support-price">50€+ / mois</p>
+            <p class="support-description">Soutenez durablement notre mission littéraire mystique</p>
+            <ul class="support-advantages">
+              <li><img src="images/icon_star.png" alt="Star Icon"> Tous les avantages précédents plus...</li>
+              <li><img src="images/icon_star.png" alt="Star Icon"> Exemplaire dédicacé de votre choix</li>
+              <li><img src="images/icon_star.png" alt="Star Icon"> Contenu exclusif Plume-Mail premium</li>
+              <li><img src="images/icon_star.png" alt="Star Icon"> Reconnaissance spéciale dans nos publications</li>
+              <li><img src="images/icon_star.png" alt="Star Icon"> Pour les dons supérieurs, contactez-nous pour des avantages personnalisés</li>
+            </ul>
+            <div id="paypal-container-5BC4Q7ZXYT5H8" class="paypal-button"></div>
+            <button class="support-button" id="paypal-onetime-sage">Je soutiens via PayPal</button>
+            <p class="support-note">Optez pour un soutien mensuel ou pour nous offrir une <a href="#kofi-button">pause magique</a> impromptue !</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="testimonials">
+      <h2>Témoignages de nos lecteurs & bienfaiteurs</h2>
+      <p class="testimonials-subtitle">Découvrez pourquoi notre communauté nous soutient avec passion</p>
+      <div class="testimonials-grid">
+        <div class="testimonial-item">
+          <p>“Super découverte ! J'ai dévoré Lazare Donatien l'Intégrale en 48h. Idée originale, personnages passionnants, aventures variées. Excellent auteur français de fantasy !”</p>
+          <h3>Archibalou</h3>
+          <p class="testimonial-title">Lecteur passionné</p>
+        </div>
+        <div class="testimonial-item">
+          <p>“Un univers à part, une histoire prenante. J'ai beaucoup aimé ce livre, facile à lire, détendant, plaisant. Un très agréable moment.”</p>
+          <h3>CatM</h3>
+          <p class="testimonial-title">Lectrice fidèle</p>
+        </div>
+        <div class="testimonial-item">
+          <p>“Génial ! Petites histoires avec pleins de rebondissements ! Les personnages sont attachants. Livre qui nous transporte dans l'univers passionnant mais non moins dangereux des drockhead.”</p>
+          <h3>Client d'Amazon</h3>
+          <p class="testimonial-title">Fan des Drockhead</p>
+        </div>
+      </div>
+    </section>
+    <section class="other-ways">
+      <h2>D’autres façons de nous aider</h2>
+      <p class="other-ways-subtitle">La magie sait prendre de nombreuses formes, suivons là...</p>
+      <div class="other-ways-grid">
+        <div class="other-ways-item">
+          <img src="images/icon_people.png" alt="People Icon" class="other-ways-icon">
+          <h3>Parlez de nous à vos amis, sur vos réseaux</h3>
+          <p>Recommandez nos publications à vos amis et sur les réseaux sociaux.</p>
+          <p>Participez aux événements et rejoignez nos rencontres littéraires et ateliers à venir.</p>
+          <p>Le bouche-à-oreille est un enchantement puissant, faites-le fructifier !</p>
+          <ul class="social-links">
+            <li><a href="https://x.com/WhiteWitchEdits"><img src="images/icon_x.png" alt="X" class="social-icon"></a></li>
+            <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+            <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+            <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+            <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+            <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+          </ul>
+        </div>
+        <div class="other-ways-item">
+          <img src="images/icon_star.png" alt="Star Icon" class="other-ways-icon">
+          <h3>Laissez des avis</h3>
+          <p>Chacune de vos étoiles devient un guide pour nous tirer des méandres de l’incognito.</p>
+          <p>Aidez-nous à briller de mille feux en laissant vos avis sur Amazon, Goodreads et autres plateformes.</p>
+          <a href="https://www.amazon.fr" class="support-button">Laisser un avis sur Amazon <img src="images/icon_star.png" alt="Star" class="button-icon"></a>
+          <a href="https://www.goodreads.com" class="support-button">Laisser un avis sur Goodreads <img src="images/icon_star.png" alt="Star" class="button-icon"></a>
+        </div>
+        <div class="other-ways-item">
+          <img src="images/icon_coffee.png" alt="Coffee Icon" class="other-ways-icon">
+          <h3>Offrez-nous une ‘Pause Magique’</h3>
+          <p>Offrez un café magique à nos auteurs pour soutenir leurs nuits d’écriture !</p>
+          <p>Virginia adore un grand café au lait, l’Alchimiste savoure sa chicorée maison, et Ravi ne résiste pas à un lungo avec du chocolat noir.</p>
+          <a href="https://ko-fi.com/T6T81IG0FB" class="support-button" id="kofi-button">Offrez une Pause Magique <img src="images/icon_coffee.png" alt="Coffee" class="button-icon"></a>
+        </div>
+      </div>
+    </section>
+    <section class="trust">
+      <h2>Votre soutien est entre de bonnes mains</h2>
+      <div class="trust-subtitle">
+        <p>Vos contributions sont utilisées exclusivement pour soutenir nos auteurs, financer nos publications ainsi que l’ensemble des projets de la Sorcière Blanche (rappelez-vous, notre hotte est déjà pleine de surprises pour ce Noël et ce n’est que le début !)</p>
+        <p>Chaque don est sécurisé et traité via PayPal.</p>
+        <p>Vous recevrez un reçu par email et vos avantages en tant que bienfaiteur seront activés dans les 24 heures.</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-item">
+          <img src="images/icon_securepay.png" alt="Secure Pay Icon" class="trust-icon">
+          <h3>Un paiement sécurisé</h3>
+          <p>Via PayPal, cartes bancaires acceptées</p>
+        </div>
+        <div class="trust-item">
+          <img src="images/icon_envelope.png" alt="Envelope Icon" class="trust-icon">
+          <h3>Reçu automatique</h3>
+          <p>Confirmation et reçu envoyé directement dans votre boîte mail</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="index.html">
+          <img src="images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+          <div class="footer-title">
+            <span>Les Éditions de la</span>
+            <span>Sorcière Blanche</span>
+          </div>
+        </a>
+        <p>Maison d’édition bilingue spécialisée dans les livres ésotériques, fantastiques et mystiques. Découvrez un univers de magie et de mystère à travers nos publications uniques.</p>
+      </div>
+      <div class="footer-info">
+        <h3>Informations</h3>
+        <ul>
+          <li><a href="conditions-generales.html">Conditions Générales</a></li>
+          <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+          <li><a href="livraison-retours.html">Livraison et Retours</a></li>
+          <li><a href="politique-cookies.html">Politique de Cookies</a></li>
+        </ul>
+      </div>
+      <div class="footer-menu">
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="a-propos.html">À Propos</a></li>
+          <li><a href="je-soutiens.html" class="active">Je Soutiens</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Suivez-nous</h3>
+        <ul>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="images/icon_x.png" alt="X" class="social-icon"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

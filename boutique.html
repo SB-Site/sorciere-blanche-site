@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique - Les Éditions de la Sorcière Blanche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="boutique.css">
+  <link rel="stylesheet" href="protection.css">
+  <style>
+    .paypal-button-container { text-align: center; margin: 10px 0; }
+    .paypal-button-container input[type="submit"] { 
+      border: 1px solid #B87333; 
+      border-radius: 8px; 
+      min-width: 200px; 
+      padding: 10px 20px; 
+      height: 40px; 
+      font-family: 'Montserrat', sans-serif; 
+      font-size: 1rem; 
+      font-weight: bold; 
+      background: linear-gradient(135deg, #B87333, #6B3E75); 
+      color: #F5E8D3; 
+      cursor: pointer; 
+      transition: background 0.3s; 
+    }
+    .paypal-button-container input[type="submit"]:hover { 
+      background: linear-gradient(135deg, #6B3E75, #B87333); 
+    }
+    .paypal-button-container img { max-height: 20px; vertical-align: middle; margin-top: 5px; }
+    .paypal-button-container section { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; color: #2A4B3D; }
+    .item-bonus, .item-dedication { 
+      font-family: 'Montserrat', sans-serif; 
+      font-size: 0.9em; 
+      color: #2A4B3D; 
+      text-align: center; 
+      margin: 10px 0; 
+    }
+  </style>
+</head>
+<body>
+  <div class="cookie-banner" id="cookieBanner">
+    <p>Nous utilisons des cookies pour améliorer votre expérience. <a href="politique-cookies.html">En savoir plus</a>.</p>
+    <button onclick="acceptCookies()">Accepter</button>
+  </div>
+  <div class="announcement-bar">
+    <p>Lancement officiel le 1er Octobre 2025 - Top départ de nos préventes le 31 juillet à 00h00 ! <a href="boutique.html" class="button announcement-button">Voir la Boutique</a></p>
+  </div>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo-link">
+        <img src="images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+        <div class="header-title">
+          <span>Les Éditions de la</span>
+          <span>Sorcière Blanche</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="boutique.html" class="active">Boutique</a></li>
+          <li><a href="a-propos.html">À Propos</a></li>
+          <li><a href="je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="creer-compte.html" class="account-icon"><img src="images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
+          <li class="lang-switcher">
+            <img src="images/icon_globe.png" alt="Globe" class="globe-icon">
+            <a href="boutique.html" class="lang-fr active">FR</a>
+            <a href="en/boutique.html" class="lang-en">EN</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="shop-content">
+      <h1>Notre Boutique Mystique</h1>
+      <img src="images/icon_infinity.png" alt="Infinity Icon" class="title-icon">
+      <div class="shop-subtitle">
+        <p>Découvrez nos romans fantastiques et livrets ésotériques bilingues (français/anglais dès 2026). À venir : guides spirituels, BD & mangas, et une collection de goodies magiques.</p>
+        <p>Un jeu de plateau inédit se prépare en secret… restez à l’écoute ! Paiements sécurisés via PayPal pour une expérience enchantée.</p>
+      </div>
+      <div class="shop-philtres">
+        <h2>Philtres</h2>
+        <div class="philtres-buttons">
+          <button class="philtres-button active" data-filter="all">Tous</button>
+          <button class="philtres-button" data-filter="bd-mangas">BD & Mangas</button>
+          <button class="philtres-button" data-filter="goodies">Goodies, Jeux & Accessoires</button>
+          <button class="philtres-button" data-filter="livrets">Livrets Spiritualité, Magie & Ésotérisme</button>
+          <button class="philtres-button" data-filter="recettes">Recettes & DIY</button>
+          <button class="philtres-button" data-filter="romans">Romans Fantastique & Fantasy</button>
+        </div>
+      </div>
+      <h2>Nos Publications</h2>
+      <div class="shop-grid publications">
+        <div class="shop-item" data-category="romans">
+          <img src="images/sb_pub_lazare.jpg" alt="Lazare Donatien L’Intégrale" class="item-image">
+          <h3>Lazare Donatien L’Intégrale</h3>
+          <p class="item-description">Lazare revient dans une réédition envoûtante ! Plongez dans l’univers complet de cette saga mystique.</p>
+          <p class="item-availability">Disponible dès le 1er octobre, prévente le 31 juillet 2025. Frais de livraison inclus pour le papier.</p>
+          <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser via <a href="contact.html">notre page contact</a>) le 1er octobre !</p>
+          <p class="item-dedication">Achetez l’eBook directement sur notre site et envoyez-nous un message via <a href="contact.html">notre page contact</a> pour une dédicace personnalisée (indiquez votre nom et préférences) !</p>
+          <div class="paypal-button-container">
+            <form action="https://www.paypal.com/ncp/payment/7YRPFVJVP57WS" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+              <input class="pp-7YRPFVJVP57WS" type="submit" value="Acheter (papier, 20,00 €)" />
+              <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+              <section style="font-size: 0.75rem;">Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+            </form>
+          </div>
+          <div class="paypal-button-container">
+            <form action="https://www.paypal.com/ncp/payment/XXWJFJ4ZKPGB6" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+              <input class="pp-XXWJFJ4ZKPGB6" type="submit" value="Acheter (eBook, 5,99 €)" />
+              <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+              <section style="font-size: 0.75rem;">Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+            </form>
+          </div>
+        </div>
+        <div class="shop-item" data-category="livrets">
+          <img src="images/sb_pub_samhain.jpg" alt="Secrets de Samhain" class="item-image">
+          <h3>Secrets de Samhain</h3>
+          <p class="item-description">Explorez les mystères de Samhain avec ce guide spirituel. Découvrez les traditions de cette nuit sacrée.</p>
+          <p class="item-availability">Disponible dès le 1er octobre, prévente le 31 juillet 2025. Frais de livraison inclus pour le papier.</p>
+          <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser via <a href="contact.html">notre page contact</a>) le 1er octobre !</p>
+          <p class="item-dedication">Achetez l’eBook directement sur notre site et envoyez-nous un message via <a href="contact.html">notre page contact</a> pour une dédicace personnalisée (indiquez votre nom et préférences) !</p>
+          <div class="paypal-button-container">
+            <form action="https://www.paypal.com/ncp/payment/AGN9PEKJB2H42" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+              <input class="pp-AGN9PEKJB2H42" type="submit" value="Acheter (papier, 10,99 €)" />
+              <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+              <section style="font-size: 0.75rem;">Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+            </form>
+          </div>
+          <div class="paypal-button-container">
+            <form action="https://www.paypal.com/ncp/payment/6Y9YN7JTDQV9G" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+              <input class="pp-6Y9YN7JTDQV9G" type="submit" value="Acheter (eBook, 3,99 €)" />
+              <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+              <section style="font-size: 0.75rem;">Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+            </form>
+          </div>
+        </div>
+        <div class="shop-item" data-category="recettes">
+          <img src="images/sb_pub_agenda.jpg" alt="Agenda Magique" class="item-image">
+          <h3>Agenda Magique</h3>
+          <p class="item-description">Votre compagnon magique pour 2025-2026. Phases lunaires, rituels et merveilles à portée de main.</p>
+          <p class="item-availability">Disponible dès le 1er octobre, prévente le 31 juillet 2025. Frais de livraison inclus pour le papier.</p>
+          <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser via <a href="contact.html">notre page contact</a>) le 1er octobre !</p>
+          <p class="item-dedication">Achetez le digital directement sur notre site et envoyez-nous un message via <a href="contact.html">notre page contact</a> pour une dédicace personnalisée (indiquez votre nom et préférences) !</p>
+          <div class="paypal-button-container">
+            <form action="https://www.paypal.com/ncp/payment/BTMS767YE9G96" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+              <input class="pp-BTMS767YE9G96" type="submit" value="Acheter (papier, 20,00 €)" />
+              <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+              <section style="font-size: 0.75rem;">Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+            </form>
+          </div>
+          <div class="paypal-button-container">
+            <form action="https://www.paypal.com/ncp/payment/JBBRDJ52DJSPU" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+              <input class="pp-JBBRDJ52DJSPU" type="submit" value="Acheter (digital, 12,00 €)" />
+              <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+              <section style="font-size: 0.75rem;">Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+            </form>
+          </div>
+        </div>
+        <div class="shop-item" data-category="livrets">
+          <img src="images/sb_pub_ebook.jpg" alt="Le Cadeau de Lazare" class="item-image">
+          <h3>Le Cadeau de Lazare</h3>
+          <p class="item-description">Un ebook exclusif offert aux nouveaux inscrits ! Découvrez les secrets inédits de l’univers de Lazare.</p>
+          <p class="item-availability">Disponible dès votre inscription à notre Magic Info</p>
+          <div class="action-button" onclick="document.getElementById('ml-form').style.display='block'">Offert à l’inscription <img src="images/icon_3hearts.png" alt="Three Hearts" class="button-icon"></div>
+        </div>
+      </div>
+      <h2>Nos Goodies, Jeux & Accessoires</h2>
+      <div class="shop-grid goodies">
+        <div class="shop-item" data-category="goodies">
+          <img src="images/sb_goodie_coque.png" alt="Coque iPhone Hermine Mystique" class="item-image">
+          <h3>Coque iPhone Hermine Mystique</h3>
+          <p class="item-description">L’Hermine Mystique veille sur votre téléphone...</p>
+          <p class="item-collection">Hermine Mystique : Inspirée par l’hermine, fidèle compagne de notre Alchimiste.</p>
+          <p class="item-availability">Frais de livraison inclus. Précisez le modèle iPhone (ex. iPhone 15 Pro) dans la note client.</p>
+          <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser dans la note client ou via <a href="contact.html">notre page contact</a>) le 1er octobre !</p>
+          <a href="product-coque.html" class="action-button">Voir Plus <img src="images/icon_3hearts.png" alt="Three Hearts" class="button-icon"></a>
+        </div>
+        <div class="shop-item" data-category="goodies">
+          <img src="images/sb_goodie_mug.png" alt="Mug Hermine Mystique" class="item-image">
+          <h3>Mug Hermine Mystique</h3>
+          <p class="item-description">Transformez chaque pause en rituel avec ce mug ensorcelé...</p>
+          <p class="item-collection">Hermine Mystique : Inspirée par l’hermine, fidèle compagne de notre Alchimiste.</p>
+          <p class="item-availability">Frais de livraison inclus.</p>
+          <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser dans la note client ou via <a href="contact.html">notre page contact</a>) le 1er octobre !</p>
+          <a href="product-mug.html" class="action-button">Voir Plus <img src="images/icon_3hearts.png" alt="Three Hearts" class="button-icon"></a>
+        </div>
+        <div class="shop-item" data-category="goodies">
+          <img src="images/sb_goodie_tote.png" alt="Tote Bag Hermine Mystique" class="item-image">
+          <h3>Tote Bag Hermine Mystique</h3>
+          <p class="item-description">Portez les secrets de l’Hermine Mystique dans ce tote bag...</p>
+          <p class="item-collection">Hermine Mystique : Inspirée par l’hermine, fidèle compagne de notre Alchimiste.</p>
+          <p class="item-availability">Frais de livraison inclus. Précisez la couleur (Blanc, Beige, Noir, Marine) dans la note client.</p>
+          <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser dans la note client ou via <a href="contact.html">notre page contact</a>) le 1er octobre !</p>
+          <a href="product-tote.html" class="action-button">Voir Plus <img src="images/icon_3hearts.png" alt="Three Hearts" class="button-icon"></a>
+        </div>
+        <div class="shop-item" data-category="goodies">
+          <img src="images/sb_goodie_sweat.png" alt="Sweat Capuche Hermine Mystique" class="item-image">
+          <h3>Sweat Capuche Hermine Mystique (Dos décoré)</h3>
+          <p class="item-description">Un sweat blanc orné de l’Hermine Mystique, recto-verso...</p>
+          <p class="item-collection">Hermine Mystique : Inspirée par l’hermine, fidèle compagne de notre Alchimiste.</p>
+          <p class="item-availability">Frais de livraison inclus. Précisez la taille (S, M, L, XL, 2XL, 3XL) dans la note client.</p>
+          <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser dans la note client ou via <a href="contact.html">notre page contact</a>) le 1er octobre !</p>
+          <a href="product-sweat.html" class="action-button">Voir Plus <img src="images/icon_3hearts.png" alt="Three Hearts" class="button-icon"></a>
+        </div>
+      </div>
+      <div id="ml-form" style="display: none; text-align: center; margin: 20px 0;">
+        <div id="mlb2-150377964" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-150377964">
+          <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/756915/forms/127563093389803964/subscribe" data-code="BCmHsl" method="post" target="_blank">
+            <input type="text" class="form-control" data-inputmask="" name="fields[name]" placeholder="Votre prénom" autocomplete="name">
+            <input type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Votre e-mail" autocomplete="email">
+            <button type="submit" class="action-button">S’inscrire <img src="images/icon_3hearts.png" alt="Three Hearts" class="button-icon"></button>
+            <input type="hidden" name="ml-submit" value="1">
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="index.html">
+          <img src="images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+          <div class="footer-title">
+            <span>Les Éditions de la</span>
+            <span>Sorcière Blanche</span>
+          </div>
+        </a>
+        <p>Maison d’édition bilingue spécialisée dans les livres ésotériques, fantastiques et mystiques. Découvrez un univers de magie et de mystère à travers nos publications uniques.</p>
+      </div>
+      <div class="footer-info">
+        <h3>Informations</h3>
+        <ul>
+          <li><a href="conditions-generales.html">Conditions Générales</a></li>
+          <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+          <li><a href="livraison-retours.html">Livraison et Retours</a></li>
+          <li><a href="politique-cookies.html">Politique de Cookies</a></li>
+        </ul>
+      </div>
+      <div class="footer-menu">
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="boutique.html" class="active">Boutique</a></li>
+          <li><a href="a-propos.html">À Propos</a></li>
+          <li><a href="je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Suivez-nous</h3>
+        <ul>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="images/icon_x.png" alt="X" class="social-icon"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
+  </footer>
+  <script src="script.js"></script>
+  <script src="protection.js"></script>
+</body>
+</html>
