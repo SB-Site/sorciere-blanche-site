@@ -71,7 +71,7 @@
             <input type="email" id="signup-email" name="email" placeholder="Email" required>
             <label for="signup-password">Votre Formule Magique</label>
             <input type="password" id="signup-password" name="password" placeholder="Mot de passe" required>
-            <button type="submit" onclick="handleSignup()">S’inscrire</button>
+            <button type="submit" id="signup-button">S’inscrire</button>
           </form>
         </div>
         <div id="login" class="tab-content">
@@ -80,7 +80,7 @@
             <input type="email" id="login-email" name="email" placeholder="Email" required>
             <label for="login-password">Votre Formule Magique</label>
             <input type="password" id="login-password" name="password" placeholder="Mot de passe" required>
-            <button type="submit" onclick="handleLogin()">Se connecter</button>
+            <button type="submit" id="login-button">Se connecter</button>
           </form>
         </div>
       </div>
@@ -168,11 +168,23 @@
   <script src="script.js"></script>
   <script src="protection.js"></script>
   <script>
-    // Initialisation de Supabase
-    const supabase = Supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
-    
-    // Gestion des onglets
+    // Vérification chargement Supabase et reCAPTCHA
     document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM chargé pour creer-compte.html');
+      if (typeof Supabase === 'undefined') {
+        console.error('Erreur: Supabase non chargé');
+        alert('Erreur: Problème de chargement du client Supabase. Veuillez réessayer plus tard.');
+        return;
+      }
+      if (typeof grecaptcha === 'undefined' || typeof grecaptcha.enterprise === 'undefined') {
+        console.error('Erreur: reCAPTCHA Enterprise non chargé');
+        alert('Erreur: Problème de chargement de reCAPTCHA. Veuillez réessayer plus tard.');
+        return;
+      }
+      console.log('Initialisation de Supabase...');
+      const supabase = Supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+
+      // Gestion des onglets
       console.log('Tabs initialized');
       const tabContents = document.querySelectorAll('.tab-content');
       const tabButtons = document.querySelectorAll('.tab-button');
@@ -180,60 +192,80 @@
       tabButtons.forEach(button => button.classList.remove('active'));
       document.getElementById('register').classList.add('active');
       document.querySelector('.tab-button[onclick="showTab(\'register\')"]').classList.add('active');
-    });
 
-    // Gestion du formulaire d'inscription
-    async function handleSignup() {
-      event.preventDefault();
-      const name = document.getElementById('signup-name').value;
-      const email = document.getElementById('signup-email').value;
-      const password = document.getElementById('signup-password').value;
-      grecaptcha.enterprise.ready(async () => {
-        const token = await grecaptcha.enterprise.execute('6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj', {action: 'SIGNUP'});
-        if (!token) {
-          alert('Veuillez valider le reCAPTCHA.');
-          return;
-        }
-        const { data, error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: { data: { full_name: name }, captchaToken: token }
-        });
-        if (error) {
-          console.error('Erreur inscription:', error.message);
+      // Gestion du formulaire d'inscription
+      document.getElementById('signup-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        console.log('Formulaire d\'inscription soumis');
+        const name = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+        console.log('Données formulaire:', { name, email, password });
+        try {
+          await grecaptcha.enterprise.ready(async () => {
+            console.log('reCAPTCHA prêt');
+            const token = await grecaptcha.enterprise.execute('6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj', { action: 'SIGNUP' });
+            console.log('reCAPTCHA token:', token);
+            if (!token) {
+              console.error('Erreur: Aucun token reCAPTCHA');
+              alert('Veuillez valider le reCAPTCHA.');
+              return;
+            }
+            const { data, error } = await supabase.auth.signUp({
+              email,
+              password,
+              options: { data: { full_name: name }, captchaToken: token }
+            });
+            if (error) {
+              console.error('Erreur inscription:', error.message);
+              alert('Erreur lors de l’inscription : ' + error.message);
+            } else {
+              console.log('Inscription réussie:', data);
+              window.location.href = 'confirmation.html';
+            }
+          });
+        } catch (error) {
+          console.error('Erreur générale inscription:', error);
           alert('Erreur lors de l’inscription : ' + error.message);
-        } else {
-          console.log('Inscription réussie:', data);
-          window.location.href = 'confirmation.html';
         }
       });
-    }
 
-    // Gestion du formulaire de connexion
-    async function handleLogin() {
-      event.preventDefault();
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
-      grecaptcha.enterprise.ready(async () => {
-        const token = await grecaptcha.enterprise.execute('6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj', {action: 'LOGIN'});
-        if (!token) {
-          alert('Veuillez valider le reCAPTCHA.');
-          return;
-        }
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-          options: { captchaToken: token }
-        });
-        if (error) {
-          console.error('Erreur connexion:', error.message);
+      // Gestion du formulaire de connexion
+      document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        console.log('Formulaire de connexion soumis');
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        console.log('Données formulaire:', { email, password });
+        try {
+          await grecaptcha.enterprise.ready(async () => {
+            console.log('reCAPTCHA prêt');
+            const token = await grecaptcha.enterprise.execute('6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj', { action: 'LOGIN' });
+            console.log('reCAPTCHA token:', token);
+            if (!token) {
+              console.error('Erreur: Aucun token reCAPTCHA');
+              alert('Veuillez valider le reCAPTCHA.');
+              return;
+            }
+            const { data, error } = await supabase.auth.signInWithPassword({
+              email,
+              password,
+              options: { captchaToken: token }
+            });
+            if (error) {
+              console.error('Erreur connexion:', error.message);
+              alert('Erreur lors de la connexion : ' + error.message);
+            } else {
+              console.log('Connexion réussie:', data);
+              window.location.href = 'portail.html';
+            }
+          });
+        } catch (error) {
+          console.error('Erreur générale connexion:', error);
           alert('Erreur lors de la connexion : ' + error.message);
-        } else {
-          console.log('Connexion réussie:', data);
-          window.location.href = 'portail.html';
         }
       });
-    }
+    });
 
     function showTab(tab) {
       console.log('Switching to tab:', tab);

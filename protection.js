@@ -1,4 +1,3 @@
-// SB/protection.js
 document.addEventListener('DOMContentLoaded', function() {
   // Filigrane invisible
   const watermark = document.createElement('div');
@@ -13,11 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
   watermark.setAttribute('aria-hidden', 'true');
   document.body.appendChild(watermark);
 
-  // Protection clic droit (sauf Console)
+  // Protection clic droit (sauf pour développeurs)
   document.addEventListener('contextmenu', function(e) {
-    // Autoriser F12, Ctrl+Shift+I, Cmd+Opt+I
-    if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.metaKey && e.altKey && e.key === 'I')) {
-      return; // Permet l'ouverture de la Console
+    if (window.location.hostname.includes('localhost') || window.location.hostname.includes('netlify.app')) {
+      console.log('Clic droit autorisé pour développement');
+      return; // Permet l'inspection sur localhost ou Netlify
     }
     e.preventDefault();
     alert('© 2025 Éditions de la Sorcière Blanche. Tous droits réservés.');
@@ -25,8 +24,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Protection contre la sélection de texte
   document.addEventListener('selectstart', function(e) {
+    if (window.location.hostname.includes('localhost') || window.location.hostname.includes('netlify.app')) {
+      return; // Autorise sélection pour développement
+    }
     e.preventDefault();
   });
 
-  console.log('Protection chargée : filigrane invisible, clic droit protégé, Console accessible via F12, Ctrl+Shift+I, Cmd+Opt+I');
+  console.log('Protection chargée : filigrane invisible, clic droit protégé (sauf dev), Console accessible via F12');
 });
