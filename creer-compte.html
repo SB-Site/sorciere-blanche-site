@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="creer-compte.css">
   <link rel="stylesheet" href="protection.css">
   <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj" async defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js" async defer onerror="console.error('Échec du chargement de Supabase CDN')"></script>
+  <script src="https://cdn.supabase.com/js/v2/supabase.min.js" async defer onerror="console.error('Échec du chargement de Supabase CDN')"></script>
 </head>
 <body>
   <div class="cookie-banner" id="cookieBanner">
@@ -172,11 +172,11 @@
     document.addEventListener('DOMContentLoaded', () => {
       console.log('DOM chargé pour creer-compte.html');
 
-      // Attendre que Supabase soit chargé
+      // Vérifier Supabase avec logs détaillés
       const checkSupabaseLoaded = setInterval(() => {
-        if (typeof Supabase !== 'undefined') {
+        if (typeof window.supabase !== 'undefined') {
           clearInterval(checkSupabaseLoaded);
-          console.log('Supabase chargé');
+          console.log('Supabase chargé avec succès');
           initializeAuth();
         } else {
           console.log('En attente du chargement de Supabase...');
@@ -185,7 +185,7 @@
 
       // Timeout après 10 secondes
       setTimeout(() => {
-        if (typeof Supabase === 'undefined') {
+        if (typeof window.supabase === 'undefined') {
           console.error('Erreur: Supabase non chargé après timeout');
           alert('Erreur: Problème de chargement du client Supabase. Veuillez réessayer plus tard.');
           clearInterval(checkSupabaseLoaded);
@@ -198,10 +198,11 @@
         alert('Erreur: Problème de chargement de reCAPTCHA. Veuillez réessayer plus tard.');
         return;
       }
+      console.log('reCAPTCHA Enterprise chargé');
 
       function initializeAuth() {
         console.log('Initialisation de Supabase...');
-        const supabase = Supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+        const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
 
         // Gestion des onglets
         console.log('Tabs initialized');
