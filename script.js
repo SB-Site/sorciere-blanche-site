@@ -3,9 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('LocalStorage domain:', window.location.hostname);
   console.log('Checking for construction-popup element...');
 
-  // Réinitialiser localStorage pour tester la pop-up
-  console.log('Resetting popupClosed in localStorage for testing');
-  localStorage.removeItem('popupClosed');
+  // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
+  if (window.location.pathname.includes('index.html')) {
+    console.log('Resetting popupClosed in localStorage for testing');
+    localStorage.removeItem('popupClosed');
+  }
 
   // Gestion de la pop-up
   const popup = document.getElementById('construction-popup');
@@ -20,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Popup not shown, already closed');
     }
   } else {
-    console.error('Error: construction-popup element not found');
+    console.log('No construction-popup element on this page');
   }
 
   window.closePopup = function() {
@@ -32,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('popupClosed', 'true');
       console.log('popupClosed set to true in localStorage');
     } else {
-      console.error('Error: construction-popup not found in closePopup');
+      console.log('No construction-popup element to close');
     }
   };
 
@@ -67,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showImage(currentIndex);
     }, 5000);
   } else {
-    console.log('Carousel not found');
+    console.log('No carousel on this page');
   }
 
   // Cookies RGPD

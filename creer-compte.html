@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="creer-compte.css">
   <link rel="stylesheet" href="protection.css">
   <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj" async defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js" async defer onerror="console.error('Échec du chargement de Supabase CDN')"></script>
 </head>
 <body>
   <div class="cookie-banner" id="cookieBanner">
@@ -171,100 +171,121 @@
     // Vérification chargement Supabase et reCAPTCHA
     document.addEventListener('DOMContentLoaded', () => {
       console.log('DOM chargé pour creer-compte.html');
-      if (typeof Supabase === 'undefined') {
-        console.error('Erreur: Supabase non chargé');
-        alert('Erreur: Problème de chargement du client Supabase. Veuillez réessayer plus tard.');
-        return;
-      }
+
+      // Attendre que Supabase soit chargé
+      const checkSupabaseLoaded = setInterval(() => {
+        if (typeof Supabase !== 'undefined') {
+          clearInterval(checkSupabaseLoaded);
+          console.log('Supabase chargé');
+          initializeAuth();
+        } else {
+          console.log('En attente du chargement de Supabase...');
+        }
+      }, 100);
+
+      // Timeout après 10 secondes
+      setTimeout(() => {
+        if (typeof Supabase === 'undefined') {
+          console.error('Erreur: Supabase non chargé après timeout');
+          alert('Erreur: Problème de chargement du client Supabase. Veuillez réessayer plus tard.');
+          clearInterval(checkSupabaseLoaded);
+        }
+      }, 10000);
+
+      // Vérifier reCAPTCHA
       if (typeof grecaptcha === 'undefined' || typeof grecaptcha.enterprise === 'undefined') {
         console.error('Erreur: reCAPTCHA Enterprise non chargé');
         alert('Erreur: Problème de chargement de reCAPTCHA. Veuillez réessayer plus tard.');
         return;
       }
-      console.log('Initialisation de Supabase...');
-      const supabase = Supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
 
-      // Gestion des onglets
-      console.log('Tabs initialized');
-      const tabContents = document.querySelectorAll('.tab-content');
-      const tabButtons = document.querySelectorAll('.tab-button');
-      tabContents.forEach(content => content.classList.remove('active'));
-      tabButtons.forEach(button => button.classList.remove('active'));
-      document.getElementById('register').classList.add('active');
-      document.querySelector('.tab-button[onclick="showTab(\'register\')"]').classList.add('active');
+      function initializeAuth() {
+        console.log('Initialisation de Supabase...');
+        const supabase = Supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
 
-      // Gestion du formulaire d'inscription
-      document.getElementById('signup-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        console.log('Formulaire d\'inscription soumis');
-        const name = document.getElementById('signup-name').value;
-        const email = document.getElementById('signup-email').value;
-        const password = document.getElementById('signup-password').value;
-        console.log('Données formulaire:', { name, email, password });
-        try {
-          await grecaptcha.enterprise.ready(async () => {
-            console.log('reCAPTCHA prêt');
-            const token = await grecaptcha.enterprise.execute('6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj', { action: 'SIGNUP' });
-            console.log('reCAPTCHA token:', token);
-            if (!token) {
-              console.error('Erreur: Aucun token reCAPTCHA');
-              alert('Veuillez valider le reCAPTCHA.');
-              return;
-            }
-            const { data, error } = await supabase.auth.signUp({
-              email,
-              password,
-              options: { data: { full_name: name }, captchaToken: token }
+        // Gestion des onglets
+        console.log('Tabs initialized');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const tabButtons = document.querySelectorAll('.tab-button');
+        tabContents.forEach(content => content.classList.remove('active'));
+        tabButtons.forEach(button => button.classList.remove('active'));
+        document.getElementById('register').classList.add('active');
+        document.querySelector('.tab-button[onclick="showTab(\'register\')"]').classList.add('active');
+
+        // Gestion du formulaire d'inscription
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          console.log('Formulaire d\'inscription soumis');
+          const name = document.getElementById('signup-name').value;
+          const email = document.getElementById('signup-email').value;
+          const password = document.getElementById('signup-password').value;
+          console.log('Données formulaire:', { name, email, password });
+          try {
+            await grecaptcha.enterprise.ready(async () => {
+              console.log('reCAPTCHA prêt');
+              const token = await grecaptcha.enterprise.execute('6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj', { action: 'SIGNUP' });
+              console.log('reCAPTCHA token:', token);
+              if (!token) {
+                console.error('Erreur: Aucun token reCAPTCHA');
+                alert('Veuillez valider le reCAPTCHA.');
+                return;
+              }
+              const { data, error } = await supabase.auth.signUp({
+                email,
+                password,
+                options: { data: { full_name: name }, captchaToken: token }
+              });
+              if (error) {
+                console.error('Erreur inscription:', error.message);
+                alert('Erreur lors de l’inscription : ' + error.message);
+              } else {
+                console.log('Inscription réussie:', data);
+                alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
+                // window.location.href = 'confirmation.html'; // Désactivé pour test
+              }
             });
-            if (error) {
-              console.error('Erreur inscription:', error.message);
-              alert('Erreur lors de l’inscription : ' + error.message);
-            } else {
-              console.log('Inscription réussie:', data);
-              window.location.href = 'confirmation.html';
-            }
-          });
-        } catch (error) {
-          console.error('Erreur générale inscription:', error);
-          alert('Erreur lors de l’inscription : ' + error.message);
-        }
-      });
+          } catch (error) {
+            console.error('Erreur générale inscription:', error);
+            alert('Erreur lors de l’inscription : ' + error.message);
+          }
+        });
 
-      // Gestion du formulaire de connexion
-      document.getElementById('login-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        console.log('Formulaire de connexion soumis');
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-        console.log('Données formulaire:', { email, password });
-        try {
-          await grecaptcha.enterprise.ready(async () => {
-            console.log('reCAPTCHA prêt');
-            const token = await grecaptcha.enterprise.execute('6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj', { action: 'LOGIN' });
-            console.log('reCAPTCHA token:', token);
-            if (!token) {
-              console.error('Erreur: Aucun token reCAPTCHA');
-              alert('Veuillez valider le reCAPTCHA.');
-              return;
-            }
-            const { data, error } = await supabase.auth.signInWithPassword({
-              email,
-              password,
-              options: { captchaToken: token }
+        // Gestion du formulaire de connexion
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          console.log('Formulaire de connexion soumis');
+          const email = document.getElementById('login-email').value;
+          const password = document.getElementById('login-password').value;
+          console.log('Données formulaire:', { email, password });
+          try {
+            await grecaptcha.enterprise.ready(async () => {
+              console.log('reCAPTCHA prêt');
+              const token = await grecaptcha.enterprise.execute('6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj', { action: 'LOGIN' });
+              console.log('reCAPTCHA token:', token);
+              if (!token) {
+                console.error('Erreur: Aucun token reCAPTCHA');
+                alert('Veuillez valider le reCAPTCHA.');
+                return;
+              }
+              const { data, error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+                options: { captchaToken: token }
+              });
+              if (error) {
+                console.error('Erreur connexion:', error.message);
+                alert('Erreur lors de la connexion : ' + error.message);
+              } else {
+                console.log('Connexion réussie:', data);
+                window.location.href = 'portail.html';
+              }
             });
-            if (error) {
-              console.error('Erreur connexion:', error.message);
-              alert('Erreur lors de la connexion : ' + error.message);
-            } else {
-              console.log('Connexion réussie:', data);
-              window.location.href = 'portail.html';
-            }
-          });
-        } catch (error) {
-          console.error('Erreur générale connexion:', error);
-          alert('Erreur lors de la connexion : ' + error.message);
-        }
-      });
+          } catch (error) {
+            console.error('Erreur générale connexion:', error);
+            alert('Erreur lors de la connexion : ' + error.message);
+          }
+        });
+      }
     });
 
     function showTab(tab) {
