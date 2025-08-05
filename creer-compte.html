@@ -8,9 +8,8 @@
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="creer-compte.css">
   <link rel="stylesheet" href="protection.css">
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+  <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="cookie-banner" id="cookieBanner">
@@ -18,7 +17,7 @@
     <button onclick="acceptCookies()">Accepter</button>
   </div>
   <div class="announcement-bar">
-    <p>Lancement officiel le 1er Octobre 2025 - Top départ de nos préventes le 31 juillet à 00h00 ! <a href="boutique.html" class="button announcement-button">Voir la Boutique</a></p>
+    <p>Lancement officiel le 1er Octobre 2025 - Top départ de nos préventes le 8 août 2025 à 00h00 ! <a href="boutique.html" class="button announcement-button">Voir la Boutique</a></p>
   </div>
   <header>
     <div class="header-content">
@@ -65,16 +64,23 @@
       </div>
       <div class="account-form-container">
         <div id="register" class="tab-content active">
-          <iframe src="https://preview.mailerlite.io/forms/1262194/160909988303210138/share" width="100%" height="600px" frameborder="0"></iframe>
+          <form id="signup-form" method="POST">
+            <label for="signup-name">Votre Nom</label>
+            <input type="text" id="signup-name" name="name" placeholder="Nom" required>
+            <label for="signup-email">Votre PlumeMail</label>
+            <input type="email" id="signup-email" name="email" placeholder="Email" required>
+            <label for="signup-password">Votre Formule Magique</label>
+            <input type="password" id="signup-password" name="password" placeholder="Mot de passe" required>
+            <button type="submit" onclick="handleSignup()">S’inscrire</button>
+          </form>
         </div>
         <div id="login" class="tab-content">
-          <form id="login-form">
+          <form id="login-form" method="POST">
             <label for="login-email">Votre PlumeMail</label>
-            <input type="email" id="login-email" name="email" required>
+            <input type="email" id="login-email" name="email" placeholder="Email" required>
             <label for="login-password">Votre Formule Magique</label>
-            <input type="password" id="login-password" name="password" required>
-            <div class="g-recaptcha" data-sitekey="6LcfYpErAAAAAL-u8jFWDYDiGCszAsQ7pQVjEj9o"></div>
-            <button type="submit">Se connecter</button>
+            <input type="password" id="login-password" name="password" placeholder="Mot de passe" required>
+            <button type="submit" onclick="handleLogin()">Se connecter</button>
           </form>
         </div>
       </div>
@@ -162,15 +168,9 @@
   <script src="script.js"></script>
   <script src="protection.js"></script>
   <script>
-    // Log pour vérifier la soumission dans l'iframe
-    window.addEventListener('message', function(event) {
-      if (event.origin.includes('mailerlite')) {
-        console.log('Message reçu de MailerLite:', event.data);
-        if (event.data === 'success') {
-          console.log('Soumission formulaire réussie, redirection attendue vers confirmation.html');
-        }
-      }
-    });
+    // Initialisation de Supabase
+    const supabase = Supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+    
     // Gestion des onglets
     document.addEventListener('DOMContentLoaded', () => {
       console.log('Tabs initialized');
@@ -181,6 +181,60 @@
       document.getElementById('register').classList.add('active');
       document.querySelector('.tab-button[onclick="showTab(\'register\')"]').classList.add('active');
     });
+
+    // Gestion du formulaire d'inscription
+    async function handleSignup() {
+      event.preventDefault();
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      grecaptcha.enterprise.ready(async () => {
+        const token = await grecaptcha.enterprise.execute('6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj', {action: 'SIGNUP'});
+        if (!token) {
+          alert('Veuillez valider le reCAPTCHA.');
+          return;
+        }
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { data: { full_name: name }, captchaToken: token }
+        });
+        if (error) {
+          console.error('Erreur inscription:', error.message);
+          alert('Erreur lors de l’inscription : ' + error.message);
+        } else {
+          console.log('Inscription réussie:', data);
+          window.location.href = 'confirmation.html';
+        }
+      });
+    }
+
+    // Gestion du formulaire de connexion
+    async function handleLogin() {
+      event.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      grecaptcha.enterprise.ready(async () => {
+        const token = await grecaptcha.enterprise.execute('6LfgGJsrAAAAAC30OP38kPnjf2zq18feqH2mcoMj', {action: 'LOGIN'});
+        if (!token) {
+          alert('Veuillez valider le reCAPTCHA.');
+          return;
+        }
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+          options: { captchaToken: token }
+        });
+        if (error) {
+          console.error('Erreur connexion:', error.message);
+          alert('Erreur lors de la connexion : ' + error.message);
+        } else {
+          console.log('Connexion réussie:', data);
+          window.location.href = 'portail.html';
+        }
+      });
+    }
+
     function showTab(tab) {
       console.log('Switching to tab:', tab);
       document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
