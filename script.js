@@ -225,11 +225,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 15000);
 
-    // Vérifier hCaptcha
+    // Vérifier et initialiser hCaptcha
     const checkHCaptchaLoaded = setInterval(() => {
       if (typeof hcaptcha !== 'undefined') {
         clearInterval(checkHCaptchaLoaded);
         console.log('hCaptcha chargé');
+        hcaptcha.render('hcaptcha-container', {
+          sitekey: 'b97e9bec-2b16-4812-975a-edac0ed2780c',
+          callback: (token) => {
+            console.log('hCaptcha token généré:', token);
+            document.querySelector('#hcaptcha-container input[name="h-captcha-response"]').value = token;
+          },
+          'error-callback': (error) => {
+            console.error('Erreur hCaptcha:', error);
+          }
+        });
       } else {
         console.log('En attente du chargement de hCaptcha...');
       }
@@ -245,7 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializeAuth() {
       console.log('Initialisation de Supabase...');
-      // Clé Supabase pour test (à sécuriser via Netlify Functions plus tard)
       const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI';
       const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', SUPABASE_ANON_KEY);
 
@@ -258,15 +267,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('signup-password').value;
         console.log('Données formulaire:', { name, email, password });
         try {
-          // Attendre que hCaptcha soit prêt
-          let hcaptchaToken = null;
-          const hcaptchaInput = document.querySelector('#hcaptcha-container input[name="h-captcha-response"]');
-          if (hcaptchaInput) {
-            hcaptchaToken = hcaptchaInput.value;
-          }
+          // Récupérer le token hCaptcha
+          let hcaptchaToken = document.querySelector('#hcaptcha-container input[name="h-captcha-response"]').value;
           if (!hcaptchaToken) {
             console.error('Erreur: Aucun token hCaptcha trouvé');
             alert('Veuillez valider hCaptcha.');
+            hcaptcha.reset('hcaptcha-container');
             return;
           }
           console.log('hCaptcha token:', hcaptchaToken);
@@ -278,6 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (error) {
             console.error('Erreur inscription:', error.message);
             alert('Erreur lors de l’inscription : ' + error.message);
+            hcaptcha.reset('hcaptcha-container');
           } else {
             console.log('Inscription réussie:', data);
             alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
@@ -286,10 +293,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
           console.error('Erreur générale inscription:', error);
           alert('Erreur lors de l’inscription : ' + error.message);
+          hcaptcha.reset('hcaptcha-container');
         }
       });
 
-      // Gestion du formulaire de connexion (sans hCaptcha pour simplifier)
+      // Gestion du formulaire de connexion
       document.getElementById('login-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         console.log('Formulaire de connexion soumis');
