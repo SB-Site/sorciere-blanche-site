@@ -226,20 +226,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 15000);
 
     // Vérifier et initialiser hCaptcha
+    let hcaptchaInitialized = false;
     const checkHCaptchaLoaded = setInterval(() => {
-      if (typeof hcaptcha !== 'undefined') {
+      if (typeof hcaptcha !== 'undefined' && !hcaptchaInitialized) {
         clearInterval(checkHCaptchaLoaded);
         console.log('hCaptcha chargé');
-        hcaptcha.render('hcaptcha-container', {
-          sitekey: 'b97e9bec-2b16-4812-975a-edac0ed2780c',
-          callback: (token) => {
-            console.log('hCaptcha token généré:', token);
-            document.querySelector('#hcaptcha-container input[name="h-captcha-response"]').value = token;
-          },
-          'error-callback': (error) => {
-            console.error('Erreur hCaptcha:', error);
-          }
-        });
+        hcaptchaInitialized = true;
+        try {
+          hcaptcha.render('hcaptcha-container', {
+            sitekey: 'b97e9bec-2b16-4812-975a-edac0ed2780c',
+            callback: (token) => {
+              console.log('hCaptcha token généré:', token);
+              const hcaptchaInput = document.createElement('input');
+              hcaptchaInput.type = 'hidden';
+              hcaptchaInput.name = 'h-captcha-response';
+              hcaptchaInput.value = token;
+              document.getElementById('hcaptcha-container').appendChild(hcaptchaInput);
+            },
+            'error-callback': (error) => {
+              console.error('Erreur hCaptcha:', error);
+              hcaptcha.reset('hcaptcha-container');
+            }
+          });
+        } catch (error) {
+          console.error('Erreur initialisation hCaptcha:', error);
+        }
       } else {
         console.log('En attente du chargement de hCaptcha...');
       }
@@ -268,7 +279,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Données formulaire:', { name, email, password });
         try {
           // Récupérer le token hCaptcha
-          let hcaptchaToken = document.querySelector('#hcaptcha-container input[name="h-captcha-response"]').value;
+          const hcaptchaInput = document.querySelector('#hcaptcha-container input[name="h-captcha-response"]');
+          let hcaptchaToken = hcaptchaInput ? hcaptchaInput.value : null;
           if (!hcaptchaToken) {
             console.error('Erreur: Aucun token hCaptcha trouvé');
             alert('Veuillez valider hCaptcha.');
