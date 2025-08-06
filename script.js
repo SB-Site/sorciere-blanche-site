@@ -207,9 +207,11 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM chargé pour creer-compte.html');
 
     // Vérifier Supabase
+    let supabaseLoaded = false;
     const checkSupabaseLoaded = setInterval(() => {
-      if (typeof window.supabase !== 'undefined') {
+      if (typeof window.supabase !== 'undefined' && !supabaseLoaded) {
         clearInterval(checkSupabaseLoaded);
+        supabaseLoaded = true;
         console.log('Supabase chargé avec succès');
         initializeAuth();
       } else {
@@ -219,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Timeout après 15 secondes
     setTimeout(() => {
-      if (typeof window.supabase === 'undefined') {
+      if (!supabaseLoaded) {
         console.error('Erreur: Supabase non chargé après timeout');
         console.log('Formulaire accessible malgré l\'erreur Supabase');
       }
@@ -227,10 +229,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Vérifier et initialiser hCaptcha
     let hcaptchaToken = null;
-    const checkHCaptchaLoaded = setInterval(() => {
-      if (typeof hcaptcha !== 'undefined') {
-        clearInterval(checkHCaptchaLoaded);
+    let hcaptchaLoaded = false;
+    const initializeHCaptcha = () => {
+      if (typeof hcaptcha !== 'undefined' && !hcaptchaLoaded) {
+        hcaptchaLoaded = true;
         console.log('hCaptcha chargé');
+        const hcaptchaContainer = document.getElementById('hcaptcha-container');
+        if (!hcaptchaContainer) {
+          console.error('Erreur: Conteneur hCaptcha #hcaptcha-container non trouvé');
+          return;
+        }
         try {
           hcaptcha.render('hcaptcha-container', {
             sitekey: 'b97e9bec-2b16-4812-975a-edac0ed2780c',
@@ -256,11 +264,21 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         console.log('En attente du chargement de hCaptcha...');
       }
+    };
+
+    // Vérifier hCaptcha immédiatement et toutes les 100ms
+    initializeHCaptcha();
+    const checkHCaptchaLoaded = setInterval(() => {
+      if (hcaptchaLoaded) {
+        clearInterval(checkHCaptchaLoaded);
+      } else {
+        initializeHCaptcha();
+      }
     }, 100);
 
     // Timeout après 15 secondes pour hCaptcha
     setTimeout(() => {
-      if (typeof hcaptcha === 'undefined') {
+      if (!hcaptchaLoaded) {
         console.error('Erreur: hCaptcha non chargé après timeout');
         console.log('Formulaire accessible malgré l\'erreur hCaptcha');
       }
@@ -272,69 +290,79 @@ document.addEventListener('DOMContentLoaded', () => {
       const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', SUPABASE_ANON_KEY);
 
       // Gestion du formulaire d'inscription
-      document.getElementById('signup-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        console.log('Formulaire d\'inscription soumis');
-        const name = document.getElementById('signup-name').value;
-        const email = document.getElementById('signup-email').value;
-        const password = document.getElementById('signup-password').value;
-        console.log('Données formulaire:', { name, email, password });
-        try {
-          // Vérifier le token hCaptcha
-          if (!hcaptchaToken) {
-            console.error('Erreur: Aucun token hCaptcha trouvé');
-            alert('Veuillez valider hCaptcha.');
-            hcaptcha.reset('hcaptcha-container');
-            return;
-          }
-          console.log('hCaptcha token:', hcaptchaToken);
-          const { data, error } = await supabase.auth.signUp({
-            email,
-            password,
-            options: { data: { full_name: name }, captchaToken: hcaptchaToken }
-          });
-          if (error) {
-            console.error('Erreur inscription:', error.message);
+      const signupForm = document.getElementById('signup-form');
+      if (signupForm) {
+        signupForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          console.log('Formulaire d\'inscription soumis');
+          const name = document.getElementById('signup-name').value;
+          const email = document.getElementById('signup-email').value;
+          const password = document.getElementById('signup-password').value;
+          console.log('Données formulaire:', { name, email, password });
+          try {
+            // Vérifier le token hCaptcha
+            if (!hcaptchaToken) {
+              console.error('Erreur: Aucun token hCaptcha trouvé');
+              alert('Veuillez valider hCaptcha.');
+              if (hcaptchaLoaded) hcaptcha.reset('hcaptcha-container');
+              return;
+            }
+            console.log('hCaptcha token:', hcaptchaToken);
+            const { data, error } = await supabase.auth.signUp({
+              email,
+              password,
+              options: { data: { full_name: name }, captchaToken: hcaptchaToken }
+            });
+            if (error) {
+              console.error('Erreur inscription:', error.message);
+              alert('Erreur lors de l’inscription : ' + error.message);
+              if (hcaptchaLoaded) hcaptcha.reset('hcaptcha-container');
+              hcaptchaToken = null;
+            } else {
+              console.log('Inscription réussie:', data);
+              alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
+              window.location.href = 'confirmation.html';
+            }
+          } catch (error) {
+            console.error('Erreur générale inscription:', error);
             alert('Erreur lors de l’inscription : ' + error.message);
-            hcaptcha.reset('hcaptcha-container');
+            if (hcaptchaLoaded) hcaptcha.reset('hcaptcha-container');
             hcaptchaToken = null;
-          } else {
-            console.log('Inscription réussie:', data);
-            alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
-            window.location.href = 'confirmation.html';
           }
-        } catch (error) {
-          console.error('Erreur générale inscription:', error);
-          alert('Erreur lors de l’inscription : ' + error.message);
-          hcaptcha.reset('hcaptcha-container');
-          hcaptchaToken = null;
-        }
-      });
+        });
+      } else {
+        console.error('Erreur: Formulaire signup-form non trouvé');
+      }
 
       // Gestion du formulaire de connexion
-      document.getElementById('login-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        console.log('Formulaire de connexion soumis');
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-        console.log('Données formulaire:', { email, password });
-        try {
-          const { data, error } = await supabase.auth.signInWithPassword({
-            email,
-            password
-          });
-          if (error) {
-            console.error('Erreur connexion:', error.message);
+      const loginForm = document.getElementById('login-form');
+      if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          console.log('Formulaire de connexion soumis');
+          const email = document.getElementById('login-email').value;
+          const password = document.getElementById('login-password').value;
+          console.log('Données formulaire:', { email, password });
+          try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+              email,
+              password
+            });
+            if (error) {
+              console.error('Erreur connexion:', error.message);
+              alert('Erreur lors de la connexion : ' + error.message);
+            } else {
+              console.log('Connexion réussie:', data);
+              window.location.href = 'portail.html';
+            }
+          } catch (error) {
+            console.error('Erreur générale connexion:', error);
             alert('Erreur lors de la connexion : ' + error.message);
-          } else {
-            console.log('Connexion réussie:', data);
-            window.location.href = 'portail.html';
           }
-        } catch (error) {
-          console.error('Erreur générale connexion:', error);
-          alert('Erreur lors de la connexion : ' + error.message);
-        }
-      });
+        });
+      } else {
+        console.error('Erreur: Formulaire login-form non trouvé');
+      }
     }
   }
 });
