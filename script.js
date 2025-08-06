@@ -226,30 +226,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 15000);
 
     // Vérifier et initialiser hCaptcha
-    let hcaptchaInitialized = false;
+    let hcaptchaToken = null;
     const checkHCaptchaLoaded = setInterval(() => {
-      if (typeof hcaptcha !== 'undefined' && !hcaptchaInitialized) {
+      if (typeof hcaptcha !== 'undefined') {
         clearInterval(checkHCaptchaLoaded);
         console.log('hCaptcha chargé');
-        hcaptchaInitialized = true;
         try {
           hcaptcha.render('hcaptcha-container', {
             sitekey: 'b97e9bec-2b16-4812-975a-edac0ed2780c',
             callback: (token) => {
               console.log('hCaptcha token généré:', token);
-              const hcaptchaInput = document.createElement('input');
-              hcaptchaInput.type = 'hidden';
-              hcaptchaInput.name = 'h-captcha-response';
-              hcaptchaInput.value = token;
-              document.getElementById('hcaptcha-container').appendChild(hcaptchaInput);
+              hcaptchaToken = token;
             },
             'error-callback': (error) => {
               console.error('Erreur hCaptcha:', error);
+              hcaptchaToken = null;
+              hcaptcha.reset('hcaptcha-container');
+            },
+            'expired-callback': () => {
+              console.log('hCaptcha token expiré');
+              hcaptchaToken = null;
               hcaptcha.reset('hcaptcha-container');
             }
           });
         } catch (error) {
           console.error('Erreur initialisation hCaptcha:', error);
+          hcaptchaToken = null;
         }
       } else {
         console.log('En attente du chargement de hCaptcha...');
@@ -278,9 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('signup-password').value;
         console.log('Données formulaire:', { name, email, password });
         try {
-          // Récupérer le token hCaptcha
-          const hcaptchaInput = document.querySelector('#hcaptcha-container input[name="h-captcha-response"]');
-          let hcaptchaToken = hcaptchaInput ? hcaptchaInput.value : null;
+          // Vérifier le token hCaptcha
           if (!hcaptchaToken) {
             console.error('Erreur: Aucun token hCaptcha trouvé');
             alert('Veuillez valider hCaptcha.');
@@ -297,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Erreur inscription:', error.message);
             alert('Erreur lors de l’inscription : ' + error.message);
             hcaptcha.reset('hcaptcha-container');
+            hcaptchaToken = null;
           } else {
             console.log('Inscription réussie:', data);
             alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
@@ -306,6 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
           console.error('Erreur générale inscription:', error);
           alert('Erreur lors de l’inscription : ' + error.message);
           hcaptcha.reset('hcaptcha-container');
+          hcaptchaToken = null;
         }
       });
 
