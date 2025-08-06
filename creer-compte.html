@@ -70,7 +70,7 @@
             <input type="email" id="signup-email" name="email" placeholder="Email" required>
             <label for="signup-password">Votre Formule Magique</label>
             <input type="password" id="signup-password" name="password" placeholder="Mot de passe" required>
-            <div class="h-captcha" data-sitekey="b97e9bec-2b16-4812-975a-edac0ed2780c"></div>
+            <div id="hcaptcha-container" class="h-captcha" data-sitekey="b97e9bec-2b16-4812-975a-edac0ed2780c"></div>
             <button type="submit" id="signup-button">S’inscrire</button>
           </form>
         </div>
@@ -168,14 +168,5 @@
   <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
   <script src="script.js"></script>
   <script src="protection.js"></script>
-  <script>
-    function showTab(tab) {
-      console.log('Switching to tab:', tab);
-      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-      document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
-      document.getElementById(tab).classList.add('active');
-      document.querySelector(`.tab-button[onclick="showTab('${tab}')"]`).classList.add('active');
-    }
-  </script>
 </body>
 </html>
