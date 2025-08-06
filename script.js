@@ -245,8 +245,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializeAuth() {
       console.log('Initialisation de Supabase...');
-      // Utiliser la variable d'environnement injectée par Netlify
-      const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', window.SUPABASE_ANON_KEY);
+      // Clé Supabase pour test (à sécuriser via Netlify Functions plus tard)
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI';
+      const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', SUPABASE_ANON_KEY);
 
       // Gestion du formulaire d'inscription
       document.getElementById('signup-form').addEventListener('submit', async (e) => {
