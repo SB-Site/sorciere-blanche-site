@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (popup) {
     console.log('Popup element found:', popup);
     console.log('popupClosed in localStorage:', localStorage.getItem('popupClosed'));
-    // Afficher la pop-up si pas encore vue
     if (!localStorage.getItem('popupClosed')) {
       console.log('Showing popup');
       popup.classList.add('active');
@@ -192,4 +191,109 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+
+  // Gestion Supabase et hCaptcha pour creer-compte.html
+  if (window.location.pathname.includes('creer-compte.html')) {
+    console.log('DOM chargé pour creer-compte.html');
+
+    // Vérifier Supabase
+    const checkSupabaseLoaded = setInterval(() => {
+      if (typeof window.supabase !== 'undefined') {
+        clearInterval(checkSupabaseLoaded);
+        console.log('Supabase chargé avec succès');
+        initializeAuth();
+      } else {
+        console.log('En attente du chargement de Supabase...');
+      }
+    }, 100);
+
+    // Timeout après 15 secondes
+    setTimeout(() => {
+      if (typeof window.supabase === 'undefined') {
+        console.error('Erreur: Supabase non chargé après timeout');
+        console.log('Formulaire accessible malgré l\'erreur Supabase');
+      }
+    }, 15000);
+
+    // Vérifier hCaptcha
+    if (typeof hcaptcha === 'undefined') {
+      console.error('Erreur: hCaptcha non chargé');
+      console.log('Formulaire accessible malgré l\'erreur hCaptcha');
+    } else {
+      console.log('hCaptcha chargé');
+    }
+
+    function initializeAuth() {
+      console.log('Initialisation de Supabase...');
+      const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+
+      // Gestion des onglets
+      console.log('Tabs initialized');
+      const tabContents = document.querySelectorAll('.tab-content');
+      const tabButtons = document.querySelectorAll('.tab-button');
+      tabContents.forEach(content => content.classList.remove('active'));
+      tabButtons.forEach(button => button.classList.remove('active'));
+      document.getElementById('register').classList.add('active');
+      document.querySelector('.tab-button[onclick="showTab(\'register\')"]').classList.add('active');
+
+      // Gestion du formulaire d'inscription
+      document.getElementById('signup-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        console.log('Formulaire d\'inscription soumis');
+        const name = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+        console.log('Données formulaire:', { name, email, password });
+        try {
+          const hcaptchaToken = document.querySelector('input[name="h-captcha-response"]').value;
+          if (!hcaptchaToken) {
+            console.error('Erreur: Aucun token hCaptcha');
+            alert('Veuillez valider hCaptcha.');
+            return;
+          }
+          const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: { data: { full_name: name }, captchaToken: hcaptchaToken }
+          });
+          if (error) {
+            console.error('Erreur inscription:', error.message);
+            alert('Erreur lors de l’inscription : ' + error.message);
+          } else {
+            console.log('Inscription réussie:', data);
+            alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
+            // window.location.href = 'confirmation.html'; // Désactivé pour test
+          }
+        } catch (error) {
+          console.error('Erreur générale inscription:', error);
+          alert('Erreur lors de l’inscription : ' + error.message);
+        }
+      });
+
+      // Gestion du formulaire de connexion (sans hCaptcha pour simplifier)
+      document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        console.log('Formulaire de connexion soumis');
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        console.log('Données formulaire:', { email, password });
+        try {
+          const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password
+          });
+          if (error) {
+            console.error('Erreur connexion:', error.message);
+            alert('Erreur lors de la connexion : ' + error.message);
+          } else {
+            console.log('Connexion réussie:', data);
+            window.location.href = 'portail.html';
+          }
+        } catch (error) {
+          console.error('Erreur générale connexion:', error);
+          alert('Erreur lors de la connexion : ' + error.message);
+        }
+      });
+    }
+  }
 });
