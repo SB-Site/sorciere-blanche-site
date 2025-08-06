@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializeAuth() {
       console.log('Initialisation de Supabase...');
-      const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+      const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'process.env.SUPABASE_ANON_KEY');
 
       // Gestion des onglets
       console.log('Tabs initialized');
