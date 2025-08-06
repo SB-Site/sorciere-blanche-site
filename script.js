@@ -245,7 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializeAuth() {
       console.log('Initialisation de Supabase...');
-      const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', process.env.SUPABASE_ANON_KEY);
+      // Utiliser la variable d'environnement injectée par Netlify
+      const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', window.SUPABASE_ANON_KEY);
 
       // Gestion du formulaire d'inscription
       document.getElementById('signup-form').addEventListener('submit', async (e) => {
@@ -279,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
             console.log('Inscription réussie:', data);
             alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
-            // window.location.href = 'confirmation.html'; // Désactivé pour test
+            window.location.href = 'confirmation.html';
           }
         } catch (error) {
           console.error('Erreur générale inscription:', error);
