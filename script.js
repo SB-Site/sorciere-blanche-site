@@ -199,6 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
     document.getElementById(tab).classList.add('active');
     document.querySelector(`.tab-button[onclick="showTab('${tab}')"]`).classList.add('active');
+    console.log('Tabs initialized');
   };
 
   // Gestion Supabase et hCaptcha pour creer-compte.html
@@ -244,16 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializeAuth() {
       console.log('Initialisation de Supabase...');
-      const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
-
-      // Gestion des onglets
-      console.log('Tabs initialized');
-      const tabContents = document.querySelectorAll('.tab-content');
-      const tabButtons = document.querySelectorAll('.tab-button');
-      tabContents.forEach(content => content.classList.remove('active'));
-      tabButtons.forEach(button => button.classList.remove('active'));
-      document.getElementById('register').classList.add('active');
-      document.querySelector('.tab-button[onclick="showTab(\'register\')"]').classList.add('active');
+      const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', process.env.SUPABASE_ANON_KEY);
 
       // Gestion du formulaire d'inscription
       document.getElementById('signup-form').addEventListener('submit', async (e) => {
