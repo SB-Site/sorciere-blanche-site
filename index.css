@@ -121,13 +121,13 @@
 .newsletter h2 {
   font-family: 'Playfair Display', serif;
   color: #6B3E75;
-  font-size: 36px; /* Agrandi */
+  font-size: 36px;
   margin-bottom: 20px;
 }
 .newsletter p {
   font-family: 'Montserrat', sans-serif;
   color: #2A4B3D;
-  font-size: 18px; /* Agrandi */
+  font-size: 18px;
   line-height: 1.6;
   margin-bottom: 20px;
 }
@@ -136,8 +136,8 @@
   color: #F5E8D3;
   font-family: 'Cinzel', serif;
   font-weight: bold;
-  font-size: 16px; /* Agrandi */
-  padding: 12px 24px; /* Agrandi */
+  font-size: 16px;
+  padding: 12px 24px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -160,6 +160,38 @@
   margin-left: auto;
   margin-right: auto;
 }
+.newsletter-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.newsletter-form-container input[type="email"] {
+  padding: 10px;
+  border: 1px solid #B87333;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: #2A4B3D;
+  background: #F5E8D3;
+}
+.newsletter-form-container .support-button {
+  background: linear-gradient(90deg, #B87333, #6B3E75);
+  color: #F5E8D3;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.newsletter-form-container .support-button:hover {
+  background: linear-gradient(90deg, #6B3E75, #B87333);
+  transform: scale(1.05);
+}
 #newsletterForm {
   display: none;
 }
@@ -170,13 +202,6 @@
   font-family: 'Playfair Display', serif;
   color: #6B3E75;
   font-size: 28px;
-  margin-bottom: 20px;
-}
-.booktrailers p {
-  font-family: 'Montserrat', sans-serif;
-  color: #2A4B3D;
-  font-size: 16px;
-  line-height: 1.6;
   margin-bottom: 20px;
 }
 .trailer-container {
@@ -226,7 +251,7 @@
   width: 48px;
   height: 48px;
   margin-bottom: 10px;
-  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important; /* Cuivre #B87333 */
+  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%);
 }
 .reason p {
   font-family: 'Montserrat', sans-serif;
@@ -273,7 +298,7 @@
   width: 48px;
   height: 48px;
   margin-bottom: 10px;
-  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important; /* Cuivre #B87333 */
+  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%);
 }
 .action p {
   font-family: 'Montserrat', sans-serif;
