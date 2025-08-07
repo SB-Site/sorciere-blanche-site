@@ -89,7 +89,7 @@
         <p>Recevez nos dernières actualités, offres exclusives et votre ebook gratuit “Le Cadeau de Lazare”.</p>
         <div class="newsletter-form">
           <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Recevez votre ebook gratuit <img src="images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
-          <div class="newsletter-form-container" id="newsletterForm" style="display: none;">
+          <div class="newsletter-form-container" id="newsletterForm" style="display: block;">
             <form name="newsletter" method="POST" netlify action="/newsletter-confirmation.html">
               <input type="hidden" name="form-name" value="newsletter">
               <input type="email" name="email" required>
@@ -99,7 +99,6 @@
         </div>
       </div>
       <div class="booktrailers">
-        <h2>Visualisez nos booktrailers</h2>
         <div class="trailer-container">
           <div class="trailer">
             <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="Booktrailer 1" frameborder="0" allowfullscreen></iframe>
@@ -154,7 +153,7 @@
             <span>Sorcière Blanche</span>
           </div>
         </a>
-        <p>Maison d’édition bilingue spécialisée dans les livres ésotériques, fantastiques et mystiques. Découvrez un univers de magie et de mystère à travers nos publications uniques.</p>
+        <p>Maison d’édition bilingue spécialisée dans les livres ésotériques, fantastiques et mystiques.</p>
       </div>
       <div class="footer-info">
         <h3>Informations</h3>
@@ -171,7 +170,7 @@
           <li><a href="index.html" class="active">Accueil</a></li>
           <li><a href="boutique.html">Boutique</a></li>
           <li><a href="a-propos.html">À Propos</a></li>
-          <li><a href="je-soutiens.html">Je Soutiens</a></li>
+          <a href="je-soutiens.html">Je Soutiens</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="blog.html">Blog</a></li>
         </ul>
@@ -179,17 +178,18 @@
       <div class="footer-social">
         <h3>Suivez-nous</h3>
         <ul>
-          <li><a href="https://x.com/WhiteWitchEdits"><img src="images/icon_x.png" alt="X" class="social-icon"></a></li>
-          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
-          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
-          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
-          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
-          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="images/icon_x.png" alt="X"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="images/icon_facebook.png" alt="Facebook"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="images/icon_instagram.png" alt="Instagram"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="images/icon_pinterest.png" alt="Pinterest"></a></li>
+          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="images/icon_youtube.png" alt="YouTube"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="images/icon_tiktok.png" alt="TikTok"></a></li>
         </ul>
       </div>
     </div>
-    <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
+    <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés.</p>
   </footer>
-  <script src="./script.js"></script>
+  <script src="script.js"></script>
+  <script src="protection.js"></script>
 </body>
 </html>
