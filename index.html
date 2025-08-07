@@ -89,7 +89,7 @@
         <p>Recevez nos dernières actualités, offres exclusives et votre ebook gratuit “Le Cadeau de Lazare”.</p>
         <div class="newsletter-form">
           <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Recevez votre ebook gratuit <img src="images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
-          <div class="newsletter-form-container" id="newsletterForm" style="display: block;">
+          <div class="newsletter-form-container" id="newsletterForm">
             <form name="newsletter" method="POST" netlify action="/newsletter-confirmation.html">
               <input type="hidden" name="form-name" value="newsletter">
               <input type="email" name="email" required>
@@ -99,6 +99,7 @@
         </div>
       </div>
       <div class="booktrailers">
+        <h2>Visualisez nos booktrailers</h2>
         <div class="trailer-container">
           <div class="trailer">
             <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="Booktrailer 1" frameborder="0" allowfullscreen></iframe>
@@ -170,7 +171,7 @@
           <li><a href="index.html" class="active">Accueil</a></li>
           <li><a href="boutique.html">Boutique</a></li>
           <li><a href="a-propos.html">À Propos</a></li>
-          <a href="je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="je-soutiens.html">Je Soutiens</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="blog.html">Blog</a></li>
         </ul>

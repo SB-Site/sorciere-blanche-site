@@ -2,13 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM fully loaded on Ste Web SB user');
   console.log('LocalStorage domain:', window.location.hostname);
   console.log('Checking for construction-popup element...');
-
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
   if (window.location.pathname.includes('index.html')) {
     console.log('Resetting popupClosed in localStorage for testing');
     localStorage.removeItem('popupClosed');
   }
-
   // Gestion de la pop-up
   const popup = document.getElementById('construction-popup');
   if (popup) {
@@ -23,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     console.log('No construction-popup element on this page');
   }
-
   window.closePopup = function() {
     console.log('closePopup function called');
     const popup = document.getElementById('construction-popup');
@@ -36,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('No construction-popup element to close');
     }
   };
-
   // Carrousel (index.html)
   const carousel = document.querySelector('.carousel-inner');
   if (carousel) {
@@ -45,24 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevButton = document.querySelector('.carousel-prev');
     const nextButton = document.querySelector('.carousel-next');
     let currentIndex = 0;
-
     images[currentIndex].classList.add('active');
-
     function showImage(index) {
       images.forEach(img => img.classList.remove('active'));
       images[index].classList.add('active');
     }
-
     prevButton.addEventListener('click', () => {
       currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
       showImage(currentIndex);
     });
-
     nextButton.addEventListener('click', () => {
       currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
       showImage(currentIndex);
     });
-
     setInterval(() => {
       currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
       showImage(currentIndex);
@@ -70,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     console.log('No carousel on this page');
   }
-
   // Cookies RGPD
   console.log('Checking cookiesAccepted:', localStorage.getItem('cookiesAccepted'));
   const cookieBanner = document.getElementById('cookieBanner');
@@ -94,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
       copyright.classList.remove('copyright-hidden');
     }
   }
-
   window.acceptCookies = function() {
     console.log('Accept button clicked');
     localStorage.setItem('cookiesAccepted', 'true');
@@ -110,18 +99,26 @@ document.addEventListener('DOMContentLoaded', () => {
       copyright.style.display = 'block';
     }
   };
-
   // Afficher/masquer le formulaire MailerLite
   window.toggleNewsletterForm = function() {
     console.log('Toggle newsletter form clicked');
     const newsletterForm = document.getElementById('newsletterForm');
     if (newsletterForm) {
-      newsletterForm.classList.toggle('active');
+      const isVisible = newsletterForm.style.display === 'block';
+      newsletterForm.style.display = isVisible ? 'none' : 'block';
+      console.log('Newsletter form visibility:', newsletterForm.style.display);
     } else {
       console.error('Error: newsletterForm not found');
     }
   };
-
+  // Ajout d’un listener pour déboguer la soumission du formulaire newsletter
+  const newsletterForm = document.querySelector('form[name="newsletter"]');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+      console.log('Newsletter form submitted');
+      // Ne pas appeler e.preventDefault() pour permettre la soumission Netlify
+    });
+  }
   // Toggle langue
   const langFr = document.querySelector('.lang-fr');
   const langEn = document.querySelector('.lang-en');
@@ -143,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
       langEn.style.color = langEn.classList.contains('active') ? '#B87333' : '#2A4B3D';
     });
   }
-
   // Gestion du panier
   const removeButtons = document.querySelectorAll('.remove-button');
   removeButtons.forEach(button => {
@@ -151,7 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Article supprimé ! (Simulation, à connecter à Shopify plus tard)');
     });
   });
-
   // Boutons PayPal HostedButtons pour dons (je-soutiens.html)
   const paypalHostedButtons = [
     { id: 'paypal-container-ZFB68XN3ZKGV2', buttonId: 'ZFB68XN3ZKGV2' },
@@ -159,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'paypal-container-RGK6BAGJWWWE8', buttonId: 'RGK6BAGJWWWE8' },
     { id: 'paypal-container-5BC4Q7ZXYT5H8', buttonId: '5BC4Q7ZXYT5H8' }
   ];
-
   paypalHostedButtons.forEach(button => {
     const container = document.getElementById(button.id);
     if (container) {
@@ -168,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }).render(`#${button.id}`);
     }
   });
-
   // Boutons PayPal personnalisés pour déclencher les HostedButtons
   const paypalCustomButtons = [
     { id: 'paypal-onetime-amis', container: 'paypal-container-ZFB68XN3ZKGV2' },
@@ -176,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'paypal-onetime-gardien', container: 'paypal-container-RGK6BAGJWWWE8' },
     { id: 'paypal-onetime-sage', container: 'paypal-container-5BC4Q7ZXYT5H8' }
   ];
-
   paypalCustomButtons.forEach(button => {
     const element = document.getElementById(button.id);
     if (element) {
@@ -191,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
-
   // Gestion des onglets pour creer-compte.html
   window.showTab = function(tab) {
     console.log('Switching to tab:', tab);
@@ -201,11 +192,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(`.tab-button[onclick="showTab('${tab}')"]`).classList.add('active');
     console.log('Tabs initialized');
   };
-
   // Gestion Supabase et hCaptcha pour creer-compte.html
   if (window.location.pathname.includes('creer-compte.html')) {
     console.log('DOM chargé pour creer-compte.html');
-
     // Vérifier Supabase
     let supabaseLoaded = false;
     const checkSupabaseLoaded = setInterval(() => {
@@ -218,7 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('En attente du chargement de Supabase...');
       }
     }, 100);
-
     // Timeout après 15 secondes
     setTimeout(() => {
       if (!supabaseLoaded) {
@@ -226,7 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Formulaire accessible malgré l\'erreur Supabase');
       }
     }, 15000);
-
     // Vérifier et initialiser hCaptcha
     let hcaptchaToken = null;
     let hcaptchaLoaded = false;
@@ -268,15 +255,12 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('hCaptcha non chargé ou déjà initialisé');
       }
     };
-
     // Initialiser hCaptcha après un délai pour garantir le chargement
     setTimeout(initializeHCaptcha, 1000);
-
     function initializeAuth() {
       console.log('Initialisation de Supabase...');
       const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI';
       const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', SUPABASE_ANON_KEY);
-
       // Gestion du formulaire d'inscription
       const signupForm = document.getElementById('signup-form');
       if (signupForm) {
@@ -321,7 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         console.error('Erreur: Formulaire signup-form non trouvé');
       }
-
       // Gestion du formulaire de connexion
       const loginForm = document.getElementById('login-form');
       if (loginForm) {
