@@ -90,7 +90,7 @@
         <div class="newsletter-form">
           <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Recevez votre ebook gratuit <img src="images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
           <div class="newsletter-form-container" id="newsletterForm" style="display: none;">
-            <form name="newsletter" method="POST" data-netlify="true" action="/confirmation.html">
+            <form name="newsletter" method="POST" netlify action="/newsletter-confirmation.html">
               <input type="hidden" name="form-name" value="newsletter">
               <input type="email" name="email" required>
               <button type="submit">Inscrivez-vous à Magic-Info</button>
