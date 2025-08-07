@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
           hcaptchaLoaded = true;
           console.log('hCaptcha chargé, initialisation du widget');
-          hcaptcha.render(hcaptchaContainer, {
+          hcaptcha.render('hcaptcha-container', {
             sitekey: 'b97e9bec-2b16-4812-975a-edac0ed2780c',
             callback: (token) => {
               console.log('hCaptcha token généré:', token);
@@ -250,12 +250,12 @@ document.addEventListener('DOMContentLoaded', () => {
             'error-callback': (error) => {
               console.error('Erreur hCaptcha:', error);
               hcaptchaToken = null;
-              hcaptcha.reset(hcaptchaContainer);
+              hcaptcha.reset('hcaptcha-container');
             },
             'expired-callback': () => {
               console.log('hCaptcha token expiré');
               hcaptchaToken = null;
-              hcaptcha.reset(hcaptchaContainer);
+              hcaptcha.reset('hcaptcha-container');
             }
           });
           console.log('hCaptcha widget rendu avec succès');
@@ -269,8 +269,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // Initialiser hCaptcha après un léger délai pour garantir le DOM
-    setTimeout(initializeHCaptcha, 500);
+    // Initialiser hCaptcha après un délai pour garantir le chargement
+    setTimeout(initializeHCaptcha, 1000);
 
     function initializeAuth() {
       console.log('Initialisation de Supabase...');
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!hcaptchaToken) {
               console.error('Erreur: Aucun token hCaptcha trouvé');
               alert('Veuillez valider hCaptcha.');
-              if (hcaptchaLoaded) hcaptcha.reset(document.getElementById('hcaptcha-container'));
+              if (hcaptchaLoaded) hcaptcha.reset('hcaptcha-container');
               return;
             }
             console.log('hCaptcha token:', hcaptchaToken);
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (error) {
               console.error('Erreur inscription:', error.message);
               alert('Erreur lors de l’inscription : ' + error.message);
-              if (hcaptchaLoaded) hcaptcha.reset(document.getElementById('hcaptcha-container'));
+              if (hcaptchaLoaded) hcaptcha.reset('hcaptcha-container');
               hcaptchaToken = null;
             } else {
               console.log('Inscription réussie:', data);
@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
           } catch (error) {
             console.error('Erreur générale inscription:', error);
             alert('Erreur lors de l’inscription : ' + error.message);
-            if (hcaptchaLoaded) hcaptcha.reset(document.getElementById('hcaptcha-container'));
+            if (hcaptchaLoaded) hcaptcha.reset('hcaptcha-container');
             hcaptchaToken = null;
           }
         });
