@@ -328,12 +328,12 @@ footer {
   display: flex;
   gap: 15px;
 }
-.footer-social .social-icon {
+.footer-social img.social-icon {
   width: 24px !important;
   height: 24px !important;
   filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important; /* Crème #F5E8D3 */
 }
-.footer-social .social-icon:hover {
+.footer-social img.social-icon:hover {
   filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important; /* Cuivré #B87333 */
 }
 .copyright {
