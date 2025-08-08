@@ -1,6 +1,4 @@
 /* Styles pour boutique.html et pages produits (product-*.html) */
-
-/* Shop Content */
 .shop-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -8,8 +6,6 @@
   background: linear-gradient(90deg, rgba(184, 115, 51, 0.1), rgba(107, 62, 117, 0.1), rgba(42, 75, 61, 0.1));
   border-radius: 8px;
 }
-
-/* Titre et Icône */
 .shop-content h1 {
   font-family: 'Playfair Display', serif;
   color: #6B3E75;
@@ -22,10 +18,8 @@
   margin: 0 auto 20px;
   width: 60px;
   height: 60px;
-  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important; /* Cuivre #B87333 */
+  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important;
 }
-
-/* Sous-titre */
 .shop-subtitle {
   text-align: center;
   margin-bottom: 30px;
@@ -40,10 +34,8 @@
   margin-left: auto;
   margin-right: auto;
 }
-
-/* Philtres */
 .shop-philtres, .product-philtres {
-  margin-bottom: 60px; /* Espacement accru */
+  margin-bottom: 60px;
 }
 .shop-philtres h2, .product-philtres h2 {
   font-family: 'Cinzel', serif;
@@ -72,20 +64,18 @@
   background: linear-gradient(90deg, #6B3E75, #B87333);
   transform: scale(1.05);
 }
-
-/* Grille Produits (boutique.html) */
 .shop-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Ajusté pour éviter débordement */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 10px;
   overflow-x: auto;
 }
 .shop-grid.publications {
-  margin-bottom: 40px; /* Espacement avant titre Goodies */
+  margin-bottom: 40px;
 }
 .shop-grid.goodies h2 {
-  margin-top: 60px; /* Espacement accru avant titre Goodies */
-  margin-bottom: 20px; /* Espacement avant encarts Goodies */
+  margin-top: 60px;
+  margin-bottom: 20px;
 }
 .shop-grid h2 {
   font-family: 'Cinzel', serif;
@@ -103,7 +93,7 @@
   border: 1px solid #B87333;
   text-align: center;
   min-height: 400px;
-  min-width: 260px; /* Réduit pour éviter débordement */
+  min-width: 260px;
   transition: transform 0.3s ease;
 }
 .shop-item:hover {
@@ -168,10 +158,8 @@
 .shop-item .button-icon {
   width: 20px;
   height: 20px;
-  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important; /* Crème #F5E8D3 */
+  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important;
 }
-
-/* Styles pour pages produits (product-*.html) */
 .product-content {
   max-width: 800px;
   margin: 0 auto;
@@ -243,7 +231,7 @@
 .product-content .button-icon {
   width: 20px;
   height: 20px;
-  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important; /* Crème #F5E8D3 */
+  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important;
 }
 .product-social {
   margin: 20px 0;
@@ -264,6 +252,10 @@
 .product-social .social-icon {
   width: 24px;
   height: 24px;
+  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important;
+}
+.product-social .social-icon:hover {
+  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important;
 }
 .product-carousel {
   margin: 20px 0;
@@ -331,10 +323,8 @@
 .carousel-item .button-icon {
   width: 20px;
   height: 20px;
-  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important; /* Crème #F5E8D3 */
+  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important;
 }
-
-/* Responsive Design */
 @media (max-width: 768px) {
   .shop-content, .product-content {
     padding: 15px;

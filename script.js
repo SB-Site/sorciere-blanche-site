@@ -5,7 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
   if (window.location.pathname.includes('index.html')) {
     console.log('Resetting popupClosed in localStorage for testing');
-    localStorage.removeItem('popupClosed');
+    try {
+      localStorage.removeItem('popupClosed');
+    } catch (e) {
+      console.error('Error removing popupClosed from localStorage:', e);
+    }
   }
   // Gestion de la pop-up
   const popup = document.getElementById('construction-popup');
@@ -27,8 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (popup) {
       console.log('Hiding popup');
       popup.classList.remove('active');
-      localStorage.setItem('popupClosed', 'true');
-      console.log('popupClosed set to true in localStorage');
+      try {
+        localStorage.setItem('popupClosed', 'true');
+        console.log('popupClosed set to true in localStorage');
+      } catch (e) {
+        console.error('Error setting localStorage:', e);
+      }
     } else {
       console.log('No construction-popup element to close');
     }
@@ -86,17 +94,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.acceptCookies = function() {
     console.log('Accept button clicked');
-    localStorage.setItem('cookiesAccepted', 'true');
+    try {
+      localStorage.setItem('cookiesAccepted', 'true');
+    } catch (e) {
+      console.error('Error setting localStorage:', e);
+    }
     const cookieBanner = document.getElementById('cookieBanner');
     if (cookieBanner) {
       console.log('Hiding cookie banner');
-      cookieBanner.style.display = 'none';
+      cookieBanner.classList.remove('cookie-banner-visible');
     } else {
       console.error('Error: cookieBanner not found in acceptCookies');
     }
     if (copyright) {
       console.log('Ensuring copyright visible:', copyright);
-      copyright.style.display = 'block';
+      copyright.classList.remove('copyright-hidden');
     }
   };
   // Afficher/masquer le formulaire MailerLite
@@ -116,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (newsletterForm) {
     newsletterForm.addEventListener('submit', (e) => {
       console.log('Newsletter form submitted');
-      // Ne pas appeler e.preventDefault() pour permettre la soumission Netlify
     });
   }
   // Toggle langue
@@ -140,13 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
       langEn.style.color = langEn.classList.contains('active') ? '#B87333' : '#2A4B3D';
     });
   }
-  // Gestion du panier
-  const removeButtons = document.querySelectorAll('.remove-button');
-  removeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      alert('Article supprimé ! (Simulation, à connecter à Shopify plus tard)');
-    });
-  });
   // Boutons PayPal HostedButtons pour dons (je-soutiens.html)
   const paypalHostedButtons = [
     { id: 'paypal-container-ZFB68XN3ZKGV2', buttonId: 'ZFB68XN3ZKGV2' },
@@ -293,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
               console.log('Inscription réussie:', data);
               alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
-              window.location.href = 'confirmation.html';
+              window.location.href = '/confirmation.html';
             }
           } catch (error) {
             console.error('Erreur générale inscription:', error);
@@ -324,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
               alert('Erreur lors de la connexion : ' + error.message);
             } else {
               console.log('Connexion réussie:', data);
-              window.location.href = 'portail.html';
+              window.location.href = '/portail.html';
             }
           } catch (error) {
             console.error('Erreur générale connexion:', error);
