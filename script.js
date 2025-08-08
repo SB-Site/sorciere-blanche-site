@@ -5,11 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
   if (window.location.pathname.includes('index.html')) {
     console.log('Resetting popupClosed in localStorage for testing');
-    try {
-      localStorage.removeItem('popupClosed');
-    } catch (e) {
-      console.error('Error removing popupClosed from localStorage:', e);
-    }
+    localStorage.removeItem('popupClosed');
   }
   // Gestion de la pop-up
   const popup = document.getElementById('construction-popup');
@@ -31,12 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (popup) {
       console.log('Hiding popup');
       popup.classList.remove('active');
-      try {
-        localStorage.setItem('popupClosed', 'true');
-        console.log('popupClosed set to true in localStorage');
-      } catch (e) {
-        console.error('Error setting localStorage:', e);
-      }
+      localStorage.setItem('popupClosed', 'true');
+      console.log('popupClosed set to true in localStorage');
     } else {
       console.log('No construction-popup element to close');
     }
@@ -94,11 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.acceptCookies = function() {
     console.log('Accept button clicked');
-    try {
-      localStorage.setItem('cookiesAccepted', 'true');
-    } catch (e) {
-      console.error('Error setting localStorage:', e);
-    }
+    localStorage.setItem('cookiesAccepted', 'true');
     const cookieBanner = document.getElementById('cookieBanner');
     if (cookieBanner) {
       console.log('Hiding cookie banner');
@@ -116,20 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Toggle newsletter form clicked');
     const newsletterForm = document.getElementById('newsletterForm');
     if (newsletterForm) {
-      const isVisible = newsletterForm.style.display === 'block';
-      newsletterForm.style.display = isVisible ? 'none' : 'block';
-      console.log('Newsletter form visibility:', newsletterForm.style.display);
+      newsletterForm.classList.toggle('active');
     } else {
       console.error('Error: newsletterForm not found');
     }
   };
-  // Ajout d’un listener pour déboguer la soumission du formulaire newsletter
-  const newsletterForm = document.querySelector('form[name="newsletter"]');
-  if (newsletterForm) {
-    newsletterForm.addEventListener('submit', (e) => {
-      console.log('Newsletter form submitted');
-    });
-  }
   // Toggle langue
   const langFr = document.querySelector('.lang-fr');
   const langEn = document.querySelector('.lang-en');
@@ -151,6 +130,13 @@ document.addEventListener('DOMContentLoaded', () => {
       langEn.style.color = langEn.classList.contains('active') ? '#B87333' : '#2A4B3D';
     });
   }
+  // Gestion du panier
+  const removeButtons = document.querySelectorAll('.remove-button');
+  removeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      alert('Article supprimé ! (Simulation, à connecter à PayPal plus tard)');
+    });
+  });
   // Boutons PayPal HostedButtons pour dons (je-soutiens.html)
   const paypalHostedButtons = [
     { id: 'paypal-container-ZFB68XN3ZKGV2', buttonId: 'ZFB68XN3ZKGV2' },
@@ -297,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
               console.log('Inscription réussie:', data);
               alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
-              window.location.href = '/confirmation.html';
+              window.location.href = 'confirmation.html';
             }
           } catch (error) {
             console.error('Erreur générale inscription:', error);
@@ -328,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
               alert('Erreur lors de la connexion : ' + error.message);
             } else {
               console.log('Connexion réussie:', data);
-              window.location.href = '/portail.html';
+              window.location.href = 'portail.html';
             }
           } catch (error) {
             console.error('Erreur générale connexion:', error);
