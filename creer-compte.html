@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créer un Compte - Les Éditions de la Sorcière Blanche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="creer-compte.css">
+  <link rel="stylesheet" href="protection.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js" onerror="console.error('Échec du chargement de Supabase CDN')"></script>
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+<body>
+  <div class="cookie-banner" id="cookieBanner">
+    <p>Nous utilisons des cookies pour améliorer votre expérience. <a href="politique-cookies.html">En savoir plus</a>.</p>
+    <button onclick="acceptCookies()">Accepter</button>
+  </div>
+  <div class="announcement-bar">
+    <p>Lancement officiel le 1er Octobre 2025 - Top départ de nos préventes le 8 août 2025 à 00h00 ! <a href="boutique.html" class="button announcement-button">Voir la Boutique</a></p>
+  </div>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo-link">
+        <img src="images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+        <div class="header-title">
+          <span>Les Éditions de la</span>
+          <span>Sorcière Blanche</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="a-propos.html">À Propos</a></li>
+          <li><a href="je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="creer-compte.html" class="account-icon active"><img src="images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
+          <li class="lang-switcher">
+            <img src="images/icon_globe.png" alt="Globe" class="globe-icon">
+            <a href="creer-compte.html" class="lang-fr active">FR</a>
+            <a href="en/creer-compte.html" class="lang-en">EN</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="account-content">
+      <div class="account-banner">
+        <img src="images/sb_banniere_compte_2.jpg" alt="Bannière Créer un Compte" class="banner-image">
+      </div>
+      <h1>Créez ou connectez-vous à votre compte</h1>
+      <img src="images/icon_infinity.png" alt="Infinity Icon" class="title-icon">
+      <h2>Rejoignez notre communauté mystique !</h2>
+      <div class="account-subtitle">
+        <p>Devenez membre de notre communauté magique pour accéder à des contenus exclusifs, suivre vos commandes et participer à l’aventure des Éditions de la Sorcière Blanche.</p>
+        <p>Créez un compte ou connectez-vous pour découvrir nos publications ésotériques, fantastiques et mystiques, et bénéficier d’avantages réservés aux initiés !</p>
+      </div>
+      <div class="account-tabs">
+        <button class="tab-button active" onclick="showTab('register')">Rejoindre</button>
+        <button class="tab-button" onclick="showTab('login')">Ouvrir Mon Portail</button>
+      </div>
+      <div class="account-form-container">
+        <div id="register" class="tab-content active">
+          <form id="signup-form" method="POST">
+            <label for="signup-name">Votre Nom</label>
+            <input type="text" id="signup-name" name="name" placeholder="Nom" required>
+            <label for="signup-email">Votre PlumeMail</label>
+            <input type="email" id="signup-email" name="email" placeholder="Email" required>
+            <label for="signup-password">Votre Formule Magique</label>
+            <input type="password" id="signup-password" name="password" placeholder="Mot de passe" required>
+            <div id="hcaptcha-container" class="h-captcha" data-sitekey="b97e9bec-2b16-4812-975a-edac0ed2780c"></div>
+            <button type="submit" id="signup-button">S’inscrire</button>
+          </form>
+        </div>
+        <div id="login" class="tab-content">
+          <form id="login-form" method="POST">
+            <label for="login-email">Votre PlumeMail</label>
+            <input type="email" id="login-email" name="email" placeholder="Email" required>
+            <label for="login-password">Votre Formule Magique</label>
+            <input type="password" id="login-password" name="password" placeholder="Mot de passe" required>
+            <button type="submit" id="login-button">Se connecter</button>
+          </form>
+        </div>
+      </div>
+      <section class="benefits">
+        <h2>Pourquoi créer un compte ?</h2>
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <img src="images/icon_star.png" alt="Star Icon" class="benefit-icon">
+            <h3>Contenu Exclusif</h3>
+            <p>Accédez à la newsletter Plume-Mail et à des extraits réservés aux membres.</p>
+          </div>
+          <div class="benefit-item">
+            <img src="images/icon_people.png" alt="People Icon" class="benefit-icon">
+            <h3>Suivi de Commandes</h3>
+            <p>Gérez vos achats et suivez vos commandes en temps réel.</p>
+          </div>
+          <div class="benefit-item">
+            <img src="images/icon_coffee.png" alt="Coffee Icon" class="benefit-icon">
+            <h3>Offres Spéciales</h3>
+            <p>Profitez de réductions et d’offres réservées aux membres.</p>
+          </div>
+          <div class="benefit-item">
+            <img src="images/icon_envelope.png" alt="Envelope Icon" class="benefit-icon">
+            <h3>Communauté Magique</h3>
+            <p>Participez à des événements et ateliers ésotériques exclusifs.</p>
+          </div>
+        </div>
+      </section>
+      <section class="call-to-action">
+        <h2>Prêt à enchanter votre expérience ?</h2>
+        <p>Rejoignez notre communauté ou découvrez nos publications dès maintenant !</p>
+        <div class="action-buttons">
+          <a href="je-soutiens.html" class="support-button">Soutenir la Magie <img src="images/icon_star.png" alt="Star" class="button-icon"></a>
+          <a href="boutique.html" class="support-button">Découvrir la Boutique <img src="images/icon_shopping_bag.png" alt="Shopping Bag" class="button-icon"></a>
+        </div>
+      </section>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="index.html">
+          <img src="images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+          <div class="footer-title">
+            <span>Les Éditions de la</span>
+            <span>Sorcière Blanche</span>
+          </div>
+        </a>
+        <p>Maison d’édition bilingue spécialisée dans les livres ésotériques, fantastiques et mystiques. Découvrez un univers de magie et de mystère à travers nos publications uniques.</p>
+      </div>
+      <div class="footer-info">
+        <h3>Informations</h3>
+        <ul>
+          <li><a href="conditions-generales.html">Conditions Générales</a></li>
+          <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+          <li><a href="livraison-retours.html">Livraison et Retours</a></li>
+          <li><a href="politique-cookies.html">Politique de Cookies</a></li>
+        </ul>
+      </div>
+      <div class="footer-menu">
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="a-propos.html">À Propos</a></li>
+          <li><a href="je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Suivez-nous</h3>
+        <ul>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="images/icon_x.png" alt="X" class="social-icon"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
+  </footer>
+  <script src="script.js"></script>
+  <script src="protection.js"></script>
+</body>
+</html>

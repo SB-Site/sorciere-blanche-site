@@ -1,0 +1,267 @@
+/* Styles spécifiques pour contact.html */
+
+/* Contact Content */
+.contact-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(90deg, rgba(184, 115, 51, 0.1), rgba(107, 62, 117, 0.1), rgba(42, 75, 61, 0.1));
+  border-radius: 8px;
+}
+
+/* Bannière */
+.contact-banner {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.banner-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #B87333;
+}
+
+/* Titre et Icône */
+.contact-content h1 {
+  font-family: 'Playfair Display', serif;
+  color: #6B3E75;
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.title-icon {
+  display: block;
+  margin: 0 auto 20px;
+  width: 60px;
+  height: 60px;
+  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important; /* Cuivre #B87333 */
+}
+
+/* Sous-titre */
+.contact-subtitle {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.contact-subtitle p {
+  font-family: 'Montserrat', sans-serif;
+  color: #2A4B3D;
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 8px 0;
+}
+
+/* Grille Formulaire/FAQ */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+}
+.contact-form-container {
+  max-width: 500px;
+}
+.contact-form-container h2 {
+  font-family: 'Cinzel', serif;
+  color: #2A4B3D;
+  font-size: 26px;
+  margin: 10px 0;
+}
+.faq-container h2 {
+  font-family: 'Cinzel', serif;
+  color: #2A4B3D;
+  font-size: 22px;
+  margin: 10px 0;
+}
+
+/* Formulaire */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 3px solid #B87333;
+  padding: 15px;
+  border-radius: 8px;
+  background: rgba(245, 232, 211, 0.2);
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border: 2px solid #B87333;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+}
+.contact-form textarea {
+  min-height: 200px;
+  resize: vertical;
+}
+.contact-form .support-button {
+  background: linear-gradient(90deg, #B87333, #6B3E75);
+  color: #F5E8D3;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+.contact-form .support-button:hover {
+  background: linear-gradient(90deg, #6B3E75, #B87333);
+  transform: scale(1.05);
+}
+.contact-form .button-icon {
+  width: 20px;
+  height: 20px;
+  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important; /* Crème #F5E8D3 */
+}
+
+/* FAQ Grid */
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+.faq-item {
+  background: rgba(107, 62, 117, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #B87333;
+}
+.faq-item h3 {
+  font-family: 'Cinzel', serif;
+  color: #2A4B3D;
+  font-size: 18px;
+  margin: 8px 0;
+}
+.faq-item p {
+  font-family: 'Montserrat', sans-serif;
+  color: #2A4B3D;
+  font-size: 14px;
+  margin: 6px 0;
+}
+.faq-item a {
+  color: #B87333;
+  text-decoration: none;
+}
+.faq-item a:hover {
+  color: #6B3E75;
+}
+
+/* Contact Details (en bas) */
+.contact-details {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr)); /* Plus compact, 4 colonnes fixes */
+  gap: 10px; /* Espacement réduit */
+  background: rgba(107, 62, 117, 0.05); /* Fond subtil pour uniformité */
+  border-radius: 8px;
+}
+.contact-item {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #B87333;
+  text-align: center;
+}
+.contact-icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 8px;
+  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(100%) contrast(160%) !important; /* Cuivre #B87333 */
+}
+.contact-icon.quill-icon {
+  width: 64px;
+  height: 64px;
+  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(110%) contrast(170%) !important; /* Plus visible */
+}
+.contact-item h3 {
+  font-family: 'Cinzel', serif;
+  color: #2A4B3D;
+  font-size: 16px;
+  margin: 6px 0;
+}
+.contact-item p {
+  font-family: 'Montserrat', sans-serif;
+  color: #2A4B3D;
+  font-size: 12px; /* Réduit pour email sur une ligne */
+  margin: 4px 0;
+}
+.contact-item a {
+  color: #B87333;
+  text-decoration: none;
+  white-space: nowrap; /* Email sur une ligne */
+  font-size: 12px;
+}
+.contact-item a:hover {
+  color: #6B3E75;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-content {
+    padding: 15px;
+  }
+  .contact-banner {
+    margin-bottom: 15px;
+  }
+  .banner-image {
+    max-height: 200px;
+    object-fit: cover;
+  }
+  .contact-content h1 {
+    font-size: 28px;
+  }
+  .contact-subtitle p {
+    font-size: 16px;
+  }
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-form-container {
+    max-width: 100%;
+  }
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-details {
+    grid-template-columns: 1fr; /* Empilage sur mobile */
+  }
+}
+@media (max-width: 480px) {
+  .contact-content h1 {
+    font-size: 24px;
+  }
+  .contact-subtitle p {
+    font-size: 14px;
+  }
+  .contact-form-container h2 {
+    font-size: 22px;
+  }
+  .faq-container h2 {
+    font-size: 20px;
+  }
+  .faq-item h3 {
+    font-size: 16px;
+  }
+  .faq-item p {
+    font-size: 13px;
+  }
+  .contact-item h3 {
+    font-size: 14px;
+  }
+  .contact-item p, .contact-item a {
+    font-size: 11px; /* Encore plus petit sur mobile */
+  }
+  .contact-form input, .contact-form textarea {
+    font-size: 16px;
+  }
+  .contact-form .support-button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}

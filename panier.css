@@ -1,0 +1,99 @@
+/* Styles spécifiques pour panier.html */
+
+/* Panier */
+.cart-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.cart-content h1 {
+  font-family: 'Playfair Display', serif;
+  color: #6B3E75;
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.cart-content p {
+  font-family: 'Montserrat', sans-serif;
+  color: #2A4B3D;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.cart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.cart-item {
+  background: rgba(107, 62, 117, 0.2);
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid #B87333;
+  text-align: center;
+}
+.cart-image {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.cart-item h3 {
+  font-family: 'Cinzel', serif;
+  color: #2A4B3D;
+  font-size: 20px;
+  margin: 10px 0;
+}
+.cart-item p {
+  font-family: 'Montserrat', sans-serif;
+  color: #2A4B3D;
+  font-size: 16px;
+}
+.remove-button {
+  background: #6B3E75;
+  color: #F5E8D3;
+  font-family: 'Montserrat', sans-serif;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.remove-button:hover {
+  background: #B87333;
+  transform: scale(1.05);
+}
+.cart-total {
+  text-align: center;
+}
+.cart-total p {
+  font-family: 'Montserrat', sans-serif;
+  color: #2A4B3D;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.action-button {
+  background: linear-gradient(90deg, #B87333, #6B3E75);
+  color: #F5E8D3;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.action-button:hover {
+  background: linear-gradient(90deg, #6B3E75, #B87333);
+  transform: scale(1.05);
+}
+.action-button .button-icon {
+  width: 20px;
+  height: 20px;
+  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important; /* Crème #F5E8D3 */
+}
