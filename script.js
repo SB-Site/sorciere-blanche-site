@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
       copyright.classList.remove('copyright-hidden');
     }
   };
-  // Afficher/masquer le formulaire MailerLite
+  // Afficher/masquer le formulaire newsletter et gérer la soumission
   window.toggleNewsletterForm = function() {
     console.log('Toggle newsletter form clicked');
     const newsletterForm = document.getElementById('newsletterForm');
@@ -109,6 +109,18 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Error: newsletterForm not found');
     }
   };
+  // Masquer l'encart newsletter après soumission réussie
+  const newsletterIframe = document.querySelector('#newsletterForm iframe');
+  if (newsletterIframe) {
+    newsletterIframe.addEventListener('load', () => {
+      console.log('Newsletter iframe loaded');
+      const newsletterForm = document.getElementById('newsletterForm');
+      if (newsletterForm && window.location.pathname.includes('index.html')) {
+        console.log('Hiding newsletter form after submission');
+        newsletterForm.classList.remove('active');
+      }
+    });
+  }
   // Toggle langue
   const langFr = document.querySelector('.lang-fr');
   const langEn = document.querySelector('.lang-en');
