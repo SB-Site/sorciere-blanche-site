@@ -17,19 +17,17 @@
       background-color: #F5F5F5; /* Crème SB */
       box-shadow: 0 4px 15px rgba(75, 0, 130, 0.2); /* Ombre violette */
     }
-    .booktrailers {
-      text-align: center;
-      margin: 20px 0;
+    .newsletter-form-container.hidden {
+      display: none;
     }
-    .booktrailers img {
-      max-width: 100%;
-      border: 2px solid #D4AF37;
-      border-radius: 10px;
+    .booktrailers .trailer {
+      margin: 20px;
+      display: inline-block;
     }
-    .booktrailers p {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 16px;
-      color: #4B0082;
+    .booktrailers iframe {
+      width: 100%;
+      max-width: 560px;
+      height: 315px;
     }
   </style>
 </head>
@@ -50,7 +48,7 @@
         <p>Envoyez vos plumes-mails via nos formulaires ou à <a href="mailto:contact@sorciereblancheeditions.com">contact@sorciereblancheeditions.com</a>.</p>
         <p>Plongez dans notre <a href="/boutique.html">boutique</a> pour les préventes dès le 8 août !</p>
       </div>
-      <button onclick="closePopup()" class="popup-close-button">Fermer le grimoire</button>
+      <button onclick="closePopup()">Fermer le grimoire</button>
     </div>
   </div>
   <section class="welcome-banner">
@@ -118,8 +116,14 @@
       </div>
       <div class="booktrailers">
         <h2>Visualisez nos booktrailers</h2>
-        <img src="/images/sb_placeholder_trailers.jpg" alt="Booktrailers en préparation">
-        <p>Nos sortilèges visuels se tissent dans l’ombre... Suivez-nous sur nos réseaux pour les découvrir bientôt en exclusivité !</p>
+        <div class="trailer-container">
+          <div class="trailer">
+            <iframe src="https://www.youtube.com/embed/-xWJyYCqbbU?rel=0" title="Booktrailer 1 - Lazare Donatien" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="trailer">
+            <iframe src="https://www.youtube.com/embed/NkThLCfhIeU?rel=0" title="Booktrailer 2 - Lazare Donatien" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
       </div>
     </section>
     <section class="why-us">
@@ -195,6 +199,7 @@
           <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
           <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
           <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/channel/UCBmw0xK4a8VOeuXav06P5og"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
           <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
         </ul>
       </div>
@@ -202,5 +207,25 @@
     <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
   </footer>
   <script src="/script.js"></script>
+  <script>
+    function acceptCookies() {
+      document.getElementById('cookieBanner').classList.remove('cookie-banner-visible');
+      localStorage.setItem('cookiesAccepted', 'true');
+    }
+    window.onload = function() {
+      if (localStorage.getItem('cookiesAccepted') === 'true') {
+        document.getElementById('cookieBanner').classList.remove('cookie-banner-visible');
+      }
+    };
+    function toggleNewsletterForm() {
+      const form = document.getElementById('newsletterForm');
+      form.classList.toggle('hidden');
+    }
+    window.addEventListener('message', function(event) {
+      if (event.data === 'formSubmitted') {
+        document.getElementById('newsletterForm').classList.add('hidden');
+      }
+    });
+  </script>
 </body>
 </html>
