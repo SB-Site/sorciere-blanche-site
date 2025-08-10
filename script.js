@@ -109,15 +109,21 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Error: newsletterForm not found');
     }
   };
-  // Masquer l'encart newsletter après soumission réussie
+  // Masquer l'encart newsletter après soumission réussie (avec flag pour second load)
   const newsletterIframe = document.querySelector('#newsletterForm iframe');
   if (newsletterIframe) {
+    let iframeLoadedOnce = false;
     newsletterIframe.addEventListener('load', () => {
       console.log('Newsletter iframe loaded');
-      const newsletterForm = document.getElementById('newsletterForm');
-      if (newsletterForm && window.location.pathname.includes('index.html')) {
-        console.log('Hiding newsletter form after submission');
-        newsletterForm.classList.remove('active');
+      if (iframeLoadedOnce) {
+        console.log('Second load detected - hiding newsletter form after submission');
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm && window.location.pathname.includes('index.html')) {
+          newsletterForm.classList.remove('active');
+        }
+      } else {
+        console.log('First load - setting flag');
+        iframeLoadedOnce = true;
       }
     });
   }
