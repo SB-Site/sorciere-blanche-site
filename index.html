@@ -208,24 +208,20 @@
   </footer>
   <script src="/script.js"></script>
   <script>
-    function acceptCookies() {
-      document.getElementById('cookieBanner').classList.remove('cookie-banner-visible');
-      localStorage.setItem('cookiesAccepted', 'true');
+    const newsletterIframe = document.querySelector('#newsletterForm iframe');
+    if (newsletterIframe) {
+      newsletterIframe.addEventListener('load', () => {
+        console.log('Newsletter iframe loaded');
+        setTimeout(() => {
+          console.log('Forcing newsletter form hide after submission');
+          const newsletterForm = document.getElementById('newsletterForm');
+          if (newsletterForm && window.location.pathname.includes('index.html')) {
+            newsletterForm.classList.remove('active');
+            newsletterForm.style.display = 'none';
+          }
+        }, 6000); // 6s pour attendre redirect Framaforms
+      });
     }
-    window.onload = function() {
-      if (localStorage.getItem('cookiesAccepted') === 'true') {
-        document.getElementById('cookieBanner').classList.remove('cookie-banner-visible');
-      }
-    };
-    function toggleNewsletterForm() {
-      const form = document.getElementById('newsletterForm');
-      form.classList.toggle('hidden');
-    }
-    window.addEventListener('message', function(event) {
-      if (event.data === 'formSubmitted') {
-        document.getElementById('newsletterForm').classList.add('hidden');
-      }
-    });
   </script>
 </body>
 </html>

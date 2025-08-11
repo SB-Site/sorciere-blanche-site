@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cookieBanner) {
       console.log('Showing cookie banner');
       cookieBanner.classList.add('cookie-banner-visible');
+      cookieBanner.style.display = 'block';
     } else {
       console.error('Error: cookieBanner not found');
     }
@@ -78,6 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cookieBanner) {
       console.log('Cookies accepted, hiding cookie banner');
       cookieBanner.classList.remove('cookie-banner-visible');
+      cookieBanner.style.display = 'none';
+      cookieBanner.style.visibility = 'hidden';
     }
     if (copyright) {
       console.log('Cookies accepted, showing copyright');
@@ -89,8 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('cookiesAccepted', 'true');
     const cookieBanner = document.getElementById('cookieBanner');
     if (cookieBanner) {
-      console.log('Hiding cookie banner');
+      console.log('Force hiding cookie banner');
       cookieBanner.classList.remove('cookie-banner-visible');
+      cookieBanner.style.display = 'none';
+      cookieBanner.style.visibility = 'hidden';
+      // Forcer DOM update
+      setTimeout(() => {
+        cookieBanner.style.display = 'none';
+        console.log('Re-forcing cookie banner hide after 100ms');
+      }, 100);
     } else {
       console.error('Error: cookieBanner not found in acceptCookies');
     }
