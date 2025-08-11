@@ -1,3 +1,7 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^creer-compte$ creer-compte.html [NC,L]
+RewriteRule ^confirmation$ confirmation.html [NC,L]
 <Files "creer-compte.html">
   Allow from all
 </Files>
