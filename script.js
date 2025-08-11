@@ -6,9 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const isIncognito = () => {
     try {
       localStorage.setItem('test', 'test');
-      sessionStorage.setItem('test', 'test');
       localStorage.removeItem('test');
-      sessionStorage.removeItem('test');
       return false;
     } catch (e) {
       return true;
@@ -16,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const incognito = isIncognito();
   console.log('Is incognito mode?', incognito);
-  if (incognito) {
-    console.log('Forcing cookiesAccepted reset in incognito mode');
+  if (incognito || !localStorage.getItem('cookiesAccepted')) {
+    console.log('Forcing cookiesAccepted reset');
     localStorage.removeItem('cookiesAccepted');
   }
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
@@ -254,8 +252,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Initialisation de Appwrite...');
       const client = new Appwrite.Client();
       client
-        .setEndpoint('https://cloud.appwrite.io/v1') // Remplacer par ton endpoint Appwrite
-        .setProject('YOUR_PROJECT_ID'); // Remplacer par ton Project ID
+        .setEndpoint('https://fra.cloud.appwrite.io/v1')
+        .setProject('6899dfe00005f0bf80bc');
       const account = new Appwrite.Account(client);
       // Gestion du formulaire d'inscription
       const signupForm = document.getElementById('signup-form');
@@ -311,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log('Formulaire de connexion soumis');
           const email = document.getElementById('login-email').value;
           const password = document.getElementById('login-password').value;
-          console.log('Données formulaire:', { name, email, password });
+          console.log('Données formulaire:', { email, password });
           try {
             await account.createEmailPasswordSession(email, password);
             console.log('Connexion réussie');
