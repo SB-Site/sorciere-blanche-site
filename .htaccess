@@ -8,3 +8,5 @@ RewriteRule ^confirmation$ confirmation.html [NC,L]
 <Files "confirmation.html">
   Allow from all
 </Files>
+RewriteRule ^creer-compte/?$ creer-compte.html [NC,L]
+RewriteRule ^confirmation/?$ confirmation.html [NC,L]
