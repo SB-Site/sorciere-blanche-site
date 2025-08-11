@@ -2,3 +2,5 @@
 *.rtf
 .vscode/
 .htaccess
+# Local Netlify folder
+.netlify

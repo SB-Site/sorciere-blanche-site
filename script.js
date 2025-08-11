@@ -2,10 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM fully loaded on Ste Web SB user');
   console.log('LocalStorage domain:', window.location.hostname);
   console.log('Checking for construction-popup element...');
-  // Réinitialiser localStorage pour tester la pop-up et cookies
-  console.log('Resetting popupClosed and cookiesAccepted in localStorage for testing');
-  localStorage.removeItem('popupClosed');
-  localStorage.removeItem('cookiesAccepted');
+  // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
+  if (window.location.pathname.includes('index.html')) {
+    console.log('Resetting popupClosed in localStorage for testing');
+    localStorage.removeItem('popupClosed');
+    // Reset cookies uniquement si paramètre ?resetCookies=true
+    if (window.location.search.includes('resetCookies')) {
+      console.log('Resetting cookiesAccepted due to resetCookies parameter');
+      localStorage.removeItem('cookiesAccepted');
+    }
+  }
   // Gestion de la pop-up
   const popup = document.getElementById('construction-popup');
   if (popup) {
@@ -130,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const newsletterForm = document.getElementById('newsletterForm');
         if (newsletterForm && window.location.pathname.includes('index.html')) {
           newsletterForm.classList.remove('active');
+          newsletterForm.style.display = 'none';
         }
       } else {
         console.log('First load - setting flag');
