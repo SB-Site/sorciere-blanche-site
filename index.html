@@ -12,10 +12,10 @@
   <script async data-goatcounter="https://sorciereblancheeditions.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
   <style>
     .newsletter-form-container iframe {
-      border: 2px solid #D4AF37; /* Or SB */
+      border: 2px solid #D4AF37;
       border-radius: 15px;
-      background-color: #F5F5F5; /* Crème SB */
-      box-shadow: 0 4px 15px rgba(75, 0, 130, 0.2); /* Ombre violette */
+      background-color: #F5F5F5;
+      box-shadow: 0 4px 15px rgba(75, 0, 130, 0.2);
     }
     .newsletter-form-container.hidden {
       display: none;
@@ -28,6 +28,19 @@
       width: 100%;
       max-width: 560px;
       height: 315px;
+    }
+    .newsletter-close-button {
+      background: #B87333;
+      color: #F5E8D3;
+      font-family: 'Cinzel', serif;
+      border: none;
+      padding: 8px 16px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .newsletter-close-button:hover {
+      background: #6B3E75;
     }
   </style>
 </head>
@@ -111,6 +124,7 @@
           <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Recevez votre eBook offert <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
           <div class="newsletter-form-container" id="newsletterForm">
             <iframe src="https://framaforms.org/bienvenue-aux-magic-info-de-la-sorciere-blanche-1754742297" width="100%" height="800px" frameborder="0"></iframe>
+            <button class="newsletter-close-button" onclick="toggleNewsletterForm()">Fermer</button>
           </div>
         </div>
       </div>
@@ -199,7 +213,7 @@
           <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
           <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
           <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
-          <li><a href="https://www.youtube.com/channel UCBmw0xK4a8VOeuXav06P5og"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/channel/UCBmw0xK4a8VOeuXav06P5og"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
           <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
         </ul>
       </div>
@@ -208,17 +222,27 @@
   </footer>
   <script src="/script.js"></script>
   <script>
-    window.addEventListener('message', function(event) {
-      if (event.origin === 'https://framaforms.org' && event.data === 'formSubmitted') {
-        console.log('Form submission detected from Framaforms');
-        const newsletterForm = document.getElementById('newsletterForm');
-        if (newsletterForm && window.location.pathname.includes('index.html')) {
-          console.log('Hiding newsletter form after submission');
-          newsletterForm.classList.remove('active');
-          newsletterForm.style.display = 'none';
+    const newsletterIframe = document.querySelector('#newsletterForm iframe');
+    if (newsletterIframe) {
+      let iframeLoadedOnce = false;
+      newsletterIframe.addEventListener('load', () => {
+        console.log('Newsletter iframe loaded');
+        if (iframeLoadedOnce) {
+          console.log('Second load detected - hiding newsletter form after submission');
+          const newsletterForm = document.getElementById('newsletterForm');
+          if (newsletterForm && window.location.pathname.includes('index.html')) {
+            setTimeout(() => {
+              newsletterForm.classList.remove('active');
+              newsletterForm.style.display = 'none';
+              console.log('Newsletter form hidden after 10s');
+            }, 10000);
+          }
+        } else {
+          console.log('First load - setting flag');
+          iframeLoadedOnce = true;
         }
-      }
-    });
+      });
+    }
   </script>
 </body>
 </html>

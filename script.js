@@ -3,16 +3,27 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('LocalStorage domain:', window.location.hostname);
   console.log('Checking for construction-popup element...');
   // Détection mode incognito
-  const isIncognito = !window.localStorage || window.localStorage.length === 0;
-  console.log('Is incognito mode?', isIncognito);
+  const isIncognito = () => {
+    try {
+      localStorage.setItem('test', 'test');
+      sessionStorage.setItem('test', 'test');
+      localStorage.removeItem('test');
+      sessionStorage.removeItem('test');
+      return false;
+    } catch (e) {
+      return true;
+    }
+  };
+  const incognito = isIncognito();
+  console.log('Is incognito mode?', incognito);
+  if (incognito) {
+    console.log('Forcing cookiesAccepted reset in incognito mode');
+    localStorage.removeItem('cookiesAccepted');
+  }
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
   if (window.location.pathname.includes('index.html')) {
     console.log('Resetting popupClosed in localStorage for testing');
     localStorage.removeItem('popupClosed');
-    if (isIncognito) {
-      console.log('Forcing cookiesAccepted reset in incognito mode');
-      localStorage.removeItem('cookiesAccepted');
-    }
   }
   // Gestion de la pop-up
   const popup = document.getElementById('construction-popup');
@@ -104,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
       cookieBanner.classList.remove('cookie-banner-visible');
       cookieBanner.style.display = 'none';
       cookieBanner.style.visibility = 'hidden';
-      // Forcer DOM update
       setTimeout(() => {
         cookieBanner.style.display = 'none';
         console.log('Re-forcing cookie banner hide after 100ms');
@@ -134,15 +144,31 @@ document.addEventListener('DOMContentLoaded', () => {
     let iframeLoadedOnce = false;
     newsletterIframe.addEventListener('load', () => {
       console.log('Newsletter iframe loaded');
-      if (iframeLoadedOnce) {
+      let iframeSrc;
+      try {
+        iframeSrc = newsletterIframe.contentWindow.location.href || newsletterIframe.src;
+      } catch (e) {
+        iframeSrc = newsletterIframe.src;
+      }
+      if (iframeSrc.includes('framaforms.org') && !iframeSrc.includes('bienvenue-aux-magic-info')) {
+        console.log('Submission detected via Framaforms URL change');
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm && window.location.pathname.includes('index.html')) {
+          setTimeout(() => {
+            newsletterForm.classList.remove('active');
+            newsletterForm.style.display = 'none';
+            console.log('Newsletter form hidden after 10s');
+          }, 10000);
+        }
+      } else if (iframeLoadedOnce) {
         console.log('Second load detected - hiding newsletter form after submission');
         const newsletterForm = document.getElementById('newsletterForm');
         if (newsletterForm && window.location.pathname.includes('index.html')) {
           setTimeout(() => {
             newsletterForm.classList.remove('active');
             newsletterForm.style.display = 'none';
-            console.log('Newsletter form hidden after 6s');
-          }, 6000);
+            console.log('Newsletter form hidden after 10s');
+          }, 10000);
         }
       } else {
         console.log('First load - setting flag');
@@ -250,11 +276,11 @@ document.addEventListener('DOMContentLoaded', () => {
               return;
             }
             console.log('hCaptcha token:', hcaptchaToken);
-            // Valider hCaptcha via une API (exemple, à implémenter côté serveur)
+            // Valider hCaptcha via une API
             const hcaptchaResponse = await fetch('https://hcaptcha.com/siteverify', {
               method: 'POST',
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-              body: `response=${hcaptchaToken}&secret=YOUR_HCAPTCHA_SECRET`
+              body: `response=${hcaptchaToken}&secret=ES_2dd780120c30499d9268d28365065f0f`
             });
             const hcaptchaResult = await hcaptchaResponse.json();
             if (!hcaptchaResult.success) {
@@ -285,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log('Formulaire de connexion soumis');
           const email = document.getElementById('login-email').value;
           const password = document.getElementById('login-password').value;
-          console.log('Données formulaire:', { email, password });
+          console.log('Données formulaire:', { name, email, password });
           try {
             await account.createEmailPasswordSession(email, password);
             console.log('Connexion réussie');
