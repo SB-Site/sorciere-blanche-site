@@ -1,0 +1,6 @@
+<Files "creer-compte.html">
+  Allow from all
+</Files>
+<Files "confirmation.html">
+  Allow from all
+</Files>

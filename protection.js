@@ -14,9 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Protection clic droit (sauf pour développeurs)
   document.addEventListener('contextmenu', function(e) {
-    if (window.location.hostname.includes('localhost') || window.location.hostname.includes('netlify.app')) {
+    if (window.location.hostname.includes('localhost') || 
+        window.location.hostname.includes('netlify.app') || 
+        window.location.hostname.includes('sorciereblancheeditions.com') || 
+        window.location.hostname.includes('deft-crisp-11fcfe.netlify.app')) {
       console.log('Clic droit autorisé pour développement');
-      return; // Permet l'inspection sur localhost ou Netlify
+      return; // Permet l'inspection sur localhost, Netlify, ou sorciereblancheeditions.com
     }
     e.preventDefault();
     alert('© 2025 Éditions de la Sorcière Blanche. Tous droits réservés.');
@@ -24,7 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Protection contre la sélection de texte
   document.addEventListener('selectstart', function(e) {
-    if (window.location.hostname.includes('localhost') || window.location.hostname.includes('netlify.app')) {
+    if (window.location.hostname.includes('localhost') || 
+        window.location.hostname.includes('netlify.app') || 
+        window.location.hostname.includes('sorciereblancheeditions.com') || 
+        window.location.hostname.includes('deft-crisp-11fcfe.netlify.app')) {
       return; // Autorise sélection pour développement
     }
     e.preventDefault();
