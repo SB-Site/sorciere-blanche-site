@@ -2,10 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM fully loaded on Ste Web SB user');
   console.log('LocalStorage domain:', window.location.hostname);
   console.log('Checking for construction-popup element...');
+  // Détection mode incognito
+  const isIncognito = !window.localStorage || window.localStorage.length === 0;
+  console.log('Is incognito mode?', isIncognito);
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
   if (window.location.pathname.includes('index.html')) {
     console.log('Resetting popupClosed in localStorage for testing');
     localStorage.removeItem('popupClosed');
+    if (isIncognito) {
+      console.log('Forcing cookiesAccepted reset in incognito mode');
+      localStorage.removeItem('cookiesAccepted');
+    }
   }
   // Gestion de la pop-up
   const popup = document.getElementById('construction-popup');
@@ -67,30 +74,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const copyright = document.querySelector('.copyright');
   console.log('cookieBanner element:', cookieBanner);
   console.log('copyright element:', copyright);
-  // Forcer affichage initial si cookies non acceptés
-  setTimeout(() => {
-    if (!localStorage.getItem('cookiesAccepted') || localStorage.getItem('cookiesAccepted') === 'false') {
-      if (cookieBanner) {
-        console.log('Showing cookie banner');
-        cookieBanner.classList.add('cookie-banner-visible');
-        cookieBanner.style.display = 'block';
-        cookieBanner.style.visibility = 'visible';
-      } else {
-        console.error('Error: cookieBanner not found');
-      }
+  if (!localStorage.getItem('cookiesAccepted') || localStorage.getItem('cookiesAccepted') === 'false') {
+    if (cookieBanner) {
+      console.log('Showing cookie banner');
+      cookieBanner.classList.add('cookie-banner-visible');
+      cookieBanner.style.display = 'block';
+      cookieBanner.style.visibility = 'visible';
     } else {
-      if (cookieBanner) {
-        console.log('Cookies accepted, hiding cookie banner');
-        cookieBanner.classList.remove('cookie-banner-visible');
-        cookieBanner.style.display = 'none';
-        cookieBanner.style.visibility = 'hidden';
-      }
-      if (copyright) {
-        console.log('Cookies accepted, showing copyright');
-        copyright.classList.remove('copyright-hidden');
-      }
+      console.error('Error: cookieBanner not found');
     }
-  }, 100);
+  } else {
+    if (cookieBanner) {
+      console.log('Cookies accepted, hiding cookie banner');
+      cookieBanner.classList.remove('cookie-banner-visible');
+      cookieBanner.style.display = 'none';
+      cookieBanner.style.visibility = 'hidden';
+    }
+    if (copyright) {
+      console.log('Cookies accepted, showing copyright');
+      copyright.classList.remove('copyright-hidden');
+    }
+  }
   window.acceptCookies = function() {
     console.log('Accept button clicked');
     localStorage.setItem('cookiesAccepted', 'true');
@@ -124,6 +128,28 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Error: newsletterForm not found');
     }
   };
+  // Masquer l'encart newsletter après soumission
+  const newsletterIframe = document.querySelector('#newsletterForm iframe');
+  if (newsletterIframe) {
+    let iframeLoadedOnce = false;
+    newsletterIframe.addEventListener('load', () => {
+      console.log('Newsletter iframe loaded');
+      if (iframeLoadedOnce) {
+        console.log('Second load detected - hiding newsletter form after submission');
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm && window.location.pathname.includes('index.html')) {
+          setTimeout(() => {
+            newsletterForm.classList.remove('active');
+            newsletterForm.style.display = 'none';
+            console.log('Newsletter form hidden after 6s');
+          }, 6000);
+        }
+      } else {
+        console.log('First load - setting flag');
+        iframeLoadedOnce = true;
+      }
+    });
+  }
   // Gestion des onglets pour creer-compte.html
   window.showTab = function(tab) {
     console.log('Switching to tab:', tab);
@@ -133,26 +159,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(`.tab-button[onclick="showTab('${tab}')"]`).classList.add('active');
     console.log('Tabs initialized');
   };
-  // Gestion Supabase et hCaptcha pour creer-compte.html
+  // Gestion Appwrite pour creer-compte.html
   if (window.location.pathname.includes('creer-compte.html')) {
     console.log('DOM chargé pour creer-compte.html');
-    // Vérifier Supabase
-    let supabaseLoaded = false;
-    const checkSupabaseLoaded = setInterval(() => {
-      if (typeof window.supabase !== 'undefined' && !supabaseLoaded) {
-        clearInterval(checkSupabaseLoaded);
-        supabaseLoaded = true;
-        console.log('Supabase chargé avec succès');
+    // Vérifier Appwrite
+    let appwriteLoaded = false;
+    const checkAppwriteLoaded = setInterval(() => {
+      if (typeof window.Appwrite !== 'undefined' && !appwriteLoaded) {
+        clearInterval(checkAppwriteLoaded);
+        appwriteLoaded = true;
+        console.log('Appwrite chargé avec succès');
         initializeAuth();
       } else {
-        console.log('En attente du chargement de Supabase...');
+        console.log('En attente du chargement de Appwrite...');
       }
     }, 100);
     // Timeout après 15 secondes
     setTimeout(() => {
-      if (!supabaseLoaded) {
-        console.error('Erreur: Supabase non chargé après timeout');
-        console.log('Formulaire accessible malgré l\'erreur Supabase');
+      if (!appwriteLoaded) {
+        console.error('Erreur: Appwrite non chargé après timeout');
+        console.log('Formulaire accessible malgré l\'erreur Appwrite');
       }
     }, 15000);
     // Vérifier et initialiser hCaptcha
@@ -196,12 +222,15 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('hCaptcha non chargé ou déjà initialisé');
       }
     };
-    // Initialiser hCaptcha après un délai pour garantir le chargement
+    // Initialiser hCaptcha après un délai
     setTimeout(initializeHCaptcha, 1000);
     function initializeAuth() {
-      console.log('Initialisation de Supabase...');
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI';
-      const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', SUPABASE_ANON_KEY);
+      console.log('Initialisation de Appwrite...');
+      const client = new Appwrite.Client();
+      client
+        .setEndpoint('https://cloud.appwrite.io/v1') // Remplacer par ton endpoint Appwrite
+        .setProject('YOUR_PROJECT_ID'); // Remplacer par ton Project ID
+      const account = new Appwrite.Account(client);
       // Gestion du formulaire d'inscription
       const signupForm = document.getElementById('signup-form');
       if (signupForm) {
@@ -221,23 +250,25 @@ document.addEventListener('DOMContentLoaded', () => {
               return;
             }
             console.log('hCaptcha token:', hcaptchaToken);
-            const { data, error } = await supabase.auth.signUp({
-              email,
-              password,
-              options: { data: { full_name: name }, captchaToken: hcaptchaToken }
+            // Valider hCaptcha via une API (exemple, à implémenter côté serveur)
+            const hcaptchaResponse = await fetch('https://hcaptcha.com/siteverify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: `response=${hcaptchaToken}&secret=YOUR_HCAPTCHA_SECRET`
             });
-            if (error) {
-              console.error('Erreur inscription:', error.message);
-              alert('Erreur lors de l’inscription : ' + error.message);
+            const hcaptchaResult = await hcaptchaResponse.json();
+            if (!hcaptchaResult.success) {
+              console.error('Erreur validation hCaptcha:', hcaptchaResult);
+              alert('Erreur de validation hCaptcha.');
               if (hcaptchaLoaded) hcaptcha.reset('hcaptcha-container');
-              hcaptchaToken = null;
-            } else {
-              console.log('Inscription réussie:', data);
-              alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
-              window.location.href = 'confirmation.html';
+              return;
             }
+            const user = await account.create(Appwrite.ID.unique(), email, password, name);
+            console.log('Inscription réussie:', user);
+            alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
+            window.location.href = 'confirmation.html';
           } catch (error) {
-            console.error('Erreur générale inscription:', error);
+            console.error('Erreur inscription:', error.message);
             alert('Erreur lors de l’inscription : ' + error.message);
             if (hcaptchaLoaded) hcaptcha.reset('hcaptcha-container');
             hcaptchaToken = null;
@@ -256,19 +287,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const password = document.getElementById('login-password').value;
           console.log('Données formulaire:', { email, password });
           try {
-            const { data, error } = await supabase.auth.signInWithPassword({
-              email,
-              password
-            });
-            if (error) {
-              console.error('Erreur connexion:', error.message);
-              alert('Erreur lors de la connexion : ' + error.message);
-            } else {
-              console.log('Connexion réussie:', data);
-              window.location.href = 'portail.html';
-            }
+            await account.createEmailPasswordSession(email, password);
+            console.log('Connexion réussie');
+            window.location.href = 'portail.html';
           } catch (error) {
-            console.error('Erreur générale connexion:', error);
+            console.error('Erreur connexion:', error.message);
             alert('Erreur lors de la connexion : ' + error.message);
           }
         });
