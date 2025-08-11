@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const incognito = isIncognito();
   console.log('Is incognito mode?', incognito);
-  if (incognito || !localStorage.getItem('cookiesAccepted')) {
-    console.log('Forcing cookiesAccepted reset');
+  if (incognito) {
+    console.log('Incognito detected, resetting cookiesAccepted');
     localStorage.removeItem('cookiesAccepted');
   }
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
