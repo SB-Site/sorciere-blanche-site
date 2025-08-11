@@ -6,11 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.location.pathname.includes('index.html')) {
     console.log('Resetting popupClosed in localStorage for testing');
     localStorage.removeItem('popupClosed');
-    // Reset cookies uniquement si paramètre ?resetCookies=true
-    if (window.location.search.includes('resetCookies')) {
-      console.log('Resetting cookiesAccepted due to resetCookies parameter');
-      localStorage.removeItem('cookiesAccepted');
-    }
   }
   // Gestion de la pop-up
   const popup = document.getElementById('construction-popup');
@@ -72,27 +67,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const copyright = document.querySelector('.copyright');
   console.log('cookieBanner element:', cookieBanner);
   console.log('copyright element:', copyright);
-  if (!localStorage.getItem('cookiesAccepted') || localStorage.getItem('cookiesAccepted') === 'false') {
-    if (cookieBanner) {
-      console.log('Showing cookie banner');
-      cookieBanner.classList.add('cookie-banner-visible');
-      cookieBanner.style.display = 'block';
-      cookieBanner.style.visibility = 'visible';
+  // Forcer affichage initial si cookies non acceptés
+  setTimeout(() => {
+    if (!localStorage.getItem('cookiesAccepted') || localStorage.getItem('cookiesAccepted') === 'false') {
+      if (cookieBanner) {
+        console.log('Showing cookie banner');
+        cookieBanner.classList.add('cookie-banner-visible');
+        cookieBanner.style.display = 'block';
+        cookieBanner.style.visibility = 'visible';
+      } else {
+        console.error('Error: cookieBanner not found');
+      }
     } else {
-      console.error('Error: cookieBanner not found');
+      if (cookieBanner) {
+        console.log('Cookies accepted, hiding cookie banner');
+        cookieBanner.classList.remove('cookie-banner-visible');
+        cookieBanner.style.display = 'none';
+        cookieBanner.style.visibility = 'hidden';
+      }
+      if (copyright) {
+        console.log('Cookies accepted, showing copyright');
+        copyright.classList.remove('copyright-hidden');
+      }
     }
-  } else {
-    if (cookieBanner) {
-      console.log('Cookies accepted, hiding cookie banner');
-      cookieBanner.classList.remove('cookie-banner-visible');
-      cookieBanner.style.display = 'none';
-      cookieBanner.style.visibility = 'hidden';
-    }
-    if (copyright) {
-      console.log('Cookies accepted, showing copyright');
-      copyright.classList.remove('copyright-hidden');
-    }
-  }
+  }, 100);
   window.acceptCookies = function() {
     console.log('Accept button clicked');
     localStorage.setItem('cookiesAccepted', 'true');
@@ -121,93 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const newsletterForm = document.getElementById('newsletterForm');
     if (newsletterForm) {
       newsletterForm.classList.toggle('active');
+      console.log('Newsletter form toggled to:', newsletterForm.classList.contains('active') ? 'visible' : 'hidden');
     } else {
       console.error('Error: newsletterForm not found');
     }
   };
-  // Masquer l'encart newsletter après soumission réussie (avec flag pour second load)
-  const newsletterIframe = document.querySelector('#newsletterForm iframe');
-  if (newsletterIframe) {
-    let iframeLoadedOnce = false;
-    newsletterIframe.addEventListener('load', () => {
-      console.log('Newsletter iframe loaded');
-      if (iframeLoadedOnce) {
-        console.log('Second load detected - hiding newsletter form after submission');
-        const newsletterForm = document.getElementById('newsletterForm');
-        if (newsletterForm && window.location.pathname.includes('index.html')) {
-          newsletterForm.classList.remove('active');
-          newsletterForm.style.display = 'none';
-        }
-      } else {
-        console.log('First load - setting flag');
-        iframeLoadedOnce = true;
-      }
-    });
-  }
-  // Toggle langue
-  const langFr = document.querySelector('.lang-fr');
-  const langEn = document.querySelector('.lang-en');
-  if (langFr && langEn) {
-    langFr.addEventListener('mouseenter', () => {
-      langFr.style.color = '#B87333';
-      langEn.style.color = '#2A4B3D';
-    });
-    langEn.addEventListener('mouseenter', () => {
-      langEn.style.color = '#B87333';
-      langFr.style.color = '#2A4B3D';
-    });
-    langFr.addEventListener('mouseleave', () => {
-      langFr.style.color = langFr.classList.contains('active') ? '#B87333' : '#2A4B3D';
-      langEn.style.color = langEn.classList.contains('active') ? '#B87333' : '#2A4B3D';
-    });
-    langEn.addEventListener('mouseleave', () => {
-      langFr.style.color = langFr.classList.contains('active') ? '#B87333' : '#2A4B3D';
-      langEn.style.color = langEn.classList.contains('active') ? '#B87333' : '#2A4B3D';
-    });
-  }
-  // Gestion du panier
-  const removeButtons = document.querySelectorAll('.remove-button');
-  removeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      alert('Article supprimé ! (Simulation, à connecter à PayPal plus tard)');
-    });
-  });
-  // Boutons PayPal HostedButtons pour dons (je-soutiens.html)
-  const paypalHostedButtons = [
-    { id: 'paypal-container-ZFB68XN3ZKGV2', buttonId: 'ZFB68XN3ZKGV2' },
-    { id: 'paypal-container-B6K6GWKCHHMT8', buttonId: 'B6K6GWKCHHMT8' },
-    { id: 'paypal-container-RGK6BAGJWWWE8', buttonId: 'RGK6BAGJWWWE8' },
-    { id: 'paypal-container-5BC4Q7ZXYT5H8', buttonId: '5BC4Q7ZXYT5H8' }
-  ];
-  paypalHostedButtons.forEach(button => {
-    const container = document.getElementById(button.id);
-    if (container) {
-      paypal.HostedButtons({
-        hostedButtonId: button.buttonId
-      }).render(`#${button.id}`);
-    }
-  });
-  // Boutons PayPal personnalisés pour déclencher les HostedButtons
-  const paypalCustomButtons = [
-    { id: 'paypal-onetime-amis', container: 'paypal-container-ZFB68XN3ZKGV2' },
-    { id: 'paypal-onetime-initie', container: 'paypal-container-B6K6GWKCHHMT8' },
-    { id: 'paypal-onetime-gardien', container: 'paypal-container-RGK6BAGJWWWE8' },
-    { id: 'paypal-onetime-sage', container: 'paypal-container-5BC4Q7ZXYT5H8' }
-  ];
-  paypalCustomButtons.forEach(button => {
-    const element = document.getElementById(button.id);
-    if (element) {
-      element.addEventListener('click', () => {
-        const container = document.getElementById(button.container);
-        if (container) {
-          const paypalButton = container.querySelector('.paypal-buttons');
-          if (paypalButton) {
-            paypalButton.click();
-          }
-        }
-      });
-    }
-  });
   // Gestion des onglets pour creer-compte.html
   window.showTab = function(tab) {
     console.log('Switching to tab:', tab);
@@ -361,4 +277,40 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
+  // Boutons PayPal HostedButtons pour dons (je-soutiens.html)
+  const paypalHostedButtons = [
+    { id: 'paypal-container-ZFB68XN3ZKGV2', buttonId: 'ZFB68XN3ZKGV2' },
+    { id: 'paypal-container-B6K6GWKCHHMT8', buttonId: 'B6K6GWKCHHMT8' },
+    { id: 'paypal-container-RGK6BAGJWWWE8', buttonId: 'RGK6BAGJWWWE8' },
+    { id: 'paypal-container-5BC4Q7ZXYT5H8', buttonId: '5BC4Q7ZXYT5H8' }
+  ];
+  paypalHostedButtons.forEach(button => {
+    const container = document.getElementById(button.id);
+    if (container) {
+      paypal.HostedButtons({
+        hostedButtonId: button.buttonId
+      }).render(`#${button.id}`);
+    }
+  });
+  // Boutons PayPal personnalisés pour déclencher les HostedButtons
+  const paypalCustomButtons = [
+    { id: 'paypal-onetime-amis', container: 'paypal-container-ZFB68XN3ZKGV2' },
+    { id: 'paypal-onetime-initie', container: 'paypal-container-B6K6GWKCHHMT8' },
+    { id: 'paypal-onetime-gardien', container: 'paypal-container-RGK6BAGJWWWE8' },
+    { id: 'paypal-onetime-sage', container: 'paypal-container-5BC4Q7ZXYT5H8' }
+  ];
+  paypalCustomButtons.forEach(button => {
+    const element = document.getElementById(button.id);
+    if (element) {
+      element.addEventListener('click', () => {
+        const container = document.getElementById(button.container);
+        if (container) {
+          const paypalButton = container.querySelector('.paypal-buttons');
+          if (paypalButton) {
+            paypalButton.click();
+          }
+        }
+      });
+    }
+  });
 });

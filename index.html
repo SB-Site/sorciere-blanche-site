@@ -199,7 +199,7 @@
           <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
           <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
           <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
-          <li><a href="https://www.youtube.com/channel/UCBmw0xK4a8VOeuXav06P5og"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/channel UCBmw0xK4a8VOeuXav06P5og"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
           <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
         </ul>
       </div>
@@ -208,20 +208,17 @@
   </footer>
   <script src="/script.js"></script>
   <script>
-    const newsletterIframe = document.querySelector('#newsletterForm iframe');
-    if (newsletterIframe) {
-      newsletterIframe.addEventListener('load', () => {
-        console.log('Newsletter iframe loaded');
-        setTimeout(() => {
-          console.log('Forcing newsletter form hide after submission');
-          const newsletterForm = document.getElementById('newsletterForm');
-          if (newsletterForm && window.location.pathname.includes('index.html')) {
-            newsletterForm.classList.remove('active');
-            newsletterForm.style.display = 'none';
-          }
-        }, 6000); // 6s pour attendre redirect Framaforms
-      });
-    }
+    window.addEventListener('message', function(event) {
+      if (event.origin === 'https://framaforms.org' && event.data === 'formSubmitted') {
+        console.log('Form submission detected from Framaforms');
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm && window.location.pathname.includes('index.html')) {
+          console.log('Hiding newsletter form after submission');
+          newsletterForm.classList.remove('active');
+          newsletterForm.style.display = 'none';
+        }
+      }
+    });
   </script>
 </body>
 </html>
