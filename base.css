@@ -86,44 +86,6 @@ main {
 .popup-close-button:hover {
   background: #8B5A2B !important;
 }
-/* Bannière de cookies */
-.cookie-banner {
-  position: fixed !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  background: #2A4B3D !important;
-  color: #F5E8D3 !important;
-  padding: 15px !important;
-  text-align: center !important;
-  z-index: 10000 !important;
-}
-.cookie-banner-visible {
-  display: block !important;
-}
-.cookie-banner p {
-  margin: 0 !important;
-  display: inline !important;
-  font-size: 14px !important;
-  color: #F5E8D3 !important;
-}
-.cookie-banner a {
-  color: #B87333 !important;
-  text-decoration: underline !important;
-}
-.cookie-banner button {
-  background: #B87333 !important;
-  color: #F5E8D3 !important;
-  border: none !important;
-  padding: 8px 16px !important;
-  border-radius: 5px !important;
-  font-family: 'Cinzel', serif !important;
-  cursor: pointer !important;
-  margin-left: 10px !important;
-}
-.cookie-banner button:hover {
-  background: #6B3E75 !important;
-}
 /* Barre d’annonce */
 .announcement-bar {
   background: linear-gradient(90deg, #B87333, #6B3E75, #2A4B3D) !important;

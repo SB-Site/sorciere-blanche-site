@@ -2,11 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM fully loaded on Ste Web SB user');
   console.log('LocalStorage domain:', window.location.hostname);
   console.log('Checking for construction-popup element...');
-  // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
-  if (window.location.pathname.includes('index.html')) {
-    console.log('Resetting popupClosed in localStorage for testing');
-    localStorage.removeItem('popupClosed');
-  }
+  // Réinitialiser localStorage pour tester la pop-up et cookies
+  console.log('Resetting popupClosed and cookiesAccepted in localStorage for testing');
+  localStorage.removeItem('popupClosed');
+  localStorage.removeItem('cookiesAccepted');
   // Gestion de la pop-up
   const popup = document.getElementById('construction-popup');
   if (popup) {
@@ -72,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Showing cookie banner');
       cookieBanner.classList.add('cookie-banner-visible');
       cookieBanner.style.display = 'block';
+      cookieBanner.style.visibility = 'visible';
     } else {
       console.error('Error: cookieBanner not found');
     }
