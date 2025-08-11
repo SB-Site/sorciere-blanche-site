@@ -1,6 +1,5 @@
 .DS_Store
 *.rtf
 .vscode/
-.htaccess
 # Local Netlify folder
 .netlify
