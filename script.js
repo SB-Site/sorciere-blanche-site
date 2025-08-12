@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => {
             newsletterForm.classList.remove('active');
             newsletterForm.style.display = 'none';
-            Console.log('Newsletter form hidden after 10s');
+            console.log('Newsletter form hidden after 10s');
           }, 10000);
         }
       } else {
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Tabs initialized');
   };
   // Supabase initialisation
-  const supabase = supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+  const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
   console.log('Supabase initialized');
   // CAPTCHA maison pour creer-compte.html
   if (window.location.pathname.includes('creer-compte.html')) {
@@ -195,6 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { question: 'Qui est l’auteur de Secrets de Samhain ?', answers: ['L\'Alchimiste'] }
     ];
     const randomCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
+    console.log('CAPTCHA sélectionné:', randomCaptcha.question);
     // Attendre que le DOM soit prêt pour mettre à jour les labels
     setTimeout(() => {
       const captchaLabel = document.getElementById('captcha-label');
@@ -211,12 +212,13 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         console.error('Erreur: captcha-label-login non trouvé');
       }
-    }, 0);
+    }, 100); // Délai augmenté pour assurer DOM prêt
     // Validation CAPTCHA pour inscription
     const signupForm = document.getElementById('signup-form');
     if (signupForm) {
       signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        console.log('Formulaire d\'inscription soumis');
         const captcha = document.getElementById('signup-captcha').value;
         if (!randomCaptcha.answers.map(a => a.toLowerCase()).includes(captcha.toLowerCase())) {
           console.error('Erreur CAPTCHA: Réponse incorrecte');
@@ -227,6 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = document.getElementById('signup-name').value;
         const email = document.getElementById('signup-email').value;
         const password = document.getElementById('signup-password').value;
+        console.log('Données formulaire:', { name, email, password });
         try {
           const { data, error } = await supabase.auth.signUp({
             email,
@@ -250,6 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginForm) {
       loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        console.log('Formulaire de connexion soumis');
         const captcha = document.getElementById('login-captcha').value;
         if (!randomCaptcha.answers.map(a => a.toLowerCase()).includes(captcha.toLowerCase())) {
           console.error('Erreur CAPTCHA: Réponse incorrecte');
@@ -259,6 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('CAPTCHA valide, soumission formulaire connexion');
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
+        console.log('Données formulaire:', { email, password });
         try {
           const { data, error } = await supabase.auth.signInWithPassword({ email, password });
           if (error) throw error;
