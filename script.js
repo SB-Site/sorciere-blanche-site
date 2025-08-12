@@ -183,146 +183,98 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(`.tab-button[onclick="showTab('${tab}')"]`).classList.add('active');
     console.log('Tabs initialized');
   };
-  // Gestion Appwrite pour creer-compte.html
+  // Supabase initialisation
+  const supabase = Supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+  console.log('Supabase initialized');
+  // CAPTCHA maison pour creer-compte.html
   if (window.location.pathname.includes('creer-compte.html')) {
     console.log('DOM chargé pour creer-compte.html');
-    // Vérifier Appwrite
-    let appwriteLoaded = false;
-    const checkAppwriteLoaded = setInterval(() => {
-      if (typeof window.Appwrite !== 'undefined' && !appwriteLoaded) {
-        clearInterval(checkAppwriteLoaded);
-        appwriteLoaded = true;
-        console.log('Appwrite chargé avec succès');
-        initializeAuth();
-      } else {
-        console.log('En attente du chargement de Appwrite...');
-      }
-    }, 100);
-    // Timeout après 15 secondes
-    setTimeout(() => {
-      if (!appwriteLoaded) {
-        console.error('Erreur: Appwrite non chargé après timeout');
-        console.log('Formulaire accessible malgré l\'erreur Appwrite');
-      }
-    }, 15000);
-    // Vérifier et initialiser hCaptcha
-    let hcaptchaToken = null;
-    let hcaptchaLoaded = false;
-    const initializeHCaptcha = () => {
-      console.log('Tentative d\'initialisation hCaptcha');
-      if (typeof hcaptcha !== 'undefined' && !hcaptchaLoaded) {
-        const hcaptchaContainer = document.getElementById('hcaptcha-container');
-        if (!hcaptchaContainer) {
-          console.error('Erreur: Conteneur hCaptcha #hcaptcha-container non trouvé');
+    const captchaQuestions = [
+      { question: 'Citez un des familiers de la Sorcière Blanche ?', answers: ['Corbeau', 'Chouette'] },
+      { question: 'Quel est le nom de famille de Lazare ?', answers: ['Donatien'] },
+      { question: 'Qui est l’auteur de Secrets de Samhain ?', answers: ['L\'Alchimiste'] }
+    ];
+    const randomCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
+    const captchaLabel = document.getElementById('captcha-label');
+    const captchaLabelLogin = document.getElementById('captcha-label-login');
+    if (captchaLabel) {
+      captchaLabel.textContent = randomCaptcha.question;
+    }
+    if (captchaLabelLogin) {
+      captchaLabelLogin.textContent = randomCaptcha.question;
+    }
+    // Validation CAPTCHA pour inscription
+    const signupForm = document.getElementById('signup-form');
+    if (signupForm) {
+      signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const captcha = document.getElementById('signup-captcha').value;
+        if (!randomCaptcha.answers.map(a => a.toLowerCase()).includes(captcha.toLowerCase())) {
+          console.error('Erreur CAPTCHA: Réponse incorrecte');
+          alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
           return;
         }
+        console.log('CAPTCHA valide, soumission formulaire inscription');
+        const name = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
         try {
-          hcaptchaLoaded = true;
-          console.log('hCaptcha chargé, initialisation du widget');
-          hcaptcha.render('hcaptcha-container', {
-            sitekey: 'b97e9bec-2b16-4812-975a-edac0ed2780c',
-            callback: (token) => {
-              console.log('hCaptcha token généré:', token);
-              hcaptchaToken = token;
-            },
-            'error-callback': (error) => {
-              console.error('Erreur hCaptcha:', error);
-              hcaptchaToken = null;
-              hcaptcha.reset('hcaptcha-container');
-            },
-            'expired-callback': () => {
-              console.log('hCaptcha token expiré');
-              hcaptchaToken = null;
-              hcaptcha.reset('hcaptcha-container');
-            }
+          const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: { data: { name } }
           });
-          console.log('hCaptcha widget rendu avec succès');
+          if (error) throw error;
+          console.log('Inscription réussie:', data.user);
+          alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
+          window.location.href = '/confirmation.html';
         } catch (error) {
-          console.error('Erreur initialisation hCaptcha:', error);
-          hcaptchaLoaded = false;
-          hcaptchaToken = null;
+          console.error('Erreur inscription:', error.message);
+          alert('Erreur lors de l’inscription : ' + error.message);
         }
-      } else {
-        console.log('hCaptcha non chargé ou déjà initialisé');
-      }
-    };
-    // Initialiser hCaptcha après un délai
-    setTimeout(initializeHCaptcha, 1000);
-    function initializeAuth() {
-      console.log('Initialisation de Appwrite...');
-      const client = new Appwrite.Client();
-      client
-        .setEndpoint('https://fra.cloud.appwrite.io/v1')
-        .setProject('6899dfe00005f0bf80bc');
-      const account = new Appwrite.Account(client);
-      // Gestion du formulaire d'inscription
-      const signupForm = document.getElementById('signup-form');
-      if (signupForm) {
-        signupForm.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          console.log('Formulaire d\'inscription soumis');
-          const name = document.getElementById('signup-name').value;
-          const email = document.getElementById('signup-email').value;
-          const password = document.getElementById('signup-password').value;
-          console.log('Données formulaire:', { name, email, password });
-          try {
-            // Vérifier le token hCaptcha
-            if (!hcaptchaToken) {
-              console.error('Erreur: Aucun token hCaptcha trouvé');
-              alert('Veuillez valider hCaptcha.');
-              if (hcaptchaLoaded) hcaptcha.reset('hcaptcha-container');
-              return;
-            }
-            console.log('hCaptcha token:', hcaptchaToken);
-            // Valider hCaptcha via une API
-            const hcaptchaResponse = await fetch('https://hcaptcha.com/siteverify', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-              body: `response=${hcaptchaToken}&secret=ES_2dd780120c30499d9268d28365065f0f`
-            });
-            const hcaptchaResult = await hcaptchaResponse.json();
-            if (!hcaptchaResult.success) {
-              console.error('Erreur validation hCaptcha:', hcaptchaResult);
-              alert('Erreur de validation hCaptcha.');
-              if (hcaptchaLoaded) hcaptcha.reset('hcaptcha-container');
-              return;
-            }
-            const user = await account.create(Appwrite.ID.unique(), email, password, name);
-            console.log('Inscription réussie:', user);
-            alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
-            window.location.href = 'confirmation.html';
-          } catch (error) {
-            console.error('Erreur inscription:', error.message);
-            alert('Erreur lors de l’inscription : ' + error.message);
-            if (hcaptchaLoaded) hcaptcha.reset('hcaptcha-container');
-            hcaptchaToken = null;
-          }
-        });
-      } else {
-        console.error('Erreur: Formulaire signup-form non trouvé');
-      }
-      // Gestion du formulaire de connexion
-      const loginForm = document.getElementById('login-form');
-      if (loginForm) {
-        loginForm.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          console.log('Formulaire de connexion soumis');
-          const email = document.getElementById('login-email').value;
-          const password = document.getElementById('login-password').value;
-          console.log('Données formulaire:', { email, password });
-          try {
-            await account.createEmailPasswordSession(email, password);
-            console.log('Connexion réussie');
-            window.location.href = 'portail.html';
-          } catch (error) {
-            console.error('Erreur connexion:', error.message);
-            alert('Erreur lors de la connexion : ' + error.message);
-          }
-        });
-      } else {
-        console.error('Erreur: Formulaire login-form non trouvé');
-      }
+      });
     }
+    // Validation CAPTCHA pour connexion
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const captcha = document.getElementById('login-captcha').value;
+        if (!randomCaptcha.answers.map(a => a.toLowerCase()).includes(captcha.toLowerCase())) {
+          console.error('Erreur CAPTCHA: Réponse incorrecte');
+          alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
+          return;
+        }
+        console.log('CAPTCHA valide, soumission formulaire connexion');
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        try {
+          const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+          if (error) throw error;
+          console.log('Connexion réussie:', data.user);
+          window.location.href = '/portail.html';
+        } catch (error) {
+          console.error('Erreur connexion:', error.message);
+          alert('Erreur lors de la connexion : ' + error.message);
+        }
+      });
+    }
+  }
+  // Vérification session pour portail.html
+  if (window.location.pathname.includes('portail.html')) {
+    console.log('DOM chargé pour portail.html');
+    supabase.auth.getSession().then(({ data, error }) => {
+      if (error || !data.session) {
+        console.error('Aucune session active, redirection vers creer-compte.html');
+        window.location.href = '/creer-compte.html';
+        return;
+      }
+      console.log('Session active:', data.session.user);
+      const userNameElement = document.getElementById('user-name');
+      if (userNameElement) {
+        userNameElement.textContent = data.session.user.user_metadata.name || 'Initié';
+      }
+    });
   }
   // Boutons PayPal HostedButtons pour dons (je-soutiens.html)
   const paypalHostedButtons = [

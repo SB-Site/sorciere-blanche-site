@@ -6,3 +6,9 @@ command = "echo 'No build command needed for static site'"
   for = "/*"
   [headers.values]
     Cache-Control = "max-age=0, no-cache, no-store, must-revalidate"
+
+    [[functions]]
+  path = "/keep-alive"
+  function = "keep-alive"
+  schedule = "@daily"
+  
