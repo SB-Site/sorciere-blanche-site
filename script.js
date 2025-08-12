@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => {
             newsletterForm.classList.remove('active');
             newsletterForm.style.display = 'none';
-            console.log('Newsletter form hidden after 10s');
+            Console.log('Newsletter form hidden after 10s');
           }, 10000);
         }
       } else {
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Tabs initialized');
   };
   // Supabase initialisation
-  const supabase = Supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+  const supabase = supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
   console.log('Supabase initialized');
   // CAPTCHA maison pour creer-compte.html
   if (window.location.pathname.includes('creer-compte.html')) {
@@ -195,14 +195,23 @@ document.addEventListener('DOMContentLoaded', () => {
       { question: 'Qui est l’auteur de Secrets de Samhain ?', answers: ['L\'Alchimiste'] }
     ];
     const randomCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
-    const captchaLabel = document.getElementById('captcha-label');
-    const captchaLabelLogin = document.getElementById('captcha-label-login');
-    if (captchaLabel) {
-      captchaLabel.textContent = randomCaptcha.question;
-    }
-    if (captchaLabelLogin) {
-      captchaLabelLogin.textContent = randomCaptcha.question;
-    }
+    // Attendre que le DOM soit prêt pour mettre à jour les labels
+    setTimeout(() => {
+      const captchaLabel = document.getElementById('captcha-label');
+      const captchaLabelLogin = document.getElementById('captcha-label-login');
+      if (captchaLabel) {
+        captchaLabel.textContent = randomCaptcha.question;
+        console.log('CAPTCHA label set:', randomCaptcha.question);
+      } else {
+        console.error('Erreur: captcha-label non trouvé');
+      }
+      if (captchaLabelLogin) {
+        captchaLabelLogin.textContent = randomCaptcha.question;
+        console.log('CAPTCHA label login set:', randomCaptcha.question);
+      } else {
+        console.error('Erreur: captcha-label-login non trouvé');
+      }
+    }, 0);
     // Validation CAPTCHA pour inscription
     const signupForm = document.getElementById('signup-form');
     if (signupForm) {
@@ -233,6 +242,8 @@ document.addEventListener('DOMContentLoaded', () => {
           alert('Erreur lors de l’inscription : ' + error.message);
         }
       });
+    } else {
+      console.error('Erreur: signup-form non trouvé');
     }
     // Validation CAPTCHA pour connexion
     const loginForm = document.getElementById('login-form');
@@ -258,6 +269,8 @@ document.addEventListener('DOMContentLoaded', () => {
           alert('Erreur lors de la connexion : ' + error.message);
         }
       });
+    } else {
+      console.error('Erreur: login-form non trouvé');
     }
   }
   // Vérification session pour portail.html
