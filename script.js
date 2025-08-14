@@ -125,17 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
       copyright.classList.remove('copyright-hidden');
     }
   };
-  // Afficher/masquer le formulaire newsletter et gérer la soumission
-  window.toggleNewsletterForm = function() {
-    console.log('Toggle newsletter form clicked');
-    const newsletterForm = document.getElementById('newsletterForm');
-    if (newsletterForm) {
-      newsletterForm.classList.toggle('active');
-      console.log('Newsletter form toggled to:', newsletterForm.classList.contains('active') ? 'visible' : 'hidden');
-    } else {
-      console.error('Error: newsletterForm not found');
-    }
-  };
   // Masquer l'encart newsletter après soumission
   const newsletterIframe = document.querySelector('#newsletterForm iframe');
   if (newsletterIframe) {
@@ -212,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         console.error('Erreur: captcha-label-login non trouvé');
       }
-    }, 100); // Délai augmenté pour assurer DOM prêt
+    }, 100);
     // Validation CAPTCHA pour inscription
     const signupForm = document.getElementById('signup-form');
     if (signupForm) {
@@ -226,15 +215,15 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         console.log('CAPTCHA valide, soumission formulaire inscription');
-        const name = document.getElementById('signup-name').value;
-        const email = document.getElementById('signup-email').value;
-        const password = document.getElementById('signup-password').value;
-        console.log('Données formulaire:', { name, email, password });
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        console.log('Données formulaire:', { username, email, password });
         try {
           const { data, error } = await supabase.auth.signUp({
             email,
             password,
-            options: { data: { name } }
+            options: { data: { username } }
           });
           if (error) throw error;
           console.log('Inscription réussie:', data.user);
@@ -290,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Session active:', data.session.user);
       const userNameElement = document.getElementById('user-name');
       if (userNameElement) {
-        userNameElement.textContent = data.session.user.user_metadata.name || 'Initié';
+        userNameElement.textContent = data.session.user.user_metadata.username || 'Initié';
       }
     });
   }
