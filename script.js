@@ -208,26 +208,26 @@ document.addEventListener('DOMContentLoaded', () => {
       signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         console.log('Formulaire d\'inscription soumis');
-        const captcha = document.getElementById('signup-captcha').value;
+        const captcha = document.getElementById('captcha-answer').value;
         if (!randomCaptcha.answers.map(a => a.toLowerCase()).includes(captcha.toLowerCase())) {
           console.error('Erreur CAPTCHA: Réponse incorrecte');
           alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
           return;
         }
         console.log('CAPTCHA valide, soumission formulaire inscription');
-        const username = document.getElementById('username').value;
-        const email = document.getElementById('email').value;
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value;
         console.log('Données formulaire:', { username, email, password });
         try {
           const { data, error } = await supabase.auth.signUp({
             email,
             password,
-            options: { data: { username } }
+            options: { data: { username: username || 'Utilisateur Anonyme' } }
           });
           if (error) throw error;
           console.log('Inscription réussie:', data.user);
-          alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
+          alert('Inscription réussie ! Vérifiez votre courriel pour confirmer.');
           window.location.href = '/confirmation.html';
         } catch (error) {
           console.error('Erreur inscription:', error.message);
