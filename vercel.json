@@ -1,0 +1,17 @@
+{
+  "rewrites": [
+    { "source": "/creer-compte", "destination": "/creer-compte.html" },
+    { "source": "/portail", "destination": "/portail.html" },
+    { "source": "/confirmation", "destination": "/confirmation.html" },
+    { "source": "/contact-confirmation", "destination": "/contact-confirmation.html" },
+    { "source": "/:path", "destination": "/:path.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache" }
+      ]
+    }
+  ]
+}
