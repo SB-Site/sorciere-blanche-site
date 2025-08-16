@@ -14,14 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const incognito = isIncognito();
   console.log('Is incognito mode?', incognito);
-  // Réinitialiser cookies si ?resetCookies=true
+  // Réinitialiser cookies si ?resetCookies=true ou incognito
   const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('resetCookies') === 'true') {
-    console.log('Resetting cookiesAccepted due to ?resetCookies=true');
-    localStorage.setItem('cookiesAccepted', 'false');
-  }
-  if (incognito) {
-    console.log('Incognito detected, resetting cookiesAccepted');
+  if (urlParams.get('resetCookies') === 'true' || incognito) {
+    console.log('Clearing localStorage due to ?resetCookies=true or incognito');
+    localStorage.clear();
     localStorage.setItem('cookiesAccepted', 'false');
   }
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
@@ -104,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!cookieBanner) {
     console.error('Error: cookieBanner not found');
   } else {
-    if (localStorage.getItem('cookiesAccepted') === 'false' || urlParams.get('resetCookies') === 'true') {
+    if (localStorage.getItem('cookiesAccepted') === 'false' || urlParams.get('resetCookies') === 'true' || incognito) {
       console.log('Showing cookie banner');
       cookieBanner.classList.add('cookie-banner-visible');
       cookieBanner.style.display = 'block';
@@ -194,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { question: 'Qui est l’auteur de Secrets de Samhain ?', answers: ['L\'Alchimiste'] }
     ];
     const randomCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
+    console.log('CAPTCHA sélectionné:', randomCaptcha.question);
     setTimeout(() => {
       const captchaLabel = document.getElementById('captcha-label');
       const captchaLabelLogin = document.getElementById('captcha-label-login');
