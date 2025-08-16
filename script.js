@@ -93,15 +93,16 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('No carousel on this page');
   }
   // Cookies RGPD
-  console.log('Checking cookiesAccepted:', localStorage.getItem('cookiesAccepted'));
   const cookieBanner = document.getElementById('cookieBanner');
   const copyright = document.querySelector('.copyright');
   console.log('cookieBanner element:', cookieBanner);
   console.log('copyright element:', copyright);
+  const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+  console.log('Checking cookiesAccepted:', cookiesAccepted);
   if (!cookieBanner) {
     console.error('Error: cookieBanner not found');
   } else {
-    if (localStorage.getItem('cookiesAccepted') === 'false' || urlParams.get('resetCookies') === 'true' || incognito) {
+    if (!cookiesAccepted || cookiesAccepted !== 'true' || urlParams.get('resetCookies') === 'true' || incognito) {
       console.log('Showing cookie banner');
       cookieBanner.classList.add('cookie-banner-visible');
       cookieBanner.style.display = 'block';
@@ -342,15 +343,12 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'paypal-onetime-sage', container: 'paypal-container-5BC4Q7ZXYT5H8' }
   ];
   paypalCustomButtons.forEach(button => {
-    const element = document.getElementById(button.id);
-    if (element) {
-      element.addEventListener('click', () => {
-        const container = document.getElementById(button.container);
-        if (container) {
-          const paypalButton = container.querySelector('.paypal-buttons');
-          if (paypalButton) {
-            paypalButton.click();
-          }
+    const container = document.getElementById(button.id);
+    if (container) {
+      container.addEventListener('click', () => {
+        const paypalButton = document.getElementById(button.container)?.querySelector('.paypal-buttons');
+        if (paypalButton) {
+          paypalButton.click();
         }
       });
     }
