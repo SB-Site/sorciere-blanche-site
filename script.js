@@ -21,6 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.clear();
     localStorage.setItem('cookiesAccepted', 'false');
   }
+  // Vérifier et nettoyer localStorage corrompu
+  const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+  if (cookiesAccepted && cookiesAccepted !== 'true' && cookiesAccepted !== 'false') {
+    console.log('Corrupted cookiesAccepted detected, resetting localStorage');
+    localStorage.clear();
+    localStorage.setItem('cookiesAccepted', 'false');
+  }
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
   if (window.location.pathname.includes('index.html')) {
     console.log('Resetting popupClosed in localStorage for testing');
@@ -93,16 +100,15 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('No carousel on this page');
   }
   // Cookies RGPD
+  console.log('Checking cookiesAccepted:', localStorage.getItem('cookiesAccepted'));
   const cookieBanner = document.getElementById('cookieBanner');
   const copyright = document.querySelector('.copyright');
   console.log('cookieBanner element:', cookieBanner);
   console.log('copyright element:', copyright);
-  const cookiesAccepted = localStorage.getItem('cookiesAccepted');
-  console.log('Checking cookiesAccepted:', cookiesAccepted);
   if (!cookieBanner) {
     console.error('Error: cookieBanner not found');
   } else {
-    if (!cookiesAccepted || cookiesAccepted !== 'true') {
+    if (!localStorage.getItem('cookiesAccepted') || localStorage.getItem('cookiesAccepted') !== 'true') {
       console.log('Showing cookie banner');
       cookieBanner.classList.add('cookie-banner-visible');
       cookieBanner.style.display = 'block';
