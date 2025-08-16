@@ -14,15 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const incognito = isIncognito();
   console.log('Is incognito mode?', incognito);
-  if (incognito) {
-    console.log('Incognito detected, resetting cookiesAccepted');
-    localStorage.removeItem('cookiesAccepted');
-  }
   // Réinitialiser cookies si ?resetCookies=true
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get('resetCookies') === 'true') {
     console.log('Resetting cookiesAccepted due to ?resetCookies=true');
-    localStorage.removeItem('cookiesAccepted');
+    localStorage.setItem('cookiesAccepted', 'false');
+  }
+  if (incognito) {
+    console.log('Incognito detected, resetting cookiesAccepted');
+    localStorage.setItem('cookiesAccepted', 'false');
   }
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
   if (window.location.pathname.includes('index.html')) {
@@ -101,26 +101,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const copyright = document.querySelector('.copyright');
   console.log('cookieBanner element:', cookieBanner);
   console.log('copyright element:', copyright);
-  if (!localStorage.getItem('cookiesAccepted') || localStorage.getItem('cookiesAccepted') === 'false' || urlParams.get('resetCookies') === 'true') {
-    if (cookieBanner) {
+  if (!cookieBanner) {
+    console.error('Error: cookieBanner not found');
+  } else {
+    if (localStorage.getItem('cookiesAccepted') === 'false' || urlParams.get('resetCookies') === 'true') {
       console.log('Showing cookie banner');
       cookieBanner.classList.add('cookie-banner-visible');
       cookieBanner.style.display = 'block';
       cookieBanner.style.visibility = 'visible';
     } else {
-      console.error('Error: cookieBanner not found');
-    }
-  } else {
-    if (cookieBanner) {
       console.log('Cookies accepted, hiding cookie banner');
       cookieBanner.classList.remove('cookie-banner-visible');
       cookieBanner.style.display = 'none';
       cookieBanner.style.visibility = 'hidden';
     }
-    if (copyright) {
-      console.log('Cookies accepted, showing copyright');
-      copyright.classList.remove('copyright-hidden');
-    }
+  }
+  if (copyright) {
+    console.log('Cookies accepted, showing copyright');
+    copyright.classList.remove('copyright-hidden');
   }
   window.acceptCookies = function() {
     console.log('Accept button clicked');
@@ -267,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
           if (error) throw error;
           console.log('Inscription réussie:', data.user);
-          alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
+          alert('Inscription réussie ! Redirection vers confirmation.');
           window.location.href = '/confirmation.html';
         } catch (error) {
           console.error('Erreur inscription:', error.message);
