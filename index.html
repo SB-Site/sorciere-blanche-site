@@ -1,48 +1,16 @@
 <!DOCTYPE html>
-<html lang="fr" class="home">
+<html lang="fr-CA" class="home">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Les Éditions de la Sorcière Blanche</title>
   <meta name="description" content="Éditions de la Sorcière Blanche : livres fantastiques, ésotériques, préventes ouvertes 2025 ! Fantasy, esoterisme, maison associative.">
   <meta name="keywords" content="fantasy, esoterisme, livres fantastiques, preventes livres, editions sorciere blanche, magie authentique">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/base.css">
   <link rel="stylesheet" href="/index.css">
   <script async data-goatcounter="https://sorciereblancheeditions.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
-  <style>
-    .newsletter-form-container iframe {
-      border: 2px solid #D4AF37;
-      border-radius: 15px;
-      background-color: #F5F5F5;
-      box-shadow: 0 4px 15px rgba(75, 0, 130, 0.2);
-    }
-    .newsletter-form-container.hidden {
-      display: none;
-    }
-    .booktrailers .trailer {
-      margin: 20px;
-      display: inline-block;
-    }
-    .booktrailers iframe {
-      width: 100%;
-      max-width: 560px;
-      height: 315px;
-    }
-    .newsletter-close-button {
-      background: #B87333;
-      color: #F5E8D3;
-      font-family: 'Cinzel', serif;
-      border: none;
-      padding: 8px 16px;
-      margin-top: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .newsletter-close-button:hover {
-      background: #6B3E75;
-    }
-  </style>
 </head>
 <body>
   <div class="cookie-banner cookie-banner-visible" id="cookieBanner">
@@ -121,11 +89,7 @@
         <h2>Inscrivez-vous à Magic-Info</h2>
         <p>Recevez nos dernières actualités, offres exclusives et votre eBook offert “Le Cadeau de Lazare”.</p>
         <div class="newsletter-form">
-          <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Recevez votre eBook offert <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
-          <div class="newsletter-form-container" id="newsletterForm">
-            <iframe src="https://framaforms.org/bienvenue-aux-magic-info-de-la-sorciere-blanche-1754742297" width="100%" height="800px" frameborder="0"></iframe>
-            <button class="newsletter-close-button" onclick="toggleNewsletterForm()">Fermer</button>
-          </div>
+          <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Recevez votre eBook offert <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></a>
         </div>
       </div>
       <div class="booktrailers">
@@ -145,7 +109,7 @@
       <div class="reasons">
         <div class="reason">
           <img src="/images/icon_open_book.png" alt="Open Book" class="icon">
-          <p>Des récits captivants mêlant fantasy, ésotérisme et bien-être.</p>
+          <p>Des récits captivants mêlant fantasy, ésotérisme et beauté.</p>
         </div>
         <div class="reason">
           <img src="/images/icon_people.png" alt="Community" class="icon">
@@ -221,28 +185,6 @@
     <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
   </footer>
   <script src="/script.js"></script>
-  <script>
-    const newsletterIframe = document.querySelector('#newsletterForm iframe');
-    if (newsletterIframe) {
-      let iframeLoadedOnce = false;
-      newsletterIframe.addEventListener('load', () => {
-        console.log('Newsletter iframe loaded');
-        if (iframeLoadedOnce) {
-          console.log('Second load detected - hiding newsletter form after submission');
-          const newsletterForm = document.getElementById('newsletterForm');
-          if (newsletterForm && window.location.pathname.includes('index.html')) {
-            setTimeout(() => {
-              newsletterForm.classList.remove('active');
-              newsletterForm.style.display = 'none';
-              console.log('Newsletter form hidden after 10s');
-            }, 10000);
-          }
-        } else {
-          console.log('First load - setting flag');
-          iframeLoadedOnce = true;
-        }
-      });
-    }
-  </script>
+  <script src="/protection.js"></script>
 </body>
 </html>
