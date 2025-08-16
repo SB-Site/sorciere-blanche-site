@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!cookieBanner) {
     console.error('Error: cookieBanner not found');
   } else {
-    if (!cookiesAccepted || cookiesAccepted !== 'true' || urlParams.get('resetCookies') === 'true' || incognito) {
+    if (!cookiesAccepted || cookiesAccepted !== 'true') {
       console.log('Showing cookie banner');
       cookieBanner.classList.add('cookie-banner-visible');
       cookieBanner.style.display = 'block';
