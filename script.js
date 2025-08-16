@@ -18,6 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Incognito detected, resetting cookiesAccepted');
     localStorage.removeItem('cookiesAccepted');
   }
+  // Réinitialiser cookies si ?resetCookies=true
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('resetCookies') === 'true') {
+    console.log('Resetting cookiesAccepted due to ?resetCookies=true');
+    localStorage.removeItem('cookiesAccepted');
+  }
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
   if (window.location.pathname.includes('index.html')) {
     console.log('Resetting popupClosed in localStorage for testing');
@@ -47,6 +53,18 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('popupClosed set to true in localStorage');
     } else {
       console.log('No construction-popup element to close');
+    }
+  };
+  // Gestion newsletter form
+  window.toggleNewsletterForm = function() {
+    console.log('toggleNewsletterForm function called');
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+      newsletterForm.classList.toggle('active');
+      console.log('Newsletter form toggled:', newsletterForm.classList.contains('active') ? 'visible' : 'hidden');
+      newsletterForm.style.display = newsletterForm.classList.contains('active') ? 'block' : 'none';
+    } else {
+      console.error('Erreur: newsletterForm non trouvé');
     }
   };
   // Carrousel (index.html)
@@ -83,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const copyright = document.querySelector('.copyright');
   console.log('cookieBanner element:', cookieBanner);
   console.log('copyright element:', copyright);
-  if (!localStorage.getItem('cookiesAccepted') || localStorage.getItem('cookiesAccepted') === 'false') {
+  if (!localStorage.getItem('cookiesAccepted') || localStorage.getItem('cookiesAccepted') === 'false' || urlParams.get('resetCookies') === 'true') {
     if (cookieBanner) {
       console.log('Showing cookie banner');
       cookieBanner.classList.add('cookie-banner-visible');
@@ -171,21 +189,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById(tab).classList.add('active');
     document.querySelector(`.tab-button[onclick="showTab('${tab}')"]`).classList.add('active');
     console.log('Tabs initialized');
-  };
-  // Supabase initialisation
-  const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
-  console.log('Supabase initialized');
-  // CAPTCHA maison pour creer-compte.html
-  if (window.location.pathname.includes('creer-compte.html')) {
-    console.log('DOM chargé pour creer-compte.html');
+    // Refresh CAPTCHA après changement d'onglet
     const captchaQuestions = [
       { question: 'Citez un des familiers de la Sorcière Blanche ?', answers: ['Corbeau', 'Chouette'] },
       { question: 'Quel est le nom de famille de Lazare ?', answers: ['Donatien'] },
       { question: 'Qui est l’auteur de Secrets de Samhain ?', answers: ['L\'Alchimiste'] }
     ];
     const randomCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
-    console.log('CAPTCHA sélectionné:', randomCaptcha.question);
-    // Attendre que le DOM soit prêt pour mettre à jour les labels
     setTimeout(() => {
       const captchaLabel = document.getElementById('captcha-label');
       const captchaLabelLogin = document.getElementById('captcha-label-login');
@@ -201,7 +211,37 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         console.error('Erreur: captcha-label-login non trouvé');
       }
-    }, 100);
+    }, 500);
+  };
+  // Supabase initialisation
+  const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6imFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+  console.log('Supabase initialized');
+  // CAPTCHA maison pour creer-compte.html
+  if (window.location.pathname.includes('creer-compte.html')) {
+    console.log('DOM chargé pour creer-compte.html');
+    const captchaQuestions = [
+      { question: 'Citez un des familiers de la Sorcière Blanche ?', answers: ['Corbeau', 'Chouette'] },
+      { question: 'Quel est le nom de famille de Lazare ?', answers: ['Donatien'] },
+      { question: 'Qui est l’auteur de Secrets de Samhain ?', answers: ['L\'Alchimiste'] }
+    ];
+    const randomCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
+    console.log('CAPTCHA sélectionné:', randomCaptcha.question);
+    setTimeout(() => {
+      const captchaLabel = document.getElementById('captcha-label');
+      const captchaLabelLogin = document.getElementById('captcha-label-login');
+      if (captchaLabel) {
+        captchaLabel.textContent = randomCaptcha.question;
+        console.log('CAPTCHA label set:', randomCaptcha.question);
+      } else {
+        console.error('Erreur: captcha-label non trouvé');
+      }
+      if (captchaLabelLogin) {
+        captchaLabelLogin.textContent = randomCaptcha.question;
+        console.log('CAPTCHA label login set:', randomCaptcha.question);
+      } else {
+        console.error('Erreur: captcha-label-login non trouvé');
+      }
+    }, 500);
     // Validation CAPTCHA pour inscription
     const signupForm = document.getElementById('signup-form');
     if (signupForm) {
@@ -215,19 +255,19 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         console.log('CAPTCHA valide, soumission formulaire inscription');
-        const username = document.getElementById('username').value.trim();
-        const email = document.getElementById('email').value.trim();
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         console.log('Données formulaire:', { username, email, password });
         try {
           const { data, error } = await supabase.auth.signUp({
             email,
             password,
-            options: { data: { username: username || 'Utilisateur Anonyme' } }
+            options: { data: { username } }
           });
           if (error) throw error;
           console.log('Inscription réussie:', data.user);
-          alert('Inscription réussie ! Vérifiez votre courriel pour confirmer.');
+          alert('Inscription réussie ! Vérifiez votre e-mail pour confirmer.');
           window.location.href = '/confirmation.html';
         } catch (error) {
           console.error('Erreur inscription:', error.message);

@@ -6,11 +6,12 @@
   <title>Les Éditions de la Sorcière Blanche</title>
   <meta name="description" content="Éditions de la Sorcière Blanche : livres fantastiques, ésotériques, préventes ouvertes 2025 ! Fantasy, esoterisme, maison associative.">
   <meta name="keywords" content="fantasy, esoterisme, livres fantastiques, preventes livres, editions sorciere blanche, magie authentique">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/images/sb_logo_fr.jpg" type="image/jpeg">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/base.css">
   <link rel="stylesheet" href="/index.css">
   <script async data-goatcounter="https://sorciereblancheeditions.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="cookie-banner cookie-banner-visible" id="cookieBanner">
@@ -89,7 +90,11 @@
         <h2>Inscrivez-vous à Magic-Info</h2>
         <p>Recevez nos dernières actualités, offres exclusives et votre eBook offert “Le Cadeau de Lazare”.</p>
         <div class="newsletter-form">
-          <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Recevez votre eBook offert <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></a>
+          <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Recevez votre eBook offert <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
+          <div class="newsletter-form-container" id="newsletterForm">
+            <iframe src="https://framaforms.org/bienvenue-aux-magic-info-de-la-sorciere-blanche-1754742297" width="100%" height="800px" frameborder="0"></iframe>
+            <button class="newsletter-close-button" onclick="toggleNewsletterForm()">Fermer</button>
+          </div>
         </div>
       </div>
       <div class="booktrailers">
