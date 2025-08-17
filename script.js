@@ -21,21 +21,27 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.clear();
     localStorage.setItem('cookiesAccepted', 'false');
     localStorage.setItem('cookiesAcceptedTimestamp', new Date().toISOString());
+    localStorage.setItem('cookieVersion', '1.0');
   }
   // Vérifier et nettoyer localStorage corrompu ou expiré
   let cookiesAccepted = localStorage.getItem('cookiesAccepted');
   let cookiesAcceptedTimestamp = localStorage.getItem('cookiesAcceptedTimestamp');
+  let cookieVersion = localStorage.getItem('cookieVersion');
+  const currentCookieVersion = '1.0';
   const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
   const now = new Date().getTime();
   const isExpired = cookiesAcceptedTimestamp && (now - new Date(cookiesAcceptedTimestamp).getTime() > thirtyDaysInMs);
-  const isOldTimestamp = cookiesAcceptedTimestamp && new Date(cookiesAcceptedTimestamp).getTime() < new Date('2025-08-17T14:00:00.000Z').getTime();
-  console.log('Checking cookiesAccepted:', cookiesAccepted, 'Timestamp:', cookiesAcceptedTimestamp);
-  if (!cookiesAccepted || (cookiesAccepted !== 'true' && cookiesAccepted !== 'false') || !cookiesAcceptedTimestamp || isExpired || isOldTimestamp) {
-    console.log('CookiesAccepted not set, corrupted, no timestamp, expired, or old timestamp, resetting to false');
+  const isOldTimestamp = cookiesAcceptedTimestamp && new Date(cookiesAcceptedTimestamp).getTime() < new Date('2025-08-17T15:54:00.000Z').getTime();
+  const isOldVersion = cookieVersion !== currentCookieVersion;
+  console.log('Checking cookiesAccepted:', cookiesAccepted, 'Timestamp:', cookiesAcceptedTimestamp, 'Version:', cookieVersion);
+  if (!cookiesAccepted || (cookiesAccepted !== 'true' && cookiesAccepted !== 'false') || !cookiesAcceptedTimestamp || isExpired || isOldTimestamp || isOldVersion) {
+    console.log('CookiesAccepted not set, corrupted, no timestamp, expired, old timestamp, or old version, resetting to false');
     localStorage.setItem('cookiesAccepted', 'false');
     localStorage.setItem('cookiesAcceptedTimestamp', new Date().toISOString());
+    localStorage.setItem('cookieVersion', currentCookieVersion);
     cookiesAccepted = 'false';
     cookiesAcceptedTimestamp = localStorage.getItem('cookiesAcceptedTimestamp');
+    cookieVersion = localStorage.getItem('cookieVersion');
   }
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
   if (window.location.pathname.includes('index.html')) {
@@ -136,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Accept button clicked');
     localStorage.setItem('cookiesAccepted', 'true');
     localStorage.setItem('cookiesAcceptedTimestamp', new Date().toISOString());
+    localStorage.setItem('cookieVersion', currentCookieVersion);
     const cookieBanner = document.getElementById('cookieBanner');
     if (cookieBanner) {
       console.log('Force hiding cookie banner');
