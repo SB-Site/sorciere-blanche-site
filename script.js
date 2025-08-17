@@ -22,12 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('cookiesAccepted', 'false');
   }
   // Vérifier et nettoyer localStorage corrompu
-  const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+  let cookiesAccepted = localStorage.getItem('cookiesAccepted');
   console.log('Checking cookiesAccepted:', cookiesAccepted);
-  if (cookiesAccepted && cookiesAccepted !== 'true' && cookiesAccepted !== 'false') {
-    console.log('Corrupted cookiesAccepted detected, resetting localStorage');
-    localStorage.clear();
+  if (!cookiesAccepted || (cookiesAccepted !== 'true' && cookiesAccepted !== 'false')) {
+    console.log('CookiesAccepted not set or corrupted, resetting to false');
     localStorage.setItem('cookiesAccepted', 'false');
+    cookiesAccepted = 'false';
   }
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
   if (window.location.pathname.includes('index.html')) {
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!cookieBanner) {
     console.error('Error: cookieBanner not found');
   } else {
-    if (!cookiesAccepted || cookiesAccepted !== 'true') {
+    if (cookiesAccepted !== 'true') {
       console.log('Showing cookie banner');
       cookieBanner.classList.add('cookie-banner-visible');
       cookieBanner.style.display = 'block';
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
   };
   // Supabase initialisation
-  const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', '[YOUR_SUPABASE_ANON_KEY]');
+  const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
   console.log('Supabase initialized');
   // CAPTCHA maison pour creer-compte.html
   if (window.location.pathname.includes('creer-compte.html')) {
