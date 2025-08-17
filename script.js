@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Vérifier et nettoyer localStorage corrompu
   const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+  console.log('Checking cookiesAccepted:', cookiesAccepted);
   if (cookiesAccepted && cookiesAccepted !== 'true' && cookiesAccepted !== 'false') {
     console.log('Corrupted cookiesAccepted detected, resetting localStorage');
     localStorage.clear();
@@ -100,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('No carousel on this page');
   }
   // Cookies RGPD
-  console.log('Checking cookiesAccepted:', localStorage.getItem('cookiesAccepted'));
   const cookieBanner = document.getElementById('cookieBanner');
   const copyright = document.querySelector('.copyright');
   console.log('cookieBanner element:', cookieBanner);
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!cookieBanner) {
     console.error('Error: cookieBanner not found');
   } else {
-    if (!localStorage.getItem('cookiesAccepted') || localStorage.getItem('cookiesAccepted') !== 'true') {
+    if (!cookiesAccepted || cookiesAccepted !== 'true') {
       console.log('Showing cookie banner');
       cookieBanner.classList.add('cookie-banner-visible');
       cookieBanner.style.display = 'block';
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
   };
   // Supabase initialisation
-  const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6imFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+  const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', '[YOUR_SUPABASE_ANON_KEY]');
   console.log('Supabase initialized');
   // CAPTCHA maison pour creer-compte.html
   if (window.location.pathname.includes('creer-compte.html')) {
