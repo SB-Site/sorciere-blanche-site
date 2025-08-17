@@ -28,9 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
   const now = new Date().getTime();
   const isExpired = cookiesAcceptedTimestamp && (now - new Date(cookiesAcceptedTimestamp).getTime() > thirtyDaysInMs);
+  const isOldTimestamp = cookiesAcceptedTimestamp && new Date(cookiesAcceptedTimestamp).getTime() < new Date('2025-08-17T14:00:00.000Z').getTime();
   console.log('Checking cookiesAccepted:', cookiesAccepted, 'Timestamp:', cookiesAcceptedTimestamp);
-  if (!cookiesAccepted || (cookiesAccepted !== 'true' && cookiesAccepted !== 'false') || !cookiesAcceptedTimestamp || isExpired) {
-    console.log('CookiesAccepted not set, corrupted, no timestamp, or expired, resetting to false');
+  if (!cookiesAccepted || (cookiesAccepted !== 'true' && cookiesAccepted !== 'false') || !cookiesAcceptedTimestamp || isExpired || isOldTimestamp) {
+    console.log('CookiesAccepted not set, corrupted, no timestamp, expired, or old timestamp, resetting to false');
     localStorage.setItem('cookiesAccepted', 'false');
     localStorage.setItem('cookiesAcceptedTimestamp', new Date().toISOString());
     cookiesAccepted = 'false';
