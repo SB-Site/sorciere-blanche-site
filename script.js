@@ -20,13 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Clearing localStorage due to ?resetCookies=true or incognito');
     localStorage.clear();
     localStorage.setItem('cookiesAccepted', 'false');
+    localStorage.setItem('cookiesAcceptedTimestamp', new Date().toISOString());
   }
-  // Vérifier et nettoyer localStorage corrompu
+  // Vérifier et nettoyer localStorage corrompu ou expiré
   let cookiesAccepted = localStorage.getItem('cookiesAccepted');
-  console.log('Checking cookiesAccepted:', cookiesAccepted);
-  if (!cookiesAccepted || (cookiesAccepted !== 'true' && cookiesAccepted !== 'false')) {
-    console.log('CookiesAccepted not set or corrupted, resetting to false');
+  const cookiesAcceptedTimestamp = localStorage.getItem('cookiesAcceptedTimestamp');
+  const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
+  const now = new Date().getTime();
+  const isExpired = cookiesAcceptedTimestamp && (now - new Date(cookiesAcceptedTimestamp).getTime() > thirtyDaysInMs);
+  console.log('Checking cookiesAccepted:', cookiesAccepted, 'Timestamp:', cookiesAcceptedTimestamp);
+  if (!cookiesAccepted || (cookiesAccepted !== 'true' && cookiesAccepted !== 'false') || isExpired) {
+    console.log('CookiesAccepted not set, corrupted, or expired, resetting to false');
     localStorage.setItem('cookiesAccepted', 'false');
+    localStorage.setItem('cookiesAcceptedTimestamp', new Date().toISOString());
     cookiesAccepted = 'false';
   }
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
@@ -127,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.acceptCookies = function() {
     console.log('Accept button clicked');
     localStorage.setItem('cookiesAccepted', 'true');
+    localStorage.setItem('cookiesAcceptedTimestamp', new Date().toISOString());
     const cookieBanner = document.getElementById('cookieBanner');
     if (cookieBanner) {
       console.log('Force hiding cookie banner');
