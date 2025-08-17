@@ -310,6 +310,7 @@ footer {
   color: var(--creme);
   font-size: 14px;
   margin-top: 20px;
+  background-color: var(--vert-emeraude);
 }
 .copyright-hidden {
   display: none !important;
