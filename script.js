@@ -24,16 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Vérifier et nettoyer localStorage corrompu ou expiré
   let cookiesAccepted = localStorage.getItem('cookiesAccepted');
-  const cookiesAcceptedTimestamp = localStorage.getItem('cookiesAcceptedTimestamp');
+  let cookiesAcceptedTimestamp = localStorage.getItem('cookiesAcceptedTimestamp');
   const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
   const now = new Date().getTime();
   const isExpired = cookiesAcceptedTimestamp && (now - new Date(cookiesAcceptedTimestamp).getTime() > thirtyDaysInMs);
   console.log('Checking cookiesAccepted:', cookiesAccepted, 'Timestamp:', cookiesAcceptedTimestamp);
-  if (!cookiesAccepted || (cookiesAccepted !== 'true' && cookiesAccepted !== 'false') || isExpired) {
-    console.log('CookiesAccepted not set, corrupted, or expired, resetting to false');
+  if (!cookiesAccepted || (cookiesAccepted !== 'true' && cookiesAccepted !== 'false') || !cookiesAcceptedTimestamp || isExpired) {
+    console.log('CookiesAccepted not set, corrupted, no timestamp, or expired, resetting to false');
     localStorage.setItem('cookiesAccepted', 'false');
     localStorage.setItem('cookiesAcceptedTimestamp', new Date().toISOString());
     cookiesAccepted = 'false';
+    cookiesAcceptedTimestamp = localStorage.getItem('cookiesAcceptedTimestamp');
   }
   // Réinitialiser localStorage pour tester la pop-up (uniquement sur index.html)
   if (window.location.pathname.includes('index.html')) {
@@ -191,6 +192,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   // Gestion des onglets pour creer-compte.html
+  let currentCaptcha = null; // Stocker CAPTCHA globalement
+  const captchaQuestions = [
+    { question: 'Citez un des familiers de la Sorcière Blanche ?', answers: ['Corbeau', 'Chouette'] },
+    { question: 'Quel est le nom de famille de Lazare ?', answers: ['Donatien'] },
+    { question: 'Qui est l’auteur de Secrets de Samhain ?', answers: ['L\'Alchimiste'] }
+  ];
   window.showTab = function(tab) {
     console.log('Switching to tab:', tab);
     document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
@@ -198,26 +205,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById(tab).classList.add('active');
     document.querySelector(`.tab-button[onclick="showTab('${tab}')"]`).classList.add('active');
     console.log('Tabs initialized');
-    // Refresh CAPTCHA après changement d'onglet
-    const captchaQuestions = [
-      { question: 'Citez un des familiers de la Sorcière Blanche ?', answers: ['Corbeau', 'Chouette'] },
-      { question: 'Quel est le nom de famille de Lazare ?', answers: ['Donatien'] },
-      { question: 'Qui est l’auteur de Secrets de Samhain ?', answers: ['L\'Alchimiste'] }
-    ];
-    const randomCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
-    console.log('CAPTCHA sélectionné:', randomCaptcha.question);
+    // Utiliser CAPTCHA existant ou en générer un nouveau
+    if (!currentCaptcha) {
+      currentCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
+      console.log('Nouveau CAPTCHA sélectionné:', currentCaptcha.question);
+    } else {
+      console.log('Utilisation CAPTCHA existant:', currentCaptcha.question);
+    }
     setTimeout(() => {
       const captchaLabel = document.getElementById('captcha-label');
       const captchaLabelLogin = document.getElementById('captcha-label-login');
       if (captchaLabel) {
-        captchaLabel.textContent = randomCaptcha.question;
-        console.log('CAPTCHA label set:', randomCaptcha.question);
+        captchaLabel.textContent = currentCaptcha.question;
+        console.log('CAPTCHA label set:', currentCaptcha.question);
       } else {
         console.error('Erreur: captcha-label non trouvé');
       }
       if (captchaLabelLogin) {
-        captchaLabelLogin.textContent = randomCaptcha.question;
-        console.log('CAPTCHA label login set:', randomCaptcha.question);
+        captchaLabelLogin.textContent = currentCaptcha.question;
+        console.log('CAPTCHA label login set:', currentCaptcha.question);
       } else {
         console.error('Erreur: captcha-label-login non trouvé');
       }
@@ -229,25 +235,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // CAPTCHA maison pour creer-compte.html
   if (window.location.pathname.includes('creer-compte.html')) {
     console.log('DOM chargé pour creer-compte.html');
-    const captchaQuestions = [
-      { question: 'Citez un des familiers de la Sorcière Blanche ?', answers: ['Corbeau', 'Chouette'] },
-      { question: 'Quel est le nom de famille de Lazare ?', answers: ['Donatien'] },
-      { question: 'Qui est l’auteur de Secrets de Samhain ?', answers: ['L\'Alchimiste'] }
-    ];
-    const randomCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
-    console.log('CAPTCHA sélectionné:', randomCaptcha.question);
+    // Initialiser CAPTCHA si non défini
+    if (!currentCaptcha) {
+      currentCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
+      console.log('Initial CAPTCHA sélectionné:', currentCaptcha.question);
+    }
     setTimeout(() => {
       const captchaLabel = document.getElementById('captcha-label');
       const captchaLabelLogin = document.getElementById('captcha-label-login');
       if (captchaLabel) {
-        captchaLabel.textContent = randomCaptcha.question;
-        console.log('CAPTCHA label set:', randomCaptcha.question);
+        captchaLabel.textContent = currentCaptcha.question;
+        console.log('CAPTCHA label set:', currentCaptcha.question);
       } else {
         console.error('Erreur: captcha-label non trouvé');
       }
       if (captchaLabelLogin) {
-        captchaLabelLogin.textContent = randomCaptcha.question;
-        console.log('CAPTCHA label login set:', randomCaptcha.question);
+        captchaLabelLogin.textContent = currentCaptcha.question;
+        console.log('CAPTCHA label login set:', currentCaptcha.question);
       } else {
         console.error('Erreur: captcha-label-login non trouvé');
       }
@@ -259,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         console.log('Formulaire d\'inscription soumis');
         const captcha = document.getElementById('captcha-answer').value;
-        if (!randomCaptcha.answers.map(a => a.toLowerCase()).includes(captcha.toLowerCase())) {
+        if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captcha.toLowerCase())) {
           console.error('Erreur CAPTCHA: Réponse incorrecte');
           alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
           return;
@@ -294,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         console.log('Formulaire de connexion soumis');
         const captcha = document.getElementById('login-captcha').value;
-        if (!randomCaptcha.answers.map(a => a.toLowerCase()).includes(captcha.toLowerCase())) {
+        if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captcha.toLowerCase())) {
           console.error('Erreur CAPTCHA: Réponse incorrecte');
           alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
           return;
