@@ -79,18 +79,20 @@ main {
   color: var(--creme) !important;
 }
 .popup-close-button {
-  background: var(--cuivre) !important;
+  background: linear-gradient(90deg, #4B0082, #6B3E75) !important;
   color: var(--creme) !important;
   border: none !important;
-  padding: 10px 20px !important;
+  padding: 12px 24px !important;
   border-radius: 5px !important;
-  font-family: 'Montserrat', sans-serif !important;
-  font-size: 16px !important;
+  font-family: 'Cinzel', serif !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
   cursor: pointer !important;
-  transition: background 0.3s ease !important;
+  transition: background 0.3s ease, transform 0.3s ease !important;
 }
 .popup-close-button:hover {
-  background: #8B5A2B !important;
+  background: linear-gradient(90deg, #6B3E75, #4B0082) !important;
+  transform: scale(1.05) !important;
 }
 /* Barre d’annonce */
 .announcement-bar {
@@ -473,7 +475,7 @@ form textarea {
     margin-bottom: 12px !important;
   }
   .popup-close-button {
-    font-size: 14px !important;
-    padding: 8px 16px !important;
+    font-size: 16px !important;
+    padding: 10px 18px !important;
   }
 }

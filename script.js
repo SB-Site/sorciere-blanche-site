@@ -122,17 +122,24 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!cookieBanner) {
     console.error('Error: cookieBanner not found');
   } else {
-    if (cookiesAccepted !== 'true') {
-      console.log('Showing cookie banner');
-      cookieBanner.classList.add('cookie-banner-visible');
-      cookieBanner.style.display = 'block';
-      cookieBanner.style.visibility = 'visible';
-    } else {
-      console.log('Cookies accepted, hiding cookie banner');
+    // Attendre que le CSS soit chargé pour éviter les conflits de cache
+    setTimeout(() => {
+      // Réinitialiser les styles inline pour éviter les conflits
+      cookieBanner.style.display = '';
+      cookieBanner.style.visibility = '';
       cookieBanner.classList.remove('cookie-banner-visible');
-      cookieBanner.style.display = 'none';
-      cookieBanner.style.visibility = 'hidden';
-    }
+      if (cookiesAccepted !== 'true' || incognito) {
+        console.log('Showing cookie banner');
+        cookieBanner.classList.add('cookie-banner-visible');
+        cookieBanner.style.display = 'block';
+        cookieBanner.style.visibility = 'visible';
+      } else {
+        console.log('Cookies accepted, hiding cookie banner');
+        cookieBanner.classList.remove('cookie-banner-visible');
+        cookieBanner.style.display = 'none';
+        cookieBanner.style.visibility = 'hidden';
+      }
+    }, 200); // Délai de 200ms pour garantir le chargement du CSS
   }
   if (copyright) {
     console.log('Cookies accepted, showing copyright');
@@ -151,8 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
       cookieBanner.style.visibility = 'hidden';
       setTimeout(() => {
         cookieBanner.style.display = 'none';
-        console.log('Re-forcing cookie banner hide after 100ms');
-      }, 100);
+        console.log('Re-forcing cookie banner hide after 200ms');
+      }, 200);
     } else {
       console.error('Error: cookieBanner not found in acceptCookies');
     }
