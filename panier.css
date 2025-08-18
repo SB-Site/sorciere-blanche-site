@@ -103,6 +103,15 @@
   margin: 20px auto;
   max-width: 300px;
 }
+.cart-icon-img {
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important;
+}
+.cart-icon-img:hover {
+  transform: scale(1.05);
+}
 @media (max-width: 768px) {
   .cart-content h1 {
     font-size: 28px;
