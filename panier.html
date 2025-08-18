@@ -37,7 +37,7 @@
           <li><a href="/contact.html">Contact</a></li>
           <li><a href="/blog.html">Blog</a></li>
           <li><a href="/creer-compte.html" class="account-icon"><img src="/images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
-          <li><a href="/panier.html" class="cart-icon"><img src="/images/icon_shopping_bag.png" alt="Panier" class="cart-icon-img" title="Voir le panier"></a></li>
+          <li><a href="/panier.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Panier" class="cart-icon-img" title="Voir le panier"></a></li>
           <li class="lang-switcher">
             <img src="/images/icon_globe.png" alt="Globe" class="globe-icon">
             <a href="/panier.html" class="lang-fr active">FR</a>
@@ -110,6 +110,45 @@
   <script src="/script.js"></script>
   <script src="/protection.js"></script>
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const newsletterIframe = document.querySelector('#ebookForm iframe');
+      if (newsletterIframe) {
+        let iframeLoadedOnce = false;
+        newsletterIframe.addEventListener('load', () => {
+          console.log('Newsletter iframe loaded');
+          let iframeSrc;
+          try {
+            iframeSrc = newsletterIframe.contentWindow.location.href || newsletterIframe.src;
+          } catch (e) {
+            iframeSrc = newsletterIframe.src;
+          }
+          if (iframeSrc.includes('framaforms.org') && !iframeSrc.includes('bienvenue-aux-magic-info')) {
+            console.log('Submission detected via Framaforms URL change');
+            const newsletterForm = document.getElementById('ebookForm');
+            if (newsletterForm) {
+              setTimeout(() => {
+                newsletterForm.classList.remove('active');
+                newsletterForm.style.display = 'none';
+                console.log('Newsletter form hidden after 10s');
+              }, 10000);
+            }
+          } else if (iframeLoadedOnce) {
+            console.log('Second load detected - hiding newsletter form after submission');
+            const newsletterForm = document.getElementById('ebookForm');
+            if (newsletterForm) {
+              setTimeout(() => {
+                newsletterForm.classList.remove('active');
+                newsletterForm.style.display = 'none';
+                console.log('Newsletter form hidden after 10s');
+              }, 10000);
+            }
+          } else {
+            console.log('First load - setting flag');
+            iframeLoadedOnce = true;
+          }
+        });
+      }
+    });
     function updateCartDisplay() {
       const cartItemsDiv = document.getElementById('cart-items');
       const cartSubtotal = document.getElementById('cart-subtotal');
@@ -171,43 +210,6 @@
       }
     }).render('#paypal-button-container');
     document.addEventListener('DOMContentLoaded', updateCartDisplay);
-    const newsletterIframe = document.querySelector('#ebookForm iframe');
-    if (newsletterIframe) {
-      let iframeLoadedOnce = false;
-      newsletterIframe.addEventListener('load', () => {
-        console.log('Newsletter iframe loaded');
-        let iframeSrc;
-        try {
-          iframeSrc = newsletterIframe.contentWindow.location.href || newsletterIframe.src;
-        } catch (e) {
-          iframeSrc = newsletterIframe.src;
-        }
-        if (iframeSrc.includes('framaforms.org') && !iframeSrc.includes('bienvenue-aux-magic-info')) {
-          console.log('Submission detected via Framaforms URL change');
-          const newsletterForm = document.getElementById('ebookForm');
-          if (newsletterForm) {
-            setTimeout(() => {
-              newsletterForm.classList.remove('active');
-              newsletterForm.style.display = 'none';
-              console.log('Newsletter form hidden after 10s');
-            }, 10000);
-          }
-        } else if (iframeLoadedOnce) {
-          console.log('Second load detected - hiding newsletter form after submission');
-          const newsletterForm = document.getElementById('ebookForm');
-          if (newsletterForm) {
-            setTimeout(() => {
-              newsletterForm.classList.remove('active');
-              newsletterForm.style.display = 'none';
-              console.log('Newsletter form hidden after 10s');
-            }, 10000);
-          }
-        } else {
-          console.log('First load - setting flag');
-          iframeLoadedOnce = true;
-        }
-      });
-    }
   </script>
 </body>
 </html>
