@@ -3,23 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panier - Sorcière Blanche Éditions</title>
+  <title>Panier - Les Éditions de la Sorcière Blanche</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="base.css">
-  <link rel="stylesheet" href="panier.css">
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/panier.css">
+  <script src="/cart.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=AWCZF9PEBBxKqR8Mp1A-vHxSu5JllX5HgxPWTxe2NpeMRxUp6GtTr4er5pnlgoJfTd8LFAQXaZAd0N3b&currency=EUR"></script>
 </head>
 <body>
   <div class="cookie-banner" id="cookieBanner">
-    <p>Nous utilisons des cookies pour améliorer votre expérience. <a href="politique-cookies.html">En savoir plus</a>.</p>
+    <p>Nous utilisons des cookies pour améliorer votre expérience. <a href="/politique-cookies.html">En savoir plus</a>.</p>
     <button onclick="acceptCookies()">Accepter</button>
   </div>
   <div class="announcement-bar">
-    <p>Lancement officiel le 1er Octobre 2025 - Top départ de nos préventes le 31 juillet à 00h00 ! <a href="boutique.html" class="button announcement-button">Voir la Boutique</a></p>
+    <p>Lancement officiel le 1er Octobre 2025 - Top départ de nos préventes le 8 août à 00h00 ! <a href="/boutique.html" class="button announcement-button">Voir la Boutique</a></p>
   </div>
   <header>
     <div class="header-content">
-      <a href="index.html" class="logo-link">
-        <img src="images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+      <a href="/index.html" class="logo-link">
+        <img src="/images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
         <div class="header-title">
           <span>Les Éditions de la</span>
           <span>Sorcière Blanche</span>
@@ -27,18 +30,17 @@
       </a>
       <nav>
         <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="boutique.html">Boutique</a></li>
-          <li><a href="a-propos.html">À Propos</a></li>
-          <li><a href="je-soutiens.html">Je Soutiens</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="creer-compte.html" class="account-icon"><img src="images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
+          <li><a href="/index.html">Accueil</a></li>
+          <li><a href="/boutique.html">Boutique</a></li>
+          <li><a href="/a-propos.html">À Propos</a></li>
+          <li><a href="/je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/creer-compte.html" class="account-icon"><img src="/images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
           <li class="lang-switcher">
-            <img src="images/icon_globe.png" alt="Globe" class="globe-icon">
-            <a href="panier.html" class="lang-fr active">FR</a>
-            <a href="en/panier.html" class="lang-en">EN</a>
-瑰
+            <img src="/images/icon_globe.png" alt="Globe" class="globe-icon">
+            <a href="/panier.html" class="lang-fr active">FR</a>
+            <a href="/en/panier.html" class="lang-en">EN</a>
           </li>
         </ul>
       </nav>
@@ -48,42 +50,21 @@
     <section class="cart-content">
       <h1>Votre Panier</h1>
       <p>Vérifiez vos articles, ajustez les quantités et finalisez votre commande magique.</p>
-      <div class="cart-grid">
-        <div class="cart-item">
-          <img src="images/pub_lazare.jpg" alt="Lazare Donatien Intégrale" class="cart-image">
-          <div class="cart-details">
-            <h3>Lazare Donatien Intégrale</h3>
-            <p>Fantasy | 25€ (papier)</p>
-            <p>Quantité : <input type="number" value="1" min="1" class="quantity-input"></p>
-            <p>Total : 25€</p>
-            <button class="remove-button">Supprimer</button>
-          </div>
-        </div>
-        <div class="cart-item">
-          <img src="images/goodie_sweat.png" alt="Sweat Hermine Mystique" class="cart-image">
-          <div class="cart-details">
-            <h3>Sweat Capuche Hermine Mystique</h3>
-            <p>Goodie | 45€</p>
-            <p>Quantité : <input type="number" value="1" min="1" class="quantity-input"></p>
-            <p>Total : 45€</p>
-            <button class="remove-button">Supprimer</button>
-          </div>
-        </div>
-      </div>
+      <div class="cart-grid" id="cart-items"></div>
       <div class="cart-summary">
         <h2>Récapitulatif</h2>
-        <p>Sous-total : 70€</p>
+        <p id="cart-subtotal">Sous-total : 0,00 €</p>
         <p>Frais de livraison : À calculer au paiement</p>
-        <p><strong>Total estimé : 70€</strong></p>
-        <a href="https://8h1un4-id.myshopify.com/cart" class="action-button">Passer la commande <img src="images/icon_shopping_bag.png" alt="Shopping Bag" class="button-icon"></a>
+        <p id="cart-total"><strong>Total estimé : 0,00 €</strong></p>
+        <div id="paypal-button-container"></div>
       </div>
     </section>
   </main>
   <footer>
     <div class="footer-content">
       <div class="footer-brand">
-        <a href="index.html">
-          <img src="images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+        <a href="/index.html">
+          <img src="/images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
           <div class="footer-title">
             <span>Les Éditions de la</span>
             <span>Sorcière Blanche</span>
@@ -94,37 +75,101 @@
       <div class="footer-info">
         <h3>Informations</h3>
         <ul>
-          <li><a href="conditions-generales.html">Conditions Générales</a></li>
-          <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
-          <li><a href="livraison-retours.html">Livraison et Retours</a></li>
-          <li><a href="politique-cookies.html">Politique de Cookies</a></li>
+          <li><a href="/conditions-generales.html">Conditions Générales</a></li>
+          <li><a href="/politique-confidentialite.html">Politique de Confidentialité</a></li>
+          <li><a href="/livraison-retours.html">Livraison et Retours</a></li>
+          <li><a href="/politique-cookies.html">Politique de Cookies</a></li>
         </ul>
       </div>
       <div class="footer-menu">
         <h3>Menu</h3>
         <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="boutique.html">Boutique</a></li>
-          <li><a href="a-propos.html">À Propos</a></li>
-          <li><a href="je-soutiens.html">Je Soutiens</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="/index.html">Accueil</a></li>
+          <li><a href="/boutique.html">Boutique</a></li>
+          <li><a href="/a-propos.html">À Propos</a></li>
+          <li><a href="/je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/blog.html">Blog</a></li>
         </ul>
       </div>
       <div class="footer-social">
         <h3>Suivez-nous</h3>
         <ul>
-          <li><a href="https://x.com/WhiteWitchEdits"><img src="images/icon_x.png" alt="X" class="social-icon"></a></li>
-          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
-          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
-          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
-          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
-          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="/images/icon_x.png" alt="X" class="social-icon"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
         </ul>
       </div>
     </div>
     <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
   </footer>
-  <script src="script.js"></script>
+  <script src="/script.js"></script>
+  <script src="/protection.js"></script>
+  <script>
+    function updateCartDisplay() {
+      const cartItemsDiv = document.getElementById('cart-items');
+      const cartSubtotal = document.getElementById('cart-subtotal');
+      const cartTotal = document.getElementById('cart-total');
+      const cart = getCart();
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = '<p>Votre panier est vide.</p>';
+        cartSubtotal.textContent = 'Sous-total : 0,00 €';
+        cartTotal.textContent = 'Total estimé : 0,00 €';
+      } else {
+        cartItemsDiv.innerHTML = '<table><tr><th>Produit</th><th>Prix</th><th>Quantité</th><th>Action</th></tr>' +
+          cart.map(item => `
+            <tr>
+              <td>${item.name}</td>
+              <td>${item.price.toFixed(2)} €</td>
+              <td><input type="number" value="${item.quantity}" min="0" onchange="updateCart('${item.productId}', this.value)"></td>
+              <td><button class="remove-button" onclick="updateCart('${item.productId}', 0)">Supprimer</button></td>
+            </tr>
+          `).join('') + '</table>';
+        const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+        cartSubtotal.textContent = `Sous-total : ${subtotal.toFixed(2)} €`;
+        cartTotal.textContent = `Total estimé : ${subtotal.toFixed(2)} €`;
+      }
+    }
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        const cart = getCart();
+        if (cart.length === 0) {
+          alert('Votre panier est vide !');
+          return;
+        }
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2),
+              currency_code: 'EUR',
+              breakdown: {
+                item_total: { value: cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2), currency_code: 'EUR' }
+              }
+            },
+            items: cart.map(item => ({
+              name: item.name,
+              unit_amount: { value: item.price.toFixed(2), currency_code: 'EUR' },
+              quantity: item.quantity
+            }))
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          alert('Paiement réussi pour ' + details.payer.name.given_name);
+          localStorage.removeItem('cart');
+          window.location.href = '/confirmation.html';
+        });
+      },
+      onError: function(err) {
+        console.error('Erreur PayPal:', err);
+        alert('Erreur lors du paiement. Veuillez réessayer.');
+      }
+    }).render('#paypal-button-container');
+    document.addEventListener('DOMContentLoaded', updateCartDisplay);
+  </script>
 </body>
 </html>

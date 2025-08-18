@@ -73,18 +73,12 @@
 .shop-grid.publications {
   margin-bottom: 40px;
 }
-.shop-grid.goodies h2 {
-  margin-top: 60px;
-  margin-bottom: 20px;
-}
-.shop-grid h2 {
+.shop-grid.publications h2, .shop-grid.goodies h2 {
   font-family: 'Cinzel', serif;
-  color: #2A4B3D;
-  font-size: 22px;
+  font-size: 24px;
+  color: var(--violet-amethyste);
   text-align: center;
-  margin: 30px 0 15px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 40px 0 20px;
 }
 .shop-item {
   background: rgba(107, 62, 117, 0.1);
@@ -138,7 +132,7 @@
   font-style: italic;
   margin-bottom: 12px;
 }
-.shop-item .action-button {
+.shop-item .action-button, .shop-item .newsletter-button {
   background: linear-gradient(90deg, #B87333, #6B3E75);
   color: #F5E8D3;
   font-family: 'Cinzel', serif;
@@ -151,7 +145,7 @@
   gap: 8px;
   margin: 5px;
 }
-.shop-item .action-button:hover {
+.shop-item .action-button:hover, .shop-item .newsletter-button:hover {
   background: linear-gradient(90deg, #6B3E75, #B87333);
   transform: scale(1.05);
 }
@@ -377,7 +371,7 @@
   .shop-item .item-collection, .shop-item .item-availability {
     font-size: 11px;
   }
-  .shop-item .action-button, .carousel-item .action-button {
+  .shop-item .action-button, .shop-item .newsletter-button, .carousel-item .action-button {
     padding: 8px 16px;
     font-size: 12px;
   }
