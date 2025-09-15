@@ -77,13 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Gestion newsletter form
   window.toggleNewsletterForm = function() {
     console.log('toggleNewsletterForm function called');
-    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterForm = document.getElementById('newsletterForm') || document.getElementById('ebookForm');
     if (newsletterForm) {
       newsletterForm.classList.toggle('active');
-      console.log('Newsletter form toggled:', newsletterForm.classList.contains('active') ? 'visible' : 'hidden');
       newsletterForm.style.display = newsletterForm.classList.contains('active') ? 'block' : 'none';
+      console.log('Newsletter form toggled:', newsletterForm.classList.contains('active') ? 'visible' : 'hidden');
     } else {
-      console.error('Erreur: newsletterForm non trouvé');
+      console.error('Erreur: newsletterForm ou ebookForm non trouvé');
     }
   };
   // Carrousel (index.html)
@@ -122,9 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!cookieBanner) {
     console.error('Error: cookieBanner not found');
   } else {
-    // Attendre que le CSS soit chargé pour éviter les conflits de cache
     setTimeout(() => {
-      // Réinitialiser les styles inline pour éviter les conflits
       cookieBanner.style.display = '';
       cookieBanner.style.visibility = '';
       cookieBanner.classList.remove('cookie-banner-visible');
@@ -139,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cookieBanner.style.display = 'none';
         cookieBanner.style.visibility = 'hidden';
       }
-    }, 200); // Délai de 200ms pour garantir le chargement du CSS
+    }, 200);
   }
   if (copyright) {
     console.log('Cookies accepted, showing copyright');
@@ -169,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
   // Masquer l'encart newsletter après soumission
-  const newsletterIframe = document.querySelector('#newsletterForm iframe');
+  const newsletterIframe = document.querySelector('#newsletterForm iframe, #ebookForm iframe');
   if (newsletterIframe) {
     let iframeLoadedOnce = false;
     newsletterIframe.addEventListener('load', () => {
@@ -182,8 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (iframeSrc.includes('framaforms.org') && !iframeSrc.includes('bienvenue-aux-magic-info')) {
         console.log('Submission detected via Framaforms URL change');
-        const newsletterForm = document.getElementById('newsletterForm');
-        if (newsletterForm && window.location.pathname.includes('index.html')) {
+        const newsletterForm = document.getElementById('newsletterForm') || document.getElementById('ebookForm');
+        if (newsletterForm) {
           setTimeout(() => {
             newsletterForm.classList.remove('active');
             newsletterForm.style.display = 'none';
@@ -192,8 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } else if (iframeLoadedOnce) {
         console.log('Second load detected - hiding newsletter form after submission');
-        const newsletterForm = document.getElementById('newsletterForm');
-        if (newsletterForm && window.location.pathname.includes('index.html')) {
+        const newsletterForm = document.getElementById('newsletterForm') || document.getElementById('ebookForm');
+        if (newsletterForm) {
           setTimeout(() => {
             newsletterForm.classList.remove('active');
             newsletterForm.style.display = 'none';
@@ -207,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   // Gestion des onglets pour creer-compte.html
-  let currentCaptcha = null; // Stocker CAPTCHA globalement
+  let currentCaptcha = null;
   const captchaQuestions = [
     { question: 'Citez un des familiers de la Sorcière Blanche ?', answers: ['Corbeau', 'Chouette'] },
     { question: 'Quel est le nom de famille de Lazare ?', answers: ['Donatien'] },
@@ -220,7 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById(tab).classList.add('active');
     document.querySelector(`.tab-button[onclick="showTab('${tab}')"]`).classList.add('active');
     console.log('Tabs initialized');
-    // Utiliser CAPTCHA existant ou en générer un nouveau
     if (!currentCaptcha) {
       currentCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
       console.log('Nouveau CAPTCHA sélectionné:', currentCaptcha.question);
@@ -244,13 +241,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 500);
   };
-  // Supabase initialisation
-  const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
-  console.log('Supabase initialized');
-  // CAPTCHA maison pour creer-compte.html
   if (window.location.pathname.includes('creer-compte.html')) {
     console.log('DOM chargé pour creer-compte.html');
-    // Initialiser CAPTCHA si non défini
     if (!currentCaptcha) {
       currentCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
       console.log('Initial CAPTCHA sélectionné:', currentCaptcha.question);
@@ -271,7 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Erreur: captcha-label-login non trouvé');
       }
     }, 500);
-    // Validation CAPTCHA pour inscription
     const signupForm = document.getElementById('signup-form');
     if (signupForm) {
       signupForm.addEventListener('submit', async (e) => {
@@ -306,7 +297,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       console.error('Erreur: signup-form non trouvé');
     }
-    // Validation CAPTCHA pour connexion
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
       loginForm.addEventListener('submit', async (e) => {
@@ -336,7 +326,6 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Erreur: login-form non trouvé');
     }
   }
-  // Vérification session pour portail.html
   if (window.location.pathname.includes('portail.html')) {
     console.log('DOM chargé pour portail.html');
     supabase.auth.getSession().then(({ data, error }) => {
@@ -352,7 +341,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-  // Boutons PayPal HostedButtons pour dons (je-soutiens.html)
   const paypalHostedButtons = [
     { id: 'paypal-container-ZFB68XN3ZKGV2', buttonId: 'ZFB68XN3ZKGV2' },
     { id: 'paypal-container-B6K6GWKCHHMT8', buttonId: 'B6K6GWKCHHMT8' },
@@ -367,7 +355,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }).render(`#${button.id}`);
     }
   });
-  // Boutons PayPal personnalisés pour déclencher les HostedButtons
   const paypalCustomButtons = [
     { id: 'paypal-onetime-amis', container: 'paypal-container-ZFB68XN3ZKGV2' },
     { id: 'paypal-onetime-initie', container: 'paypal-container-B6K6GWKCHHMT8' },
