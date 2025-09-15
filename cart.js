@@ -28,3 +28,14 @@ function updateCart(productId, quantity) {
     updateCartDisplay();
   }
 }
+function applyPromoCode() {
+  const promoCode = document.getElementById('promo-code').value;
+  console.log('Code promo saisi:', promoCode);
+  alert('Code promo non configuré. Veuillez fournir les codes PayPal pour activation.');
+  // TODO: Implémenter logique PayPal API pour codes promo (ex. MEMBRE10, SAMHAIN20)
+}
+function deliverEbookLinks(orderDetails) {
+  console.log('Livraison liens eBooks pour commande:', orderDetails);
+  alert('Liens eBooks non configurés. Veuillez fournir les liens pour activation.');
+  // TODO: Implémenter envoi liens via Supabase/SES après paiement (attente liens)
+}

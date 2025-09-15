@@ -77,7 +77,7 @@
   font-family: 'Cinzel', serif;
   font-size: 24px;
   color: var(--violet-amethyste);
-  text-align: center;
+  text-align: center !important;
   margin: 40px 0 20px;
 }
 .shop-item {
@@ -93,12 +93,22 @@
 .shop-item:hover {
   transform: scale(1.03);
 }
-.shop-item .item-image {
+.shop-item .item-image, .shop-item .item-image-placeholder {
   width: 100%;
   max-height: 200px;
   object-fit: contain;
   border-radius: 8px;
   margin-bottom: 12px;
+}
+.shop-item .item-image-placeholder {
+  background: #F5E8D3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  color: #6B3E75;
+  font-size: 14px;
+  font-style: italic;
 }
 .shop-item h3 {
   font-family: 'Cinzel', serif;
@@ -152,7 +162,7 @@
 .shop-item .button-icon {
   width: 20px;
   height: 20px;
-  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important;
+  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important;
 }
 .newsletter-form-container {
   max-width: 600px;
@@ -257,7 +267,23 @@
 .product-content .button-icon {
   width: 20px;
   height: 20px;
-  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important;
+  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important;
+}
+.paypal-button-container input[type="submit"] {
+  display: block;
+  margin: 0 auto 20px;
+  padding: 12px 24px;
+  background: linear-gradient(90deg, #B87333, #6B3E75);
+  color: #F5E8D3;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.paypal-button-container input[type="submit"]:hover {
+  background: linear-gradient(90deg, #6B3E75, #B87333);
+  transform: scale(1.05);
 }
 .product-social {
   margin: 20px 0;
@@ -278,7 +304,7 @@
 .product-social .social-icon {
   width: 24px;
   height: 24px;
-  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important;
+  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important;
 }
 .product-social .social-icon:hover {
   filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important;
@@ -349,16 +375,7 @@
 .carousel-item .button-icon {
   width: 20px;
   height: 20px;
-  filter: sepia(100%) hue-rotate(20deg) saturate(50%) brightness(170%) contrast(110%) !important;
-}
-.cart-icon-img {
-  width: 30px;
-  height: 30px;
-  vertical-align: middle;
-  filter: sepia(100%) hue-rotate(20deg) saturate(600%) brightness(90%) contrast(150%) !important;
-}
-.cart-icon-img:hover {
-  transform: scale(1.05);
+  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important;
 }
 @media (max-width: 768px) {
   .shop-content, .product-content {

@@ -17,7 +17,7 @@
     <button onclick="acceptCookies()">Accepter</button>
   </div>
   <div class="announcement-bar">
-    <p>Lancement officiel le 1er Octobre 2025 - Top départ de nos préventes le 8 août à 00h00 ! <a href="/boutique.html" class="button announcement-button">Voir la Boutique</a></p>
+    <p>Lancement officiel le 1er Octobre 2025 - Préventes en cours ! <a href="/boutique.html" class="button announcement-button">Voir la Boutique</a></p>
   </div>
   <header>
     <div class="header-content">
@@ -69,14 +69,14 @@
       <h2>Nos Publications</h2>
       <div class="shop-grid publications">
         <div class="shop-item" data-category="romans">
-          <img src="/images/sb_pub_lazare.jpg" alt="Lazare Donatien L’Intégrale" class="item-image">
-          <h3>Lazare Donatien L’Intégrale</h3>
+          <img src="/images/sb_pub_lazare.jpg" alt="Lazare Donatien L'Intégrale" class="item-image">
+          <h3>Lazare Donatien L'Intégrale</h3>
           <p class="item-description">Lazare revient dans une réédition envoûtante ! Plongez dans l’univers complet de cette saga mystique.</p>
           <p class="item-availability">Disponible dès le 1er octobre, prévente le 8 août 2025. Frais de livraison inclus pour le papier.</p>
           <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser via <a href="/contact.html">notre page contact</a>) le 1er octobre !</p>
           <p class="item-dedication">Achetez l’eBook directement sur notre site et envoyez-nous un message via <a href="/contact.html">notre page contact</a> pour une dédicace personnalisée (indiquez votre nom et préférences) !</p>
-          <button class="action-button" onclick="addToCart('lazare-papier', 'Lazare Donatien L’Intégrale (papier)', 20.00)">Ajouter au panier (papier, 20,00 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
-          <button class="action-button" onclick="addToCart('lazare-ebook', 'Lazare Donatien L’Intégrale (eBook)', 5.99)">Ajouter au panier (eBook, 5,99 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
+          <button class="action-button" onclick="addToCart('lazare-papier', 'Lazare Donatien L\'Intégrale (papier)', 20.00)">Ajouter au panier (papier, 20,00 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
+          <button class="action-button" onclick="addToCart('lazare-ebook', 'Lazare Donatien L\'Intégrale (eBook)', 5.99)">Ajouter au panier (eBook, 5,99 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
         </div>
         <div class="shop-item" data-category="livrets">
           <img src="/images/sb_pub_samhain.jpg" alt="Secrets de Samhain" class="item-image">
@@ -88,15 +88,35 @@
           <button class="action-button" onclick="addToCart('samhain-papier', 'Secrets de Samhain (papier)', 10.99)">Ajouter au panier (papier, 10,99 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
           <button class="action-button" onclick="addToCart('samhain-ebook', 'Secrets de Samhain (eBook)', 3.99)">Ajouter au panier (eBook, 3,99 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
         </div>
+        <div class="shop-item" data-category="romans">
+          <img src="/images/sb_pub_Orph.Avent.jpg" alt="Les Orphelins de l'Avent - L'Intégrale" class="item-image">
+          <h3>Les Orphelins de l'Avent - L'Intégrale</h3>
+          <p class="item-description">Une épopée fantastique où magie et mystère s’entrelacent. Découvrez les aventures des Orphelins dans cette intégrale captivante.</p>
+          <p class="item-availability">Disponible dès le 25 novembre 2025, préventes ouvertes. Frais de livraison inclus pour le broché (POD).</p>
+          <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser via <a href="/contact.html">notre page contact</a>) le 25 novembre !</p>
+          <p class="item-dedication">Achetez l’eBook directement sur notre site et envoyez-nous un message via <a href="/contact.html">notre page contact</a> pour une dédicace personnalisée (indiquez votre nom et préférences) !</p>
+          <button class="action-button" onclick="addToCart('orphelins-papier', 'Les Orphelins de l\'Avent - L\'Intégrale (broché)', 22.00)">Ajouter au panier (broché, 22,00 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
+          <button class="action-button" onclick="addToCart('orphelins-ebook', 'Les Orphelins de l\'Avent - L\'Intégrale (eBook)', 6.99)">Ajouter au panier (eBook, 6,99 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
+          <div class="paypal-button-container">
+            <form action="YOUR_PAYPAL_BROCHE_CODE" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+              <input type="submit" value="Acheter directement (broché, 22,00 €)" />
+              <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+              <section style="font-size: 0.75rem;">Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+            </form>
+            <form action="YOUR_PAYPAL_EBOOK_CODE" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+              <input type="submit" value="Acheter directement (eBook, 6,99 €)" />
+              <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+              <section style="font-size: 0.75rem;">Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+            </form>
+          </div>
+        </div>
         <div class="shop-item" data-category="recettes">
-          <img src="/images/sb_pub_agenda.jpg" alt="Agenda Magique" class="item-image">
-          <h3>Agenda Magique</h3>
-          <p class="item-description">Votre compagnon magique pour 2025-2026. Phases lunaires, rituels et merveilles à portée de main.</p>
-          <p class="item-availability">Disponible dès le 1er octobre, prévente le 8 août 2025. Frais de livraison inclus pour le papier.</p>
-          <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser via <a href="/contact.html">notre page contact</a>) le 1er octobre !</p>
-          <p class="item-dedication">Achetez le digital directement sur notre site et envoyez-nous un message via <a href="/contact.html">notre page contact</a> pour une dédicace personnalisée (indiquez votre nom et préférences) !</p>
-          <button class="action-button" onclick="addToCart('agenda-papier', 'Agenda Magique (papier)', 20.00)">Ajouter au panier (papier, 20,00 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
-          <button class="action-button" onclick="addToCart('agenda-digital', 'Agenda Magique (digital)', 12.00)">Ajouter au panier (digital, 12,00 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
+          <div class="item-image-placeholder">Image à venir</div>
+          <h3>Livre de Coloriages Inedit</h3>
+          <p class="item-description">Un livre de coloriages exclusif inspiré du monde des Orphelins de l'Avent. Plongez dans un univers magique à colorier.</p>
+          <p class="item-availability">Disponible dès le 25 novembre 2025, préventes ouvertes. Frais de livraison inclus.</p>
+          <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser via <a href="/contact.html">notre page contact</a>) le 25 novembre !</p>
+          <button class="action-button" onclick="addToCart('coloriages-papier', 'Livre de Coloriages Inedit', 15.00)">Ajouter au panier (papier, 15,00 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
         </div>
         <div class="shop-item" data-category="livrets">
           <img src="/images/sb_pub_ebook.jpg" alt="Le Cadeau de Lazare" class="item-image">
@@ -104,7 +124,7 @@
           <p class="item-description">Un ebook exclusif offert aux nouveaux inscrits ! Découvrez les secrets inédits de l’univers de Lazare.</p>
           <p class="item-availability">Disponible dès votre inscription à notre Magic Info</p>
           <button class="newsletter-button" onclick="toggleNewsletterForm()">Offert à l’inscription <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
-          <div class="newsletter-form-container" id="ebookForm" style="display: none;">
+          <div class="newsletter-form-container" id="newsletterForm" style="display: none;">
             <iframe src="https://framaforms.org/bienvenue-aux-magic-info-de-la-sorciere-blanche-1754742297" width="100%" height="800px" frameborder="0"></iframe>
             <button class="newsletter-close-button" onclick="toggleNewsletterForm()">Fermer</button>
           </div>
@@ -147,6 +167,14 @@
           <p class="item-availability">Frais de livraison inclus. Précisez la taille (S, M, L, XL, 2XL, 3XL) dans la note client.</p>
           <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser dans la note client ou via <a href="/contact.html">notre page contact</a>) le 1er octobre !</p>
           <a href="/product-sweat.html" class="action-button">Voir Plus <img src="/images/icon_3hearts.png" alt="Three Hearts" class="button-icon"></a>
+        </div>
+        <div class="shop-item" data-category="goodies">
+          <div class="item-image-placeholder">Image à venir</div>
+          <h3>Livret Jeux Ésotériques Magiques</h3>
+          <p class="item-description">Un livret de jeux et puzzles uniques, empreint de la magie de la Sorcière Blanche, à offrir ou à s’offrir.</p>
+          <p class="item-availability">Disponible dès le 1er décembre 2025, préventes ouvertes. Frais de livraison inclus.</p>
+          <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser via <a href="/contact.html">notre page contact</a>) le 1er décembre !</p>
+          <button class="action-button" onclick="addToCart('jeux-esoteriques', 'Livret Jeux Ésotériques Magiques', 12.00)">Ajouter au panier (papier, 12,00 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
         </div>
       </div>
     </section>
@@ -201,7 +229,7 @@
   <script src="/protection.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const newsletterIframe = document.querySelector('#ebookForm iframe');
+      const newsletterIframe = document.querySelector('#newsletterForm iframe');
       if (newsletterIframe) {
         let iframeLoadedOnce = false;
         newsletterIframe.addEventListener('load', () => {
@@ -214,7 +242,7 @@
           }
           if (iframeSrc.includes('framaforms.org') && !iframeSrc.includes('bienvenue-aux-magic-info')) {
             console.log('Submission detected via Framaforms URL change');
-            const newsletterForm = document.getElementById('ebookForm');
+            const newsletterForm = document.getElementById('newsletterForm');
             if (newsletterForm) {
               setTimeout(() => {
                 newsletterForm.classList.remove('active');
@@ -224,7 +252,7 @@
             }
           } else if (iframeLoadedOnce) {
             console.log('Second load detected - hiding newsletter form after submission');
-            const newsletterForm = document.getElementById('ebookForm');
+            const newsletterForm = document.getElementById('newsletterForm');
             if (newsletterForm) {
               setTimeout(() => {
                 newsletterForm.classList.remove('active');
