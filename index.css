@@ -379,6 +379,20 @@
   background: linear-gradient(90deg, var(--violet-amethyste), var(--cuivre));
   transform: scale(1.05);
 }
+.popup-content button {
+  background: linear-gradient(90deg, var(--cuivre), var(--violet-amethyste));
+  color: var(--creme);
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.popup-content button:hover {
+  background: linear-gradient(90deg, var(--violet-amethyste), var(--cuivre));
+  transform: scale(1.05);
+}
 @media (max-width: 768px) {
   .welcome-banner {
     height: 250px;
