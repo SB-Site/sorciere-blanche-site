@@ -230,7 +230,7 @@
   margin-bottom: 20px;
 }
 .product-content .product-description {
-  margin-bottom: 20px;
+  margin-bottom: 15px; /* Ajouté pour espace avant variant-note */
 }
 .product-content .product-description p {
   font-family: 'Montserrat', sans-serif;
