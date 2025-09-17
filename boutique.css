@@ -230,7 +230,7 @@
   margin-bottom: 20px;
 }
 .product-content .product-description {
-  margin-bottom: 15px; /* Ajouté pour espace avant variant-note */
+  margin-bottom: 15px;
 }
 .product-content .product-description p {
   font-family: 'Montserrat', sans-serif;
@@ -381,7 +381,11 @@
   height: 20px;
   filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important;
 }
-.variant-note {
+.variant-note p {
+  font-family: 'Montserrat', sans-serif;
+  color: #6B3E75;
+  font-size: 14px;
+  font-style: italic;
   margin-bottom: 15px;
 }
 .paypal-button-container img {
