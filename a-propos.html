@@ -7,23 +7,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/base.css">
   <link rel="stylesheet" href="/a-propos.css">
-  <!-- MailerLite Universal -->
-  <script>
-    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-    ml('account', '1262194');
-  </script>
-  <!-- End MailerLite Universal -->
 </head>
 <body>
+  <section class="welcome-banner">
+    <img src="/images/sb_banniere_a_propos.jpg" alt="Bannière À Propos" class="welcome-banner-image">
+  </section>
   <div class="cookie-banner" id="cookieBanner">
     <p>Nous utilisons des cookies pour améliorer votre expérience. <a href="/politique-cookies.html">En savoir plus</a>.</p>
     <button onclick="acceptCookies()">Accepter</button>
   </div>
   <div class="announcement-bar">
-    <p>Lancement officiel le 1er Octobre 2025 - Top départ de nos préventes le 8 août à 00h00 ! <a href="/boutique.html" class="button announcement-button">Voir la Boutique</a></p>
+    <p>Lancement officiel le 1er Octobre 2025 - Préventes en cours ! <a href="/boutique.html" class="button announcement-button">Voir la Boutique</a></p>
   </div>
   <header>
     <div class="header-content">
@@ -43,6 +37,7 @@
           <li><a href="/contact.html">Contact</a></li>
           <li><a href="/blog.html">Blog</a></li>
           <li><a href="/creer-compte.html" class="account-icon"><img src="/images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
+          <li><a href="/panier.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Panier" class="cart-icon-img" title="Voir le panier"></a></li>
           <li class="lang-switcher">
             <img src="/images/icon_globe.png" alt="Globe" class="globe-icon">
             <a href="/a-propos.html" class="lang-fr active">FR</a>
@@ -115,15 +110,10 @@
             <img src="/images/icon_people.png" alt="Connectés" class="join-icon">
             <p>Restez connectés</p>
             <p class="description">Recevez nos actualités, offres exclusives et surprises magiques en vous inscrivant à notre newsletter Magic-Info.</p>
-            <div id="ml-form" style="text-align: center;">
-              <div id="mlb2-150377964" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-150377964">
-                <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/756915/forms/127563093389803964/subscribe" data-code="BCmHsl" method="post" target="_blank">
-                  <input type="text" class="form-control" data-inputmask="" name="fields[name]" placeholder="Votre prénom" autocomplete="name">
-                  <input type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Votre e-mail" autocomplete="email">
-                  <button type="submit" class="join-button">Inscrivez-vous à Magic-Info <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
-                  <input type="hidden" name="ml-submit" value="1">
-                </form>
-              </div>
+            <button class="join-button" onclick="toggleNewsletterForm()">Inscrivez-vous à Magic-Info <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
+            <div class="newsletter-form-container" id="newsletterForm" style="display: none;">
+              <iframe src="https://framaforms.org/bienvenue-aux-magic-info-de-la-sorciere-blanche-1754742297" width="100%" height="800px" frameborder="0"></iframe>
+              <button class="newsletter-close-button" onclick="toggleNewsletterForm()">Fermer</button>
             </div>
           </div>
           <div class="join-item">
@@ -195,7 +185,7 @@
           <li><a href="https://x.com/WhiteWitchEdits"><img src="/images/icon_x.png" alt="X" class="social-icon"></a></li>
           <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
           <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
-          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/iconPINNED.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_PINNED.png" alt="Pinterest" class="social-icon"></a></li>
           <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
           <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
         </ul>
