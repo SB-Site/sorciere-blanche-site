@@ -12,6 +12,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
   filter: sepia(100%) hue-rotate(10deg) saturate(700%) brightness(85%) contrast(110%) !important;
 }
 .about-content {
