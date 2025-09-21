@@ -5,22 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Je Soutiens - Les Éditions de la Sorcière Blanche</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="base.css">
-  <link rel="stylesheet" href="je-soutiens.css">
-  <script src="https://www.paypal.com/sdk/js?client-id=BAA51afidFS4AQU3dNu2pUeq91wxbwf_MG9I0lz2mqUuX89LxwhnTAaldysPIXpCBOuYj8g4ex0AaEbS-A&components=buttons,hosted-fields&currency=EUR"></script>
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="/je-soutiens.css">
 </head>
 <body>
   <div class="cookie-banner" id="cookieBanner">
-    <p>Nous utilisons des cookies pour améliorer votre expérience. <a href="politique-cookies.html">En savoir plus</a>.</p>
+    <p>Nous utilisons des cookies pour améliorer votre expérience. <a href="/politique-cookies.html">En savoir plus</a>.</p>
     <button onclick="acceptCookies()">Accepter</button>
   </div>
   <div class="announcement-bar">
-    <p>Lancement officiel le 1er Octobre 2025 - Top départ de nos préventes le 31 juillet à 00h00 ! <a href="boutique.html" class="button announcement-button">Voir la Boutique</a></p>
+    <p>Lancement officiel le 1er Octobre 2025 - Préventes en cours ! <a href="/boutique.html" class="button announcement-button">Voir la Boutique</a></p>
   </div>
+  <section class="welcome-banner">
+    <img src="/images/sb_banniere_soutiens.jpg" alt="Bannière Je Soutiens" class="welcome-banner-image" onerror="this.src='/images/sb_banniere_soutiens.JPG'">
+  </section>
   <header>
     <div class="header-content">
-      <a href="index.html" class="logo-link">
-        <img src="images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+      <a href="/index.html" class="logo-link">
+        <img src="/images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
         <div class="header-title">
           <span>Les Éditions de la</span>
           <span>Sorcière Blanche</span>
@@ -28,17 +30,18 @@
       </a>
       <nav>
         <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="boutique.html">Boutique</a></li>
-          <li><a href="a-propos.html">À Propos</a></li>
-          <li><a href="je-soutiens.html" class="active">Je Soutiens</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="creer-compte.html" class="account-icon"><img src="images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
+          <li><a href="/index.html">Accueil</a></li>
+          <li><a href="/boutique.html">Boutique</a></li>
+          <li><a href="/a-propos.html">À Propos</a></li>
+          <li><a href="/je-soutiens.html" class="active">Je Soutiens</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/creer-compte.html" class="account-icon"><img src="/images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
+          <li><a href="/panier.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Panier" class="cart-icon-img" title="Voir le panier"></a></li>
           <li class="lang-switcher">
-            <img src="images/icon_globe.png" alt="Globe" class="globe-icon">
-            <a href="je-soutiens.html" class="lang-fr active">FR</a>
-            <a href="en/je-soutiens.html" class="lang-en">EN</a>
+            <img src="/images/icon_globe.png" alt="Globe" class="globe-icon">
+            <a href="/je-soutiens.html" class="lang-fr active">FR</a>
+            <a href="/en/je-soutiens.html" class="lang-en">EN</a>
           </li>
         </ul>
       </nav>
@@ -67,12 +70,18 @@
             <p class="support-price">5€ / mois</p>
             <p class="support-description">Soutenez nos auteurs avec un petit don amical</p>
             <ul class="support-advantages">
-              <li><img src="images/icon_star.png" alt="Star Icon"> Remerciement dans nos publications</li>
-              <li><img src="images/icon_star.png" alt="Star Icon"> Newsletter Plume-Mail exclusive</li>
-              <li><img src="images/icon_star.png" alt="Star Icon"> Badge de soutien numérique</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Remerciement dans nos publications</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Newsletter Plume-Mail exclusive</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Badge de soutien numérique</li>
             </ul>
-            <div id="paypal-container-ZFB68XN3ZKGV2" class="paypal-button"></div>
-            <button class="support-button" id="paypal-onetime-amis">Je soutiens via PayPal</button>
+            <div class="paypal-button-container">
+              <style>.pp-ZFB68XN3ZKGV2{text-align:center;border:none;border-radius:1.5rem;min-width:11.625rem;padding:0 2rem;height:3.125rem;font-weight:bold;background-color:#6B3E75;color:#ffffff;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.125rem;line-height:1.5rem;cursor:pointer;}</style>
+              <form action="https://www.paypal.com/ncp/payment/ZFB68XN3ZKGV2" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                <input class="pp-ZFB68XN3ZKGV2" type="submit" value="Devenir Ami/Amie" />
+                <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" style="height:0.5rem;" />
+                <section style="font-size: 0.75rem;">Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.5rem;vertical-align:middle;"/></section>
+              </form>
+            </div>
             <p class="support-note">Optez pour un soutien mensuel ou pour nous offrir une <a href="#kofi-button">pause magique</a> impromptue !</p>
           </div>
           <div class="support-item">
@@ -80,13 +89,19 @@
             <p class="support-price">15€ / mois</p>
             <p class="support-description">Participez activement au financement de nos publications</p>
             <ul class="support-advantages">
-              <li><img src="images/icon_star.png" alt="Star Icon"> Tous les avantages précédents plus...</li>
-              <li><img src="images/icon_star.png" alt="Star Icon"> Accès anticipé aux nouveautés</li>
-              <li><img src="images/icon_star.png" alt="Star Icon"> Mention spéciale dans les crédits</li>
-              <li><img src="images/icon_star.png" alt="Star Icon"> Contenu exclusif Plume-Mail</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Tous les avantages précédents plus...</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Accès anticipé aux nouveautés</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Mention spéciale dans les crédits</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Contenu exclusif Plume-Mail</li>
             </ul>
-            <div id="paypal-container-B6K6GWKCHHMT8" class="paypal-button"></div>
-            <button class="support-button" id="paypal-onetime-initie">Je soutiens via PayPal</button>
+            <div class="paypal-button-container">
+              <style>.pp-B6K6GWKCHHMT8{text-align:center;border:none;border-radius:1.5rem;min-width:11.625rem;padding:0 2rem;height:3.125rem;font-weight:bold;background-color:#6B3E75;color:#ffffff;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.125rem;line-height:1.5rem;cursor:pointer;}</style>
+              <form action="https://www.paypal.com/ncp/payment/B6K6GWKCHHMT8" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                <input class="pp-B6K6GWKCHHMT8" type="submit" value="Devenir Initié/e" />
+                <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" style="height:0.5rem;" />
+                <section style="font-size: 0.75rem;">Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.5rem;vertical-align:middle;"/></section>
+              </form>
+            </div>
             <p class="support-note">Optez pour un soutien mensuel ou pour nous offrir une <a href="#kofi-button">pause magique</a> impromptue !</p>
           </div>
           <div class="support-item">
@@ -94,13 +109,19 @@
             <p class="support-price">30€ / mois</p>
             <p class="support-description">Devenez gardien de notre patrimoine littéraire mystique</p>
             <ul class="support-advantages">
-              <li><img src="images/icon_star.png" alt="Star Icon"> Tous les avantages précédents plus...</li>
-              <li><img src="images/icon_star.png" alt="Star Icon"> Exemplaire dédicacé offert</li>
-              <li><img src="images/icon_star.png" alt="Star Icon"> Consultation privée avec nos auteurs</li>
-              <li><img src="images/icon_star.png" alt="Star Icon"> Événements VIP réservés</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Tous les avantages précédents plus...</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Exemplaire dédicacé offert</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Un cadeau diy surprise par mois</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Événements/Ateliers VIP réservés</li>
             </ul>
-            <div id="paypal-container-RGK6BAGJWWWE8" class="paypal-button"></div>
-            <button class="support-button" id="paypal-onetime-gardien">Je soutiens via PayPal</button>
+            <div class="paypal-button-container">
+              <style>.pp-RGK6BAGJWWWE8{text-align:center;border:none;border-radius:1.5rem;min-width:11.625rem;padding:0 2rem;height:3.125rem;font-weight:bold;background-color:#6B3E75;color:#ffffff;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.125rem;line-height:1.5rem;cursor:pointer;}</style>
+              <form action="https://www.paypal.com/ncp/payment/RGK6BAGJWWWE8" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                <input class="pp-RGK6BAGJWWWE8" type="submit" value="Devenir Gardien/ne" />
+                <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" style="height:0.5rem;" />
+                <section style="font-size: 0.75rem;">Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.5rem;vertical-align:middle;"/></section>
+              </form>
+            </div>
             <p class="support-note">Optez pour un soutien mensuel ou pour nous offrir une <a href="#kofi-button">pause magique</a> impromptue !</p>
           </div>
         </div>
@@ -110,14 +131,20 @@
             <p class="support-price">50€+ / mois</p>
             <p class="support-description">Soutenez durablement notre mission littéraire mystique</p>
             <ul class="support-advantages">
-              <li><img src="images/icon_star.png" alt="Star Icon"> Tous les avantages précédents plus...</li>
-              <li><img src="images/icon_star.png" alt="Star Icon"> Exemplaire dédicacé de votre choix</li>
-              <li><img src="images/icon_star.png" alt="Star Icon"> Contenu exclusif Plume-Mail premium</li>
-              <li><img src="images/icon_star.png" alt="Star Icon"> Reconnaissance spéciale dans nos publications</li>
-              <li><img src="images/icon_star.png" alt="Star Icon"> Pour les dons supérieurs, contactez-nous pour des avantages personnalisés</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Tous les avantages précédents plus...</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Exemplaire dédicacé de votre choix</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Contenu exclusif Plume-Mail premium</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Reconnaissance spéciale dans nos publications</li>
+              <li><img src="/images/icon_star.png" alt="Star Icon"> Pour les dons supérieurs, contactez-nous pour des avantages personnalisés</li>
             </ul>
-            <div id="paypal-container-5BC4Q7ZXYT5H8" class="paypal-button"></div>
-            <button class="support-button" id="paypal-onetime-sage">Je soutiens via PayPal</button>
+            <div class="paypal-button-container">
+              <style>.pp-5BC4Q7ZXYT5H8{text-align:center;border:none;border-radius:1.5rem;min-width:11.625rem;padding:0 2rem;height:3.125rem;font-weight:bold;background-color:#6B3E75;color:#ffffff;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.125rem;line-height:1.5rem;cursor:pointer;}</style>
+              <form action="https://www.paypal.com/ncp/payment/5BC4Q7ZXYT5H8" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                <input class="pp-5BC4Q7ZXYT5H8" type="submit" value="Devenir Sage" />
+                <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" style="height:0.5rem;" />
+                <section style="font-size: 0.75rem;">Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.5rem;vertical-align:middle;"/></section>
+              </form>
+            </div>
             <p class="support-note">Optez pour un soutien mensuel ou pour nous offrir une <a href="#kofi-button">pause magique</a> impromptue !</p>
           </div>
         </div>
@@ -149,34 +176,34 @@
       <p class="other-ways-subtitle">La magie sait prendre de nombreuses formes, suivons là...</p>
       <div class="other-ways-grid">
         <div class="other-ways-item">
-          <img src="images/icon_people.png" alt="People Icon" class="other-ways-icon">
+          <img src="/images/icon_people.png" alt="People Icon" class="other-ways-icon">
           <h3>Parlez de nous à vos amis, sur vos réseaux</h3>
           <p>Recommandez nos publications à vos amis et sur les réseaux sociaux.</p>
           <p>Participez aux événements et rejoignez nos rencontres littéraires et ateliers à venir.</p>
           <p>Le bouche-à-oreille est un enchantement puissant, faites-le fructifier !</p>
           <ul class="social-links">
-            <li><a href="https://x.com/WhiteWitchEdits"><img src="images/icon_x.png" alt="X" class="social-icon"></a></li>
-            <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
-            <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
-            <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
-            <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
-            <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+            <li><a href="https://x.com/WhiteWitchEdits"><img src="/images/icon_x.png" alt="X" class="social-icon"></a></li>
+            <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+            <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+            <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+            <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+            <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
           </ul>
         </div>
-        <div class="other-ways-item">
-          <img src="images/icon_star.png" alt="Star Icon" class="other-ways-icon">
+        <div class="other-ways-item avis-buttons">
+          <img src="/images/icon_star.png" alt="Star Icon" class="other-ways-icon">
           <h3>Laissez des avis</h3>
           <p>Chacune de vos étoiles devient un guide pour nous tirer des méandres de l’incognito.</p>
           <p>Aidez-nous à briller de mille feux en laissant vos avis sur Amazon, Goodreads et autres plateformes.</p>
-          <a href="https://www.amazon.fr" class="support-button">Laisser un avis sur Amazon <img src="images/icon_star.png" alt="Star" class="button-icon"></a>
-          <a href="https://www.goodreads.com" class="support-button">Laisser un avis sur Goodreads <img src="images/icon_star.png" alt="Star" class="button-icon"></a>
+          <a href="https://www.amazon.fr" class="support-button">Laisser un avis sur Amazon <img src="/images/icon_star.png" alt="Star" class="button-icon"></a>
+          <a href="https://www.goodreads.com" class="support-button">Laisser un avis sur Goodreads <img src="/images/icon_star.png" alt="Star" class="button-icon"></a>
         </div>
         <div class="other-ways-item">
-          <img src="images/icon_coffee.png" alt="Coffee Icon" class="other-ways-icon">
+          <img src="/images/icon_coffee.png" alt="Coffee Icon" class="other-ways-icon">
           <h3>Offrez-nous une ‘Pause Magique’</h3>
           <p>Offrez un café magique à nos auteurs pour soutenir leurs nuits d’écriture !</p>
           <p>Virginia adore un grand café au lait, l’Alchimiste savoure sa chicorée maison, et Ravi ne résiste pas à un lungo avec du chocolat noir.</p>
-          <a href="https://ko-fi.com/T6T81IG0FB" class="support-button" id="kofi-button">Offrez une Pause Magique <img src="images/icon_coffee.png" alt="Coffee" class="button-icon"></a>
+          <a href="https://ko-fi.com/T6T81IG0FB" class="support-button" id="kofi-button">Offrez une Pause Magique <img src="/images/icon_coffee.png" alt="Coffee" class="button-icon"></a>
         </div>
       </div>
     </section>
@@ -189,12 +216,12 @@
       </div>
       <div class="trust-grid">
         <div class="trust-item">
-          <img src="images/icon_securepay.png" alt="Secure Pay Icon" class="trust-icon">
+          <img src="/images/icon_securepay.png" alt="Secure Pay Icon" class="trust-icon">
           <h3>Un paiement sécurisé</h3>
           <p>Via PayPal, cartes bancaires acceptées</p>
         </div>
         <div class="trust-item">
-          <img src="images/icon_envelope.png" alt="Envelope Icon" class="trust-icon">
+          <img src="/images/icon_envelope.png" alt="Envelope Icon" class="trust-icon">
           <h3>Reçu automatique</h3>
           <p>Confirmation et reçu envoyé directement dans votre boîte mail</p>
         </div>
@@ -204,8 +231,8 @@
   <footer>
     <div class="footer-content">
       <div class="footer-brand">
-        <a href="index.html">
-          <img src="images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+        <a href="/index.html">
+          <img src="/images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
           <div class="footer-title">
             <span>Les Éditions de la</span>
             <span>Sorcière Blanche</span>
@@ -216,37 +243,37 @@
       <div class="footer-info">
         <h3>Informations</h3>
         <ul>
-          <li><a href="conditions-generales.html">Conditions Générales</a></li>
-          <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
-          <li><a href="livraison-retours.html">Livraison et Retours</a></li>
-          <li><a href="politique-cookies.html">Politique de Cookies</a></li>
+          <li><a href="/conditions-generales.html">Conditions Générales</a></li>
+          <li><a href="/politique-confidentialite.html">Politique de Confidentialité</a></li>
+          <li><a href="/livraison-retours.html">Livraison et Retours</a></li>
+          <li><a href="/politique-cookies.html">Politique de Cookies</a></li>
         </ul>
       </div>
       <div class="footer-menu">
         <h3>Menu</h3>
         <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="boutique.html">Boutique</a></li>
-          <li><a href="a-propos.html">À Propos</a></li>
-          <li><a href="je-soutiens.html" class="active">Je Soutiens</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="/index.html">Accueil</a></li>
+          <li><a href="/boutique.html">Boutique</a></li>
+          <li><a href="/a-propos.html">À Propos</a></li>
+          <li><a href="/je-soutiens.html" class="active">Je Soutiens</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/blog.html">Blog</a></li>
         </ul>
       </div>
       <div class="footer-social">
         <h3>Suivez-nous</h3>
         <ul>
-          <li><a href="https://x.com/WhiteWitchEdits"><img src="images/icon_x.png" alt="X" class="social-icon"></a></li>
-          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
-          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
-          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
-          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
-          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="/images/icon_x.png" alt="X" class="social-icon"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
         </ul>
       </div>
     </div>
     <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
   </footer>
-  <script src="script.js"></script>
+  <script src="/script.js"></script>
 </body>
 </html>
