@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="contact.css">
   <link rel="stylesheet" href="protection.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="cookie-banner" id="cookieBanner">
@@ -17,6 +18,9 @@
   <div class="announcement-bar">
     <p>Lancement officiel le 1er Octobre 2025 - Préventes en cours ! <a href="boutique.html" class="button announcement-button">Voir la Boutique</a></p>
   </div>
+  <section class="welcome-banner">
+    <img src="images/sb_banniere_contact.jpg" alt="Bannière Contact" class="banner-image" style="border: 2px solid #B87333; max-height: 300px; width: 100%; height: auto;">
+  </section>
   <header>
     <div class="header-content">
       <a href="index.html" class="logo-link">
@@ -35,6 +39,7 @@
           <li><a href="contact.html" class="active">Contact</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="creer-compte.html" class="account-icon"><img src="images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
+          <li><a href="/panier.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Panier" class="cart-icon-img" title="Voir le panier"></a></li>
           <li class="lang-switcher">
             <img src="images/icon_globe.png" alt="Globe" class="globe-icon">
             <a href="contact.html" class="lang-fr active">FR</a>
@@ -46,25 +51,21 @@
   </header>
   <main>
     <section class="contact-content">
-      <div class="contact-banner">
-        <img src="images/sb_banniere_contact.jpg" alt="Bannière Contact" class="banner-image">
-      </div>
       <h1>Contactez la Sorcière Blanche</h1>
       <img src="images/icon_infinity.png" alt="Infinity Icon" class="title-icon">
       <div class="contact-subtitle">
         <p>Nos hiboux et corbeaux vous répondent pour toute question ou collaboration mystique.</p>
         <p>Proposez vos idées bénévoles, nous les étudions avec soin !</p>
       </div>
-      <div class="content-grid">
+      <div class="content-grid" style="flex-direction: column; max-width: 800px;">
         <div class="contact-form-container">
           <h2>Quel est le sujet de votre parchemin ?</h2>
-          <form class="contact-form" id="contactForm" name="contact" method="POST" netlify action="/confirmation.html">
-            <input type="hidden" name="form-name" value="contact">
+          <form class="contact-form" id="contact-form">
             <input type="text" id="name" name="name" placeholder="Votre Sobriquet choisi" required>
             <input type="email" id="email" name="email" placeholder="Votre PlumeMail" required>
             <input type="text" id="subject" name="subject" placeholder="Quelle est l’objet de votre requête ?" required>
             <textarea id="message" name="message" placeholder="Contenu du parchemin" required></textarea>
-            <button type="submit" class="support-button">J’appelle un hibou ou un corbeau pour mon message <img src="images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
+            <button type="submit" class="support-button">J'appelle un hibou ou un corbeau pour mon message <img src="images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
           </form>
         </div>
         <div class="faq-container">
@@ -80,8 +81,8 @@
             </div>
             <div class="faq-item">
               <h3>Puis-je retourner un produit ?</h3>
-              <p>Oui, vous disposez de 14 jours pour retourner un produit physique non utilisé, conformément à l’article L221-18 du Code de la consommation.</p>
-            <p>Les produits numériques ne sont pas remboursables après téléchargement.</p>
+              <p>Oui, vous disposez de 14 jours pour retourner un produit physique non utilisé, conformément à l'article L221-18 du Code de la consommation.</p>
+              <p>Les produits numériques ne sont pas remboursables après téléchargement.</p>
               <p>Voir <a href="livraison-retours.html">Livraison et Retours</a>.</p>
             </div>
             <div class="faq-item">
@@ -90,17 +91,17 @@
               <p>Vous trouverez toutes les informations pour nous soutenir en cliquant sur <a href="je-soutiens.html">Je Soutiens</a>.</p>
             </div>
             <div class="faq-item">
-              <h3>Comment rejoindre l’équipe des bénévoles ?</h3>
-              <p>En devenant bénévole, vous devenez un de nos bons génies et nous sommes heureux de vous voir rejoindre l’équipe !</p>
-              <p>Qu’aimeriez-vous avoir comme rôle en tant que nouveau bon génie ?</p>
-              <p>Votre truc, c’est plutôt la communication, les corrections, une voix de ouf, ou peut-être jeter des sorts d’organisation ?</p>
-              <p>Quoi qu’il en soit, sollicitez nos hiboux et corbeaux et parlons-en, qu'en dites-vous ?</p>
+              <h3>Comment rejoindre l'équipe des bénévoles ?</h3>
+              <p>En devenant bénévole, vous devenez un de nos bons génies et nous sommes heureux de vous voir rejoindre l'équipe !</p>
+              <p>Qu'aimez-vous avoir comme rôle en tant que nouveau bon génie ?</p>
+              <p>Votre truc, c'est plutôt la communication, les corrections, une voix de ouf, ou peut-être jeter des sorts d'organisation ?</p>
+              <p>Quoi qu'il en soit, sollicitez nos hiboux et corbeaux et parlons-en, qu'en dites-vous ?</p>
             </div>
             <div class="faq-item">
               <h3>Proposer un manuscrit ?</h3>
               <p>Nous ne prenons pas de nouveaux auteurs pour le moment.</p>
               <p>Inscrivez-vous à notre newsletter Magic-Info pour connaître les prochaines dates de soumission de manuscrits.</p>
-              <p>Lorsque les soumissions seront ouvertes, contactez-nous avec “Collaboration” comme objet et décrivez votre projet.</p>
+              <p>Lorsque les soumissions seront ouvertes, contactez-nous avec "Collaboration" comme objet et décrivez votre projet.</p>
               <p>Nous étudions chaque proposition avec attention.</p>
             </div>
           </div>
@@ -141,7 +142,7 @@
             <span>Sorcière Blanche</span>
           </div>
         </a>
-        <p>Maison d’édition bilingue spécialisée dans les livres ésotériques, fantastiques et mystiques. Découvrez un univers de magie et de mystère à travers nos publications uniques.</p>
+        <p>Maison d'édition bilingue spécialisée dans les livres ésotériques, fantastiques et mystiques. Découvrez un univers de magie et de mystère à travers nos publications uniques.</p>
       </div>
       <div class="footer-info">
         <h3>Informations</h3>
@@ -175,9 +176,47 @@
         </ul>
       </div>
     </div>
-    <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
+    <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d'images et/ou de texte autorisée sans autorisation expresse.</p>
   </footer>
   <script src="script.js"></script>
   <script src="protection.js"></script>
+  <script>
+    const { createClient } = supabase;
+    const supabase = createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+    document.getElementById('contact-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const user = await supabase.auth.getUser();
+      if (!user.data.user) {
+        alert('Veuillez vous connecter');
+        window.location.href = '/creer-compte.html';
+        return;
+      }
+      const form = event.target;
+      const formData = {
+        name: form.name.value,
+        email: form.email.value,
+        subject: form.subject.value,
+        message: form.message.value
+      };
+      const { error } = await supabase.from('contacts').insert([formData]);
+      if (error) {
+        console.error('Erreur Supabase:', error);
+        alert('Erreur lors de l\'envoi du message');
+        return;
+      }
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      const result = await response.json();
+      if (response.ok) {
+        window.location.href = '/confirmation.html';
+      } else {
+        console.error('Erreur envoi email:', result);
+        alert('Erreur lors de l\'envoi de l\'email');
+      }
+    });
+  </script>
 </body>
 </html>
