@@ -184,12 +184,6 @@
     const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
     document.getElementById('contact-form').addEventListener('submit', async function(event) {
       event.preventDefault();
-      const user = await supabase.auth.getUser();
-      if (!user.data.user) {
-        alert('Veuillez vous connecter');
-        window.location.href = '/creer-compte.html';
-        return;
-      }
       const form = event.target;
       const formData = {
         name: form.name.value,
