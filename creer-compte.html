@@ -17,8 +17,11 @@
     <button onclick="acceptCookies()">Accepter</button>
   </div>
   <div class="announcement-bar">
-    <p>Lancement officiel le 1er Octobre 2025 - Top départ de nos préventes le 8 août 2025 à 00h00 ! <a href="/boutique.html" class="button announcement-button">Voir la Boutique</a></p>
+    <p>Lancement officiel le 1er Octobre 2025 - Préventes en cours ! <a href="/boutique.html" class="button announcement-button">Voir la Boutique</a></p>
   </div>
+  <section class="welcome-banner">
+    <img src="/images/sb_banniere_compte_2.jpg" alt="Bannière Créer un Compte" class="banner-image">
+  </section>
   <header>
     <div class="header-content">
       <a href="/index.html" class="logo-link">
@@ -37,6 +40,7 @@
           <li><a href="/contact.html">Contact</a></li>
           <li><a href="/blog.html">Blog</a></li>
           <li><a href="/creer-compte.html" class="account-icon active"><img src="/images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
+          <li><a href="/panier.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Panier" class="cart-icon-img" title="Voir le panier"></a></li>
           <li class="lang-switcher">
             <img src="/images/icon_globe.png" alt="Globe" class="globe-icon">
             <a href="/creer-compte.html" class="lang-fr active">FR</a>
@@ -48,9 +52,6 @@
   </header>
   <main>
     <section class="account-content">
-      <div class="account-banner">
-        <img src="/images/sb_banniere_compte_2.jpg" alt="Bannière Créer un Compte" class="banner-image">
-      </div>
       <h1>Créez ou connectez-vous à votre compte</h1>
       <img src="/images/icon_infinity.png" alt="Infinity Icon" class="title-icon">
       <h2>Rejoignez notre communauté mystique !</h2>
@@ -85,6 +86,7 @@
             <label id="captcha-label-login" for="login-captcha"></label>
             <input type="text" id="login-captcha" name="captcha" placeholder="Entrez votre réponse" required>
             <button type="submit" id="login-button">Se connecter</button>
+            <a href="#" onclick="resetPassword()" class="forgot-password">Mot de passe oublié ?</a>
           </form>
         </div>
       </div>
@@ -171,5 +173,65 @@
   </footer>
   <script src="/script.js"></script>
   <script src="/protection.js"></script>
+  <script>
+    const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+    
+    function showTab(tabName) {
+      const tabs = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.tab-button');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      buttons.forEach(button => button.classList.remove('active'));
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    document.getElementById('signup-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const form = event.target;
+      const { error } = await supabase.auth.signUp({
+        email: form.email.value,
+        password: form.password.value,
+        options: {
+          data: { username: form.username.value }
+        }
+      });
+      if (error) {
+        console.error('Erreur inscription:', error);
+        alert('Erreur lors de l’inscription : ' + error.message);
+        return;
+      }
+      alert('Inscription réussie ! Vérifiez votre email pour confirmer.');
+      window.location.href = '/confirmation.html';
+    });
+
+    document.getElementById('login-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const form = event.target;
+      const { error } = await supabase.auth.signInWithPassword({
+        email: form.email.value,
+        password: form.password.value
+      });
+      if (error) {
+        console.error('Erreur connexion:', error);
+        alert('Erreur lors de la connexion : ' + error.message);
+        return;
+      }
+      window.location.href = '/portail.html';
+    });
+
+    async function resetPassword() {
+      const email = prompt('Entrez votre email pour réinitialiser le mot de passe :');
+      if (!email) return;
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://sorciereblancheeditions.com/reset-password.html'
+      });
+      if (error) {
+        console.error('Erreur réinitialisation mot de passe:', error);
+        alert('Erreur lors de la demande de réinitialisation : ' + error.message);
+      } else {
+        alert('Un email de réinitialisation a été envoyé à ' + email);
+      }
+    }
+  </script>
 </body>
 </html>

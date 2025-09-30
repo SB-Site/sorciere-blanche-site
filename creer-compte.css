@@ -4,6 +4,7 @@
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+  box-sizing: border-box;
 }
 .account-banner {
   text-align: center;
@@ -15,6 +16,7 @@
   object-fit: cover;
   border-radius: 8px;
   border: 2px solid #B87333;
+  box-sizing: border-box;
 }
 .account-content h1 {
   font-family: 'Playfair Display', serif;
@@ -65,6 +67,7 @@
   transition: transform 0.3s ease, background 0.3s ease;
   min-width: 150px;
   text-align: center;
+  box-sizing: border-box;
 }
 .tab-button:hover {
   transform: scale(1.05);
@@ -89,6 +92,7 @@
   border-radius: 10px;
   padding: 20px;
   position: relative;
+  box-sizing: border-box;
 }
 .account-form-container::before {
   content: '';
@@ -106,6 +110,7 @@
   max-width: 100%;
   padding: 20px;
   font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
 }
 .ml-embedded label, #login-form label {
   font-family: 'Montserrat', sans-serif;
@@ -144,10 +149,24 @@
   width: 100%;
   text-align: center;
   transition: transform 0.3s ease;
+  box-sizing: border-box;
 }
 .ml-embedded button:hover, #login-form button:hover {
   transform: scale(1.05);
   background: linear-gradient(90deg, #6B3E75, #B87333);
+}
+.forgot-password {
+  font-family: 'Montserrat', sans-serif;
+  color: #B87333;
+  font-size: 14px;
+  text-decoration: none;
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+}
+.forgot-password:hover {
+  color: #6B3E75;
+  text-decoration: underline;
 }
 #mlb2-28833794, .ml-form-embedContainer, .ml-block-form {
   display: block !important;
@@ -175,6 +194,7 @@
   border-radius: 8px;
   border: 2px solid #B87333;
   transition: transform 0.3s ease;
+  box-sizing: border-box;
 }
 .benefit-item:hover {
   transform: scale(1.05);
@@ -218,6 +238,7 @@
   display: flex;
   justify-content: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 .support-button {
   background: linear-gradient(90deg, #B87333, #6B3E75);
@@ -231,6 +252,7 @@
   display: inline-flex;
   align-items: center;
   transition: transform 0.3s ease;
+  box-sizing: border-box;
 }
 .support-button:hover {
   transform: scale(1.05);
@@ -240,4 +262,85 @@
   width: 20px;
   height: 20px;
   margin-left: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .account-content {
+    padding: 15px;
+  }
+  .banner-image {
+    max-height: 250px;
+  }
+  .account-content h1 {
+    font-size: 28px;
+  }
+  .account-subtitle p {
+    font-size: 16px;
+  }
+  .account-tabs {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tab-button {
+    min-width: 200px;
+    font-size: 16px;
+  }
+  .account-form-container {
+    max-width: 100%;
+    margin: 20px auto 40px;
+    padding: 15px;
+  }
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .action-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .support-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+@media (max-width: 480px) {
+  .account-content h1 {
+    font-size: 24px;
+  }
+  .account-subtitle p {
+    font-size: 14px;
+  }
+  .account-content h2 {
+    font-size: 20px;
+  }
+  .benefits h2 {
+    font-size: 24px;
+  }
+  .benefit-item h3 {
+    font-size: 18px;
+  }
+  .benefit-item p {
+    font-size: 14px;
+  }
+  .call-to-action h2 {
+    font-size: 24px;
+  }
+  .call-to-action p {
+    font-size: 14px;
+  }
+  .tab-button {
+    font-size: 14px;
+    padding: 8px 20px;
+  }
+  .ml-embedded input, #login-form input {
+    font-size: 16px;
+  }
+  .ml-embedded button, #login-form button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+  .forgot-password {
+    font-size: 12px;
+  }
 }
