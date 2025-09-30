@@ -19,7 +19,7 @@
     <p>Lancement officiel le 1er Octobre 2025 - Préventes en cours ! <a href="boutique.html" class="button announcement-button">Voir la Boutique</a></p>
   </div>
   <section class="welcome-banner">
-    <img src="images/sb_banniere_contact.jpg" alt="Bannière Contact" class="banner-image" style="border: 2px solid #B87333; max-height: 300px; width: 100%; height: auto;">
+    <img src="images/sb_banniere_contact.jpg" alt="Bannière Contact" class="banner-image">
   </section>
   <header>
     <div class="header-content">
@@ -181,8 +181,7 @@
   <script src="script.js"></script>
   <script src="protection.js"></script>
   <script>
-    const { createClient } = supabase;
-    const supabase = createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+    const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
     document.getElementById('contact-form').addEventListener('submit', async function(event) {
       event.preventDefault();
       const user = await supabase.auth.getUser();

@@ -1,5 +1,24 @@
 /* Styles spécifiques pour contact.html */
 
+/* Welcome Banner */
+.welcome-banner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.welcome-banner img.banner-image {
+  border: 2px solid #B87333;
+  border-radius: 8px;
+  max-height: 300px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  box-sizing: border-box;
+}
+
 /* Contact Content */
 .contact-content {
   max-width: 1200px;
@@ -7,19 +26,6 @@
   padding: 20px;
   background: linear-gradient(90deg, rgba(184, 115, 51, 0.1), rgba(107, 62, 117, 0.1), rgba(42, 75, 61, 0.1));
   border-radius: 8px;
-}
-
-/* Bannière */
-.contact-banner {
-  width: 100%;
-  margin-bottom: 20px;
-}
-.banner-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid #B87333;
 }
 
 /* Titre et Icône */
@@ -53,8 +59,10 @@
 
 /* Grille Formulaire/FAQ */
 .content-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
   gap: 20px;
 }
 .contact-form-container {
@@ -157,9 +165,9 @@
   margin: 20px auto;
   padding: 20px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(150px, 1fr)); /* Plus compact, 4 colonnes fixes */
-  gap: 10px; /* Espacement réduit */
-  background: rgba(107, 62, 117, 0.05); /* Fond subtil pour uniformité */
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 10px;
+  background: rgba(107, 62, 117, 0.05);
   border-radius: 8px;
 }
 .contact-item {
@@ -177,7 +185,7 @@
 .contact-icon.quill-icon {
   width: 64px;
   height: 64px;
-  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(110%) contrast(170%) !important; /* Plus visible */
+  filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(110%) contrast(170%) !important;
 }
 .contact-item h3 {
   font-family: 'Cinzel', serif;
@@ -188,13 +196,13 @@
 .contact-item p {
   font-family: 'Montserrat', sans-serif;
   color: #2A4B3D;
-  font-size: 12px; /* Réduit pour email sur une ligne */
+  font-size: 12px;
   margin: 4px 0;
 }
 .contact-item a {
   color: #B87333;
   text-decoration: none;
-  white-space: nowrap; /* Email sur une ligne */
+  white-space: nowrap;
   font-size: 12px;
 }
 .contact-item a:hover {
@@ -203,15 +211,11 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .welcome-banner img.banner-image {
+    max-height: 250px;
+  }
   .contact-content {
     padding: 15px;
-  }
-  .contact-banner {
-    margin-bottom: 15px;
-  }
-  .banner-image {
-    max-height: 200px;
-    object-fit: cover;
   }
   .contact-content h1 {
     font-size: 28px;
@@ -220,7 +224,7 @@
     font-size: 16px;
   }
   .content-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
   .contact-form-container {
     max-width: 100%;
@@ -229,10 +233,13 @@
     grid-template-columns: 1fr;
   }
   .contact-details {
-    grid-template-columns: 1fr; /* Empilage sur mobile */
+    grid-template-columns: 1fr;
   }
 }
 @media (max-width: 480px) {
+  .welcome-banner img.banner-image {
+    max-height: 200px;
+  }
   .contact-content h1 {
     font-size: 24px;
   }
@@ -255,7 +262,7 @@
     font-size: 14px;
   }
   .contact-item p, .contact-item a {
-    font-size: 11px; /* Encore plus petit sur mobile */
+    font-size: 11px;
   }
   .contact-form input, .contact-form textarea {
     font-size: 16px;
