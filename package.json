@@ -1,5 +1,6 @@
 {
   "dependencies": {
     "nodemailer": "^6.9.13"
-  }
+  },
+  "comment": "Pour envoyer emails formulaire contact"
 }
