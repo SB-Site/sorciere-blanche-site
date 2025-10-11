@@ -403,3 +403,17 @@
     height: 200px;
   }
 }
+
+/* Fix popup : clics traversent background vers menu/header, content interactif ; force pour 3 liens */
+#construction-popup.popup-container {
+  pointer-events: none !important;
+}
+#construction-popup .popup-content {
+  pointer-events: auto !important;
+}
+nav ul li:nth-child(2) a[href="/boutique.html"],
+nav ul li:nth-child(3) a[href="/a-propos.html"],
+nav ul li:nth-child(4) a[href="/je-soutiens.html"] {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
