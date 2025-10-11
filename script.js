@@ -50,14 +50,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Gestion de la pop-up
   const popup = document.getElementById('construction-popup');
+  const nav = document.querySelector('nav');
   if (popup) {
     console.log('Popup element found:', popup);
     console.log('popupClosed in localStorage:', localStorage.getItem('popupClosed'));
     if (!localStorage.getItem('popupClosed')) {
       console.log('Showing popup');
       popup.classList.add('active');
+      if (nav) {
+        nav.style.display = 'none'; // Masque menu pendant popup actif
+        console.log('Menu nav hidden during popup');
+      }
     } else {
       console.log('Popup not shown, already closed');
+      if (nav) {
+        nav.style.display = ''; // Assure menu visible si popup fermé
+      }
     }
   } else {
     console.log('No construction-popup element on this page');
@@ -70,6 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
       popup.classList.remove('active');
       localStorage.setItem('popupClosed', 'true');
       console.log('popupClosed set to true in localStorage');
+      if (nav) {
+        nav.style.display = ''; // Réaffiche menu après close
+        console.log('Menu nav shown after popup close');
+      }
     } else {
       console.log('No construction-popup element to close');
     }

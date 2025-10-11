@@ -403,11 +403,3 @@
     height: 200px;
   }
 }
-
-/* Fix popup : clics traversent le background vers menu, mais content interactif */
-#construction-popup.popup-container {
-  pointer-events: none;
-}
-#construction-popup .popup-content {
-  pointer-events: auto;
-}
