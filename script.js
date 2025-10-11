@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header');
   if (popupEl) {
     console.log('Popup element found:', popupEl);
-    console.log('popupClosed in localStorage:', localStorage.getItem('popupClosed'));
+    localStorage.removeItem('popupClosed'); // Force show pour test
+    console.log('popupClosed in localStorage after force reset:', localStorage.getItem('popupClosed'));
     if (!localStorage.getItem('popupClosed')) {
       console.log('Showing popup');
       popupEl.classList.add('active');
