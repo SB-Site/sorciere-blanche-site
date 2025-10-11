@@ -390,6 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   // Fix override clics menu sous popup (surpasse protection.js)
+  const menuLinks = document.querySelectorAll('nav ul li a[href]');
   menuLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       if (popupEl && popupEl.classList.contains('active')) {
