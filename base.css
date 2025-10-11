@@ -36,11 +36,22 @@ main {
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  background: rgba(0, 0, 0, 0.7) !important;
+  background: none !important; /* Retiré pour éviter blocage clics */
   z-index: 1001 !important;
   visibility: hidden !important;
   opacity: 0 !important;
   transition: opacity 0.3s ease-in-out !important;
+  pointer-events: none !important; /* Traverse clics vers dessous */
+}
+.popup-overlay {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  pointer-events: none !important; /* Background traversable */
+  z-index: 1 !important;
 }
 .popup-container.active {
   visibility: visible !important;
@@ -55,6 +66,8 @@ main {
   text-align: center !important;
   box-shadow: 0 0 20px rgba(184, 115, 51, 0.5) !important;
   font-family: 'Montserrat', sans-serif !important;
+  pointer-events: auto !important; /* Content cliquable */
+  z-index: 2 !important;
 }
 .popup-content h2 {
   font-family: 'Cinzel', serif !important;
@@ -167,6 +180,8 @@ nav ul li a {
   font-family: 'Cinzel', serif;
   font-weight: bold;
   font-size: 18px;
+  pointer-events: auto !important;
+  cursor: pointer !important;
 }
 nav ul li a:hover, nav ul li a.active {
   color: var(--cuivre);
