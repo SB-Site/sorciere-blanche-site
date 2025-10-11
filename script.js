@@ -50,21 +50,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Gestion de la pop-up
   const popup = document.getElementById('construction-popup');
-  const nav = document.querySelector('nav');
+  const header = document.querySelector('header');
   if (popup) {
     console.log('Popup element found:', popup);
     console.log('popupClosed in localStorage:', localStorage.getItem('popupClosed'));
     if (!localStorage.getItem('popupClosed')) {
       console.log('Showing popup');
       popup.classList.add('active');
-      if (nav) {
-        nav.style.display = 'none'; // Masque menu pendant popup actif
-        console.log('Menu nav hidden during popup');
+      if (header) {
+        header.style.display = 'none'; // Masque header entier pendant popup
+        console.log('Header hidden during popup');
       }
     } else {
       console.log('Popup not shown, already closed');
-      if (nav) {
-        nav.style.display = ''; // Assure menu visible si popup fermé
+      if (header) {
+        header.style.display = ''; // Assure header visible si popup fermé
+        header.style.position = 'relative';
+        header.style.left = '0';
       }
     }
   } else {
@@ -78,9 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
       popup.classList.remove('active');
       localStorage.setItem('popupClosed', 'true');
       console.log('popupClosed set to true in localStorage');
-      if (nav) {
-        nav.style.display = ''; // Réaffiche menu après close
-        console.log('Menu nav shown after popup close');
+      if (header) {
+        header.style.display = ''; // Réaffiche header après close
+        header.style.position = 'relative'; // Reset position pour éviter décalage
+        header.style.left = '0';
+        console.log('Header shown after popup close, position reset');
       }
     } else {
       console.log('No construction-popup element to close');
