@@ -49,27 +49,44 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('popupClosed');
   }
   // Gestion de la pop-up
-  const popup = document.getElementById('construction-popup');
-  if (popup) {
-    console.log('Popup element found:', popup);
+  const popupEl = document.getElementById('construction-popup');
+  const header = document.querySelector('header');
+  if (popupEl) {
+    console.log('Popup element found:', popupEl);
     console.log('popupClosed in localStorage:', localStorage.getItem('popupClosed'));
     if (!localStorage.getItem('popupClosed')) {
       console.log('Showing popup');
-      popup.classList.add('active');
+      popupEl.classList.add('active');
+      if (header) {
+        header.style.display = 'none';
+        console.log('Header hidden during popup');
+      }
     } else {
       console.log('Popup not shown, already closed');
+      if (header) {
+        header.style.display = '';
+        header.style.position = 'relative';
+        header.style.left = '0';
+        header.style.top = '0';
+      }
     }
   } else {
     console.log('No construction-popup element on this page');
   }
   window.closePopup = function() {
     console.log('closePopup function called');
-    const popup = document.getElementById('construction-popup');
-    if (popup) {
+    if (popupEl) {
       console.log('Hiding popup');
-      popup.classList.remove('active');
+      popupEl.classList.remove('active');
       localStorage.setItem('popupClosed', 'true');
       console.log('popupClosed set to true in localStorage');
+      if (header) {
+        header.style.display = '';
+        header.style.position = 'relative';
+        header.style.left = '0';
+        header.style.top = '0';
+        console.log('Header shown after popup close, position reset');
+      }
     } else {
       console.log('No construction-popup element to close');
     }
@@ -373,8 +390,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   // Fix override clics menu sous popup (surpasse protection.js)
-  const popupEl = document.getElementById('construction-popup');
-  const menuLinks = document.querySelectorAll('nav ul li a[href]');
   menuLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       if (popupEl && popupEl.classList.contains('active')) {
