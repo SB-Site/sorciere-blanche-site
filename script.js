@@ -372,4 +372,18 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+  // Fix override clics menu sous popup (surpasse protection.js)
+  const popupEl = document.getElementById('construction-popup');
+  const menuLinks = document.querySelectorAll('nav ul li a[href]');
+  menuLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (popupEl && popupEl.classList.contains('active')) {
+        e.stopPropagation();
+        e.preventDefault();
+        window.location.href = link.href;
+        console.log('Forced navigation on link under popup:', link.href);
+      }
+    }, true); // Capture phase pour surpasse bubbling
+  });
+  console.log('Menu links override added for popup');
 });
