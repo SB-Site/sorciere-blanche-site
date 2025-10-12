@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmation d'Achat - Les Éditions de la Sorcière Blanche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <div class="announcement-bar">
+    <p><strong>Lancement réussi ! Explorez nos ouvrages enchantés en vente dès maintenant. ✨</strong> <a href="/boutique.html" class="announcement-button">Voir la boutique</a></p>
+  </div>
+  <header>
+    <div class="header-content">
+      <a href="/index.html" class="logo-link">
+        <img src="/images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+        <div class="header-title">
+          <span>Les Éditions de la</span>
+          <span>Sorcière Blanche</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="/index.html">Accueil</a></li>
+          <li><a href="/boutique.html">Boutique</a></li>
+          <li><a href="/a-propos.html">À Propos</a></li>
+          <li><a href="/je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/creer-compte.html" class="account-icon"><img src="/images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
+          <li><a href="/panier.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Panier" class="cart-icon-img" title="Voir le panier"></a></li>
+          <li class="lang-switcher">
+            <img src="/images/icon_globe.png" alt="Globe" class="globe-icon">
+            <a href="/confirmation-achat.html" class="lang-fr active">FR</a>
+            <a href="/en/confirmation-achat.html" class="lang-en">EN</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="confirmation-content">
+      <h1>Merci pour votre achat enchanté ! ✨</h1>
+      <img src="/images/icon_star.png" alt="Star Icon" class="confirmation-icon">
+      <div class="confirmation-details">
+        <p>Votre commande a été validée. Vous recevrez un email de confirmation avec le récapitulatif et le lien de téléchargement pour l'eBook <strong>Lazare Donatien L'Intégrale</strong> dans les prochaines minutes.</p>
+        <p>Si vous n'avez pas reçu l'email, vérifiez vos spams ou contactez-nous via <a href="/contact.html">notre page contact</a>.</p>
+        <div class="download-section">
+          <h2>Téléchargez votre eBook maintenant</h2>
+          <p>Lien direct pour <strong>Lazare Donatien L'Intégrale</strong> (valide 7 jours après achat) :</p>
+          <a href="/EBooks/Lazare-integrale.pdf" download class="download-button">Télécharger PDF (5,99 €)</a>
+          <p><small>Format : PDF | Taille : 10 MB | Compatibilité : Tous appareils</small></p>
+        </div>
+        <div class="order-recap">
+          <h3>Récapitulatif de votre commande</h3>
+          <ul id="order-list">
+            <!-- Rempli par JS -->
+          </ul>
+          <p><strong>Total : <span id="order-total">0,00 €</span></strong></p>
+        </div>
+        <div class="next-steps">
+          <h3>Prochaines étapes</h3>
+          <ul>
+            <li>Vérifiez votre email pour la confirmation et le lien de téléchargement.</li>
+            <li>Pour les produits physiques, suivez le numéro de suivi dans votre email.</li>
+            <li>Des questions ? <a href="/contact.html">Contactez-nous</a>.</li>
+          </ul>
+        </div>
+      </div>
+      <a href="/boutique.html" class="continue-shopping">Continuer mes achats</a>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="/index.html">
+          <img src="/images/sb_logo_fr.jpg" alt="Sorcière Blanche Éditions Logo" class="logo">
+          <div class="footer-title">
+            <span>Les Éditions de la</span>
+            <span>Sorcière Blanche</span>
+          </div>
+        </a>
+        <p>Maison d’édition bilingue spécialisée dans les livres ésotériques, fantastiques et mystiques. Découvrez un univers de magie et de mystère à travers nos publications uniques.</p>
+      </div>
+      <div class="footer-info">
+        <h3>Informations</h3>
+        <ul>
+          <li><a href="/conditions-generales.html">Conditions Générales</a></li>
+          <li><a href="/politique-confidentialite.html">Politique de Confidentialité</a></li>
+          <li><a href="/livraison-retours.html">Livraison et Retours</a></li>
+          <li><a href="/politique-cookies.html">Politique de Cookies</a></li>
+        </ul>
+      </div>
+      <div class="footer-menu">
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="/index.html">Accueil</a></li>
+          <li><a href="/boutique.html">Boutique</a></li>
+          <li><a href="/a-propos.html">À Propos</a></li>
+          <li><a href="/je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Suivez-nous</h3>
+        <ul>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="/images/icon_x.png" alt="X" class="social-icon"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
+  </footer>
+  <script src="/script.js"></script>
+  <script src="/protection.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const orderList = document.getElementById('order-list');
+      const orderTotal = document.getElementById('order-total');
+      let total = 0;
+      if (cart.length > 0) {
+        orderList.innerHTML = cart.map(item => {
+          const lineTotal = item.price * item.quantity;
+          total += lineTotal;
+          return `<li>${item.name} x${item.quantity} - ${lineTotal.toFixed(2)} €</li>`;
+        }).join('');
+      } else {
+        orderList.innerHTML = '<li>Aucun article dans cette commande.</li>';
+      }
+      orderTotal.textContent = total.toFixed(2) + ' €';
+      // Envoi email confirmation (simulé pour test ; en prod, utilise /api/send-email)
+      fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: 'contact@sorciereblancheeditions.com', // Ou email acheteur depuis PayPal
+          subject: 'Confirmation d\'achat - Lazare eBook',
+          body: 'Merci pour votre achat ! Lien téléchargement : https://sorciereblancheeditions.com/EBooks/Lazare-integrale.pdf'
+        })
+      }).then(response => response.ok ? console.log('Email envoyé') : console.error('Email fail'));
+    });
+  </script>
+</body>
+</html>
