@@ -7,16 +7,18 @@
   box-sizing: border-box;
 }
 .account-banner {
-  text-align: center;
-  margin-bottom: 30px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px auto;
+  height: 300px;
+  border: 2px solid var(--cuivre);
+  border-radius: 8px;
+  overflow: hidden;
 }
 .banner-image {
   width: 100%;
-  max-height: 300px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid #B87333;
-  box-sizing: border-box;
 }
 .account-content h1 {
   font-family: 'Playfair Display', serif;
@@ -266,17 +268,11 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .account-banner {
+    height: 250px;
+  }
   .account-content {
     padding: 15px;
-  }
-  .banner-image {
-    max-height: 250px;
-  }
-  .account-content h1 {
-    font-size: 28px;
-  }
-  .account-subtitle p {
-    font-size: 16px;
   }
   .account-tabs {
     flex-direction: column;
@@ -305,8 +301,11 @@
   }
 }
 @media (max-width: 480px) {
+  .account-banner {
+    height: 200px;
+  }
   .account-content h1 {
-    font-size: 24px;
+    font-size: 28px;
   }
   .account-subtitle p {
     font-size: 14px;
