@@ -131,22 +131,24 @@
         document.getElementById('order-id-section').style.display = 'block';
       }
 
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      // FIX : Lit 'lastOrderCart' pour récap (sauvegardé de panier.html)
+      const lastOrderCart = JSON.parse(localStorage.getItem('lastOrderCart') || '[]');
       const orderList = document.getElementById('order-list');
       const orderTotal = document.getElementById('order-total');
       let total = 0;
-      if (cart.length > 0) {
-        orderList.innerHTML = cart.map(item => {
+      if (lastOrderCart.length > 0) {
+        orderList.innerHTML = lastOrderCart.map(item => {
           const lineTotal = item.price * item.quantity;
           total += lineTotal;
           return `<li>${item.name} x${item.quantity} - ${lineTotal.toFixed(2)} €</li>`;
         }).join('');
-        // Vider panier après confirmation
-        localStorage.removeItem('cart');
       } else {
         orderList.innerHTML = '<li>Aucun article dans cette commande.</li>';
       }
       orderTotal.textContent = total.toFixed(2) + ' €';
+
+      // Efface la sauvegarde après usage (propreté)
+      localStorage.removeItem('lastOrderCart');
 
       // Envoi email confirmation (simulé pour test ; en prod, utilise /api/send-email avec Supabase)
       fetch('/api/send-email', {
