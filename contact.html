@@ -39,7 +39,7 @@
           <li><a href="contact.html" class="active">Contact</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="creer-compte.html" class="account-icon"><img src="images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
-          <li><a href="/panier.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Panier" class="cart-icon-img" title="Voir le panier"></a></li>
+          <li><a href="panier.html" class="cart-icon"><img src="images/icon_basket.png" alt="Panier" class="cart-icon-img" title="Voir le panier"></a></li>
           <li class="lang-switcher">
             <img src="images/icon_globe.png" alt="Globe" class="globe-icon">
             <a href="contact.html" class="lang-fr active">FR</a>
@@ -65,6 +65,11 @@
             <input type="email" id="email" name="email" placeholder="Votre PlumeMail" required>
             <input type="text" id="subject" name="subject" placeholder="Quelle est l’objet de votre requête ?" required>
             <textarea id="message" name="message" placeholder="Contenu du parchemin" required></textarea>
+            <!-- FIX : CAPTCHA Supabase ajouté -->
+            <div class="captcha-container">
+              <label id="captcha-label" for="captcha-answer">Question CAPTCHA : Chargement...</label>
+              <input type="text" id="captcha-answer" placeholder="Votre réponse..." required>
+            </div>
             <button type="submit" class="support-button">J'appelle un hibou ou un corbeau pour mon message <img src="images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
           </form>
         </div>
@@ -182,8 +187,29 @@
   <script src="protection.js"></script>
   <script>
     const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+    // FIX : CAPTCHA logic (comme script.js, questions Sorcière/Lazare)
+    let currentCaptcha = null;
+    const captchaQuestions = [
+      { question: 'Citez un des familiers de la Sorcière Blanche ?', answers: ['Corbeau', 'Chouette'] },
+      { question: 'Quel est le nom de famille de Lazare ?', answers: ['Donatien'] },
+      { question: 'Qui est l’auteur de Secrets de Samhain ?', answers: ['L\'Alchimiste'] }
+    ];
+    function initCaptcha() {
+      currentCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
+      const captchaLabel = document.getElementById('captcha-label');
+      if (captchaLabel) {
+        captchaLabel.textContent = currentCaptcha.question;
+      }
+    }
+    document.addEventListener('DOMContentLoaded', initCaptcha);
     document.getElementById('contact-form').addEventListener('submit', async function(event) {
       event.preventDefault();
+      // FIX : Validation CAPTCHA
+      const captchaAnswer = document.getElementById('captcha-answer').value.toLowerCase();
+      if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captchaAnswer)) {
+        alert('Erreur CAPTCHA : Réponse incorrecte. Veuillez réessayer.');
+        return;
+      }
       const form = event.target;
       const formData = {
         name: form.name.value,
@@ -204,10 +230,10 @@
       });
       const result = await response.json();
       if (response.ok) {
-        window.location.href = '/confirmation.html';
+        window.location.href = 'confirmation-contact.html'; // FIX : Redirect vers ta confirmation existante
       } else {
         console.error('Erreur envoi email:', result);
-        alert('Erreur lors de l\'envoi de l\'email');
+        alert('Message enregistré en DB, mais erreur email. Contactez-nous directement.');
       }
     });
   </script>
