@@ -19,13 +19,20 @@ export default async function handler(req, res) {
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.PROTONMAIL_SMTP_SERVER,
-      port: process.env.PROTONMAIL_SMTP_PORT,
+      port: parseInt(process.env.PROTONMAIL_SMTP_PORT), // Force int
       secure: false, // STARTTLS
       auth: {
+        type: 'login', // FIX : Explicit auth type for Proton
         user: process.env.PROTONMAIL_SMTP_USERNAME,
         pass: process.env.PROTONMAIL_SMTP_PASSWORD
-      }
+      },
+      logger: true, // FIX : Debug logs in Vercel
+      debug: true // Full SMTP trace
     });
+
+    // FIX : Test connection avant send (optional, log if fail)
+    await transporter.verify();
+    console.log('SMTP connection verified OK');
 
     await transporter.sendMail({
       from: 'contact@sorciereblancheeditions.com',
@@ -37,7 +44,8 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ message: 'Email envoyé' });
   } catch (error) {
-    console.error('Erreur envoi email:', error);
-    return res.status(500).json({ error: 'Erreur serveur lors de l’envoi de l’email', details: error.message });
+    console.error('Erreur envoi email full:', error); // FIX : Full log
+    const details = error.response ? error.response.data : error.message;
+    return res.status(500).json({ error: 'Erreur serveur lors de l’envoi de l’email', details });
   }
 }
