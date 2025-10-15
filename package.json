@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "nodemailer": "^6.9.13",
-    "resend": "^4.0.0"
+    "resend": "^4.8.0"
   },
-  "comment": "Pour envoyer emails formulaire contact (nodemailer fallback, Resend principal)"
+  "comment": "Pour envoyer emails formulaire contact (Resend principal, nodemailer fallback)"
 }
