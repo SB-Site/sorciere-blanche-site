@@ -19,20 +19,20 @@ export default async function handler(req, res) {
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.PROTONMAIL_SMTP_SERVER,
-      port: parseInt(process.env.PROTONMAIL_SMTP_PORT), // Force int
-      secure: false, // STARTTLS
+      port: parseInt(process.env.PROTONMAIL_SMTP_PORT),
+      secure: true, // FIX : true pour port 465 SSL (au lieu false STARTTLS 587)
       auth: {
-        type: 'login', // FIX : Explicit auth type for Proton
+        type: 'login', // FIX : Explicit for Proton
         user: process.env.PROTONMAIL_SMTP_USERNAME,
         pass: process.env.PROTONMAIL_SMTP_PASSWORD
       },
-      logger: true, // FIX : Debug logs in Vercel
-      debug: true // Full SMTP trace
+      logger: true, // Debug full SMTP
+      debug: true
     });
 
-    // FIX : Test connection avant send (optional, log if fail)
+    // FIX : Verify connection (log if fail)
     await transporter.verify();
-    console.log('SMTP connection verified OK');
+    console.log('SMTP verified OK');
 
     await transporter.sendMail({
       from: 'contact@sorciereblancheeditions.com',
@@ -44,8 +44,8 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ message: 'Email envoyé' });
   } catch (error) {
-    console.error('Erreur envoi email full:', error); // FIX : Full log
-    const details = error.response ? error.response.data : error.message;
+    console.error('Erreur envoi email full:', error); // Full trace
+    const details = error.response ? error.response.data : error.message || error.code;
     return res.status(500).json({ error: 'Erreur serveur lors de l’envoi de l’email', details });
   }
 }
