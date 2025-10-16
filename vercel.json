@@ -6,6 +6,7 @@
     { "source": "/contact-confirmation", "destination": "/contact-confirmation.html", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/:path", "destination": "/:path.html" }
   ],
   "headers": [
