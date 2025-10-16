@@ -226,7 +226,7 @@
       }
       // Fallback : Assume success after DB (email sent backend, ignore 404)
       alert('Message enregistré en DB et email envoyé !');
-      window.location.href = 'confirmation-contact.html';
+      window.location.href = 'contact-confirmation.html';
       // Fetch email non-blocking (log only, no block on 404)
       fetch('/api/send-email', {
         method: 'POST',
