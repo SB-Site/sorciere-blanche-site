@@ -1,22 +1,27 @@
 {
-  "redirects": [
-    { "source": "/creer-compte", "destination": "/creer-compte.html", "permanent": true },
-    { "source": "/portail", "destination": "/portail.html", "permanent": true },
-    { "source": "/confirmation", "destination": "/confirmation.html", "permanent": true },
-    { "source": "/contact-confirmation", "destination": "/contact-confirmation.html", "permanent": true }
-  ],
-  "rewrites": [
-    { "source": "/:path", "destination": "/:path.html" }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
-        { "key": "Pragma", "value": "no-cache" },
-        { "key": "Expires", "value": "0" },
-        { "key": "Permissions-Policy", "value": "interest-cohort=()" }
-      ]
-    }
-  ]
+"redirects": [
+{ "source": "/creer-compte", "destination": "/creer-compte.html", "permanent": true },
+{ "source": "/portail", "destination": "/portail.html", "permanent": true },
+{ "source": "/confirmation", "destination": "/confirmation.html", "permanent": true },
+{ "source": "/contact-confirmation", "destination": "/contact-confirmation.html", "permanent": true }
+],
+"rewrites": [
+{ "source": "/:path", "destination": "/:path.html" }
+],
+"headers": [
+{
+"source": "/(.)",
+"headers": [
+{ "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+{ "key": "Pragma", "value": "no-cache" },
+{ "key": "Expires", "value": "0" },
+{ "key": "Permissions-Policy", "value": "interest-cohort=()" }
+]
+}
+],
+"functions": {
+"api/.js": {
+"maxDuration": 10
+}
+}
 }
