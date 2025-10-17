@@ -72,9 +72,11 @@
             <input type="email" id="email" name="email" placeholder="Courriel" required>
             <label for="password">Formule Magique</label>
             <input type="password" id="password" name="password" placeholder="Mot de passe" required>
-            <label id="captcha-label" for="captcha-answer"></label>
-            <input type="text" id="captcha-answer" name="captcha" placeholder="Entrez votre réponse" required>
-            <button type="submit" id="signup-button">S’inscrire</button>
+            <div class="captcha-container">
+              <label id="captcha-label" for="captcha-answer">Question CAPTCHA : Chargement...</label>
+              <input type="text" id="captcha-answer" name="captcha" placeholder="Entrez votre réponse" required>
+            </div>
+            <button type="submit" id="signup-button" class="support-button">S’inscrire <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
           </form>
         </div>
         <div id="login" class="tab-content">
@@ -83,9 +85,11 @@
             <input type="email" id="login-email" name="email" placeholder="Courriel" required>
             <label for="login-password">Formule Magique</label>
             <input type="password" id="login-password" name="password" placeholder="Mot de passe" required>
-            <label id="captcha-label-login" for="login-captcha"></label>
-            <input type="text" id="login-captcha" name="captcha" placeholder="Entrez votre réponse" required>
-            <button type="submit" id="login-button">Se connecter</button>
+            <div class="captcha-container">
+              <label id="captcha-label-login" for="login-captcha">Question CAPTCHA : Chargement...</label>
+              <input type="text" id="login-captcha" name="captcha" placeholder="Entrez votre réponse" required>
+            </div>
+            <button type="submit" id="login-button" class="support-button">Se connecter <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
             <a href="#" onclick="resetPassword()" class="forgot-password">Mot de passe oublié ?</a>
           </form>
         </div>
@@ -185,40 +189,86 @@
       event.target.classList.add('active');
     }
 
-    document.getElementById('signup-form').addEventListener('submit', async function(event) {
-      event.preventDefault();
-      const form = event.target;
-      const { error } = await supabase.auth.signUp({
-        email: form.email.value,
-        password: form.password.value,
-        options: {
-          data: { username: form.username.value }
+    // CAPTCHA logic
+    let currentCaptcha = null;
+    const captchaQuestions = [
+      { question: 'Citez un des familiers de la Sorcière Blanche ?', answers: ['Corbeau', 'Chouette'] },
+      { question: 'Quel est le nom de famille de Lazare ?', answers: ['Donatien'] },
+      { question: 'Qui est l’auteur de Secrets de Samhain ?', answers: ['L\'Alchimiste'] }
+    ];
+    function initCaptcha() {
+      currentCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
+      const captchaLabel = document.getElementById('captcha-label');
+      const captchaLabelLogin = document.getElementById('captcha-label-login');
+      if (captchaLabel) {
+        captchaLabel.textContent = currentCaptcha.question;
+      }
+      if (captchaLabelLogin) {
+        captchaLabelLogin.textContent = currentCaptcha.question;
+      }
+    }
+    document.addEventListener('DOMContentLoaded', initCaptcha);
+
+    // Signup form
+    const signupForm = document.getElementById('signup-form');
+    if (signupForm) {
+      signupForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        // CAPTCHA validation
+        const captcha = document.getElementById('captcha-answer').value.toLowerCase();
+        if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captcha)) {
+          console.error('Erreur CAPTCHA: Réponse incorrecte');
+          alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
+          return;
         }
+        const form = event.target;
+        const { data, error } = await supabase.auth.signUp({
+          email: form.email.value,
+          password: form.password.value
+        });
+        if (error) {
+          console.error('Erreur inscription:', error);
+          alert('Erreur lors de l’inscription : ' + error.message);
+          return;
+        }
+        console.log('Inscription réussie:', data.user);
+        alert('Inscription réussie ! Votre compte est créé (pas d\'email de confirmation pour la sécurité). Connectez-vous pour commencer.');
+        window.location.href = '/confirmation.html';
       });
-      if (error) {
-        console.error('Erreur inscription:', error);
-        alert('Erreur lors de l’inscription : ' + error.message);
-        return;
-      }
-      alert('Inscription réussie ! Vérifiez votre email pour confirmer.');
-      window.location.href = '/confirmation.html';
-    });
+    } else {
+      console.error('Erreur: signup-form non trouvé');
+    }
 
-    document.getElementById('login-form').addEventListener('submit', async function(event) {
-      event.preventDefault();
-      const form = event.target;
-      const { error } = await supabase.auth.signInWithPassword({
-        email: form.email.value,
-        password: form.password.value
+    // Login form
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+      loginForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        // CAPTCHA validation
+        const captcha = document.getElementById('login-captcha').value.toLowerCase();
+        if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captcha)) {
+          console.error('Erreur CAPTCHA: Réponse incorrecte');
+          alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
+          return;
+        }
+        const form = event.target;
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: form.email.value,
+          password: form.password.value
+        });
+        if (error) {
+          console.error('Erreur connexion:', error);
+          alert('Erreur lors de la connexion : ' + error.message);
+          return;
+        }
+        console.log('Connexion réussie:', data.user);
+        window.location.href = '/portail.html';
       });
-      if (error) {
-        console.error('Erreur connexion:', error);
-        alert('Erreur lors de la connexion : ' + error.message);
-        return;
-      }
-      window.location.href = '/portail.html';
-    });
+    } else {
+      console.error('Erreur: login-form non trouvé');
+    }
 
+    // Reset password
     async function resetPassword() {
       const email = prompt('Entrez votre email pour réinitialiser le mot de passe :');
       if (!email) return;
