@@ -1,34 +1,20 @@
 <!DOCTYPE html>
-<html lang="fr-CA">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
-  <title>Confirmation d'inscription - Les Éditions de la Sorcière Blanche</title>
-  <meta name="description" content="Confirmation de votre inscription aux Éditions de la Sorcière Blanche.">
-  <link rel="icon" href="/images/sb_logo_fr.jpg" type="image/jpeg">
+  <title>Confirmation d'Inscription - Les Éditions de la Sorcière Blanche</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/base.css">
   <link rel="stylesheet" href="/index.css">
-  <script async data-goatcounter="https://sorciereblancheeditions.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
-  <style>
-    .confirmation {
-      text-align: center;
-      padding: 40px;
-    }
-    .confirmation p {
-      margin: 20px 0;
-    }
-    .action-button {
-      display: block;
-      margin: 0 auto 20px;
-    }
-  </style>
 </head>
 <body>
-  <div class="cookie-banner cookie-banner-visible" id="cookieBanner">
+  <div class="cookie-banner" id="cookieBanner">
     <p>Nous utilisons des cookies pour améliorer votre expérience. <a href="/politique-cookies.html">En savoir plus</a>.</p>
     <button onclick="acceptCookies()">Accepter</button>
+  </div>
+  <div class="announcement-bar">
+    <p><strong>Lancement réussi ! Explorez nos ouvrages enchantés en vente dès maintenant. ✨</strong> <a href="/boutique.html" class="announcement-button">Voir la boutique</a></p>
   </div>
   <header>
     <div class="header-content">
@@ -48,23 +34,33 @@
           <li><a href="/contact.html">Contact</a></li>
           <li><a href="/blog.html">Blog</a></li>
           <li><a href="/creer-compte.html" class="account-icon"><img src="/images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail"></a></li>
+          <li><a href="/panier.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Panier" class="cart-icon-img" title="Voir le panier"></a></li>
           <li class="lang-switcher">
             <img src="/images/icon_globe.png" alt="Globe" class="globe-icon">
-            <a href="/index.html" class="lang-fr active">FR</a>
-            <a href="/en/index.html" class="lang-en">EN</a>
+            <a href="/confirmation.html" class="lang-fr active">FR</a>
+            <a href="/en/confirmation.html" class="lang-en">EN</a>
           </li>
         </ul>
       </nav>
     </div>
   </header>
   <main>
-    <section class="confirmation">
-      <h1>Inscription Réussie ! ✨</h1>
-      <p>Bienvenue dans l’univers des Éditions de la Sorcière Blanche !</p>
-      <p>Un email de confirmation a été envoyé à votre adresse.</p>
-      <p>Veuillez vérifier votre boîte de réception (et vos spams) pour valider votre compte.</p>
-      <p>Une fois validé, connectez-vous pour accéder à votre portail magique et découvrir nos contenus exclusifs.</p>
-      <a href="/creer-compte.html" class="action-button">Retour à la connexion <img src="/images/icon_people_button.png" alt="People" class="button-icon"></a>
+    <section class="confirmation-content">
+      <h1>Inscription Enchantée ! ✨</h1>
+      <img src="/images/icon_star.png" alt="Star Icon" class="confirmation-icon">
+      <div class="confirmation-details">
+        <p>Votre compte est créé avec succès !</p>
+        <p>Pas d'email de confirmation pour la sécurité – c'est normal. Vous pouvez vous connecter directement pour accéder à votre portail mystique.</p>
+        <div class="next-steps">
+          <h3>Prochaines étapes</h3>
+          <ul>
+            <li><a href="/creer-compte.html">Se connecter maintenant</a></li>
+            <li>Explorez notre <a href="/boutique.html">Boutique</a>.</li>
+            <li>Des questions ? <a href="/contact.html">Contactez-nous</a>.</li>
+          </ul>
+        </div>
+      </div>
+      <a href="/creer-compte.html" class="continue-shopping">Se Connecter</a>
     </section>
   </main>
   <footer>
