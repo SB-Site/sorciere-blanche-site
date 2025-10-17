@@ -215,7 +215,7 @@
       signupForm.addEventListener('submit', async function(event) {
         event.preventDefault();
         // CAPTCHA validation
-        const captcha = document.getElementById('captcha-answer').value.toLowerCase();
+        const captcha = document.getElementById('captcha-answer').value.toLowerCase().trim();
         if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captcha)) {
           console.error('Erreur CAPTCHA: Réponse incorrecte');
           alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
@@ -228,7 +228,11 @@
         });
         if (error) {
           console.error('Erreur inscription:', error);
-          alert('Erreur lors de l’inscription : ' + error.message);
+          if (error.message.includes('User already registered')) {
+            alert('Email déjà utilisé – connectez-vous ou utilisez un autre email.');
+          } else {
+            alert('Erreur lors de l’inscription : ' + error.message);
+          }
           return;
         }
         console.log('Inscription réussie:', data.user);
@@ -245,7 +249,7 @@
       loginForm.addEventListener('submit', async function(event) {
         event.preventDefault();
         // CAPTCHA validation
-        const captcha = document.getElementById('login-captcha').value.toLowerCase();
+        const captcha = document.getElementById('login-captcha').value.toLowerCase().trim();
         if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captcha)) {
           console.error('Erreur CAPTCHA: Réponse incorrecte');
           alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
@@ -284,4 +288,4 @@
     }
   </script>
 </body>
-</html> 
+</html>
