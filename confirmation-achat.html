@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/index.css">
   <link rel="stylesheet" href="/confirmation-achat.css">
   <link rel="stylesheet" href="/protection.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/script.js"></script>
 </head>
 <body>
@@ -122,7 +123,12 @@
   </footer>
   <script src="/protection.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    // Init Supabase client (pour session et log order)
+    const supabaseUrl = 'https://cskhhttnmjfmieqkayzg.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI';
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    document.addEventListener('DOMContentLoaded', async () => {
       // Récup order ID de l'URL (de PayPal redirect sur panier.html)
       const urlParams = new URLSearchParams(window.location.search);
       const orderId = urlParams.get('order');
@@ -130,7 +136,6 @@
         document.getElementById('order-id').textContent = orderId;
         document.getElementById('order-id-section').style.display = 'block';
       }
-
       // FIX : Lit 'lastOrderCart' pour récap (sauvegardé de panier.html)
       const lastOrderCart = JSON.parse(localStorage.getItem('lastOrderCart') || '[]');
       const orderList = document.getElementById('order-list');
@@ -146,10 +151,8 @@
         orderList.innerHTML = '<li>Aucun article dans cette commande.</li>';
       }
       orderTotal.textContent = total.toFixed(2) + ' €';
-
       // Efface la sauvegarde après usage (propreté)
       localStorage.removeItem('lastOrderCart');
-
       // Envoi email confirmation (simulé pour test ; en prod, utilise /api/send-email avec Supabase)
       fetch('/api/send-email', {
         method: 'POST',
@@ -160,6 +163,31 @@
           body: 'Merci pour votre achat ! Lien téléchargement sécurisé : https://sorciereblancheeditions.com/EBooks/Lazare-integrale.pdf (valide 7 jours). Order ID: ' + (orderId || 'N/A')
         })
       }).then(response => response.ok ? console.log('Email envoyé') : console.error('Email fail'));
+
+      // Bonus Point 4 : Log order en DB Supabase après confirmation (si user logué)
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user && orderId && total > 0) {
+        try {
+          const response = await fetch('/api/log-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              userId: session.user.id,
+              orderId: orderId,
+              total: total
+            })
+          });
+          if (response.ok) {
+            console.log('Order loggé en DB OK');
+          } else {
+            console.warn('Log order failed (non-blocking)');
+          }
+        } catch (err) {
+          console.error('Fetch log-order error:', err); // Silent fail
+        }
+      } else {
+        console.log('No user session or order details - skip DB log');
+      }
     });
   </script>
 </body>
