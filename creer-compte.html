@@ -214,9 +214,10 @@
     if (signupForm) {
       signupForm.addEventListener('submit', async function(event) {
         event.preventDefault();
+        event.stopPropagation();
         // CAPTCHA validation
-        const captcha = document.getElementById('captcha-answer').value.toLowerCase().trim();
-        if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captcha)) {
+        const captcha = document.getElementById('captcha-answer').value.toLowerCase().trim().replace(/\s/g, '');
+        if (!currentCaptcha.answers.map(a => a.toLowerCase().trim().replace(/\s/g, '')).includes(captcha)) {
           console.error('Erreur CAPTCHA: Réponse incorrecte');
           alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
           return;
@@ -248,9 +249,10 @@
     if (loginForm) {
       loginForm.addEventListener('submit', async function(event) {
         event.preventDefault();
+        event.stopPropagation();
         // CAPTCHA validation
-        const captcha = document.getElementById('login-captcha').value.toLowerCase().trim();
-        if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captcha)) {
+        const captcha = document.getElementById('login-captcha').value.toLowerCase().trim().replace(/\s/g, '');
+        if (!currentCaptcha.answers.map(a => a.toLowerCase().trim().replace(/\s/g, '')).includes(captcha)) {
           console.error('Erreur CAPTCHA: Réponse incorrecte');
           alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
           return;
