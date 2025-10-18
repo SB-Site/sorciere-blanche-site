@@ -214,9 +214,9 @@
       if (loginCaptcha) loginCaptcha.value = '';
     }
     document.addEventListener('DOMContentLoaded', initCaptcha);
-    // Fonction helper pour nettoyer CAPTCHA (minuscules, no spaces, no apostrophe)
+    // Fonction helper pour nettoyer CAPTCHA (minuscules, no spaces, no apostrophe droite ET courbe)
     function cleanCaptcha(input) {
-      return input.toLowerCase().trim().replace(/\s/g, '').replace(/'/g, '');
+      return input.toLowerCase().trim().replace(/\s/g, '').replace(/['’]/g, '');
     }
     // Signup form
     const signupForm = document.getElementById('signup-form');
