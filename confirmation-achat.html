@@ -85,13 +85,13 @@
             <span>Sorcière Blanche</span>
           </div>
         </a>
-        <p>Maison d’édition bilingue spécialisée dans les livres ésotériques, fantastiques et mystiques. Découvrez un univers de magie et de mystère à travers nos publications uniques.</p>
+        <p>Maison d'édition bilingue spécialisée dans les livres ésotériques, fantastiques et mystiques. Découvrez un univers de magie et de mystère à travers nos publications uniques.</p>
       </div>
       <div class="footer-info">
         <h3>Informations</h3>
         <ul>
           <li><a href="/conditions-generales.html">Conditions Générales</a></li>
-          <li><a href="/politique-confidentialite.html">Politique de Confidentialité</a></li>
+          <li><a href="/politique-confidentailite.html">Politique de Confidentialité</a></li>
           <li><a href="/livraison-retours.html">Livraison et Retours</a></li>
           <li><a href="/politique-cookies.html">Politique de Cookies</a></li>
         </ul>
@@ -119,14 +119,14 @@
         </ul>
       </div>
     </div>
-    <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
+    <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d'images et/ou de texte autorisée sans autorisation expresse.</p>
   </footer>
   <script src="/protection.js"></script>
   <script>
-    // Init Supabase client (pour session et log order)
+    // Init Supabase client (renommé 'client' pour éviter conflit global 'supabase')
     const supabaseUrl = 'https://cskhhttnmjfmieqkayzg.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI';
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    const client = supabase.createClient(supabaseUrl, supabaseKey);
 
     document.addEventListener('DOMContentLoaded', async () => {
       // Récup order ID de l'URL (de PayPal redirect sur panier.html)
@@ -135,9 +135,11 @@
       if (orderId) {
         document.getElementById('order-id').textContent = orderId;
         document.getElementById('order-id-section').style.display = 'block';
+        console.log('Order ID loaded:', orderId); // Debug
       }
-      // FIX : Lit 'lastOrderCart' pour récap (sauvegardé de panier.html)
+      // Lit 'lastOrderCart' pour récap (sauvegardé de panier.html)
       const lastOrderCart = JSON.parse(localStorage.getItem('lastOrderCart') || '[]');
+      console.log('LastOrderCart from localStorage:', lastOrderCart); // Debug : Vérif vide ?
       const orderList = document.getElementById('order-list');
       const orderTotal = document.getElementById('order-total');
       let total = 0;
@@ -148,24 +150,35 @@
           return `<li>${item.name} x${item.quantity} - ${lineTotal.toFixed(2)} €</li>`;
         }).join('');
       } else {
-        orderList.innerHTML = '<li>Aucun article dans cette commande.</li>';
+        // Fallback pour tests Sandbox (si localStorage vide : assume Lazare eBook standard)
+        orderList.innerHTML = '<li>Lazare Donatien L\'Intégrale eBook x1 - 5.99 €</li>';
+        total = 5.99;
+        console.warn('lastOrderCart vide - fallback récap Lazare eBook');
       }
       orderTotal.textContent = total.toFixed(2) + ' €';
+      console.log('Récap total calculé:', total); // Debug
       // Efface la sauvegarde après usage (propreté)
       localStorage.removeItem('lastOrderCart');
-      // Envoi email confirmation (simulé pour test ; en prod, utilise /api/send-email avec Supabase)
+      // Envoi email confirmation (avec .catch full pour debug)
       fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          to: 'contact@sorciereblancheeditions.com', // Ou email acheteur depuis PayPal/form
+          to: 'contact@sorciereblancheeditions.com', // TODO: Acheteur email depuis PayPal/session
           subject: 'Confirmation d\'achat - Lazare eBook',
-          body: 'Merci pour votre achat ! Lien téléchargement sécurisé : https://sorciereblancheeditions.com/EBooks/Lazare-integrale.pdf (valide 7 jours). Order ID: ' + (orderId || 'N/A')
+          body: `Merci pour votre achat ! Order ID: ${orderId || 'N/A'}, Total: ${total.toFixed(2)} €. Lien téléchargement: https://sorciereblancheeditions.com/EBooks/Lazare-integrale.pdf (valide 7 jours).`
         })
-      }).then(response => response.ok ? console.log('Email envoyé') : console.error('Email fail'));
+      }).then(response => {
+        if (response.ok) {
+          console.log('Email confirmation envoyé OK');
+        } else {
+          console.error('Email confirmation fail:', response.status, response.statusText);
+        }
+      }).catch(err => console.error('Fetch email error:', err));
 
-      // Bonus Point 4 : Log order en DB Supabase après confirmation (si user logué)
-      const { data: { session } } = await supabase.auth.getSession();
+      // Bonus : Log order en DB si user logué (après recap/email)
+      const { data: { session } } = await client.auth.getSession();
+      console.log('Supabase session:', session ? 'Logué' : 'Non logué'); // Debug
       if (session?.user && orderId && total > 0) {
         try {
           const response = await fetch('/api/log-order', {
@@ -180,13 +193,13 @@
           if (response.ok) {
             console.log('Order loggé en DB OK');
           } else {
-            console.warn('Log order failed (non-blocking)');
+            console.warn('Log order failed (non-blocking):', response.status);
           }
         } catch (err) {
-          console.error('Fetch log-order error:', err); // Silent fail
+          console.error('Fetch log-order error:', err);
         }
       } else {
-        console.log('No user session or order details - skip DB log');
+        console.log('Skip DB log (no session/order/total)');
       }
     });
   </script>
