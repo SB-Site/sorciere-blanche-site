@@ -179,7 +179,7 @@
   <script src="/protection.js"></script>
   <script>
     const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
-    
+   
     function showTab(tabName) {
       const tabs = document.querySelectorAll('.tab-content');
       const buttons = document.querySelectorAll('.tab-button');
@@ -187,8 +187,9 @@
       buttons.forEach(button => button.classList.remove('active'));
       document.getElementById(tabName).classList.add('active');
       event.target.classList.add('active');
+      // Réinitialiser CAPTCHA sur changement de tab pour question fraîche
+      initCaptcha();
     }
-
     // CAPTCHA logic
     let currentCaptcha = null;
     const captchaQuestions = [
@@ -206,74 +207,121 @@
       if (captchaLabelLogin) {
         captchaLabelLogin.textContent = currentCaptcha.question;
       }
+      // Clear inputs CAPTCHA
+      const captchaAnswer = document.getElementById('captcha-answer');
+      const loginCaptcha = document.getElementById('login-captcha');
+      if (captchaAnswer) captchaAnswer.value = '';
+      if (loginCaptcha) loginCaptcha.value = '';
     }
     document.addEventListener('DOMContentLoaded', initCaptcha);
-
+    // Fonction helper pour nettoyer CAPTCHA (minuscules, no spaces, no apostrophe)
+    function cleanCaptcha(input) {
+      return input.toLowerCase().trim().replace(/\s/g, '').replace(/'/g, '');
+    }
     // Signup form
     const signupForm = document.getElementById('signup-form');
     if (signupForm) {
       signupForm.addEventListener('submit', async function(event) {
         event.preventDefault();
         event.stopPropagation();
+        const submitBtn = document.getElementById('signup-button');
+        submitBtn.disabled = true; // Éviter double submit
         // CAPTCHA validation
-        const captcha = document.getElementById('captcha-answer').value.toLowerCase().trim().replace(/\s/g, '');
-        if (!currentCaptcha.answers.map(a => a.toLowerCase().trim().replace(/\s/g, '')).includes(captcha)) {
+        const captchaInput = document.getElementById('captcha-answer').value;
+        const cleanInput = cleanCaptcha(captchaInput);
+        const cleanAnswers = currentCaptcha.answers.map(a => cleanCaptcha(a));
+        console.log('CAPTCHA Input:', captchaInput, 'Clean Input:', cleanInput, 'Valid Answers:', cleanAnswers); // Debug
+        if (!cleanAnswers.includes(cleanInput)) {
           console.error('Erreur CAPTCHA: Réponse incorrecte');
-          alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
+          alert('Erreur CAPTCHA : Réponse incorrecte. Vérifiez l\'indice et réessayez (ex: sans espaces ou apostrophe, en minuscules).');
+          submitBtn.disabled = false;
           return;
         }
         const form = event.target;
-        const { data, error } = await supabase.auth.signUp({
-          email: form.email.value,
-          password: form.password.value
-        });
-        if (error) {
-          console.error('Erreur inscription:', error);
-          if (error.message.includes('User already registered')) {
-            alert('Email déjà utilisé – connectez-vous ou utilisez un autre email.');
-          } else {
-            alert('Erreur lors de l’inscription : ' + error.message);
+        try {
+          const { data, error } = await supabase.auth.signUp({
+            email: form.email.value,
+            password: form.password.value
+          });
+          if (error) {
+            console.error('Erreur inscription:', error);
+            if (error.message.includes('User already registered')) {
+              alert('Email déjà utilisé – connectez-vous ou utilisez un autre. Vérifiez CAPTCHA si erreur réponse.');
+            } else {
+              alert('Erreur lors de l’inscription : ' + error.message + '. Réessayez ou contactez-nous.');
+            }
+            submitBtn.disabled = false;
+            return;
           }
-          return;
+          console.log('Inscription réussie:', data.user);
+          // Auto-login après inscription (emails off, donc direct)
+          const { data: sessionData, error: sessionError } = await supabase.auth.signInWithPassword({
+            email: form.email.value,
+            password: form.password.value
+          });
+          if (sessionError) {
+            console.error('Erreur auto-login:', sessionError);
+            alert('Inscription OK, mais connexion auto échouée. Connectez-vous manuellement sur la page suivante.');
+          } else {
+            console.log('Auto-login réussie:', sessionData.user);
+          }
+          alert('Inscription réussie ! Redirection vers la confirmation...');
+          // Redirect après 1s pour voir alert
+          setTimeout(() => {
+            window.location.href = '/confirmation.html';
+          }, 1000);
+        } catch (err) {
+          console.error('Erreur globale:', err);
+          alert('Erreur inattendue lors de l’inscription. Vérifiez votre connexion et réessayez.');
+          submitBtn.disabled = false;
         }
-        console.log('Inscription réussie:', data.user);
-        alert('Inscription réussie ! Votre compte est créé (pas d\'email de confirmation pour la sécurité). Connectez-vous pour commencer.');
-        window.location.href = '/confirmation.html';
       });
     } else {
       console.error('Erreur: signup-form non trouvé');
     }
-
     // Login form
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
       loginForm.addEventListener('submit', async function(event) {
         event.preventDefault();
         event.stopPropagation();
+        const submitBtn = document.getElementById('login-button');
+        submitBtn.disabled = true; // Éviter double submit
         // CAPTCHA validation
-        const captcha = document.getElementById('login-captcha').value.toLowerCase().trim().replace(/\s/g, '');
-        if (!currentCaptcha.answers.map(a => a.toLowerCase().trim().replace(/\s/g, '')).includes(captcha)) {
-          console.error('Erreur CAPTCHA: Réponse incorrecte');
-          alert('Erreur : Réponse incorrecte. Veuillez vérifier votre réponse.');
+        const captchaInput = document.getElementById('login-captcha').value;
+        const cleanInput = cleanCaptcha(captchaInput);
+        const cleanAnswers = currentCaptcha.answers.map(a => cleanCaptcha(a));
+        console.log('CAPTCHA Login Input:', captchaInput, 'Clean Input:', cleanInput, 'Valid Answers:', cleanAnswers); // Debug
+        if (!cleanAnswers.includes(cleanInput)) {
+          console.error('Erreur CAPTCHA Login: Réponse incorrecte');
+          alert('Erreur CAPTCHA : Réponse incorrecte. Vérifiez l\'indice et réessayez (ex: sans espaces ou apostrophe, en minuscules).');
+          submitBtn.disabled = false;
           return;
         }
         const form = event.target;
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email: form.email.value,
-          password: form.password.value
-        });
-        if (error) {
-          console.error('Erreur connexion:', error);
-          alert('Erreur lors de la connexion : ' + error.message);
-          return;
+        try {
+          const { data, error } = await supabase.auth.signInWithPassword({
+            email: form.email.value,
+            password: form.password.value
+          });
+          if (error) {
+            console.error('Erreur connexion:', error);
+            alert('Erreur lors de la connexion : ' + error.message + '. Vérifiez vos identifiants ou CAPTCHA.');
+            submitBtn.disabled = false;
+            return;
+          }
+          console.log('Connexion réussie:', data.user);
+          // Redirect immédiat
+          window.location.href = '/portail.html';
+        } catch (err) {
+          console.error('Erreur globale login:', err);
+          alert('Erreur inattendue lors de la connexion. Vérifiez votre connexion et réessayez.');
+          submitBtn.disabled = false;
         }
-        console.log('Connexion réussie:', data.user);
-        window.location.href = '/portail.html';
       });
     } else {
       console.error('Erreur: login-form non trouvé');
     }
-
     // Reset password
     async function resetPassword() {
       const email = prompt('Entrez votre email pour réinitialiser le mot de passe :');
