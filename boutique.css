@@ -131,6 +131,11 @@
   line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  transition: -webkit-line-clamp 0.3s ease;
+}
+.shop-item:hover .item-description {
+  -webkit-line-clamp: unset;
+  overflow: visible;
 }
 .shop-item .item-collection {
   font-family: 'Montserrat', sans-serif;
@@ -477,4 +482,11 @@
 .shop-item:hover {
   max-height: none; /* Expand full texte */
   border-color: #D4AF37; /* Gold glow mystique */
+}
+.shop-item .item-description {
+  transition: -webkit-line-clamp 0.3s ease;
+}
+.shop-item:hover .item-description {
+  -webkit-line-clamp: unset;
+  overflow: visible;
 }
