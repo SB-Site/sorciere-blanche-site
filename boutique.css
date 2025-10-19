@@ -88,10 +88,14 @@
   text-align: center;
   min-height: 400px;
   min-width: 260px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, max-height 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+  max-height: 300px; /* Initial truncaté pour teaser */
 }
 .shop-item:hover {
   transform: scale(1.03);
+  max-height: none; /* Expand full texte */
+  border-color: #D4AF37; /* Gold glow mystique */
 }
 .shop-item .item-image, .shop-item .item-image-placeholder {
   width: 100%;
@@ -462,4 +466,15 @@
   .newsletter-form-container iframe {
     height: 500px;
   }
+}
+
+/* Hover expand for book items (Option 1) */
+.shop-item {
+  transition: max-height 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+  max-height: 300px; /* Initial truncaté pour teaser */
+}
+.shop-item:hover {
+  max-height: none; /* Expand full texte */
+  border-color: #D4AF37; /* Gold glow mystique */
 }
