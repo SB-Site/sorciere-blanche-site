@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-CA" class="home">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+  <title>The White Witch Editions</title>
+  <meta name="description" content="White Witch Editions: fantastical, esoteric books with 2025 pre-orders open! Fantasy, esotericism, associative publishing house.">
+  <meta name="keywords" content="fantasy, esotericism, fantastical books, book pre-orders, white witch editions, authentic magic">
+  <link rel="icon" href="/images/sb_logo_fr.jpg" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="/index.css">
+  <script async data-goatcounter="https://sorciereblancheeditions.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="cookie-banner cookie-banner-visible" id="cookieBanner">
+    <p>We use cookies to enhance your experience. <a href="/en/cookie-policy.html">Learn more</a>.</p>
+    <button onclick="acceptCookies()">Accept</button>
+  </div>
+  <div class="announcement-bar">
+    <p><strong>Launch Success! Dive into our enchanted tomes, available for purchase now. ✨</strong> <a href="/en/shop.html" class="announcement-button">Visit the Shop</a></p>
+  </div>
+  <div id="construction-popup" class="popup-container active">
+    <div class="popup-overlay"></div>
+    <div class="popup-content">
+      <h2>Welcome to Our Digital Grimoire! ✨</h2>
+      <div class="popup-text">
+        <p>Our sanctuary is open, with forms ready for sign-ups, inquiries, and beyond.</p>
+        <p>The English version and blog categories (just three scrolls for now—more spells brewing soon!) are in the works.</p>
+        <p>Send your enchanted missives through our forms or to <a href="mailto:contact@sorciereblancheeditions.com">contact@sorciereblancheeditions.com</a>.</p>
+        <p>Immerse yourself in our <a href="/en/shop.html">shop</a>, where our first tomes and delights await!</p>
+      </div>
+      <button onclick="closePopup()">Close the Grimoire</button>
+    </div>
+  </div>
+  <section class="welcome-banner">
+    <img src="/images/sb_banniere_accueil1.jpg" alt="Welcome Banner" class="welcome-banner-image">
+  </section>
+  <header>
+    <div class="header-content">
+      <a href="/en/index.html" class="logo-link">
+        <img src="/images/sb_logo_fr.jpg" alt="White Witch Editions Logo" class="logo">
+        <div class="header-title">
+          <span>The</span>
+          <span>White Witch Editions</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="/en/index.html" class="active">Home</a></li>
+          <li><a href="/en/shop.html">Shop</a></li>
+          <li><a href="/en/about.html">About</a></li>
+          <li><a href="/en/support-us.html">Support Us</a></li>
+          <li><a href="/en/contact.html">Contact</a></li>
+          <li><a href="/en/blog.html">Blog</a></li>
+          <li><a href="/en/create-account.html" class="account-icon"><img src="/images/sb_sorciere.png" alt="Join / Open My Portal" class="sorciere-icon" title="Join / Open My Portal"></a></li>
+          <li><a href="/en/cart.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Cart" class="cart-icon-img" title="View Cart"></a></li>
+          <li class="lang-switcher">
+            <img src="/images/icon_globe.png" alt="Globe" class="globe-icon">
+            <a href="/index.html" class="lang-fr">FR</a>
+            <a href="/en/index.html" class="lang-en active">EN</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="intro">
+      <div class="intro-container">
+        <div class="carousel">
+          <div class="carousel-inner">
+            <img src="/images/sb_carousel_1.jpg" alt="Carousel Image 1" class="carousel-image active">
+            <img src="/images/sb_carousel_2.jpg" alt="Carousel Image 2" class="carousel-image">
+            <img src="/images/sb_carousel_5.jpg?v=1" alt="Carousel Image 3" class="carousel-image">
+            <img src="/images/sb_carousel_4.jpg" alt="Carousel Image 4" class="carousel-image">
+          </div>
+          <button class="carousel-prev">❮</button>
+          <button class="carousel-next">❯</button>
+        </div>
+        <div class="intro-content">
+          <h1>Weave the Magic, Page by Enchanted Page...</h1>
+          <p>Join a literary adventure like no other.</p>
+          <p>Support the birth of an associative publishing house.</p>
+          <p>Dedicated to Fantasy, the Fantastical, and Authentic Esotericism.</p>
+          <a class="intro-button" href="/en/shop.html">Discover the Magic <img src="/images/icon_quill.png" alt="Quill" class="button-icon"></a>
+        </div>
+      </div>
+    </section>
+    <section class="newsletter-booktrailers">
+      <div class="newsletter">
+        <h2>Subscribe to Magic-Info</h2>
+        <p>Receive our latest news, exclusive offers, and your free eBook “Lazare’s Gift”.</p>
+        <div class="newsletter-form">
+          <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Claim Your Free eBook <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
+          <div class="newsletter-form-container" id="newsletterForm">
+            <iframe src="https://framaforms.org/bienvenue-aux-magic-info-de-la-sorciere-blanche-1754742297" width="100%" height="800px" frameborder="0"></iframe>
+            <button class="newsletter-close-button" onclick="toggleNewsletterForm()">Close</button>
+          </div>
+        </div>
+      </div>
+      <div class="booktrailers">
+        <h2>Watch Our Book Trailers</h2>
+        <div class="trailer-container">
+          <div class="trailer">
+            <iframe src="https://www.youtube.com/embed/-xWJyYCqbbU?rel=0" title="Booktrailer 1 - Lazare Donatien" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="trailer">
+            <iframe src="https://www.youtube.com/embed/NkThLCfhIeU?rel=0" title="Booktrailer 2 - Lazare Donatien" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="why-us">
+      <h2>Why Choose Our Editions?</h2>
+      <div class="reasons">
+        <div class="reason">
+          <img src="/images/icon_open_book.png" alt="Open Book" class="icon">
+          <p>Captivating tales blending fantasy, esotericism, and sheer enchantment.</p>
+        </div>
+        <div class="reason">
+          <img src="/images/icon_people.png" alt="Community" class="icon">
+          <p>A passionate community to share your love of the arcane.</p>
+        </div>
+        <div class="reason">
+          <img src="/images/icon_star.png" alt="Star" class="icon">
+          <p>Exquisite, bilingual editions accessible to all wanderers of wonder.</p>
+        </div>
+      </div>
+    </section>
+    <section class="join-us">
+      <h2>Join the Adventure</h2>
+      <p>Become a spellweaver in our universe by supporting our associative publishing house.</p>
+      <div class="actions">
+        <div class="action">
+          <img src="/images/icon_heart.png" alt="Support" class="icon">
+          <p>Back our mission to champion magic and creativity.</p>
+          <a href="/en/support-us.html" class="action-button">I Support <img src="/images/icon_heart.png" alt="Heart" class="button-icon"></a>
+        </div>
+        <div class="action">
+          <img src="/images/icon_people_button.png" alt="Join" class="icon">
+          <p>Create an account for exclusive realms of content.</p>
+          <a href="/en/create-account.html" class="action-button">Create My Account <img src="/images/icon_people_button.png" alt="People" class="button-icon"></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="/en/index.html">
+          <img src="/images/sb_logo_fr.jpg" alt="White Witch Editions Logo" class="logo">
+          <div class="footer-title">
+            <span>The</span>
+            <span>White Witch Editions</span>
+          </div>
+        </a>
+        <p>Bilingual publishing house specializing in esoteric, fantastical, and mystical books. Discover a realm of magic and mystery through our unique publications.</p>
+      </div>
+      <div class="footer-info">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="/en/terms.html">Terms and Conditions</a></li>
+          <li><a href="/en/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/en/shipping-returns.html">Shipping and Returns</a></li>
+          <li><a href="/en/cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-menu">
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="/en/index.html" class="active">Home</a></li>
+          <li><a href="/en/shop.html">Shop</a></li>
+          <li><a href="/en/about.html">About</a></li>
+          <li><a href="/en/support-us.html">Support Us</a></li>
+          <li><a href="/en/contact.html">Contact</a></li>
+          <li><a href="/en/blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <ul>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="/images/icon_x.png" alt="X" class="social-icon"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/channel/UCBmw0xK4a8VOeuXav06P5og"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 White Witch Editions. All rights reserved. No reproduction of images or text permitted without express authorization.</p>
+  </footer>
+  <script src="/script.js"></script>
+  <script src="/protection.js"></script>
+</body>
+</html>
