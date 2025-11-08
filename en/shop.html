@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - White Witch Publishing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/shop.css">
+  <link rel="stylesheet" href="/protection.css">
+  <script src="/cart.js"></script>
+</head>
+<body>
+  <div class="cookie-banner" id="cookieBanner">
+    <p>We use cookies to enhance your experience. <a href="/en/cookie-policy.html">Learn more</a>.</p>
+    <button onclick="acceptCookies()">Accept</button>
+  </div>
+  <div class="announcement-bar">
+    <p><strong>Launch Success! Dive into our enchanted tomes, available for purchase now. ✨</strong> <a href="/en/shop.html" class="announcement-button">Visit the Shop</a></p>
+  </div>
+  <header>
+    <div class="header-content">
+      <a href="/en/index.html" class="logo-link">
+        <img src="/images/sb_logo_en.jpg" alt="White Witch Publishing Logo" class="logo">
+        <div class="header-title">
+          <span>White Witch</span>
+          <span>Publishing</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="/en/index.html">Home</a></li>
+          <li><a href="/en/shop.html" class="active">Shop</a></li>
+          <li><a href="/en/about.html">About</a></li>
+          <li><a href="/en/support-us.html">Support Us</a></li>
+          <li><a href="/en/contact.html">Contact</a></li>
+          <li><a href="/en/blog.html">Blog</a></li>
+          <li><a href="/en/create-account.html" class="account-icon"><img src="/images/sb_sorciere.png" alt="Join / Open My Portal" class="sorciere-icon" title="Join / Open My Portal"></a></li>
+          <li><a href="/en/cart.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Cart" class="cart-icon-img" title="View Cart"></a></li>
+          <li class="lang-switcher">
+            <img src="/images/icon_globe.png" alt="Globe" class="globe-icon">
+            <a href="/boutique.html" class="lang-fr">FR</a>
+            <a href="/en/shop.html" class="lang-en active">EN</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="shop-content">
+      <h1>Our Mystical Shop</h1>
+      <img src="/images/icon_infinity.png" alt="Infinity Icon" class="title-icon">
+      <div class="shop-subtitle">
+        <p>Discover our fantastical novels and esoteric booklets, bilingual (French/English from 2026). Coming soon: spiritual guides, comics & mangas, and a collection of magical goodies.</p>
+        <p>A secret board game brews in the shadows... stay tuned! Secure payments via PayPal for an enchanted experience.</p>
+        <p class="account-encouragement">Create a free account to track your orders and access your mystical portal! <a href="/en/create-account.html" class="btn-primary">Create Account</a></p>
+      </div>
+      <div class="shop-philtres">
+        <h2>Filters</h2>
+        <div class="philtres-buttons">
+          <button class="philtres-button active" data-filter="all">All</button>
+          <button class="philtres-button" data-filter="bd-mangas">Comics & Mangas</button>
+          <button class="philtres-button" data-filter="goodies">Goodies, Games & Accessories</button>
+          <button class="philtres-button" data-filter="livrets">Booklets: Spirituality, Magic & Esotericism</button>
+          <button class="philtres-button" data-filter="recettes">Recipes & DIY</button>
+          <button class="philtres-button" data-filter="romans">Fantasy & Fantastical Novels</button>
+        </div>
+      </div>
+      <h2>Our Publications</h2>
+      <div class="shop-grid publications">
+        <div class="shop-item" data-category="romans">
+          <img src="/images/Ebook Cover (1st) Lazare Donatien The Complete Arc .jpg" alt="Lazare Donatien The Complete Arc" class="item-image">
+          <h3>Lazare Donatien The Complete Arc</h3>
+          <p class="item-description">Lazare returns in an enchanting re-edition! Immerse yourself in the full saga of this mystical universe.</p>
+          <p class="item-availability">Available now. Shipping not included for paperback (POD).</p>
+          <p class="item-bonus">Order and receive a dedicated digital wallpaper (smartphone or computer, specify via <a href="/en/contact.html">our contact page</a>)!</p>
+          <p class="item-dedication">Buy the eBook directly on our site and send us a message via <a href="/en/contact.html">our contact page</a> for a personalized dedication (include your name and preferences)! Download link sent by email after payment validation.</p>
+          <button class="action-button" onclick="addToCart('lazare-papier', 'Lazare Donatien The Complete Arc (paperback)', 20.00)">Add to Cart (paperback, $20.00) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
+          <button class="action-button" onclick="addToCart('lazare-ebook', 'Lazare Donatien The Complete Arc (eBook)', 5.99)">Add to Cart (eBook, $5.99) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
+        </div>
+        <div class="shop-item" data-category="romans">
+          <img src="/images/Ebook Cover - The Orphans' Odyssey.jpg" alt="The Orphans' Odyssey - The Complete Arc" class="item-image">
+          <h3>The Orphans' Odyssey - The Complete Arc</h3>
+          <p class="item-description">A fantastical epic where magic and mystery entwine. Discover the Orphans' adventures in this captivating complete arc.</p>
+          <p class="item-availability">Available from November 25, 2025, pre-orders open. Shipping not included for paperback (POD).</p>
+          <p class="item-bonus">Order and receive a dedicated digital wallpaper (smartphone or computer, specify via <a href="/en/contact.html">our contact page</a>) from November 25!</p>
+          <p class="item-dedication">Buy the eBook directly on our site and send us a message via <a href="/en/contact.html">our contact page</a> for a personalized dedication (include your name and preferences)!</p>
+          <button class="action-button" onclick="addToCart('orphans-papier', 'The Orphans\' Odyssey - The Complete Arc (paperback)', 19.00)">Add to Cart (paperback, $19.00) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
+          <button class="action-button" onclick="addToCart('orphans-ebook', 'The Orphans\' Odyssey - The Complete Arc (eBook)', 5.99)">Add to Cart (eBook, $5.99) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
+        </div>
+        <div class="shop-item" data-category="recettes">
+          <img src="/images/Coloring book cover - the Orphan's Odyssey theme.jpg" alt="Exclusive Coloring Book" class="item-image">
+          <h3>Exclusive Coloring Book</h3>
+          <p class="item-description">An exclusive coloring book inspired by the world of The Orphans' Odyssey. Immerse yourself in a magical universe to color.</p>
+          <p class="item-availability">Available from November 25, 2025, pre-orders open. Shipping not included for paperback (POD).</p>
+          <p class="item-bonus">Order and receive a dedicated digital wallpaper (smartphone or computer, specify via <a href="/en/contact.html">our contact page</a>) from November 25!</p>
+          <button class="action-button" onclick="addToCart('coloring-papier', 'Exclusive Coloring Book', 15.00)">Add to Cart (paperback, $15.00) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
+        </div>
+        <div class="shop-item" data-category="livrets">
+          <img src="/images/Games Booklet Cover.jpg" alt="Esoteric Magical Games Booklet" class="item-image">
+          <h3>Esoteric Magical Games Booklet</h3>
+          <p class="item-description">A unique booklet of games and puzzles infused with the magic of the White Witch, to gift or cherish.</p>
+          <p class="item-availability">Available from December 1, 2025, pre-orders open. Shipping not included for paperback (POD).</p>
+          <p class="item-bonus">Order and receive a dedicated digital wallpaper (smartphone or computer, specify via <a href="/en/contact.html">our contact page</a>) from December 1!</p>
+          <button class="action-button" onclick="addToCart('games-esoteric', 'Esoteric Magical Games Booklet', 12.00)">Add to Cart (paperback, $12.00) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
+        </div>
+        <div class="shop-item" data-category="romans">
+          <img src="/images/Ebook - Secrets of Samhain - en.jpg" alt="Secrets of Samhain" class="item-image">
+          <h3>Secrets of Samhain</h3>
+          <p class="item-description">An esoteric booklet exploring the mysteries of Samhain, with rituals and ancestral secrets.</p>
+          <p class="item-availability">Coming in 2026. The booklet is not yet available for pre-order.</p>
+        </div>
+      </div>
+      <div class="shop-item ebook-offer" style="text-align: center; margin: 40px 0; padding: 20px; border: 2px dashed #B87333; border-radius: 10px; background: rgba(184, 115, 51, 0.1);">
+        <img src="/images/Ebook Cover Lazare's Gift - EN.jpg" alt="Lazare’s Gift" class="item-image" style="width: 200px; height: auto; margin: 0 auto 20px;">
+        <h3>Lazare’s Gift – Free Gift!</h3>
+        <p class="item-description">An exclusive eBook gift for new newsletter subscribers! Discover unpublished secrets from Lazare’s universe.</p>
+        <p class="item-availability">Sign up for free to receive it instantly.</p>
+        <button class="newsletter-button" onclick="toggleNewsletterForm()" style="width: 100%; max-width: 250px; margin: 0 auto; padding: 12px 20px; font-size: 1em;">Sign Up for Newsletter <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
+        <div class="newsletter-form-container active" id="newsletterForm" style="display: none;">
+          <iframe src="https://framaforms.org/welcome-to-the-white-witchs-magic-info-revelations-1762611377" width="100%" height="800px" frameborder="0"></iframe>
+          <button class="newsletter-close-button" onclick="toggleNewsletterForm()">Close</button>
+        </div>
+      </div>
+      <h2>Our Goodies, Games & Accessories</h2>
+      <div class="shop-grid goodies">
+        <div class="shop-item" data-category="goodies">
+          <img src="/images/sb_goodie_coque.png" alt="Mystical Hermine iPhone Case" class="item-image">
+          <h3>Mystical Hermine iPhone Case</h3>
+          <p class="item-description">The Mystical Hermine watches over your phone...</p>
+          <p class="item-collection">Mystical Hermine: Inspired by the ermine, the Alchemist's faithful companion.</p>
+          <p class="item-availability">Shipping included. Specify iPhone model (e.g., iPhone 15 Pro) in customer note.</p>
+          <p class="item-bonus">Order and receive a dedicated digital wallpaper (smartphone or computer, specify in customer note or via <a href="/en/contact.html">our contact page</a>)!</p>
+          <a href="/en/product-phonecase.html" class="action-button">See More <img src="/images/icon_3hearts.png" alt="Three Hearts" class="button-icon"></a>
+        </div>
+        <div class="shop-item" data-category="goodies">
+          <img src="/images/sb_goodie_mug.png" alt="Mystical Hermine Mug" class="item-image">
+          <h3>Mystical Hermine Mug</h3>
+          <p class="item-description">Turn every pause into a ritual with this enchanted mug...</p>
+          <p class="item-collection">Mystical Hermine: Inspired by the ermine, the Alchemist's faithful companion.</p>
+          <p class="item-availability">Shipping included.</p>
+          <p class="item-bonus">Order and receive a dedicated digital wallpaper (smartphone or computer, specify in customer note or via <a href="/en/contact.html">our contact page</a>)!</p>
+          <a href="/en/product-mug.html" class="action-button">See More <img src="/images/icon_3hearts.png" alt="Three Hearts" class="button-icon"></a>
+        </div>
+        <div class="shop-item" data-category="goodies">
+          <img src="/images/sb_goodie_tote.png" alt="Mystical Hermine Tote Bag" class="item-image">
+          <h3>Mystical Hermine Tote Bag</h3>
+          <p class="item-description">Carry the secrets of the Mystical Hermine in this tote bag...</p>
+          <p class="item-collection">Mystical Hermine: Inspired by the ermine, the Alchemist's faithful companion.</p>
+          <p class="item-availability">Shipping included. Specify color (White, Beige, Black, Navy) in customer note.</p>
+          <p class="item-bonus">Order and receive a dedicated digital wallpaper (smartphone or computer, specify in customer note or via <a href="/en/contact.html">our contact page</a>)!</p>
+          <a href="/en/product-tote.html" class="action-button">See More <img src="/images/icon_3hearts.png" alt="Three Hearts" class="button-icon"></a>
+        </div>
+        <div class="shop-item" data-category="goodies">
+          <img src="/images/sb_goodie_sweat.png" alt="Mystical Hermine Hoodie (Back Decorated)" class="item-image">
+          <h3>Mystical Hermine Hoodie (Back Decorated)</h3>
+          <p class="item-description">A white hoodie adorned with the Mystical Hermine, front and back...</p>
+          <p class="item-collection">Mystical Hermine: Inspired by the ermine, the Alchemist's faithful companion.</p>
+          <p class="item-availability">Shipping included. Specify size (S, M, L, XL, 2XL, 3XL) in customer note.</p>
+          <p class="item-bonus">Order and receive a dedicated digital wallpaper (smartphone or computer, specify in customer note or via <a href="/en/contact.html">our contact page</a>)!</p>
+          <a href="/en/product-hoodie.html" class="action-button">See More <img src="/images/icon_3hearts.png" alt="Three Hearts" class="button-icon"></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="/en/index.html">
+          <img src="/images/sb_logo_en.jpg" alt="White Witch Publishing Logo" class="logo">
+          <div class="footer-title">
+            <span>White Witch</span>
+            <span>Publishing</span>
+          </div>
+        </a>
+        <p>Bilingual publishing house specializing in esoteric, fantastical, and mystical books. Discover a realm of magic and mystery through our unique publications.</p>
+      </div>
+      <div class="footer-info">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="/en/terms.html">Terms and Conditions</a></li>
+          <li><a href="/en/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/en/shipping-returns.html">Shipping and Conditions</a></li>
+          <li><a href="/en/cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-menu">
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="/en/index.html">Home</a></li>
+          <li><a href="/en/shop.html" class="active">Shop</a></li>
+          <li><a href="/en/about.html">About</a></li>
+          <li><a href="/en/support-us.html">Support Us</a></li>
+          <li><a href="/en/contact.html">Contact</a></li>
+          <li><a href="/en/blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <ul>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="/images/icon_x.png" alt="X" class="social-icon"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 White Witch Publishing. All rights reserved. No reproduction of images or text permitted without express authorization.</p>
+  </footer>
+  <script src="/script.js"></script>
+  <script src="/protection.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const newsletterIframe = document.querySelector('#newsletterForm iframe');
+      if (newsletterIframe) {
+        let iframeLoadedOnce = false;
+        newsletterIframe.addEventListener('load', () => {
+          console.log('Newsletter iframe loaded');
+          let iframeSrc;
+          try {
+            iframeSrc = newsletterIframe.contentWindow.location.href || newsletterIframe.src;
+          } catch (e) {
+            iframeSrc = newsletterIframe.src;
+          }
+          if (iframeSrc.includes('framaforms.org') && !iframeSrc.includes('welcome-to-the-white-witchs-magic-info-revelations')) {
+            console.log('Submission detected via Framaforms URL change');
+            const newsletterForm = document.getElementById('newsletterForm');
+            if (newsletterForm) {
+              setTimeout(() => {
+                newsletterForm.classList.remove('active');
+                newsletterForm.style.display = 'none';
+                console.log('Newsletter form hidden after 10s');
+              }, 10000);
+            }
+          } else if (iframeLoadedOnce) {
+            console.log('Second load detected - hiding newsletter form after submission');
+            const newsletterForm = document.getElementById('newsletterForm');
+            if (newsletterForm) {
+              setTimeout(() => {
+                newsletterForm.classList.remove('active');
+                newsletterForm.style.display = 'none';
+                console.log('Newsletter form hidden after 10s');
+              }, 10000);
+            }
+          } else {
+            console.log('First load - setting flag');
+            iframeLoadedOnce = true;
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
