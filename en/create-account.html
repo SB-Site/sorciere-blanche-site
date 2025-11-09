@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account - White Witch Publishing</title>
+  <meta name="description" content="Create your account to access exclusive content at White Witch Publishing.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="../index.css">
+  <link rel="stylesheet" href="create-account.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="cookie-banner" id="cookieBanner">
+    <p>We use cookies to improve your experience. <a href="../cookie-policy.html">Learn more</a>.</p>
+    <button onclick="acceptCookies()">Accept</button>
+  </div>
+  <div class="announcement-bar">
+    <p><strong>Successful Launch! Explore our enchanted books on sale now. ✨</strong> <a href="../shop.html" class="announcement-button">View the Shop</a></p>
+  </div>
+  <section class="welcome-banner">
+    <img src="../images/sb_banner_create-account-en.jpg" alt="Create Account Banner" class="banner-image">
+  </section>
+  <header>
+    <div class="header-content">
+      <a href="../index.html" class="logo-link">
+        <img src="../images/sb_logo_en.jpg" alt="White Witch Publishing Logo" class="logo">
+        <div class="header-title">
+          <span>White Witch</span>
+          <span>Publishing</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../shop.html">Shop</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../support-us.html">Support Us</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+          <li><a href="create-account.html" class="account-icon active"><img src="../images/sb_sorciere.png" alt="Join / Open My Portal" class="sorciere-icon" title="Join / Open My Portal"></a></li>
+          <li><a href="../panier.html" class="cart-icon"><img src="../images/icon_basket.png" alt="Cart" class="cart-icon-img" title="View Cart"></a></li>
+          <li class="lang-switcher">
+            <img src="../images/icon_globe.png" alt="Globe" class="globe-icon">
+            <a href="../creer-compte.html" class="lang-fr">FR</a>
+            <a href="create-account.html" class="lang-en active">EN</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="account-content">
+      <h1>Create or Log In to Your Account</h1>
+      <img src="../images/icon_infinity.png" alt="Infinity Icon" class="title-icon">
+      <h2>Join Our Mystical Community!</h2>
+      <div class="account-subtitle">
+        <p>Become a member of our magical community to access exclusive content, track your orders, and join the adventure of White Witch Publishing.</p>
+        <p>Create an account or log in to discover our esoteric, fantastical, and mystical publications, and enjoy benefits reserved for initiates!</p>
+      </div>
+      <div class="account-tabs">
+        <button class="tab-button active" onclick="showTab('signup')">Join</button>
+        <button class="tab-button" onclick="showTab('login')">Open My Portal</button>
+      </div>
+      <div class="account-form-container">
+        <div id="signup" class="tab-content active">
+          <form id="signup-form" method="POST">
+            <label for="username">Mystic Moniker</label>
+            <input type="text" id="username" name="username" placeholder="Mystic Moniker" required>
+            <label for="email">QuillMail</label>
+            <input type="email" id="email" name="email" placeholder="QuillMail" required>
+            <label for="password">Magic Formula</label>
+            <input type="password" id="password" name="password" placeholder="Magic Formula" required>
+            <div class="captcha-container">
+              <label id="captcha-label" for="captcha-answer">CAPTCHA Question: Loading...</label>
+              <input type="text" id="captcha-answer" name="captcha" placeholder="Enter your answer" required>
+            </div>
+            <button type="submit" id="signup-button" class="support-button" style="text-align: center; display: flex; justify-content: center; align-items: center;">Sign Up <img src="../images/icon_quill.png" alt="Quill" class="button-icon"></button>
+          </form>
+        </div>
+        <div id="login" class="tab-content">
+          <form id="login-form" method="POST">
+            <label for="login-email">QuillMail</label>
+            <input type="email" id="login-email" name="email" placeholder="QuillMail" required>
+            <label for="login-password">Magic Formula</label>
+            <input type="password" id="login-password" name="password" placeholder="Magic Formula" required>
+            <div class="captcha-container">
+              <label id="captcha-label-login" for="login-captcha">CAPTCHA Question: Loading...</label>
+              <input type="text" id="login-captcha" name="captcha" placeholder="Enter your answer" required>
+            </div>
+            <button type="submit" id="login-button" class="support-button" style="text-align: center; display: flex; justify-content: center; align-items: center;">Log In <img src="../images/icon_quill.png" alt="Quill" class="button-icon"></button>
+            <a href="#" onclick="resetPassword()" class="forgot-password">Forgot Password?</a>
+          </form>
+        </div>
+      </div>
+      <section class="benefits">
+        <h2>Why Create an Account?</h2>
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <img src="../images/icon_star.png" alt="Star Icon" class="benefit-icon">
+            <h3>Exclusive Content</h3>
+            <p>Access the QuillMail newsletter and excerpts reserved for members.</p>
+          </div>
+          <div class="benefit-item">
+            <img src="../images/icon_people.png" alt="People Icon" class="benefit-icon">
+            <h3>Order Tracking</h3>
+            <p>Manage your purchases and track your orders in real time.</p>
+          </div>
+          <div class="benefit-item">
+            <img src="../images/icon_coffee.png" alt="Coffee Icon" class="benefit-icon">
+            <h3>Special Offers</h3>
+            <p>Enjoy discounts and offers reserved for members.</p>
+          </div>
+          <div class="benefit-item">
+            <img src="../images/icon_envelope.png" alt="Envelope Icon" class="benefit-icon">
+            <h3>Mystical Community</h3>
+            <p>Participate in exclusive esoteric events and workshops.</p>
+          </div>
+        </div>
+      </section>
+      <section class="call-to-action">
+        <h2>Ready to Enchant Your Experience?</h2>
+        <p>Join our community or discover our publications right now!</p>
+        <div class="action-buttons">
+          <a href="../support-us.html" class="support-button">Support the Magic <img src="../images/icon_star.png" alt="Star" class="button-icon"></a>
+          <a href="../shop.html" class="support-button">Discover the Shop <img src="../images/icon_shopping_bag.png" alt="Shopping Bag" class="button-icon"></a>
+        </div>
+      </section>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="../index.html">
+          <img src="../images/sb_logo_en.jpg" alt="White Witch Publishing Logo" class="logo">
+          <div class="footer-title">
+            <span>White Witch</span>
+            <span>Publishing</span>
+          </div>
+        </a>
+        <p>Bilingual publishing house specializing in esoteric, fantastical, and mystical books. Discover a universe of magic and mystery through our unique publications.</p>
+      </div>
+      <div class="footer-info">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="../terms.html">Terms and Conditions</a></li>
+          <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="../shipping-returns.html">Shipping and Returns</a></li>
+          <li><a href="../cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-menu">
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../shop.html">Shop</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../support-us.html">Support Us</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <ul>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="../images/icon_x.png" alt="X" class="social-icon"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="../images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="../images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="../images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/channel/UCBmw0xK4a8VOeuXav06P5og"><img src="../images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="../images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 White Witch Publishing. All rights reserved. No reproduction of images and/or text authorized without express permission.</p>
+  </footer>
+  <script src="../script.js"></script>
+  <script src="../protection.js"></script>
+  <script>
+    // Supabase client
+    const { createClient } = supabase;
+    window.supabase = createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+    
+    // Tab switch
+    function showTab(tabName) {
+      const tabs = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.tab-button');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      buttons.forEach(button => button.classList.remove('active'));
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+    }
+    
+    // Reset password
+    async function resetPassword() {
+      const email = prompt('Enter your email to reset password:');
+      if (!email) return;
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://sorciereblancheeditions.com/reset-password.html'
+      });
+      if (error) {
+        console.error('Password reset error:', error);
+        alert('Error with password reset request: ' + error.message);
+      } else {
+        alert('A password reset email has been sent to ' + email);
+      }
+    }
+
+    // CAPTCHA (EN questions from rapport)
+    let currentCaptcha = null;
+    const captchaQuestions = [
+      { question: 'Name one of the White Witch\'s familiars?', answers: ['Raven', 'Owl'] },
+      { question: 'What is Lazare\'s family name?', answers: ['Donatien'] },
+      { question: 'Who is the author of Secrets of Samhain?', answers: ['The Alchemist'] }
+    ];
+    function initCaptcha(formId) {
+      currentCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
+      const captchaLabel = document.getElementById(formId === 'signup' ? 'captcha-label' : 'captcha-label-login');
+      if (captchaLabel) {
+        captchaLabel.textContent = currentCaptcha.question;
+      }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      initCaptcha('signup');
+      document.getElementById('login').addEventListener('shown.bs.tab', () => initCaptcha('login'));
+    });
+
+    // Signup form
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const captchaAnswer = document.getElementById('captcha-answer').value.toLowerCase();
+      if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captchaAnswer)) {
+        alert('CAPTCHA Error: Incorrect answer. Please try again.');
+        return;
+      }
+      const { data, error } = await supabase.auth.signUp({
+        email: form.email.value,
+        password: form.password.value,
+        options: { data: { username: form.username.value } }
+      });
+      if (error) {
+        console.error('Signup Error:', error);
+        alert('Signup error: ' + error.message);
+      } else {
+        alert('Success! Check your QuillMail for verification.');
+        form.reset();
+        initCaptcha('signup');
+      }
+    });
+
+    // Login form
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const captchaAnswer = document.getElementById('login-captcha').value.toLowerCase();
+      if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captchaAnswer)) {
+        alert('CAPTCHA Error: Incorrect answer. Please try again.');
+        return;
+      }
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: form.email.value,
+        password: form.password.value
+      });
+      if (error) {
+        console.error('Login Error:', error);
+        alert('Login error: ' + error.message);
+      } else {
+        alert('Welcome back, Mystic Soul! Your portal is open.');
+        window.location.href = '/en/portail.html';
+      }
+    });
+  </script>
+</body>
+</html>
