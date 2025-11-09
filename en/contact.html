@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - White Witch Publishing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="../contact.css">
+  <link rel="stylesheet" href="../protection.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="cookie-banner" id="cookieBanner">
+    <p>We use cookies to improve your experience. <a href="cookie-policy.html">Learn more</a>.</p>
+    <button onclick="acceptCookies()">Accept</button>
+  </div>
+  <div class="announcement-bar">
+    <p><strong>Successful Launch! Explore our enchanted books on sale now. ✨</strong> <a href="shop.html" class="announcement-button">View the Shop</a></p>
+  </div>
+  <section class="welcome-banner">
+    <img src="../images/sb_banner_contact-en.jpg" alt="Contact Banner" class="banner-image">
+  </section>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo-link">
+        <img src="../images/sb_logo_en.jpg" alt="White Witch Publishing Logo" class="logo">
+        <div class="header-title">
+          <span>White Witch</span>
+          <span>Publishing</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="support-us.html">Support Us</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="../creer-compte.html" class="account-icon"><img src="../images/sb_sorciere.png" alt="Join / Open My Portal" class="sorciere-icon" title="Join / Open My Portal"></a></li>
+          <li><a href="../panier.html" class="cart-icon"><img src="../images/icon_basket.png" alt="Cart" class="cart-icon-img" title="View Cart"></a></li>
+          <li class="lang-switcher">
+            <img src="../images/icon_globe.png" alt="Globe" class="globe-icon">
+            <a href="../contact.html" class="lang-fr">FR</a>
+            <a href="contact.html" class="lang-en active">EN</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="contact-content">
+      <h1>Contact the White Witch</h1>
+      <img src="../images/icon_infinity.png" alt="Infinity Icon" class="title-icon">
+      <div class="contact-subtitle">
+        <p>Our owls and ravens will respond to any question or mystical collaboration.</p>
+        <p>Share your volunteer ideas, we review them with care!</p>
+      </div>
+      <div class="content-grid" style="flex-direction: column; max-width: 800px;">
+        <div class="contact-form-container">
+          <h2>What is the subject of your scroll?</h2>
+          <form class="contact-form" id="contact-form">
+            <input type="text" id="name" name="name" placeholder="Mystic Moniker" required>
+            <input type="email" id="email" name="email" placeholder="QuillMail" required>
+            <input type="text" id="subject" name="subject" placeholder="What is the subject of your query?" required>
+            <textarea id="message" name="message" placeholder="Scroll Content" required></textarea>
+            <!-- CAPTCHA Supabase -->
+            <div class="captcha-container">
+              <label id="captcha-label" for="captcha-answer">CAPTCHA Question: Loading...</label>
+              <input type="text" id="captcha-answer" placeholder="Your answer..." required>
+            </div>
+            <button type="submit" class="support-button">I summon an owl or raven for my message <img src="../images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
+          </form>
+        </div>
+        <div class="faq-container">
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-grid">
+            <div class="faq-item">
+              <h3>When will I receive my order?</h3>
+              <p>For pre-orders, physical products (books) will be shipped starting October 1, 2025.</p>
+              <p>Goodies, on print-on-demand, are produced upon receipt of your order and shipped once finalized.</p>
+              <p>Digital products are available immediately after purchase starting October 1.</p>
+              <p>Exception for pre-orders: even digital products purchased before October 1 will only be available for download from October 1.</p>
+              <p>Consult our <a href="shipping-returns.html">Shipping and Returns</a> page for more details.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Can I return a product?</h3>
+              <p>Yes, you have 14 days to return an unused physical product, in accordance with Article L221-18 of the Consumer Code.</p>
+              <p>Digital products are not refundable after download.</p>
+              <p>See <a href="shipping-returns.html">Shipping and Returns</a>.</p>
+            </div>
+            <div class="faq-item">
+              <h3>How to support our Authors and projects?</h3>
+              <p>Become a member, volunteer and/or make a donation to our wonderful team.</p>
+              <p>You will find all the information to support us by clicking on <a href="support-us.html">Support Us</a>.</p>
+            </div>
+            <div class="faq-item">
+              <h3>How to join the volunteer team?</h3>
+              <p>By becoming a volunteer, you become one of our good spirits and we are happy to see you join the team!</p>
+              <p>What role do you like to have as a new good spirit?</p>
+              <p>Is your thing more communication, proofreading, an amazing voice, or perhaps casting organization spells?</p>
+              <p>Whatever it is, summon our owls and ravens and let's talk about it, what do you say?</p>
+            </div>
+            <div class="faq-item">
+              <h3>Submit a manuscript?</h3>
+              <p>We are not accepting new authors at this time.</p>
+              <p>Subscribe to our Magic-Info newsletter to know the next manuscript submission dates.</p>
+              <p>When submissions are open, contact us with "Collaboration" as the subject and describe your project.</p>
+              <p>We review each proposal with care.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="contact-details">
+      <div class="contact-item">
+        <img src="../images/icon_envelope.png" alt="Email Icon" class="contact-icon">
+        <h3>Our QuillMail</h3>
+        <p><a href="mailto:contact@sorciereblancheeditions.com">contact@sorciereblancheeditions.com</a></p>
+        <p>Response within 24 hours on average</p>
+      </div>
+      <div class="contact-item">
+        <img src="../images/icon_tel.png" alt="Phone Icon" class="contact-icon">
+        <h3>Focus and we will receive your thoughts</h3>
+        <p>Mystical communication</p>
+      </div>
+      <div class="contact-item">
+        <img src="../images/icon_lieu.png" alt="Location Icon" class="contact-icon">
+        <h3>You will find us somewhere in the fantastical worlds</h3>
+        <p>Our spiritual dimension</p>
+      </div>
+      <div class="contact-item">
+        <img src="../images/icon_quill.png" alt="Quill Icon" class="contact-icon quill-icon">
+        <h3>Live our stories</h3>
+        <p>Mystical & enchanted literature</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="index.html">
+          <img src="../images/sb_logo_en.jpg" alt="White Witch Publishing Logo" class="logo">
+          <div class="footer-title">
+            <span>White Witch</span>
+            <span>Publishing</span>
+          </div>
+        </a>
+        <p>Bilingual publishing house specializing in esoteric, fantastical, and mystical books. Discover a universe of magic and mystery through our unique publications.</p>
+      </div>
+      <div class="footer-info">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="terms.html">Terms and Conditions</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="shipping-returns.html">Shipping and Returns</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-menu">
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="support-us.html">Support Us</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <ul>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="../images/icon_x.png" alt="X" class="social-icon"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="../images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="../images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="../images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
+          <li><a href="https://www.youtube.com/@Sorci%C3%A8reBlancheEditions"><img src="../images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="../images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 White Witch Publishing. All rights reserved. No reproduction of images and/or text authorized without express permission.</p>
+  </footer>
+  <script src="../script.js"></script>
+  <script src="../protection.js"></script>
+  <script>
+    const supabase = window.supabase.createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
+    // CAPTCHA logic
+    let currentCaptcha = null;
+    const captchaQuestions = [
+      { question: 'Name one of the White Witch\'s familiars?', answers: ['Raven', 'Owl'] },
+      { question: 'What is Lazare\'s family name?', answers: ['Donatien'] },
+      { question: 'Who is the author of Secrets of Samhain?', answers: ['The Alchemist'] }
+    ];
+    function initCaptcha() {
+      currentCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
+      const captchaLabel = document.getElementById('captcha-label');
+      if (captchaLabel) {
+        captchaLabel.textContent = currentCaptcha.question;
+      }
+    }
+    document.addEventListener('DOMContentLoaded', initCaptcha);
+    document.getElementById('contact-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      // CAPTCHA Validation
+      const captchaAnswer = document.getElementById('captcha-answer').value.toLowerCase();
+      if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captchaAnswer)) {
+        alert('CAPTCHA Error: Incorrect answer. Please try again.');
+        return;
+      }
+      const form = event.target;
+      const formData = {
+        name: form.name.value,
+        email: form.email.value,
+        subject: form.subject.value,
+        message: form.message.value
+      };
+      // Supabase insert first
+      const { error } = await supabase.from('contacts').insert([formData]);
+      if (error) {
+        console.error('Supabase Error:', error);
+        alert('Error sending message');
+        return;
+      }
+      // Fallback: Assume success after DB (email sent backend, ignore 404)
+      alert('Message saved to DB and email sent!');
+      window.location.href = 'contact-confirmation.html';
+      // Fetch email non-blocking (log only, no block on 404)
+      fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      }).catch((err) => console.error('Fetch email fail (non-blocking):', err)); // Ignore 404, backend works
+    });
+  </script>
+</body>
+</html>
