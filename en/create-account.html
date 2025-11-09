@@ -90,7 +90,7 @@
               <input type="text" id="login-captcha" name="captcha" placeholder="Enter your answer" required>
             </div>
             <button type="submit" id="login-button" class="support-button" style="text-align: center; display: flex; justify-content: center; align-items: center;">Log In <img src="../images/icon_quill.png" alt="Quill" class="button-icon"></button>
-            <a href="#" onclick="resetPassword()" class="forgot-password">Forgot Password?</a>
+            <a href="#" onclick="resetPassword()" class="forgot-password">Forgot Magic Formula?</a>
           </form>
         </div>
       </div>
@@ -123,8 +123,8 @@
         <h2>Ready to Enchant Your Experience?</h2>
         <p>Join our community or discover our publications right now!</p>
         <div class="action-buttons">
-          <a href="../support-us.html" class="support-button">Support the Magic <img src="../images/icon_star.png" alt="Star" class="button-icon"></a>
-          <a href="../shop.html" class="support-button">Discover the Shop <img src="../images/icon_shopping_bag.png" alt="Shopping Bag" class="button-icon"></a>
+          <a href="/en/support-us.html" class="support-button">Support the Magic <img src="../images/icon_star.png" alt="Star" class="button-icon"></a>
+          <a href="/en/shop.html" class="support-button">Discover the Shop <img src="../images/icon_shopping_bag.png" alt="Shopping Bag" class="button-icon"></a>
         </div>
       </section>
     </section>
@@ -178,11 +178,11 @@
   <script src="../script.js"></script>
   <script src="../protection.js"></script>
   <script>
-    // Supabase client
+    // Supabase client global (standard to avoid "undefined" error, for reset pwd and if needed)
     const { createClient } = supabase;
     window.supabase = createClient('https://cskhhttnmjfmieqkayzg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNza2hodHRubWpmbWllcWtheXpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMTk1NDgsImV4cCI6MjA2OTg5NTU0OH0.or26KhHzKJ7oPYu0tQrXLIMwpBxZmHqGwC5rfGKrADI');
-    
-    // Tab switch
+   
+    // Tab switch (unchanged, for UI tabs)
     function showTab(tabName) {
       const tabs = document.querySelectorAll('.tab-content');
       const buttons = document.querySelectorAll('.tab-button');
@@ -190,87 +190,23 @@
       buttons.forEach(button => button.classList.remove('active'));
       document.getElementById(tabName).classList.add('active');
       event.target.classList.add('active');
+      // Re-init CAPTCHA via script.js if needed (no logic here, avoid duplication)
     }
     
-    // Reset password
+    // Reset password (kept intact, called from HTML)
     async function resetPassword() {
-      const email = prompt('Enter your email to reset password:');
+      const email = prompt('Enter your email to reset the magic formula:');
       if (!email) return;
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      const { error } = await window.supabase.auth.resetPasswordForEmail(email, {
         redirectTo: 'https://sorciereblancheeditions.com/reset-password.html'
       });
       if (error) {
-        console.error('Password reset error:', error);
-        alert('Error with password reset request: ' + error.message);
+        console.error('Magic formula reset error:', error);
+        alert('Error with magic formula reset request: ' + error.message);
       } else {
-        alert('A password reset email has been sent to ' + email);
+        alert('A magic formula reset email has been sent to ' + email);
       }
     }
-
-    // CAPTCHA (EN questions from rapport)
-    let currentCaptcha = null;
-    const captchaQuestions = [
-      { question: 'Name one of the White Witch\'s familiars?', answers: ['Raven', 'Owl'] },
-      { question: 'What is Lazare\'s family name?', answers: ['Donatien'] },
-      { question: 'Who is the author of Secrets of Samhain?', answers: ['The Alchemist'] }
-    ];
-    function initCaptcha(formId) {
-      currentCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
-      const captchaLabel = document.getElementById(formId === 'signup' ? 'captcha-label' : 'captcha-label-login');
-      if (captchaLabel) {
-        captchaLabel.textContent = currentCaptcha.question;
-      }
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      initCaptcha('signup');
-      document.getElementById('login').addEventListener('shown.bs.tab', () => initCaptcha('login'));
-    });
-
-    // Signup form
-    document.getElementById('signup-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const form = e.target;
-      const captchaAnswer = document.getElementById('captcha-answer').value.toLowerCase();
-      if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captchaAnswer)) {
-        alert('CAPTCHA Error: Incorrect answer. Please try again.');
-        return;
-      }
-      const { data, error } = await supabase.auth.signUp({
-        email: form.email.value,
-        password: form.password.value,
-        options: { data: { username: form.username.value } }
-      });
-      if (error) {
-        console.error('Signup Error:', error);
-        alert('Signup error: ' + error.message);
-      } else {
-        alert('Success! Check your QuillMail for verification.');
-        form.reset();
-        initCaptcha('signup');
-      }
-    });
-
-    // Login form
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const form = e.target;
-      const captchaAnswer = document.getElementById('login-captcha').value.toLowerCase();
-      if (!currentCaptcha.answers.map(a => a.toLowerCase()).includes(captchaAnswer)) {
-        alert('CAPTCHA Error: Incorrect answer. Please try again.');
-        return;
-      }
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: form.email.value,
-        password: form.password.value
-      });
-      if (error) {
-        console.error('Login Error:', error);
-        alert('Login error: ' + error.message);
-      } else {
-        alert('Welcome back, Mystic Soul! Your portal is open.');
-        window.location.href = '/en/portail.html';
-      }
-    });
   </script>
 </body>
 </html>
