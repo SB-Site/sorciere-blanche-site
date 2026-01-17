@@ -1,0 +1,15 @@
+name: Garder Supabase actif (Free plan)
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Tous les dimanches à 00:00 UTC (02:00 Paris)
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Envoyer un ping à Supabase
+        run: |
+          curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/" \
+          -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
