@@ -425,7 +425,6 @@ document.addEventListener('DOMContentLoaded', () => {
       createOrder: function(data, actions) {
         console.log('createOrder appelé – récupération panier');
 
-        // FIX : JSON.parse au lieu de stringify + fallback array vide
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
         if (cart.length === 0) {
@@ -484,25 +483,29 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.setItem('lastOrderCart', JSON.stringify(cart));
           console.log('lastOrderCart sauvegardé avant redirection:', cart);
 
-          // Envoi email via EmailJS (avec tes IDs réels)
-          emailjs.init("Les éditions de la Sorcière Blanche"); // ← Ton User ID
+          // Envoi email via EmailJS
+          try {
+            emailjs.init("Les éditions de la Sorcière Blanche");
 
-          emailjs.send("service_wjuzvqr", "template_r4iy5fj", {
-            name: details.payer.name.given_name || 'Cher Client',
-            email: details.payer.email_address,
-            orderId: details.id,
-            total: details.purchase_units[0].amount.value,
-            items: cart.map(item => `${item.name} x${item.quantity}`).join(', '),
-            downloadLink: 'https://sorciereblancheeditions.com/EBooks/Lazare-integrale.pdf' // Adapte si dynamique
-          }).then(() => {
-            console.log('Email envoyé avec succès !');
-          }).catch(err => {
-            console.error('Erreur envoi email:', err);
-          });
+            emailjs.send("service_wjuzvqr", "template_r4iy5fj", {
+              name: details.payer.name.given_name || 'Cher Client',
+              email: details.payer.email_address,
+              orderId: details.id,
+              total: details.purchase_units[0].amount.value,
+              items: cart.map(item => `${item.name} x${item.quantity}`).join(', '),
+              downloadLink: 'https://sorciereblancheeditions.com/EBooks/Lazare-integrale.pdf'
+            }).then(() => {
+              console.log('Email envoyé avec succès !');
+            }).catch(err => {
+              console.error('Erreur envoi email:', err);
+            });
+          } catch (e) {
+            console.error('EmailJS non chargé ou erreur init:', e);
+          }
 
           alert('Paiement réussi ! Merci ' + details.payer.name.given_name + ' ! Un email de confirmation vous a été envoyé.');
 
-          // Vide le panier après succès (optionnel mais recommandé)
+          // Vide le panier après succès
           localStorage.removeItem('cart');
 
           // Redirection avec order ID
@@ -525,7 +528,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn('Conteneur PayPal ou SDK non chargé sur cette page');
   }
 
-  // Anciens HostedButtons (optionnel – garde-les si tu veux plusieurs boutons)
+  // Anciens HostedButtons (optionnel)
   const paypalHostedButtons = [
     { id: 'paypal-container-ZFB68XN3ZKGV2', buttonId: 'ZFB68XN3ZKGV2' },
     { id: 'paypal-container-B6K6GWKCHHMT8', buttonId: 'B6K6GWKCHHMT8' },
