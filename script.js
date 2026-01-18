@@ -425,7 +425,8 @@ document.addEventListener('DOMContentLoaded', () => {
       createOrder: function(data, actions) {
         console.log('createOrder appelé – récupération panier');
 
-        const cart = JSON.stringify(localStorage.getItem('cart')) || [];
+        // FIX : JSON.parse au lieu de stringify + fallback array vide
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
         if (cart.length === 0) {
           alert('Votre panier est vide !');
@@ -501,7 +502,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           alert('Paiement réussi ! Merci ' + details.payer.name.given_name + ' ! Un email de confirmation vous a été envoyé.');
 
-          // Vide le panier après succès
+          // Vide le panier après succès (optionnel mais recommandé)
           localStorage.removeItem('cart');
 
           // Redirection avec order ID
