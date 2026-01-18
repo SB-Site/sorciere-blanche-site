@@ -409,7 +409,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // PARTIE PAYPAL – BOUTONS CUSTOM AVEC createOrder + item_total obligatoire
   // ======================================
 
-  // Sélectionne le conteneur du bouton PayPal sur la page panier (adapte l'ID si différent)
   const paypalContainer = document.getElementById('paypal-button-container');
 
   if (paypalContainer && window.paypal) {
@@ -426,7 +425,6 @@ document.addEventListener('DOMContentLoaded', () => {
       createOrder: function(data, actions) {
         console.log('createOrder appelé – récupération panier');
 
-        // Récupère le panier depuis localStorage (adapte les clés si besoin)
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
         if (cart.length === 0) {
@@ -443,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const subtotal = parseFloat(unitPrice) * quantity;
 
           items.push({
-            name: product.name.substring(0, 127), // limite PayPal
+            name: product.name.substring(0, 127),
             unit_amount: {
               currency_code: 'EUR',
               value: unitPrice
@@ -479,17 +477,27 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Paiement approuvé – capture en cours', data);
         return actions.order.capture().then(function(details) {
           console.log('Paiement capturé avec succès:', details);
+
+          // FIX PRINCIPAL : Sauvegarde le panier actuel pour le récap sur confirmation-paiement.html
+          const cart = JSON.parse(localStorage.getItem('cart')) || [];
+          localStorage.setItem('lastOrderCart', JSON.stringify(cart));
+          console.log('lastOrderCart sauvegardé avant redirection:', cart);
+
           alert('Paiement réussi ! Merci ' + details.payer.name.given_name + ' !');
-          // Vide le panier après succès
-          localStorage.removeItem('cart');
-          // Redirection vers page de confirmation
-          window.location.href = '/confirmation-paiement.html';
+
+          // Redirection avec order ID dans l'URL (pour affichage sur confirmation)
+          window.location.href = '/confirmation-paiement.html?order=' + details.id;
         });
       },
 
       onError: function(err) {
         console.error('Erreur PayPal:', err);
         alert('Une erreur est survenue lors du paiement. Veuillez réessayer.');
+      },
+
+      onCancel: function(data) {
+        console.log('Paiement annulé:', data);
+        alert('Paiement annulé. Vous pouvez réessayer à tout moment.');
       }
 
     }).render('#paypal-button-container');
@@ -497,7 +505,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn('Conteneur PayPal ou SDK non chargé sur cette page');
   }
 
-  // Anciens HostedButtons (tu peux les garder ou supprimer si tu passes full custom)
+  // Anciens HostedButtons (optionnel – garde-les si tu veux plusieurs boutons)
   const paypalHostedButtons = [
     { id: 'paypal-container-ZFB68XN3ZKGV2', buttonId: 'ZFB68XN3ZKGV2' },
     { id: 'paypal-container-B6K6GWKCHHMT8', buttonId: 'B6K6GWKCHHMT8' },
