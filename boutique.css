@@ -90,7 +90,7 @@
   min-height: 420px;
   min-width: 260px;
   transition: all 0.4s ease;
-  overflow: visible;
+  overflow: hidden; /* Contient tout hors hover */
   max-height: 540px;
   position: relative;
   z-index: 1;
@@ -102,6 +102,7 @@
   border-color: #D4AF37;
   box-shadow: 0 15px 40px rgba(107, 62, 117, 0.4);
   z-index: 10;
+  overflow: visible; /* Déploie au hover seulement */
 }
 .shop-item .item-image, .shop-item .item-image-placeholder {
   width: 100%;
@@ -138,15 +139,16 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   transition: -webkit-line-clamp 0.4s ease;
-  word-break: break-word; /* Empêche les liens de dépasser */
+  word-break: break-word;
   overflow-wrap: break-word;
+  max-width: 100%; /* Empêche débordement horizontal */
 }
 .shop-item:hover .item-description {
   -webkit-line-clamp: unset;
   overflow: visible;
 }
 .shop-item .item-description a {
-  word-break: break-all; /* Liens longs cassés proprement */
+  word-break: break-all;
   max-width: 100%;
   display: inline-block;
 }
@@ -187,4 +189,4 @@
   filter: sepia(100%) hue-rotate(15deg) saturate(600%) brightness(90%) contrast(150%) !important;
 }
 
-/* ... le reste de ton CSS reste inchangé (newsletter, product-content, media queries, etc.) */
+/* Le reste de ton CSS reste inchangé (newsletter, etc.) */
