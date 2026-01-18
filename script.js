@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
       createOrder: function(data, actions) {
         console.log('createOrder appelé – récupération panier');
 
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cart = JSON.stringify(localStorage.getItem('cart')) || [];
 
         if (cart.length === 0) {
           alert('Votre panier est vide !');
@@ -478,14 +478,33 @@ document.addEventListener('DOMContentLoaded', () => {
         return actions.order.capture().then(function(details) {
           console.log('Paiement capturé avec succès:', details);
 
-          // FIX PRINCIPAL : Sauvegarde le panier actuel pour le récap sur confirmation-paiement.html
+          // Sauvegarde le panier pour le récap sur confirmation-paiement.html
           const cart = JSON.parse(localStorage.getItem('cart')) || [];
           localStorage.setItem('lastOrderCart', JSON.stringify(cart));
           console.log('lastOrderCart sauvegardé avant redirection:', cart);
 
-          alert('Paiement réussi ! Merci ' + details.payer.name.given_name + ' !');
+          // Envoi email via EmailJS (avec tes IDs réels)
+          emailjs.init("Les éditions de la Sorcière Blanche"); // ← Ton User ID
 
-          // Redirection avec order ID dans l'URL (pour affichage sur confirmation)
+          emailjs.send("service_wjuzvqr", "template_r4iy5fj", {
+            name: details.payer.name.given_name || 'Cher Client',
+            email: details.payer.email_address,
+            orderId: details.id,
+            total: details.purchase_units[0].amount.value,
+            items: cart.map(item => `${item.name} x${item.quantity}`).join(', '),
+            downloadLink: 'https://sorciereblancheeditions.com/EBooks/Lazare-integrale.pdf' // Adapte si dynamique
+          }).then(() => {
+            console.log('Email envoyé avec succès !');
+          }).catch(err => {
+            console.error('Erreur envoi email:', err);
+          });
+
+          alert('Paiement réussi ! Merci ' + details.payer.name.given_name + ' ! Un email de confirmation vous a été envoyé.');
+
+          // Vide le panier après succès
+          localStorage.removeItem('cart');
+
+          // Redirection avec order ID
           window.location.href = '/confirmation-paiement.html?order=' + details.id;
         });
       },
