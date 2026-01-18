@@ -154,6 +154,60 @@
         });
       }
     });
+
+    // Rendu dynamique du bouton PayPal
+    function renderPayPalButton() {
+      if (document.getElementById('paypal-button-container').innerHTML !== '') {
+        return; // Évite double rendu
+      }
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          const cart = getCart();
+          if (cart.length === 0) {
+            alert('Votre panier est vide !');
+            return;
+          }
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2),
+                currency_code: 'EUR'
+              },
+              items: cart.map(item => ({
+                name: item.name,
+                unit_amount: { value: item.price.toFixed(2), currency_code: 'EUR' },
+                quantity: item.quantity
+              }))
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert('Paiement réussi pour ' + details.payer.name.given_name);
+            localStorage.setItem('lastOrderCart', JSON.stringify(getCart()));
+            localStorage.removeItem('cart');
+            window.location.href = '/confirmation-achat.html?order=' + details.id;
+          });
+        },
+        onError: function(err) {
+          console.error('Erreur PayPal:', err);
+          alert('Erreur lors du paiement. Veuillez réessayer.');
+        }
+      }).render('#paypal-button-container');
+    }
+
+    // Appel initial + après chaque update panier
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartDisplay();
+      renderPayPalButton(); // Premier rendu
+    });
+
+    // Override updateCartDisplay pour relancer PayPal si panier vide/plein
+    const originalUpdateCartDisplay = updateCartDisplay;
+    updateCartDisplay = function() {
+      originalUpdateCartDisplay();
+      renderPayPalButton(); // Recharge le bouton si panier change
+    };
   </script>
 </body>
 </html>
