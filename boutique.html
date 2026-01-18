@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="/index.css">
   <link rel="stylesheet" href="/boutique.css">
   <link rel="stylesheet" href="/protection.css">
-  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
   <script src="/cart.js"></script>
 </head>
 <body>
@@ -54,7 +53,7 @@
       <img src="/images/icon_infinity.png" alt="Infinity Icon" class="title-icon">
       <div class="shop-subtitle">
         <p>Découvrez nos romans fantastiques et livrets ésotériques bilingues (français/anglais dès 2026). À venir : guides spirituels, BD & mangas, et une collection de goodies magiques.</p>
-        <p>Un jeu de plateau inédit se prépare en secret… restez à l’écoute ! Paiements sécurisés via PayPal et Stripe pour une expérience enchantée.</p>
+        <p>Un jeu de plateau inédit se prépare en secret… restez à l’écoute ! Paiements sécurisés via votre panier pour une expérience enchantée.</p>
         <p class="account-encouragement">Créez un compte gratuit pour suivre vos commandes et accéder à votre portail mystique ! <a href="/creer-compte.html" class="btn-primary">Créer Compte</a></p>
       </div>
       <div class="shop-philtres">
@@ -77,16 +76,8 @@
           <p class="item-availability">Disponible dès maintenant. Frais de livraison non inclus pour le broché (POD).</p>
           <p class="item-bonus">Commandez et recevez un fond d’écran numérique dédicacé (smartphone ou ordinateur, à préciser via <a href="/contact.html">notre page contact</a>) !</p>
           <p class="item-dedication">Achetez l’eBook directement sur notre site et envoyez-nous un message via <a href="/contact.html">notre page contact</a> pour une dédicace personnalisée (indiquez votre nom et préférences) ! Lien de téléchargement envoyé par email après validation du paiement.</p>
-          <stripe-buy-button
-            buy-button-id="buy_btn_1SqdcfLz00kJ7IhAVQ3Yzwak"
-            publishable-key="pk_live_51SqbppLz00kJ7IhA6mdwQXrQBxr3CSVb1Np0NFzZ5tm3h8uvx92AQGZYaTG32wgG3qaErxP54lZ8wJfJ06AF2hEQ00ghcHkbdc"
-          >
-          </stripe-buy-button>
-          <stripe-buy-button
-            buy-button-id="buy_btn_1SqdUgLz00kJ7IhAf7u8Xo7f"
-            publishable-key="pk_live_51SqbppLz00kJ7IhA6mdwQXrQBxr3CSVb1Np0NFzZ5tm3h8uvx92AQGZYaTG32wgG3qaErxP54lZ8wJfJ06AF2hEQ00ghcHkbdc"
-          >
-          </stripe-buy-button>
+          <button class="action-button" onclick="addToCart('lazare-papier', 'Lazare Donatien L\'Intégrale (papier)', 20.00)">Ajouter au panier (papier, 20,00 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
+          <button class="action-button" onclick="addToCart('lazare-ebook', 'Lazare Donatien L\'Intégrale (eBook)', 5.99)">Ajouter au panier (eBook, 5,99 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
         </div>
         <div class="shop-item" data-category="livrets">
           <img src="/images/couverture-ebook-journal-dedicaces-digital.jpg" alt="Mon journal de dédicaces" class="item-image">
@@ -95,19 +86,7 @@
           <p class="item-description">Inspiré par notre tutoriel « Dédicace d’eBook : le tutoriel simple et fun » à lire sur notre blog https://sorciereblancheeditions.com/Articles/article-3.html ou sur notre Substack https://sorciereblanche.substack.com/p/dedicace-debook-le-tutoriel-simple, découvrez comment personnaliser vos dédicaces avec créativité. Ce journal physique prolonge cette magie : un espace tangible pour consigner vos dédicaces digitales et souvenirs de salons !</p>
           <p class="item-availability">Disponible dès maintenant dans sa version digitale unique (pas de version broché pour l'instant).</p>
           <p class="item-dedication">Pour une touche unique : demandez une couverture personnalisée ou une dédicace spéciale de la Sorcière Blanche à contact@sorciereblancheeditions.com. ✨</p>
-          <stripe-buy-button
-            buy-button-id="buy_btn_1SqdeXLz00kJ7IhA1DAugk85"
-            publishable-key="pk_live_51SqbppLz00kJ7IhA6mdwQXrQBxr3CSVb1Np0NFzZ5tm3h8uvx92AQGZYaTG32wgG3qaErxP54lZ8wJfJ06AF2hEQ00ghcHkbdc"
-          >
-          </stripe-buy-button>
-          <div>
-            <style>.pp-XYF9UENTN3B6U{text-align:center;border:none;border-radius:1.5rem;min-width:11.625rem;padding:0 2rem;height:3.125rem;font-weight:bold;background-color:#6B3E75;color:#ffffff;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.125rem;line-height:1.5rem;cursor:pointer;}</style>
-            <form action="https://www.paypal.com/ncp/payment/XYF9UENTN3B6U" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
-              <input class="pp-XYF9UENTN3B6U" type="submit" value="Acheter" />
-              <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
-              <section style="font-size: 0.75rem;"> Optimisé par <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
-            </form>
-          </div>
+          <button class="action-button" onclick="addToCart('journal-dedicaces-ebook', 'Mon journal de dédicaces (digital)', 5.00)">Ajouter au panier (digital, 5,00 €) <img src="/images/icon_basket.png" alt="Basket" class="button-icon"></button>
         </div>
         <div class="shop-item" data-category="romans">
           <img src="/images/sb_pub_Orph.Avent.jpg" alt="Les Orphelins de l'Avent - L'Intégrale" class="item-image">

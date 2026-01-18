@@ -115,7 +115,7 @@
   <script src="/protection.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const newsletterIframe = document.querySelector('#ebookForm iframe');
+      const newsletterIframe = document.querySelector('#newsletterForm iframe');
       if (newsletterIframe) {
         let iframeLoadedOnce = false;
         newsletterIframe.addEventListener('load', () => {
@@ -128,7 +128,7 @@
           }
           if (iframeSrc.includes('framaforms.org') && !iframeSrc.includes('bienvenue-aux-magic-info')) {
             console.log('Submission detected via Framaforms URL change');
-            const newsletterForm = document.getElementById('ebookForm');
+            const newsletterForm = document.getElementById('newsletterForm');
             if (newsletterForm) {
               setTimeout(() => {
                 newsletterForm.classList.remove('active');
@@ -138,7 +138,7 @@
             }
           } else if (iframeLoadedOnce) {
             console.log('Second load detected - hiding newsletter form after submission');
-            const newsletterForm = document.getElementById('ebookForm');
+            const newsletterForm = document.getElementById('newsletterForm');
             if (newsletterForm) {
               setTimeout(() => {
                 newsletterForm.classList.remove('active');
@@ -153,70 +153,6 @@
         });
       }
     });
-    function updateCartDisplay() {
-      const cartItemsDiv = document.getElementById('cart-items');
-      const cartSubtotal = document.getElementById('cart-subtotal');
-      const cartTotal = document.getElementById('cart-total');
-      const cart = getCart();
-      if (cart.length === 0) {
-        cartItemsDiv.innerHTML = '<p>Votre panier est vide.</p>';
-        cartSubtotal.textContent = 'Sous-total : 0,00 €';
-        cartTotal.textContent = 'Total estimé : 0,00 €';
-      } else {
-        cartItemsDiv.innerHTML = '<table><tr><th>Produit</th><th>Prix</th><th>Quantité</th><th>Action</th></tr>' +
-          cart.map(item => `
-            <tr>
-              <td>${item.name}</td>
-              <td>${item.price.toFixed(2)} €</td>
-              <td><input type="number" value="${item.quantity}" min="0" onchange="updateCart('${item.productId}', this.value)"></td>
-              <td><button class="remove-button" onclick="updateCart('${item.productId}', 0)">Supprimer</button></td>
-            </tr>
-          `).join('') + '</table>';
-        const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-        cartSubtotal.textContent = `Sous-total : ${subtotal.toFixed(2)} €`;
-        cartTotal.textContent = `Total estimé : ${subtotal.toFixed(2)} €`;
-      }
-    }
-    paypal.Buttons({
-      createOrder: function(data, actions) {
-        const cart = getCart();
-        if (cart.length === 0) {
-          alert('Votre panier est vide !');
-          return;
-        }
-        return actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2),
-              currency_code: 'EUR',
-              breakdown: {
-                item_total: { value: cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2), currency_code: 'EUR' }
-              }
-            },
-            items: cart.map(item => ({
-              name: item.name,
-              unit_amount: { value: item.price.toFixed(2), currency_code: 'EUR' },
-              quantity: item.quantity
-            }))
-          }]
-        });
-      },
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          alert('Paiement réussi pour ' + details.payer.name.given_name);
-          // FIX : Sauvegarde cart pour récap avant clear
-          const cart = getCart();
-          localStorage.setItem('lastOrderCart', JSON.stringify(cart));
-          localStorage.removeItem('cart');
-          window.location.href = '/confirmation-achat.html?order=' + details.id;
-        });
-      },
-      onError: function(err) {
-        console.error('Erreur PayPal:', err);
-        alert('Erreur lors du paiement. Veuillez réessayer.');
-      }
-    }).render('#paypal-button-container');
-    document.addEventListener('DOMContentLoaded', updateCartDisplay);
   </script>
 </body>
 </html>
