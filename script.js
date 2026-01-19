@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header');
   if (popupEl) {
     console.log('Popup element found:', popupEl);
-    // localStorage.removeItem('popupClosed'); // Décommente pour forcer l'affichage en test
     console.log('popupClosed in localStorage after force reset:', localStorage.getItem('popupClosed'));
 
     if (!localStorage.getItem('popupClosed')) {
@@ -475,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       onApprove: function(data, actions) {
         console.log('Paiement approuvé – capture en cours', data);
-        return actions.order.capture().then(function(details) {
+        return actions.order.capture().then(async function(details) {
           console.log('Paiement capturé avec succès:', details);
 
           // Sauvegarde le panier pour le récap sur confirmation-paiement.html
@@ -483,27 +482,34 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.setItem('lastOrderCart', JSON.stringify(cart));
           console.log('lastOrderCart sauvegardé avant redirection:', cart);
 
-          // Envoi email via EmailJS
+          // Envoi email via EmailJS v4 (init déjà fait en haut)
           try {
-            emailjs.init("Les éditions de la Sorcière Blanche");
-
-            emailjs.send("service_wjuzvqr", "template_r4iy5fj", {
+            const templateParams = {
               name: details.payer.name.given_name || 'Cher Client',
-              email: details.payer.email_address,
+              email: details.payer.email_address || '',  // requis pour To Email
               orderId: details.id,
               total: details.purchase_units[0].amount.value,
-              items: cart.map(item => `${item.name} x${item.quantity}`).join(', '),
-              downloadLink: 'https://sorciereblancheeditions.com/EBooks/Lazare-integrale.pdf'
-            }).then(() => {
-              console.log('Email envoyé avec succès !');
-            }).catch(err => {
-              console.error('Erreur envoi email:', err);
-            });
-          } catch (e) {
-            console.error('EmailJS non chargé ou erreur init:', e);
+              items: cart.map(item => `${item.name} x${item.quantity}`).join('\n')  // \n pour sauts de ligne dans email si besoin
+            };
+
+            console.log('Params envoyés à EmailJS :', templateParams);
+
+            const response = await emailjs.send(
+              "service_wjuzvqr",
+              "template_r4iy5fj",
+              templateParams
+            );
+
+            console.log('Email envoyé avec succès ! Status:', response.status, 'Text:', response.text);
+          } catch (err) {
+            console.error('Erreur détaillée EmailJS :', err);
+            if (err.status) console.error('Status code:', err.status);
+            if (err.text) console.error('Message serveur:', err.text);
+            // Option : alert pour test, mais en prod on peut juste logger
+            // alert('Échec envoi email de confirmation – mais paiement OK ! Contactez-nous si besoin.');
           }
 
-          alert('Paiement réussi ! Merci ' + details.payer.name.given_name + ' ! Un email de confirmation vous a été envoyé.');
+          alert('Paiement réussi ! Merci ' + (details.payer.name.given_name || 'Client') + ' ! Un email de confirmation vous a été envoyé (vérifiez vos spams si besoin).');
 
           // Vide le panier après succès
           localStorage.removeItem('cart');
@@ -528,7 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn('Conteneur PayPal ou SDK non chargé sur cette page');
   }
 
-  // Anciens HostedButtons (optionnel)
+  // Anciens HostedButtons (optionnel – inchangé)
   const paypalHostedButtons = [
     { id: 'paypal-container-ZFB68XN3ZKGV2', buttonId: 'ZFB68XN3ZKGV2' },
     { id: 'paypal-container-B6K6GWKCHHMT8', buttonId: 'B6K6GWKCHHMT8' },

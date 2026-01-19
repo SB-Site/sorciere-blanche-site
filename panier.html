@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="/base.css">
   <link rel="stylesheet" href="/index.css">
   <link rel="stylesheet" href="/panier.css">
-  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <!-- EmailJS SDK v4 officiel (remplace l'ancien déprécié) -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="https://www.paypal.com/sdk/js?client-id=AWCZF9PEBBxKqR8Mp1A-vHxSu5JllX5HgxPWTxe2NpeMRxUp6GtTr4er5pnlgoJfTd8LFAQXaZAd0N3b&currency=EUR"></script>
   <script src="/cart.js"></script>
 </head>
@@ -115,6 +116,14 @@
   <script src="/script.js"></script>
   <script src="/protection.js"></script>
   <script>
+    // Initialisation EmailJS v4 – OBLIGATOIRE avant tout send (mettez ça ici ou dans head si possible)
+    (function() {
+      emailjs.init({
+        publicKey: "S92nRGERo6JfwegIc"
+      });
+      console.log('EmailJS initialisé avec publicKey');
+    })();
+
     // Script newsletter (inchangé)
     document.addEventListener('DOMContentLoaded', () => {
       const newsletterIframe = document.querySelector('#newsletterForm iframe');
@@ -156,7 +165,7 @@
       }
     });
 
-    // Rendu dynamique du bouton PayPal
+    // Rendu dynamique du bouton PayPal (inchangé)
     function renderPayPalButton() {
       if (document.getElementById('paypal-button-container').innerHTML !== '') {
         return; // Évite double rendu

@@ -1,0 +1,68 @@
+/* announcement.css - Animations saisonnières pour la barre d'annonce */
+
+/* Barre d'annonce de base (commun à toutes saisons) */
+.announcement-bar {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fff8dc, #f5e6d3); /* Fond crème doux magique */
+  padding: 1rem;
+  text-align: center;
+  color: #8A2BE2;
+  font-weight: bold;
+  font-size: 1.1rem;
+  z-index: 1; /* stacking context principal */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* petit effet profondeur */
+}
+
+/* Le texte lui-même doit être au-dessus des animations */
+.announcement-bar p {
+  position: relative;
+  z-index: 2; /* Explicitement plus haut que ::before */
+  margin: 0;
+  pointer-events: auto; /* clics sur lien OK */
+}
+
+/* Animation générale de chute */
+.announcement-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* plus propre que top/left/width/height */
+  pointer-events: none;
+  animation: fall 20s linear infinite;
+  z-index: 0; /* Derrière le texte */
+  opacity: 0.75; /* Un peu plus doux */
+  will-change: transform; /* Meilleure perf animation */
+}
+
+@keyframes fall {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Hiver : Flocons de neige */
+.announcement-bar.winter::before {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><circle cx="8" cy="8" r="4" fill="%23FFFFFF" opacity="0.95"/></svg>') repeat;
+  animation-duration: 28s; /* Lent et majestueux pour flocons */
+  background-size: 24px 24px; /* Plus espacés */
+}
+
+/* Printemps : Pétales de sakura */
+.announcement-bar.spring::before {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 4a6 6 0 0 1 6 6 6 6 0 0 1-6 6 6 6 0 0 1-6-6 6 6 0 0 1 6-6" fill="%23FFB6C1" opacity="0.85"/></svg>') repeat;
+  animation-duration: 16s; /* Plus vif pour pétales */
+  background-size: 32px 32px;
+}
+
+/* Été : Grains de blé + coquelicots */
+.announcement-bar.summer::before {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect x="8" y="2" width="4" height="16" fill="%23DAA520" opacity="0.8"/><circle cx="10" cy="12" r="6" fill="%23FF4500" opacity="0.75"/></svg>') repeat;
+  animation-duration: 22s;
+  background-size: 28px 28px;
+}
+
+/* Automne : Feuilles d'érable */
+.announcement-bar.autumn::before {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 0 L14 6 L20 9 L14 12 L10 18 L6 12 L0 9 L6 6 Z" fill="%23FF7518" opacity="0.85"/></svg>') repeat;
+  animation-duration: 20s;
+  background-size: 30px 30px;
+}
