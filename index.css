@@ -412,3 +412,45 @@ nav ul li:nth-child(4) a[href="/je-soutiens.html"] {
   cursor: pointer !important;
   z-index: 1002 !important;
 }
+.trailer-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.trailer {
+  position: relative;
+  width: 560px;
+  max-width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  cursor: pointer;
+}
+.trailer-thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.trailer-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(42, 75, 61, 0.8);
+  color: var(--creme);
+  border: none;
+  width: 68px;
+  height: 48px;
+  font-size: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.trailer iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

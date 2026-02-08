@@ -9,44 +9,10 @@
   <meta name="keywords" content="magie blanche, ésotérisme authentique, fantasy, livres fantastiques, éditions sorcière blanche, grimoires">
   <link rel="icon" href="/images/sb_logo_fr.jpg" type="image/jpeg">
   
-  <!-- Self-host fonts (zéro tiers, LCP instantané) -->
-  <style>
-    @font-face {
-      font-family: 'Playfair Display';
-      src: url('/fonts/PlayfairDisplay-Regular.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Playfair Display';
-      src: url('/fonts/PlayfairDisplay-Italic.woff2') format('woff2');
-      font-weight: normal;
-      font-style: italic;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Cinzel';
-      src: url('/fonts/Cinzel-Regular.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Montserrat';
-      src: url('/fonts/Montserrat-Regular.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Montserrat';
-      src: url('/fonts/Montserrat-Bold.woff2') format('woff2');
-      font-weight: bold;
-      font-style: normal;
-      font-display: swap;
-    }
-  </style>
+  <!-- Google Fonts stable avec display=swap (CLS 0, revert temporaire self-host corrompu) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="/base.css">
   <link rel="stylesheet" href="/index.css">
@@ -126,7 +92,7 @@
   </header>
   <main>
     <section class="intro" aria-labelledby="intro-title">
-      <div class="intro-container" style="min-height: 600px;"> <!-- Anti-CLS -->
+      <div class="intro-container" style="min-height: 600px;">
         <div class="carousel" role="region" aria-label="Carousel des ouvrages">
           <div class="carousel-inner">
             <picture>
@@ -184,17 +150,11 @@
         <h2>Visualisez nos booktrailers</h2>
         <div class="trailer-container">
           <div class="trailer" data-video-id="-xWJyYCqbbU">
-            <picture>
-              <source srcset="/images/trailer1_thumbnail.webp" type="image/webp"> <!-- Si tu as thumbnail WebP, sinon fallback JPG -->
-              <img src="https://img.youtube.com/vi/-xWJyYCqbbU/maxresdefault.jpg" alt="Thumbnail Booktrailer 1 - Lazare Donatien" class="trailer-thumbnail" loading="lazy">
-            </picture>
+            <img src="https://img.youtube.com/vi/-xWJyYCqbbU/maxresdefault.jpg" alt="Thumbnail Booktrailer 1 - Lazare Donatien" class="trailer-thumbnail" loading="lazy">
             <button class="trailer-play" aria-label="Lire la vidéo">▶</button>
           </div>
           <div class="trailer" data-video-id="NkThLCfhIeU">
-            <picture>
-              <source srcset="/images/trailer2_thumbnail.webp" type="image/webp">
-              <img src="https://img.youtube.com/vi/NkThLCfhIeU/maxresdefault.jpg" alt="Thumbnail Booktrailer 2 - Lazare Donatien" class="trailer-thumbnail" loading="lazy">
-            </picture>
+            <img src="https://img.youtube.com/vi/NkThLCfhIeU/maxresdefault.jpg" alt="Thumbnail Booktrailer 2 - Lazare Donatien" class="trailer-thumbnail" loading="lazy">
             <button class="trailer-play" aria-label="Lire la vidéo">▶</button>
           </div>
         </div>
