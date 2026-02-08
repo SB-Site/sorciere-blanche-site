@@ -5,14 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
   <title>White Witch Publishing</title>
-  <meta name="description" content="White Witch Publishing: fantastical, esoteric books with 2025 pre-orders open! Fantasy, esotericism, associative publishing house.">
-  <meta name="keywords" content="fantasy, esotericism, fantastical books, book pre-orders, white witch publishing, authentic magic">
+  <meta name="description" content="White Witch Publishing: fantastical, esoteric books with 2025 pre-orders open! Fantasy, esotericism, associative publishing house dedicated to authentic white magic.">
+  <meta name="keywords" content="white magic, authentic esotericism, fantasy, fantastical books, white witch publishing, grimoires">
   <link rel="icon" href="/images/sb_logo_en.jpg" type="image/jpeg">
+  
+  <!-- Google Fonts stable avec display=swap (CLS 0) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="/base.css">
   <link rel="stylesheet" href="/index.css">
   <script async data-goatcounter="https://sorciereblancheeditions.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
 <body>
   <div class="cookie-banner cookie-banner-visible" id="cookieBanner">
@@ -36,18 +41,24 @@
     </div>
   </div>
   <section class="welcome-banner">
-    <img src="/images/sb_banner_home1-en.jpg" alt="Welcome Banner" class="welcome-banner-image">
+    <picture>
+      <source srcset="/images/sb_banner_home1-en.webp" type="image/webp">
+      <img src="/images/sb_banner_home1-en.jpg" alt="Welcome Banner – grimoires and esoteric light" class="welcome-banner-image" loading="lazy" width="1200" height="400">
+    </picture>
   </section>
   <header>
     <div class="header-content">
       <a href="/en/index.html" class="logo-link">
-        <img src="/images/sb_logo_en.jpg" alt="White Witch Publishing Logo" class="logo">
+        <picture>
+          <source srcset="/images/sb_logo_en.webp" type="image/webp">
+          <img src="/images/sb_logo_en.jpg" alt="White Witch Publishing Logo" class="logo" loading="lazy" width="100" height="100">
+        </picture>
         <div class="header-title">
           <span>White Witch</span>
           <span>Publishing</span>
         </div>
       </a>
-      <nav>
+      <nav aria-label="Main navigation">
         <ul>
           <li><a href="/en/index.html" class="active">Home</a></li>
           <li><a href="/en/shop.html">Shop</a></li>
@@ -55,10 +66,23 @@
           <li><a href="/en/support-us.html">Support Us</a></li>
           <li><a href="/en/contact.html">Contact</a></li>
           <li><a href="/en/blog.html">Blog</a></li>
-          <li><a href="/en/create-account.html" class="account-icon"><img src="/images/sb_sorciere.png" alt="Join / Open My Portal" class="sorciere-icon" title="Join / Open My Portal"></a></li>
-          <li><a href="/en/cart.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Cart" class="cart-icon-img" title="View Cart"></a></li>
+          <li><a href="/en/create-account.html" class="account-icon">
+            <picture>
+              <source srcset="/images/sb_sorciere.webp" type="image/webp">
+              <img src="/images/sb_sorciere.png" alt="Join / Open My Portal" class="sorciere-icon" title="Join / Open My Portal" loading="lazy" width="40" height="40">
+            </picture>
+          </a></li>
+          <li><a href="/en/cart.html" class="cart-icon">
+            <picture>
+              <source srcset="/images/icon_basket.webp" type="image/webp">
+              <img src="/images/icon_basket.png" alt="Cart" class="cart-icon-img" title="View Cart" loading="lazy" width="30" height="30">
+            </picture>
+          </a></li>
           <li class="lang-switcher">
-            <img src="/images/icon_globe.png" alt="Globe" class="globe-icon">
+            <picture>
+              <source srcset="/images/icon_globe.webp" type="image/webp">
+              <img src="/images/icon_globe.png" alt="Globe" class="globe-icon" loading="lazy" width="24" height="24">
+            </picture>
             <a href="/index.html" class="lang-fr">FR</a>
             <a href="/en/index.html" class="lang-en active">EN</a>
           </li>
@@ -67,24 +91,41 @@
     </div>
   </header>
   <main>
-    <section class="intro">
-      <div class="intro-container">
-        <div class="carousel">
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="intro-container" style="min-height: 600px;">
+        <div class="carousel" role="region" aria-label="Carousel of publications">
           <div class="carousel-inner">
-            <img src="/images/Ebook Cover (1st) Lazare Donatien The Complete Arc .jpg" alt="Carousel Image 1" class="carousel-image active">
-            <img src="/images/Ebook Cover (2nd) Lazare Donatien the complet Arc - en .jpg" alt="Carousel Image 2" class="carousel-image">
-            <img src="/images/Ebook - Secrets of Samhain - en.jpg?v=1" alt="Carousel Image 3" class="carousel-image">
-            <img src="/images/Ebook Cover - The Orphans' Odyssey.jpg" alt="Carousel Image 4" class="carousel-image">
+            <picture>
+              <source srcset="/images/Ebook Cover (1st) Lazare Donatien The Complete Arc .webp" type="image/webp">
+              <img src="/images/Ebook Cover (1st) Lazare Donatien The Complete Arc .jpg" alt="Cover 1 – Lazare Donatien The Complete Arc" class="carousel-image active" loading="lazy" width="400" height="600">
+            </picture>
+            <picture>
+              <source srcset="/images/Ebook Cover (2nd) Lazare Donatien the complet Arc - en .webp" type="image/webp">
+              <img src="/images/Ebook Cover (2nd) Lazare Donatien the complet Arc - en .jpg" alt="Cover 2 – Lazare Donatien The Complete Arc" class="carousel-image" loading="lazy" width="400" height="600">
+            </picture>
+            <picture>
+              <source srcset="/images/Ebook - Secrets of Samhain - en.webp" type="image/webp">
+              <img src="/images/Ebook - Secrets of Samhain - en.jpg?v=1" alt="Cover Secrets of Samhain" class="carousel-image" loading="lazy" width="400" height="600">
+            </picture>
+            <picture>
+              <source srcset="/images/Ebook Cover - The Orphans' Odyssey.webp" type="image/webp">
+              <img src="/images/Ebook Cover - The Orphans' Odyssey.jpg" alt="Cover The Orphans' Odyssey" class="carousel-image" loading="lazy" width="400" height="600">
+            </picture>
           </div>
-          <button class="carousel-prev">❮</button>
-          <button class="carousel-next">❯</button>
+          <button class="carousel-prev" aria-label="Previous image">❮</button>
+          <button class="carousel-next" aria-label="Next image">❯</button>
         </div>
         <div class="intro-content">
-          <h1>Weave the Magic, Page by Enchanted Page...</h1>
+          <h1 id="intro-title">Weave the Magic, Page by Enchanted Page...</h1>
           <p>Join a literary adventure like no other.</p>
           <p>Support the birth of an associative publishing house.</p>
           <p>Dedicated to Fantasy, the Fantastical, and Authentic Esotericism.</p>
-          <a class="intro-button" href="/en/shop.html">Discover the Magic <img src="/images/icon_quill.png" alt="Quill" class="button-icon"></a>
+          <a class="intro-button" href="/en/shop.html">Discover the Magic 
+            <picture>
+              <source srcset="/images/icon_quill.webp" type="image/webp">
+              <img src="/images/icon_quill.png" alt="" class="button-icon" loading="lazy" width="35" height="35">
+            </picture>
+          </a>
         </div>
       </div>
     </section>
@@ -93,9 +134,14 @@
         <h2>Subscribe to Magic-Info</h2>
         <p>Receive our latest news, exclusive offers, and your free eBook “Lazare’s Gift”.</p>
         <div class="newsletter-form">
-          <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Claim Your Free eBook <img src="/images/icon_envelope.png" alt="Envelope" class="button-icon"></button>
+          <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Claim Your Free eBook 
+            <picture>
+              <source srcset="/images/icon_envelope.webp" type="image/webp">
+              <img src="/images/icon_envelope.png" alt="" class="button-icon" loading="lazy" width="35" height="35">
+            </picture>
+          </button>
           <div class="newsletter-form-container" id="newsletterForm">
-            <iframe src="https://framaforms.org/welcome-to-the-white-witchs-magic-info-revelations-1762611377" width="100%" height="800px" frameborder="0"></iframe>
+            <iframe src="https://framaforms.org/welcome-to-the-white-witchs-magic-info-revelations-1762611377" width="100%" height="800" style="border:1px solid #EEE; background:white; border-radius: 8px;" frameborder="0" scrolling="no" loading="lazy"></iframe>
             <button class="newsletter-close-button" onclick="toggleNewsletterForm()">Close</button>
           </div>
         </div>
@@ -103,45 +149,72 @@
       <div class="booktrailers">
         <h2>Watch Our Book Trailers</h2>
         <div class="trailer-container">
-          <div class="trailer">
-            <iframe src="https://www.youtube.com/embed/-xWJyYCqbbU?rel=0" title="Booktrailer 1 - Lazare Donatien" frameborder="0" allowfullscreen></iframe>
+          <div class="trailer" data-video-id="-xWJyYCqbbU">
+            <img src="https://img.youtube.com/vi/-xWJyYCqbbU/hqdefault.jpg" alt="Thumbnail Booktrailer 1 - Lazare Donatien" class="trailer-thumbnail" loading="lazy">
+            <button class="trailer-play" aria-label="Play video">▶</button>
           </div>
-          <div class="trailer">
-            <iframe src="https://www.youtube.com/embed/NkThLCfhIeU?rel=0" title="Booktrailer 2 - Lazare Donatien" frameborder="0" allowfullscreen></iframe>
+          <div class="trailer" data-video-id="NkThLCfhIeU">
+            <img src="https://img.youtube.com/vi/NkThLCfhIeU/hqdefault.jpg" alt="Thumbnail Booktrailer 2 - Lazare Donatien" class="trailer-thumbnail" loading="lazy">
+            <button class="trailer-play" aria-label="Play video">▶</button>
           </div>
         </div>
       </div>
     </section>
-    <section class="why-us">
-      <h2>Why Choose Our Editions?</h2>
+    <section class="why-us" aria-labelledby="why-title">
+      <h2 id="why-title">Why Choose Our Editions?</h2>
       <div class="reasons">
         <div class="reason">
-          <img src="/images/icon_open_book.png" alt="Open Book" class="icon">
+          <picture>
+            <source srcset="/images/icon_open_book.webp" type="image/webp">
+            <img src="/images/icon_open_book.png" alt="" class="icon" loading="lazy" width="48" height="48">
+          </picture>
           <p>Captivating tales blending fantasy, esotericism, and sheer enchantment.</p>
         </div>
         <div class="reason">
-          <img src="/images/icon_people.png" alt="Community" class="icon">
+          <picture>
+            <source srcset="/images/icon_people.webp" type="image/webp">
+            <img src="/images/icon_people.png" alt="" class="icon" loading="lazy" width="48" height="48">
+          </picture>
           <p>A passionate community to share your love of the arcane.</p>
         </div>
         <div class="reason">
-          <img src="/images/icon_star.png" alt="Star" class="icon">
+          <picture>
+            <source srcset="/images/icon_star.webp" type="image/webp">
+            <img src="/images/icon_star.png" alt="" class="icon" loading="lazy" width="48" height="48">
+          </picture>
           <p>Exquisite, bilingual editions accessible to all wanderers of wonder.</p>
         </div>
       </div>
     </section>
-    <section class="join-us">
-      <h2>Join the Adventure</h2>
+    <section class="join-us" aria-labelledby="join-title">
+      <h2 id="join-title">Join the Adventure</h2>
       <p>Become a spellweaver in our universe by supporting our associative publishing house.</p>
       <div class="actions">
         <div class="action">
-          <img src="/images/icon_heart.png" alt="Support" class="icon">
+          <picture>
+            <source srcset="/images/icon_heart.webp" type="image/webp">
+            <img src="/images/icon_heart.png" alt="" class="icon" loading="lazy" width="48" height="48">
+          </picture>
           <p>Back our mission to champion magic and creativity.</p>
-          <a href="/en/support-us.html" class="action-button">I Support <img src="/images/icon_heart.png" alt="Heart" class="button-icon"></a>
+          <a href="/en/support-us.html" class="action-button">I Support 
+            <picture>
+              <source srcset="/images/icon_heart.webp" type="image/webp">
+              <img src="/images/icon_heart.png" alt="" class="button-icon" loading="lazy" width="48" height="48">
+            </picture>
+          </a>
         </div>
         <div class="action">
-          <img src="/images/icon_people_button.png" alt="Join" class="icon">
+          <picture>
+            <source srcset="/images/icon_people_button.webp" type="image/webp">
+            <img src="/images/icon_people_button.png" alt="" class="icon" loading="lazy" width="48" height="48">
+          </picture>
           <p>Create an account for exclusive realms of content.</p>
-          <a href="/en/create-account.html" class="action-button">Create My Account <img src="/images/icon_people_button.png" alt="People" class="button-icon"></a>
+          <a href="/en/create-account.html" class="action-button">Create My Account 
+            <picture>
+              <source srcset="/images/icon_people_button.webp" type="image/webp">
+              <img src="/images/icon_people_button.png" alt="" class="button-icon" loading="lazy" width="48" height="48">
+            </picture>
+          </a>
         </div>
       </div>
     </section>
@@ -150,7 +223,10 @@
     <div class="footer-content">
       <div class="footer-brand">
         <a href="/en/index.html">
-          <img src="/images/sb_logo_en.jpg" alt="White Witch Publishing Logo" class="logo">
+          <picture>
+            <source srcset="/images/sb_logo_en.webp" type="image/webp">
+            <img src="/images/sb_logo_en.jpg" alt="White Witch Publishing Logo" class="logo" loading="lazy" width="80" height="80">
+          </picture>
           <div class="footer-title">
             <span>White Witch</span>
             <span>Publishing</span>
@@ -165,7 +241,7 @@
           <li><a href="/en/privacy-policy.html">Privacy Policy</a></li>
           <li><a href="/en/shipping-returns.html">Shipping and Returns</a></li>
           <li><a href="/en/cookie-policy.html">Cookie Policy</a></li>
-          <li><a href="legal-notices.html">Legal Notices</a></li>
+          <li><a href="/legal-notices.html">Legal Notices</a></li>
         </ul>
       </div>
       <div class="footer-menu">
@@ -182,18 +258,48 @@
       <div class="footer-social">
         <h3>Follow Us</h3>
         <ul>
-          <li><a href="https://x.com/WhiteWitchEdits"><img src="/images/icon_x.png" alt="X" class="social-icon"></a></li>
-          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon"></a></li>
-          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon"></a></li>
-          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon"></a></li>
-          <li><a href="https://www.youtube.com/channel/UCBmw0xK4a8VOeuXav06P5og"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon"></a></li>
-          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon"></a></li>
+          <li><a href="https://x.com/WhiteWitchEdits">
+            <picture>
+              <source srcset="/images/icon_x.webp" type="image/webp">
+              <img src="/images/icon_x.png" alt="X" class="social-icon" loading="lazy" width="24" height="24">
+            </picture>
+          </a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/">
+            <picture>
+              <source srcset="/images/icon_facebook.webp" type="image/webp">
+              <img src="/images/icon_facebook.png" alt="Facebook" class="social-icon" loading="lazy" width="24" height="24">
+            </picture>
+          </a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/">
+            <picture>
+              <source srcset="/images/icon_instagram.webp" type="image/webp">
+              <img src="/images/icon_instagram.png" alt="Instagram" class="social-icon" loading="lazy" width="24" height="24">
+            </picture>
+          </a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/">
+            <picture>
+              <source srcset="/images/icon_pinterest.webp" type="image/webp">
+              <img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon" loading="lazy" width="24" height="24">
+            </picture>
+          </a></li>
+          <li><a href="https://www.youtube.com/channel/UCBmw0xK4a8VOeuXav06P5og">
+            <picture>
+              <source srcset="/images/icon_youtube.webp" type="image/webp">
+              <img src="/images/icon_youtube.png" alt="YouTube" class="social-icon" loading="lazy" width="24" height="24">
+            </picture>
+          </a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed">
+            <picture>
+              <source srcset="/images/icon_tiktok.webp" type="image/webp">
+              <img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon" loading="lazy" width="24" height="24">
+            </picture>
+          </a></li>
         </ul>
       </div>
     </div>
     <p class="copyright">© 2025 White Witch Publishing. All rights reserved. No reproduction of images or text permitted without express authorization.</p>
   </footer>
-  <script src="/script.js"></script>
-  <script src="/protection.js"></script>
+  <script src="/script.js" defer></script>
+  <script src="/protection.js" defer></script>
 </body>
 </html>
