@@ -3,92 +3,236 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Site en Enchantement - Les Éditions de la Sorcière Blanche</title>
-  <meta name="description" content="Les Éditions de la Sorcière Blanche sont temporairement en maintenance magique. Revenez bientôt pour découvrir nos grimoires de lumière et d’ésotérisme authentique.">
-  <meta name="keywords" content="magie blanche, ésotérisme authentique, sorcière blanche, éditions indépendantes, spiritualité, grimoires">
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+  <title>Les Éditions de la Sorcière Blanche</title>
+  <meta name="description" content="Éditions de la Sorcière Blanche : livres fantastiques, ésotériques, préventes ouvertes 2025 ! Fantasy, esoterisme, maison associative dédiée à la magie blanche authentique.">
+  <meta name="keywords" content="magie blanche, ésotérisme authentique, fantasy, livres fantastiques, éditions sorcière blanche, grimoires">
+  <link rel="icon" href="/images/sb_logo_fr.jpg" type="image/jpeg">
   
+  <!-- Self-host fonts (zéro tiers, LCP instantané) -->
   <style>
     @font-face {
       font-family: 'Playfair Display';
-      src: url('fonts/PlayfairDisplay-Regular.woff2') format('woff2');
+      src: url('/fonts/PlayfairDisplay-Regular.woff2') format('woff2');
       font-weight: normal;
       font-style: normal;
       font-display: swap;
     }
     @font-face {
       font-family: 'Playfair Display';
-      src: url('fonts/PlayfairDisplay-Italic.woff2') format('woff2');
+      src: url('/fonts/PlayfairDisplay-Italic.woff2') format('woff2');
       font-weight: normal;
       font-style: italic;
       font-display: swap;
     }
     @font-face {
       font-family: 'Cinzel';
-      src: url('fonts/Cinzel-Regular.woff2') format('woff2');
+      src: url('/fonts/Cinzel-Regular.woff2') format('woff2');
       font-weight: normal;
       font-style: normal;
       font-display: swap;
     }
     @font-face {
       font-family: 'Montserrat';
-      src: url('fonts/Montserrat-Regular.woff2') format('woff2');
+      src: url('/fonts/Montserrat-Regular.woff2') format('woff2');
       font-weight: normal;
       font-style: normal;
       font-display: swap;
     }
     @font-face {
       font-family: 'Montserrat';
-      src: url('fonts/Montserrat-Bold.woff2') format('woff2');
+      src: url('/fonts/Montserrat-Bold.woff2') format('woff2');
       font-weight: bold;
       font-style: normal;
       font-display: swap;
-    }
-
-    :root {
-      --creme: #F5E8D3;
-      --violet-amethyste: #6B3E75;
-      --cuivre: #B87333;
-    }
-    body {
-      background-color: var(--creme);
-      color: var(--violet-amethyste);
-      font-family: 'Playfair Display', serif;
-      text-align: center;
-      padding: 80px 20px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 38px;
-      color: var(--violet-amethyste);
-      margin-bottom: 30px;
-    }
-    p {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 18px;
-      max-width: 800px;
-      margin: 20px auto;
-      line-height: 1.7;
-    }
-    a {
-      color: var(--violet-amethyste);
-      text-decoration: underline;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-    a:hover {
-      color: var(--cuivre);
     }
   </style>
+  
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="/index.css">
+  <script async data-goatcounter="https://sorciereblancheeditions.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <main role="main" aria-label="Message de maintenance">
-    <h1>Le Grimoire de la Sorcière Blanche est en Enchantement ✨</h1>
-    <p>Ô âme curieuse, notre sanctuaire numérique est temporairement fermé pour des ajustements magiques raffinés. Revenez bientôt pour tisser la magie page après page !</p>
-    <p>En attendant, n’hésitez pas à nous contacter à <a href="mailto:contact@sorciereblancheeditions.com">contact@sorciereblancheeditions.com</a>.</p>
+  <div class="cookie-banner cookie-banner-visible" id="cookieBanner">
+    <p>Nous utilisons des cookies pour améliorer votre expérience. <a href="/politique-cookies.html">En savoir plus</a>.</p>
+    <button onclick="acceptCookies()">Accepter</button>
+  </div>
+  <div class="announcement-bar">
+    <p><strong>Lancement réussi ! Explorez nos ouvrages enchantés en vente dès maintenant. ✨</strong> <a href="/boutique.html" class="announcement-button">Voir la boutique</a></p>
+  </div>
+  <div id="construction-popup" class="popup-container active">
+    <div class="popup-overlay"></div>
+    <div class="popup-content">
+      <h2>Bienvenue dans notre grimoire numérique ! ✨</h2>
+      <div class="popup-text">
+        <p>Notre sanctuaire est prêt à vous accueillir avec des formulaires opérationnels pour l’inscription, le contact et plus encore.</p>
+        <p>La version anglaise et les catégories du blog (seulement trois parchemins pour l’instant, d’autres sortilèges arrivent bientôt !) sont en cours d’élaboration.</p>
+        <p>Envoyez vos plumes-mails via nos formulaires ou à <a href="mailto:contact@sorciereblancheeditions.com">contact@sorciereblancheeditions.com</a>.</p>
+        <p>Plongez dans notre <a href="/boutique.html">boutique</a> où nos premiers ouvrages et goodies vous attendent !</p>
+      </div>
+      <button onclick="closePopup()">Fermer le grimoire</button>
+    </div>
+  </div>
+  <section class="welcome-banner">
+    <img src="/images/sb_banniere_accueil1.jpg" alt="Bannière d'accueil – grimoires et lumière ésotérique" class="welcome-banner-image" loading="lazy">
+  </section>
+  <header>
+    <div class="header-content">
+      <a href="/index.html" class="logo-link">
+        <img src="/images/sb_logo_fr.jpg" alt="Logo Les Éditions de la Sorcière Blanche" class="logo" loading="lazy">
+        <div class="header-title">
+          <span>Les Éditions de la</span>
+          <span>Sorcière Blanche</span>
+        </div>
+      </a>
+      <nav aria-label="Navigation principale">
+        <ul>
+          <li><a href="/index.html" class="active">Accueil</a></li>
+          <li><a href="/boutique.html">Boutique</a></li>
+          <li><a href="/a-propos.html">À Propos</a></li>
+          <li><a href="/je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/creer-compte.html" class="account-icon"><img src="/images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail" loading="lazy"></a></li>
+          <li><a href="/panier.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Panier" class="cart-icon-img" title="Voir le panier" loading="lazy"></a></li>
+          <li class="lang-switcher">
+            <img src="/images/icon_globe.png" alt="Globe" class="globe-icon" loading="lazy">
+            <a href="/index.html" class="lang-fr active">FR</a>
+            <a href="/en/index.html" class="lang-en">EN</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="intro-container">
+        <div class="carousel" role="region" aria-label="Carousel des ouvrages">
+          <div class="carousel-inner">
+            <img src="/images/sb_carousel_1.jpg" alt="Couverture 1 – Lazare Donatien" class="carousel-image active" loading="lazy">
+            <img src="/images/sb_carousel_2.jpg" alt="Couverture 2 – Lazare Donatien" class="carousel-image" loading="lazy">
+            <img src="/images/sb_carousel_5.jpg?v=1" alt="Couverture Secrets de Samhain" class="carousel-image" loading="lazy">
+            <img src="/images/sb_carousel_4.jpg" alt="Couverture L'Odyssée des Orphelins" class="carousel-image" loading="lazy">
+          </div>
+          <button class="carousel-prev" aria-label="Image précédente">❮</button>
+          <button class="carousel-next" aria-label="Image suivante">❯</button>
+        </div>
+        <div class="intro-content">
+          <h1 id="intro-title">Tissons la Magie, page après page...</h1>
+          <p>Rejoignez une aventure littéraire unique.</p>
+          <p>Soutenez la naissance d'une maison d'édition associative.</p>
+          <p>Dédiée au Fantastique, à la Fantasy et à l'Ésotérisme authentique.</p>
+          <a class="intro-button" href="/boutique.html">Découvrir la magie <img src="/images/icon_quill.png" alt="" class="button-icon" loading="lazy"></a>
+        </div>
+      </div>
+    </section>
+    <section class="newsletter-booktrailers">
+      <div class="newsletter">
+        <h2>Inscrivez-vous à Magic-Info</h2>
+        <p>Recevez nos dernières actualités, offres exclusives et votre eBook offert “Le Cadeau de Lazare”.</p>
+        <div class="newsletter-form">
+          <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Recevez votre eBook offert <img src="/images/icon_envelope.png" alt="" class="button-icon" loading="lazy"></button>
+          <div class="newsletter-form-container" id="newsletterForm">
+            <iframe src="https://sorciereblanche.substack.com/embed" width="100%" height="400" style="border:1px solid #EEE; background:white; border-radius: 8px;" frameborder="0" scrolling="no" loading="lazy"></iframe>
+            <button class="newsletter-close-button" onclick="toggleNewsletterForm()">Fermer</button>
+          </div>
+        </div>
+      </div>
+      <div class="booktrailers">
+        <h2>Visualisez nos booktrailers</h2>
+        <div class="trailer-container">
+          <div class="trailer">
+            <iframe src="https://www.youtube.com/embed/-xWJyYCqbbU?rel=0" title="Booktrailer 1 - Lazare Donatien" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="trailer">
+            <iframe src="https://www.youtube.com/embed/NkThLCfhIeU?rel=0" title="Booktrailer 2 - Lazare Donatien" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="why-us" aria-labelledby="why-title">
+      <h2 id="why-title">Pourquoi choisir nos éditions ?</h2>
+      <div class="reasons">
+        <div class="reason">
+          <img src="/images/icon_open_book.png" alt="" class="icon" loading="lazy">
+          <p>Des récits captivants mêlant fantasy, ésotérisme et beauté.</p>
+        </div>
+        <div class="reason">
+          <img src="/images/icon_people.png" alt="" class="icon" loading="lazy">
+          <p>Une communauté passionnée pour partager votre amour de la magie.</p>
+        </div>
+        <div class="reason">
+          <img src="/images/icon_star.png" alt="" class="icon" loading="lazy">
+          <p>Des éditions soignées, bilingues et accessibles à tous.</p>
+        </div>
+      </div>
+    </section>
+    <section class="join-us" aria-labelledby="join-title">
+      <h2 id="join-title">Rejoignez l’aventure</h2>
+      <p>Devenez un acteur de notre univers en soutenant notre maison d’édition associative.</p>
+      <div class="actions">
+        <div class="action">
+          <img src="/images/icon_heart.png" alt="" class="icon" loading="lazy">
+          <p>Soutenez notre mission pour promouvoir la magie et la créativité.</p>
+          <a href="/je-soutiens.html" class="action-button">Je soutiens <img src="/images/icon_heart.png" alt="" class="button-icon" loading="lazy"></a>
+        </div>
+        <div class="action">
+          <img src="/images/icon_people_button.png" alt="" class="icon" loading="lazy">
+          <p>Créez un compte pour accéder à des contenus exclusifs.</p>
+          <a href="/creer-compte.html" class="action-button">Créer mon compte <img src="/images/icon_people_button.png" alt="" class="button-icon" loading="lazy"></a>
+        </div>
+      </div>
+    </section>
   </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="/index.html">
+          <img src="/images/sb_logo_fr.jpg" alt="Logo Les Éditions de la Sorcière Blanche" class="logo" loading="lazy">
+          <div class="footer-title">
+            <span>Les Éditions de la</span>
+            <span>Sorcière Blanche</span>
+          </div>
+        </a>
+        <p>Maison d’édition bilingue spécialisée dans les livres ésotériques, fantastiques et mystiques. Découvrez un univers de magie et de mystère à travers nos publications uniques.</p>
+      </div>
+      <div class="footer-info">
+        <h3>Informations</h3>
+        <ul>
+          <li><a href="/conditions-generales.html">Conditions Générales</a></li>
+          <li><a href="/politique-confidentialite.html">Politique de Confidentialité</a></li>
+          <li><a href="/livraison-retours.html">Livraison et Retours</a></li>
+          <li><a href="/politique-cookies.html">Politique de Cookies</a></li>
+          <li><a href="/mentions-legales.html">Mentions Légales</a></li>
+        </ul>
+      </div>
+      <div class="footer-menu">
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="/index.html" class="active">Accueil</a></li>
+          <li><a href="/boutique.html">Boutique</a></li>
+          <li><a href="/a-propos.html">À Propos</a></li>
+          <li><a href="/je-soutiens.html">Je Soutiens</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Suivez-nous</h3>
+        <ul>
+          <li><a href="https://x.com/WhiteWitchEdits"><img src="/images/icon_x.png" alt="X" class="social-icon" loading="lazy"></a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon" loading="lazy"></a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon" loading="lazy"></a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon" loading="lazy"></a></li>
+          <li><a href="https://www.youtube.com/channel/UCBmw0xK4a8VOeuXav06P5og"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon" loading="lazy"></a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon" loading="lazy"></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 Éditions de la Sorcière Blanche. Tous droits réservés. Aucune reproduction d’images et/ou de texte autorisée sans autorisation expresse.</p>
+  </footer>
+  <script src="/script.js" defer></script>
+  <script src="/protection.js" defer></script>
 </body>
 </html>
