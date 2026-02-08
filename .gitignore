@@ -3,4 +3,5 @@
 .vscode/
 # Local Netlify folder
 .netlify
-node_modules/
+node_modules/*.backup
+*.old-*
