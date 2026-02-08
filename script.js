@@ -325,3 +325,17 @@ document.querySelectorAll('.trailer').forEach(trailer => {
     trailer.appendChild(iframe);
   });
 });
+// Lazy YouTube trailers
+document.querySelectorAll('.trailer').forEach(trailer => {
+  trailer.addEventListener('click', () => {
+    const videoId = trailer.dataset.videoId;
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`;
+    iframe.title = 'Booktrailer';
+    iframe.frameBorder = '0';
+    iframe.allowFullscreen = true;
+    iframe.loading = 'lazy';
+    trailer.innerHTML = '';
+    trailer.appendChild(iframe);
+  });
+});
