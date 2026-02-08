@@ -7,15 +7,43 @@
   <meta name="description" content="Les Éditions de la Sorcière Blanche sont temporairement en maintenance magique. Revenez bientôt pour découvrir nos grimoires de lumière et d’ésotérisme authentique.">
   <meta name="keywords" content="magie blanche, ésotérisme authentique, sorcière blanche, éditions indépendantes, spiritualité, grimoires">
   
-  <!-- Preconnect & preload Google Fonts avec display=swap pour CLS 0 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet"></noscript>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
-  
   <style>
+    @font-face {
+      font-family: 'Playfair Display';
+      src: url('fonts/PlayfairDisplay-Regular.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Playfair Display';
+      src: url('fonts/PlayfairDisplay-Italic.woff2') format('woff2');
+      font-weight: normal;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Cinzel';
+      src: url('fonts/Cinzel-Regular.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Montserrat';
+      src: url('fonts/Montserrat-Regular.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Montserrat';
+      src: url('fonts/Montserrat-Bold.woff2') format('woff2');
+      font-weight: bold;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root {
       --creme: #F5E8D3;
       --violet-amethyste: #6B3E75;
@@ -46,13 +74,13 @@
       line-height: 1.7;
     }
     a {
-      color: var(--violet-amethyste); /* Contraste parfait par défaut */
+      color: var(--violet-amethyste);
       text-decoration: underline;
       font-weight: bold;
       transition: color 0.3s ease;
     }
     a:hover {
-      color: var(--cuivre); /* Touche chaleureuse au survol */
+      color: var(--cuivre);
     }
   </style>
 </head>
