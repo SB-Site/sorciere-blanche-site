@@ -51,7 +51,7 @@
   <link rel="stylesheet" href="/base.css">
   <link rel="stylesheet" href="/index.css">
   <script async data-goatcounter="https://sorciereblancheeditions.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
 <body>
   <div class="cookie-banner cookie-banner-visible" id="cookieBanner">
@@ -75,12 +75,18 @@
     </div>
   </div>
   <section class="welcome-banner">
-    <img src="/images/sb_banniere_accueil1.jpg" alt="Bannière d'accueil – grimoires et lumière ésotérique" class="welcome-banner-image" loading="lazy">
+    <picture>
+      <source srcset="/images/sb_banniere_accueil1.webp" type="image/webp">
+      <img src="/images/sb_banniere_accueil1.jpg" alt="Bannière d'accueil – grimoires et lumière ésotérique" class="welcome-banner-image" loading="lazy" width="1200" height="400">
+    </picture>
   </section>
   <header>
     <div class="header-content">
       <a href="/index.html" class="logo-link">
-        <img src="/images/sb_logo_fr.jpg" alt="Logo Les Éditions de la Sorcière Blanche" class="logo" loading="lazy">
+        <picture>
+          <source srcset="/images/sb_logo_fr.webp" type="image/webp">
+          <img src="/images/sb_logo_fr.jpg" alt="Logo Les Éditions de la Sorcière Blanche" class="logo" loading="lazy" width="100" height="100">
+        </picture>
         <div class="header-title">
           <span>Les Éditions de la</span>
           <span>Sorcière Blanche</span>
@@ -94,10 +100,23 @@
           <li><a href="/je-soutiens.html">Je Soutiens</a></li>
           <li><a href="/contact.html">Contact</a></li>
           <li><a href="/blog.html">Blog</a></li>
-          <li><a href="/creer-compte.html" class="account-icon"><img src="/images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail" loading="lazy"></a></li>
-          <li><a href="/panier.html" class="cart-icon"><img src="/images/icon_basket.png" alt="Panier" class="cart-icon-img" title="Voir le panier" loading="lazy"></a></li>
+          <li><a href="/creer-compte.html" class="account-icon">
+            <picture>
+              <source srcset="/images/sb_sorciere.webp" type="image/webp">
+              <img src="/images/sb_sorciere.png" alt="Rejoindre / Ouvrir Mon Portail" class="sorciere-icon" title="Rejoindre / Ouvrir Mon Portail" loading="lazy" width="40" height="40">
+            </picture>
+          </a></li>
+          <li><a href="/panier.html" class="cart-icon">
+            <picture>
+              <source srcset="/images/icon_basket.webp" type="image/webp">
+              <img src="/images/icon_basket.png" alt="Panier" class="cart-icon-img" title="Voir le panier" loading="lazy" width="30" height="30">
+            </picture>
+          </a></li>
           <li class="lang-switcher">
-            <img src="/images/icon_globe.png" alt="Globe" class="globe-icon" loading="lazy">
+            <picture>
+              <source srcset="/images/icon_globe.webp" type="image/webp">
+              <img src="/images/icon_globe.png" alt="Globe" class="globe-icon" loading="lazy" width="24" height="24">
+            </picture>
             <a href="/index.html" class="lang-fr active">FR</a>
             <a href="/en/index.html" class="lang-en">EN</a>
           </li>
@@ -107,13 +126,25 @@
   </header>
   <main>
     <section class="intro" aria-labelledby="intro-title">
-      <div class="intro-container">
+      <div class="intro-container" style="min-height: 600px;"> <!-- Anti-CLS -->
         <div class="carousel" role="region" aria-label="Carousel des ouvrages">
           <div class="carousel-inner">
-            <img src="/images/sb_carousel_1.jpg" alt="Couverture 1 – Lazare Donatien" class="carousel-image active" loading="lazy">
-            <img src="/images/sb_carousel_2.jpg" alt="Couverture 2 – Lazare Donatien" class="carousel-image" loading="lazy">
-            <img src="/images/sb_carousel_5.jpg?v=1" alt="Couverture Secrets de Samhain" class="carousel-image" loading="lazy">
-            <img src="/images/sb_carousel_4.jpg" alt="Couverture L'Odyssée des Orphelins" class="carousel-image" loading="lazy">
+            <picture>
+              <source srcset="/images/sb_carousel_1.webp" type="image/webp">
+              <img src="/images/sb_carousel_1.jpg" alt="Couverture 1 – Lazare Donatien" class="carousel-image active" loading="lazy" width="400" height="600">
+            </picture>
+            <picture>
+              <source srcset="/images/sb_carousel_2.webp" type="image/webp">
+              <img src="/images/sb_carousel_2.jpg" alt="Couverture 2 – Lazare Donatien" class="carousel-image" loading="lazy" width="400" height="600">
+            </picture>
+            <picture>
+              <source srcset="/images/sb_carousel_5.webp" type="image/webp">
+              <img src="/images/sb_carousel_5.jpg?v=1" alt="Couverture Secrets de Samhain" class="carousel-image" loading="lazy" width="400" height="600">
+            </picture>
+            <picture>
+              <source srcset="/images/sb_carousel_4.webp" type="image/webp">
+              <img src="/images/sb_carousel_4.jpg" alt="Couverture L'Odyssée des Orphelins" class="carousel-image" loading="lazy" width="400" height="600">
+            </picture>
           </div>
           <button class="carousel-prev" aria-label="Image précédente">❮</button>
           <button class="carousel-next" aria-label="Image suivante">❯</button>
@@ -123,7 +154,12 @@
           <p>Rejoignez une aventure littéraire unique.</p>
           <p>Soutenez la naissance d'une maison d'édition associative.</p>
           <p>Dédiée au Fantastique, à la Fantasy et à l'Ésotérisme authentique.</p>
-          <a class="intro-button" href="/boutique.html">Découvrir la magie <img src="/images/icon_quill.png" alt="" class="button-icon" loading="lazy"></a>
+          <a class="intro-button" href="/boutique.html">Découvrir la magie 
+            <picture>
+              <source srcset="/images/icon_quill.webp" type="image/webp">
+              <img src="/images/icon_quill.png" alt="" class="button-icon" loading="lazy" width="35" height="35">
+            </picture>
+          </a>
         </div>
       </div>
     </section>
@@ -132,7 +168,12 @@
         <h2>Inscrivez-vous à Magic-Info</h2>
         <p>Recevez nos dernières actualités, offres exclusives et votre eBook offert “Le Cadeau de Lazare”.</p>
         <div class="newsletter-form">
-          <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Recevez votre eBook offert <img src="/images/icon_envelope.png" alt="" class="button-icon" loading="lazy"></button>
+          <button type="button" class="newsletter-button" onclick="toggleNewsletterForm()">Recevez votre eBook offert 
+            <picture>
+              <source srcset="/images/icon_envelope.webp" type="image/webp">
+              <img src="/images/icon_envelope.png" alt="" class="button-icon" loading="lazy" width="35" height="35">
+            </picture>
+          </button>
           <div class="newsletter-form-container" id="newsletterForm">
             <iframe src="https://sorciereblanche.substack.com/embed" width="100%" height="400" style="border:1px solid #EEE; background:white; border-radius: 8px;" frameborder="0" scrolling="no" loading="lazy"></iframe>
             <button class="newsletter-close-button" onclick="toggleNewsletterForm()">Fermer</button>
@@ -142,11 +183,19 @@
       <div class="booktrailers">
         <h2>Visualisez nos booktrailers</h2>
         <div class="trailer-container">
-          <div class="trailer">
-            <iframe src="https://www.youtube.com/embed/-xWJyYCqbbU?rel=0" title="Booktrailer 1 - Lazare Donatien" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          <div class="trailer" data-video-id="-xWJyYCqbbU">
+            <picture>
+              <source srcset="/images/trailer1_thumbnail.webp" type="image/webp"> <!-- Si tu as thumbnail WebP, sinon fallback JPG -->
+              <img src="https://img.youtube.com/vi/-xWJyYCqbbU/maxresdefault.jpg" alt="Thumbnail Booktrailer 1 - Lazare Donatien" class="trailer-thumbnail" loading="lazy">
+            </picture>
+            <button class="trailer-play" aria-label="Lire la vidéo">▶</button>
           </div>
-          <div class="trailer">
-            <iframe src="https://www.youtube.com/embed/NkThLCfhIeU?rel=0" title="Booktrailer 2 - Lazare Donatien" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          <div class="trailer" data-video-id="NkThLCfhIeU">
+            <picture>
+              <source srcset="/images/trailer2_thumbnail.webp" type="image/webp">
+              <img src="https://img.youtube.com/vi/NkThLCfhIeU/maxresdefault.jpg" alt="Thumbnail Booktrailer 2 - Lazare Donatien" class="trailer-thumbnail" loading="lazy">
+            </picture>
+            <button class="trailer-play" aria-label="Lire la vidéo">▶</button>
           </div>
         </div>
       </div>
@@ -155,15 +204,24 @@
       <h2 id="why-title">Pourquoi choisir nos éditions ?</h2>
       <div class="reasons">
         <div class="reason">
-          <img src="/images/icon_open_book.png" alt="" class="icon" loading="lazy">
+          <picture>
+            <source srcset="/images/icon_open_book.webp" type="image/webp">
+            <img src="/images/icon_open_book.png" alt="" class="icon" loading="lazy" width="48" height="48">
+          </picture>
           <p>Des récits captivants mêlant fantasy, ésotérisme et beauté.</p>
         </div>
         <div class="reason">
-          <img src="/images/icon_people.png" alt="" class="icon" loading="lazy">
+          <picture>
+            <source srcset="/images/icon_people.webp" type="image/webp">
+            <img src="/images/icon_people.png" alt="" class="icon" loading="lazy" width="48" height="48">
+          </picture>
           <p>Une communauté passionnée pour partager votre amour de la magie.</p>
         </div>
         <div class="reason">
-          <img src="/images/icon_star.png" alt="" class="icon" loading="lazy">
+          <picture>
+            <source srcset="/images/icon_star.webp" type="image/webp">
+            <img src="/images/icon_star.png" alt="" class="icon" loading="lazy" width="48" height="48">
+          </picture>
           <p>Des éditions soignées, bilingues et accessibles à tous.</p>
         </div>
       </div>
@@ -173,14 +231,30 @@
       <p>Devenez un acteur de notre univers en soutenant notre maison d’édition associative.</p>
       <div class="actions">
         <div class="action">
-          <img src="/images/icon_heart.png" alt="" class="icon" loading="lazy">
+          <picture>
+            <source srcset="/images/icon_heart.webp" type="image/webp">
+            <img src="/images/icon_heart.png" alt="" class="icon" loading="lazy" width="48" height="48">
+          </picture>
           <p>Soutenez notre mission pour promouvoir la magie et la créativité.</p>
-          <a href="/je-soutiens.html" class="action-button">Je soutiens <img src="/images/icon_heart.png" alt="" class="button-icon" loading="lazy"></a>
+          <a href="/je-soutiens.html" class="action-button">Je soutiens 
+            <picture>
+              <source srcset="/images/icon_heart.webp" type="image/webp">
+              <img src="/images/icon_heart.png" alt="" class="button-icon" loading="lazy" width="48" height="48">
+            </picture>
+          </a>
         </div>
         <div class="action">
-          <img src="/images/icon_people_button.png" alt="" class="icon" loading="lazy">
+          <picture>
+            <source srcset="/images/icon_people_button.webp" type="image/webp">
+            <img src="/images/icon_people_button.png" alt="" class="icon" loading="lazy" width="48" height="48">
+          </picture>
           <p>Créez un compte pour accéder à des contenus exclusifs.</p>
-          <a href="/creer-compte.html" class="action-button">Créer mon compte <img src="/images/icon_people_button.png" alt="" class="button-icon" loading="lazy"></a>
+          <a href="/creer-compte.html" class="action-button">Créer mon compte 
+            <picture>
+              <source srcset="/images/icon_people_button.webp" type="image/webp">
+              <img src="/images/icon_people_button.png" alt="" class="button-icon" loading="lazy" width="48" height="48">
+            </picture>
+          </a>
         </div>
       </div>
     </section>
@@ -189,7 +263,10 @@
     <div class="footer-content">
       <div class="footer-brand">
         <a href="/index.html">
-          <img src="/images/sb_logo_fr.jpg" alt="Logo Les Éditions de la Sorcière Blanche" class="logo" loading="lazy">
+          <picture>
+            <source srcset="/images/sb_logo_fr.webp" type="image/webp">
+            <img src="/images/sb_logo_fr.jpg" alt="Logo Les Éditions de la Sorcière Blanche" class="logo" loading="lazy" width="80" height="80">
+          </picture>
           <div class="footer-title">
             <span>Les Éditions de la</span>
             <span>Sorcière Blanche</span>
@@ -221,12 +298,42 @@
       <div class="footer-social">
         <h3>Suivez-nous</h3>
         <ul>
-          <li><a href="https://x.com/WhiteWitchEdits"><img src="/images/icon_x.png" alt="X" class="social-icon" loading="lazy"></a></li>
-          <li><a href="https://www.facebook.com/sorciereblancheeditions/"><img src="/images/icon_facebook.png" alt="Facebook" class="social-icon" loading="lazy"></a></li>
-          <li><a href="https://www.instagram.com/sorciereblancheeditions/"><img src="/images/icon_instagram.png" alt="Instagram" class="social-icon" loading="lazy"></a></li>
-          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/"><img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon" loading="lazy"></a></li>
-          <li><a href="https://www.youtube.com/channel/UCBmw0xK4a8VOeuXav06P5og"><img src="/images/icon_youtube.png" alt="YouTube" class="social-icon" loading="lazy"></a></li>
-          <li><a href="https://www.tiktok.com/@sorciereblancheed"><img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon" loading="lazy"></a></li>
+          <li><a href="https://x.com/WhiteWitchEdits">
+            <picture>
+              <source srcset="/images/icon_x.webp" type="image/webp">
+              <img src="/images/icon_x.png" alt="X" class="social-icon" loading="lazy" width="24" height="24">
+            </picture>
+          </a></li>
+          <li><a href="https://www.facebook.com/sorciereblancheeditions/">
+            <picture>
+              <source srcset="/images/icon_facebook.webp" type="image/webp">
+              <img src="/images/icon_facebook.png" alt="Facebook" class="social-icon" loading="lazy" width="24" height="24">
+            </picture>
+          </a></li>
+          <li><a href="https://www.instagram.com/sorciereblancheeditions/">
+            <picture>
+              <source srcset="/images/icon_instagram.webp" type="image/webp">
+              <img src="/images/icon_instagram.png" alt="Instagram" class="social-icon" loading="lazy" width="24" height="24">
+            </picture>
+          </a></li>
+          <li><a href="https://fr.pinterest.com/Leseditionsdelasorciereblanche/">
+            <picture>
+              <source srcset="/images/icon_pinterest.webp" type="image/webp">
+              <img src="/images/icon_pinterest.png" alt="Pinterest" class="social-icon" loading="lazy" width="24" height="24">
+            </picture>
+          </a></li>
+          <li><a href="https://www.youtube.com/channel/UCBmw0xK4a8VOeuXav06P5og">
+            <picture>
+              <source srcset="/images/icon_youtube.webp" type="image/webp">
+              <img src="/images/icon_youtube.png" alt="YouTube" class="social-icon" loading="lazy" width="24" height="24">
+            </picture>
+          </a></li>
+          <li><a href="https://www.tiktok.com/@sorciereblancheed">
+            <picture>
+              <source srcset="/images/icon_tiktok.webp" type="image/webp">
+              <img src="/images/icon_tiktok.png" alt="TikTok" class="social-icon" loading="lazy" width="24" height="24">
+            </picture>
+          </a></li>
         </ul>
       </div>
     </div>
