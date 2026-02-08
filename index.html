@@ -7,7 +7,7 @@
   <meta name="description" content="Les Éditions de la Sorcière Blanche sont temporairement en maintenance magique. Revenez bientôt pour découvrir nos grimoires de lumière et d’ésotérisme authentique.">
   <meta name="keywords" content="magie blanche, ésotérisme authentique, sorcière blanche, éditions indépendantes, spiritualité, grimoires">
   
-  <!-- Preconnect & preload Google Fonts – chargement instantané -->
+  <!-- Preconnect & preload Google Fonts avec display=swap pour CLS 0 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -46,13 +46,13 @@
       line-height: 1.7;
     }
     a {
-      color: var(--cuivre);
+      color: var(--violet-amethyste); /* Contraste parfait par défaut */
       text-decoration: underline;
       font-weight: bold;
       transition: color 0.3s ease;
     }
     a:hover {
-      color: var(--violet-amethyste);
+      color: var(--cuivre); /* Touche chaleureuse au survol */
     }
   </style>
 </head>
