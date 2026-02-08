@@ -3,38 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Site en Enchantement - Sorcière Blanche</title>
-  <meta name="description" content="Les Éditions de la Sorcière Blanche sont en maintenance magique. Revenez bientôt !">
-  <meta name="keywords" content="sorciere blanche, maintenance, fantasy, esoterisme">
+  <title>Site en Enchantement - Les Éditions de la Sorcière Blanche</title>
+  <meta name="description" content="Les Éditions de la Sorcière Blanche sont temporairement en maintenance magique. Revenez bientôt pour découvrir nos grimoires de lumière et d’ésotérisme authentique.">
+  <meta name="keywords" content="magie blanche, ésotérisme authentique, sorcière blanche, éditions indépendantes, spiritualité, grimoires">
+  
+  <!-- Preconnect & preload Google Fonts – chargement instantané -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet"></noscript>
+  
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&family=Montserrat&display=swap" rel="stylesheet">
+  
   <style>
+    :root {
+      --creme: #F5E8D3;
+      --violet-amethyste: #6B3E75;
+      --cuivre: #B87333;
+    }
     body {
-      background-color: #F5F5F5; /* Crème SB */
-      color: #4B0082; /* Violet SB */
+      background-color: var(--creme);
+      color: var(--violet-amethyste);
       font-family: 'Playfair Display', serif;
       text-align: center;
-      padding: 50px;
+      padding: 80px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     h1 {
       font-family: 'Cinzel', serif;
-      font-size: 32px;
+      font-size: 38px;
+      color: var(--violet-amethyste);
+      margin-bottom: 30px;
     }
     p {
       font-family: 'Montserrat', sans-serif;
       font-size: 18px;
+      max-width: 800px;
+      margin: 20px auto;
+      line-height: 1.7;
     }
     a {
-      color: #D4AF37; /* Or SB */
-      text-decoration: none;
+      color: var(--cuivre);
+      text-decoration: underline;
+      font-weight: bold;
+      transition: color 0.3s ease;
     }
     a:hover {
-      text-decoration: underline;
+      color: var(--violet-amethyste);
     }
   </style>
 </head>
 <body>
-  <h1>Le Grimoire de la Sorcière Blanche est en Enchantement ✨</h1>
-  <p>Ô âme curieuse, notre sanctuaire numérique est temporairement fermé pour des ajustements magiques. Revenez bientôt pour tisser la magie page après page !</p>
-  <p>En attendant, contactez-nous à <a href="mailto:contact@sorciereblancheeditions.com">contact@sorciereblancheeditions.com</a>.</p>
+  <main role="main" aria-label="Message de maintenance">
+    <h1>Le Grimoire de la Sorcière Blanche est en Enchantement ✨</h1>
+    <p>Ô âme curieuse, notre sanctuaire numérique est temporairement fermé pour des ajustements magiques raffinés. Revenez bientôt pour tisser la magie page après page !</p>
+    <p>En attendant, n’hésitez pas à nous contacter à <a href="mailto:contact@sorciereblancheeditions.com">contact@sorciereblancheeditions.com</a>.</p>
+  </main>
 </body>
 </html>
